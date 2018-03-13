@@ -3,6 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage{graphicx}
+\usepackage{color}
 
 \graphicspath{ {F:/Téléchargements/Licence/S6/} }
 
@@ -105,9 +106,22 @@ Nous distinguons deux types d'apprentissages :
 				\item Afin de permettre l'apprentissage du réseau de neurone, la solution attendue doit être récupérée puis envoyée au module d'apprentissage.
 				\item Après avoir calculé les modifications à apporter aux poids et biais du réseau de neurone, celles-ci doivent être envoyé au gestionnaire du réseau de neurone afin que celui-ci les applique.
 			\end{enumerate}
-		\paragraph{Tableau des fonctionnalités :}
-			%a faire
-			
+	\paragraph{Tableau des fonctionnalités :}
+	{\setlength{\tabcolsep}{0.07cm}
+		\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+		\hline
+		Gestionnaire du & Apprentissage & Gestionnaire d'entrées & Interface\\
+		Réseau de Neurones & & sorties & \\
+		(2 personnes) & (2 personnes) & (1 personne) & (1 personne)\\
+		\color{red}(155) & \color{red}(150) & \color{red}(75) & \color{red}(310)\\
+		\hline
+		-Formatage des & -Algorithme de & -Récupération d'une & -Définition de la taille\\
+		informations reçu par & rétropropagation \color{red}(50) & image au format & des couches cachéés du \\
+		\hline
+		\end{tabular}
+		\end{center}
+	}
 \section{Exigences Non Fonctionnelles}
 	\subsection{Interface}
 		\begin{center}
@@ -152,9 +166,17 @@ Nous distinguons deux types d'apprentissages :
 		Minimum :
 			1/2 journée de travail seul par semaine
 	    1/2 journée de travail en équipe par semaine
-	\subsection{Coût en Ligne de Code}
-		%a renseigner
-		
+	\subsection{Répartition des tâches :}
+	\begin{center}	
+		\begin{tabular}{|c|c|p{2.9cm}|c|}
+		\hline
+		Réseau de Neurones & Apprentissage & Gestionnaire d'entrées sorties & Interface\\
+		\hline
+		Severine Selaquet & Thibaut Pepin & Anthony Montigne & Arezki Slimani\\
+		Isaac Szulek & Soumia Rezgui & & \\
+		\hline
+		\end{tabular}
+	\end{center}	
 \section{Implémentations Supplémentaires Possibles}
 	Afin d'améliorer les performance de l'application, il serait possible d'opter pour la version stochastique de la descente de gradient où la rétro-propagation est effectuée sur la moyenne de l'erreur de plusieur images et non plus sur l'erreur de chaque image.
 Il serait également possible d'implémenter un algorithme de multiplication matriciel (type Strassen) afin de rendre la calcul le plus commun de cette application plus rapide.
@@ -168,7 +190,7 @@ Ce type de réseaux fait l'extraction des caractéristiques des images.
 
 \section{Conclusion}
 	%a terminer ;)
-	Il serait plus adéquat d’utiliser le langage C plutôt qu'un autre langage pour la nature elle-même du langage qui est procédurale : pas d'interdépendance des différents éléments de notre programme, un seul algorithme complexe à développer ; utilisation des structures de données bien spécifiques (tableaux, matrices), mais aussi la conception de notre application est plutôt linéaire.\\Nous citons aussi d’autres points forts du langage :
+	Il serait plus adéquat d’utiliser le langage C plutôt qu'un autre langage pour la nature elle-même du langage qui est procédurale : pas d'interdépendance des différents éléments de notre programme, un seul algorithme complexe à développer ; utilisation des structures de données bien spécifiques (tableaux, matrices), mais aussi la conception de notre application est plutôt linéaire.\\\\Nous citons aussi d’autres points forts du langage :
 	\begin{itemize}
 		\item La simplicité : simple à utiliser (assimiler l'ensemble de ses mécanismes)
 		\item La puissance : langage universel, convenant aussi bien  à la programmation système qu'au codage d’algorithmes et à la représentation de structure de données complexes, au développement d’interface ou au calcul numérique.
@@ -176,5 +198,6 @@ Ce type de réseaux fait l'extraction des caractéristiques des images.
 		\item La souplesse : n’impose pas de cycle particulier.
 		\item l'efficacité : grâce aux variétés de ses expressions ; il permet d'optimiser à la main les sources de programmes.
 	\end{itemize}
+	\\Pour conclure, notre application permettra à l'utilisateur de créer et de choisir un ou plusieurs réseau de neurones et d'y traiter une image ou d'y réaliser un apprentissage en utilisant un répertoire d'images variées que l'utilisateur aura choisi préalablement.
 	
 \end{document}
