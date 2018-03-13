@@ -1,0 +1,180 @@
+\documentclass{article}
+\usepackage[latin1]{inputenc}    
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+
+\graphicspath{ {F:/Téléchargements/Licence/S6/} }
+
+\title{Cahier des charges\\Sujet 10 : Réseau de Neurones}
+\author{Thibaut \bsc{Pepin}\\Soumia \bsc{Rezgui}\\Isaac \bsc{Szulek}\\Severine \bsc{Selaquet}\\Anthony \bsc{Montigne}\\Arezki \bsc{Slimani}}
+\date{14 mars 2018}
+
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+
+\section{Présentation}
+	\subsection{Introduction}
+			Nous souhaitons analyser des images, un problème compliqué qui a besoin de prendre en entrée une image et dont le but est d'essayer de deviner ce que représente cette image. Pour cela il nous faut une structure qui sera capable de prendre beaucoup de données en entrée et de capturer des relations complexes entres les entrées et les sorties, c'est là qu'interviennent les réseaux de neurones artificiels.
+		\subsubsection{Définition}
+			Les réseaux de neurones artificiels sont des modèles inspirés du fonctionnement du cerveau animal. Ces modèles prennent en compte quelques grands principes :
+			\begin{itemize}
+				\item \emph{parallélisme} : les neurones sont des entités réalisant une fonction très simples, mais fortement interconnectés ce qui rend le traitement massivement parallèle.
+				\item \emph{poids synaptiques} : les connections entre neurones ont des poids variables, ce qui rend les neurones plus ou moins influents sur d'autres neurones.
+				\item \emph{apprentissage} : ces coefficients synaptiques sont modifiables lors de l'apprentissage pour réaliser au réseau la fonction désirée.
+			\end{itemize}
+			\paragraph{Types Réseaux de neurones :}
+				\begin{enumerate}
+					\item \emph{Le perceptron monocouche :} \\Dans cette première version le perceptron était alors mono-couche et n'avait qu'une seule sortie à laquelle toutes les entrées sont connectées. Ce type de réseaux de neurones étaient limités et ne permettaient pas de résoudre des problèmes non-linéaires et des problèmes complexes.
+					\item \emph{Perceptron multicouches (MLP):} \\Les MLP (multi-layer perceptron), ou réseaux à couches, forment la très grande majorité des réseaux. Ils sont intemporels (réseaux statiques et non dynamiques).
+				\end{enumerate}
+		\subsubsection{Structure}
+			Les neurones sont organisés en couches : chaque neurone est connecté aux neurones de la couche suivante, et y propage sa sortie (ces réseaux sont d'ailleurs qualifiés de feedforward (faire avancer)). La première couche du réseau est appelée couche d'entrée, c'est par cette couche que sont transmise les donnée. La dernière couche est appelée couche de sortie est c'est la qu'est récupérée la solution, chaque neurone de cette couche possède une 'étiquette', il s'agira de la solution dans le cas où l'activation de ce neurone est la plus forte. Chaque liaison entre neurone se voit associer un poids nécessaire au calcul de la solution. Les neurones compris entre la couche d'entrée et de sortie sont appelées couches cachées.
+		\subsubsection{Applications}
+			Les applications des réseaux MLP sont très diverses et étendues. Elles vont de la reconnaissance de motifs, à la modélisation en passant par l'apprentissage de comportements ou de jeux (alphago ..).
+		\subsubsection{Type D'apprentissage}
+			On appelle apprentissage des réseaux de neurones la procédure qui consiste à raffiner les paramètres des neurones du réseau afin que celui-ci remplisse aux mieux la tâche qui lui est affectée. Le but de l'apprentissage est de permettre au réseau de neurone de généraliser à partir des exemple rencontrés lors de l'apprentissage.
+Nous distinguons deux types d'apprentissages :
+			\begin{itemize}
+				\item \emph{Supervisé : }son fournit au réseau le couple (entrée, sortie attendue) et on modifie les poids en fonction de l'erreur entre la sortie désirée et la sortie obtenue.\\ \emph{Exemple : }utile aux chercheurs et aux ingénieurs qui disposent d'un ensemble de variables mesurées et d'un ensemble de mesure relative à un processus quelconque (physique, chimique, économique,financier...), du coup le but est d'établir un modèle du processus étudié à partir des mesures disponible.
+				\item \emph{Non Supervisé : }le réseau doit détecter des points communs aux exemples présentés, et modifier les poids afin de fournir la même sortie pour des entrées aux caractéristiques proches.\\ \emph{Exemple : }utiles aux applications qui permettent de retrouver des informations dont sait qu'elles doivent être présente dans les données mais on ne sait pas comment les extraire.
+			\end{itemize}
+			\emph{Pour conclure sur le choix de l'apprentissage : }il n'existe pas vraiment de méthode d'apprentissage supérieur à une autre, ce choix s'effectue principalement en fonction des type de données à la disposition de l'utilisateur et du but recherché.
+		\subsubsection{Limites des Réseaux de Neurones}
+			Les réseaux de neurones ne fournissent pas les explications concernant leurs résultats ce qui limite l'analyse des phénomènes existants, ils peuvent être assimilés à une boîte noire qui donne une réponse quand on lui fournit les données mais qui ne délivre pas de justifications simple à analyser, ça se résume à un pouvoir explicatif limité.
+
+			Les réseaux de neurones sont donc une alternative qui peut être très efficace pour les problèmes que les algorithmes classiques ne peuvent résoudre. Un de leurs grands avantages est leur capacité à généraliser.
+
+	\subsection{But du Projet}
+		Afin de réaliser une l'analyse d'image sur de grands ensemble de données, il nous a été demandé de créer une application permettant de facilement créer et d'utiliser un réseau de neurone à l'aide d'une interface graphique. Afin de pouvoir efficacement utiliser les données à la disposition de l'entreprise nécessaire à l'apprentissage du réseau de neurone (qui sont un couple de données d'entrées et de résultats attendus) nous allons mettre un place un réseau de neurone de type MLP utilisant l'apprentissage supervisé.
+
+\section{Partie Prenant}
+	\subsection{Commanditaire}
+	\subsection{Utilisateur}
+		De part la nature assez ouverte de l'application, l'utilisateur devra être capable de définir les paramètres du réseau de neurone en fonction de son problème et donc de posséder une certaine connaissance des réseaux de neurones.
+
+\section{Contraintes sur le Projet}
+	\subsection{Contraintes sur le Conception de la Solution}
+		\begin{itemize}
+			\item L'application doit pouvoir tourner sous Linux.
+			\item L'application doit utiliser un réseau de neurone de type MLP qui apprendra grâce à l'apprentissage supervisé.
+			\item Disponibilité des données d'apprentissage au format adéquat.
+			\item L'application doit posséder une interface graphique facile à prendre en main.
+		\end{itemize}
+	\subsection{Contraintes de planning}
+	\begin{itemize}
+			\item Cahier des charges : 14 mars 2018
+			\item Cahier des spéci?cations : 18 avril 2018
+			\item Rendu ?nal : 25 mai 2018
+		\end{itemize}
+
+\section{Glossaire et Conventions de Dénomination}
+	\begin{itemize}
+		\item \emph{Traitement : }Utilisation du système par l'utilisateur pour traiter une image de son choix et obtenir la valeur correspondante attendue.
+		\item \emph{MLP : }perceptron multi-couches ("`multi-layer perceptron"').
+		\item \emph{Activation : }Valeur de chaque neurone (entre 0 et 1).
+		\item \emph{Poids : }Valeur des liens entre les neurones.
+		\item \emph{Biais : }Valeur définissant le seuil d'activation de chaque neurone (propre à chaque neurone).
+		\item \emph{Étiquette : }Signification des neurones de la couche de sortie.
+		\item \emph{Sigmoïde : }Fonction ramenant la valeur d'entrée a une valeur entre 0 et 1 (comme l'activation) defini tel quel : 
+			\[
+				\sigma(x) = \frac{1}{1+e^{-x}}
+			\]
+		\item \emph{Gradient : }Le gradient d'une fonction (noté $\nabla$f) est la direction de la plus forte pente par rapport à un point donné.
+	\end{itemize}
+	
+\section{Exigences Fonctionnelles}
+	\subsection{Diagramme de cas D'utilisation}
+		\begin{center}
+			\includegraphics[height=188, width=230]{dcu.png}
+		\end{center}
+	\subsection{Organigramme et Liens entre Modules}
+		\begin{center}
+			\includegraphics[height=159, width=230]{organigrame.png}
+		\end{center}
+		\paragraph{Connections entre les modules :}
+			\begin{enumerate}
+				\item Lors de la création d'un réseau de neurone, l'utilisateur choisit les différents paramètres du réseau de neurone, ces informations sont donc envoyées au gestionnaire du réseau de neurone qui va créer le réseau. Pendant la phase d'apprentissage, il faut également spécifier au réseau de neurone qu'il faut envoyer la solution calculée au module d'apprentissage.
+				\item Après l'estimation d'une solution par le réseau de neurone, la solution est envoyée à l'interface. De plus, pour la visualisation de la méthode de fonctionnement du réseau, les matrices contenants les poids doivent également être envoyées à l'interface.
+				\item Lors de l'apprentissage ou du traitement d'image, l'interface demande au gestionnaire d'entrée/sortie de lire un fichier à un emplacement en particulier.
+				\item Après lecture d'un fichier, le contenu est envoyé au gestionnaire du réseau de neurone qui va en effectuer le traitement.
+				\item Afin de sauvegarder un réseau de neurone, les différentes matrices et vecteurs contenants les poids et les biais du réseau de neurone doivent être envoyés au gestionnaire d'entrées/sorties.
+				\item Lors de l'apprentissage, la solution calculée est envoyée au module d'apprentissage.
+				\item Afin de permettre l'apprentissage du réseau de neurone, la solution attendue doit être récupérée puis envoyée au module d'apprentissage.
+				\item Après avoir calculé les modifications à apporter aux poids et biais du réseau de neurone, celles-ci doivent être envoyé au gestionnaire du réseau de neurone afin que celui-ci les applique.
+			\end{enumerate}
+		\paragraph{Tableau des fonctionnalités :}
+			%a faire
+			
+\section{Exigences Non Fonctionnelles}
+	\subsection{Interface}
+		\begin{center}
+			\includegraphics[height=224, width=350]{interface.png}
+		\end{center}
+	\subsection{Facilité D'utilisation et Facteur Humain}
+		Le produit nécessitera une compréhension de la langue française. L'application aidera l'utilisateur à ne pas faire d'erreur en lui proposant des conseil et en utilisant des message de confirmation pour les actions tel que la suppression.
+	\subsection{Facilité D'apprentissage}
+		La prise en main par un utilisateur apte à l'utilisation de l'application sera quasi immédiate.
+	\subsection{Rapidité D'exécution et Temps de Latence}
+		\subsubsection{Algorithme de Propagation}
+			\paragraph{Fonctionnement :}
+				\begin{enumerate}
+					\item Mettre les données d'entrées dans la première couche du réseau de neurone.
+					\item Calculer les activations des neurones de la couche suivante en suivant la formule : 
+						\[
+							A_j = \sigma(A^{j-1}*W^j+B^j)
+						\] \\avec $A^j$  les activations de la couche 'j', $\sigma$ la fonction sigmoïde, $W^j$ les poids des liaisons entre les neurone de la couche 'j-1' et 'j' et $B^j$ les biais des neurones de la couche 'j'.
+					\item Récupérer l'étiquette du neurone le plus actif de la couche de sortie.
+				\end{enumerate}
+			\paragraph{Complexité :}
+				C = O(n) avec n le nombre de liaison entre neurone dans le réseau, ce qui est linéaire, mais le nombre de liaisons croît exponentiellement par rapport au nombre de neurone.
+		\subsubsection{Algorithme de Rétro-Propagation}
+			\paragraph{Fonctionnement :}
+				\begin{enumerate}
+					\item Présentation d'un motif d'entraînement au réseau.
+					\item Comparaison de la sortie du réseau avec la sortie ciblée.
+					\item Calcul de l'erreur en sortie de chacun des neurones du réseau.
+					\item Calcul, pour chacun des neurones, de la valeur de sortie qui aurait été correcte.
+					\item Définition de l'augmentation ou de la diminution nécessaire pour obtenir cette valeur (erreur locale).
+					\item Ajustement du poids de chaque connexion vers l'erreur locale la plus faible.
+					\item Attribution d'un blâme à tous les neurones précédents.
+					\item Recommencer à partir de l'étape 4, sur les neurones précédents en utilisant le  blâme comme erreur.
+				\end{enumerate}
+			\paragraph{Complexité :}
+				Égale à celle de l'algorithme de propagation à un facteur près.
+	\subsection{Fiabilité}
+		Due à la nature même du réseau de neurone, la fiabilité de la prédiction sur la solution d'un problème après l'apprentissage du réseau de neurone ne pourra être de 100\%. La fiabilité ne dépendra cependant pas de l'application mais de la complexité du problème à résoudre ainsi que des paramètres du réseau de neurone choisis par l'utilisateur.
+
+\section{Estimation des Coûts}
+	\subsection{Coût Humain}
+		Minimum :
+			1/2 journée de travail seul par semaine
+	    1/2 journée de travail en équipe par semaine
+	\subsection{Coût en Ligne de Code}
+		%a renseigner
+		
+\section{Implémentations Supplémentaires Possibles}
+	Afin d'améliorer les performance de l'application, il serait possible d'opter pour la version stochastique de la descente de gradient où la rétro-propagation est effectuée sur la moyenne de l'erreur de plusieur images et non plus sur l'erreur de chaque image.
+Il serait également possible d'implémenter un algorithme de multiplication matriciel (type Strassen) afin de rendre la calcul le plus commun de cette application plus rapide.
+
+\section{Idées pour les Futures Versions}
+	Implémentation d'un réseau de convolutions en amont du réseaux de neurones et de l'apprentissage, qu'on appelle le CNN. Il s'applique à des techniques de filtre avec l'algorithme de Sliding Window afin qu'il découvre les objets dans une image complexe. 
+Ce type de réseaux fait l'extraction des caractéristiques des images.
+
+\section{Portabilité}
+	Le produit devra tourner de base sur un environnement Linux (debian) et doit pouvoir y être installable.
+
+\section{Conclusion}
+	%a terminer ;)
+	Il serait plus adéquat d’utiliser le langage C plutôt qu'un autre langage pour la nature elle-même du langage qui est procédurale : pas d'interdépendance des différents éléments de notre programme, un seul algorithme complexe à développer ; utilisation des structures de données bien spécifiques (tableaux, matrices), mais aussi la conception de notre application est plutôt linéaire.\\Nous citons aussi d’autres points forts du langage :
+	\begin{itemize}
+		\item La simplicité : simple à utiliser (assimiler l'ensemble de ses mécanismes)
+		\item La puissance : langage universel, convenant aussi bien  à la programmation système qu'au codage d’algorithmes et à la représentation de structure de données complexes, au développement d’interface ou au calcul numérique.
+		\item La portabilité : portable facilement sur des systèmes différents.
+		\item La souplesse : n’impose pas de cycle particulier.
+		\item l'efficacité : grâce aux variétés de ses expressions ; il permet d'optimiser à la main les sources de programmes.
+	\end{itemize}
+	
+\end{document}
