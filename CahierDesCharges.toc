@@ -38,7 +38,7 @@
 \contentsline {section}{\numberline {9}Id\'ees pour les Futures Versions}{8}
 \contentsline {section}{\numberline {10}Portabilit\'e}{8}
 \contentsline {section}{\numberline {11}Conclusion}{8}
-\contentsline {section}{\numberline {12}Annexe}{10}
-\contentsline {subsection}{\numberline {12.1}annexe 1}{10}
-\contentsline {subsection}{\numberline {12.2}annexe 2}{10}
-\contentsline {subsection}{\numberline {12.3}annexe 3}{11}
+\contentsline {section}{\numberline {12}Annexe}{9}
+\contentsline {subsection}{\numberline {12.1}annexe 1}{9}
+\contentsline {subsection}{\numberline {12.2}annexe 2}{9}
+\contentsline {subsection}{\numberline {12.3}annexe 3}{10}
