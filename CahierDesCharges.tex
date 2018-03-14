@@ -79,7 +79,7 @@ Nous distinguons deux types d'apprentissages :
 		\item \emph{Poids : }Valeur des liens entre les neurones.
 		\item \emph{Biais : }Valeur définissant le seuil d'activation de chaque neurone (propre à chaque neurone).
 		\item \emph{Étiquette : }Signification des neurones de la couche de sortie.
-		\item \emph{Sigmoïde : }Fonction ramenant la valeur d'entrée a une valeur entre 0 et 1 (comme l'activation) defini tel quel : 
+		\item \emph{Sigmoïde : }Fonction ramenant la valeur d'entrée à une valeur entre 0 et 1 (comme l'activation) défini tel quel : 
 			\[
 				\sigma(x) = \frac{1}{1+e^{-x}}
 			\]
@@ -100,10 +100,10 @@ Nous distinguons deux types d'apprentissages :
 		\paragraph{Connections entre les modules :}
 			\begin{enumerate}
 				\item Lors de la création d'un réseau de neurone, l'utilisateur choisit les différents paramètres du réseau de neurone, ces informations sont donc envoyées au gestionnaire du réseau de neurone qui va créer le réseau. Pendant la phase d'apprentissage, il faut également spécifier au réseau de neurone qu'il faut envoyer la solution calculée au module d'apprentissage.
-				\item Après l'estimation d'une solution par le réseau de neurone, la solution est envoyée à l'interface. De plus, pour la visualisation de la méthode de fonctionnement du réseau, les matrices contenants les poids doivent également être envoyées à l'interface.
+				\item Après l'estimation d'une solution par le réseau de neurone, la solution est envoyée à l'interface. De plus, pour la visualisation de la méthode de fonctionnement du réseau, les matrices contenant les poids doivent également être envoyées à l'interface.
 				\item Lors de l'apprentissage ou du traitement d'image, l'interface demande au gestionnaire d'entrée/sortie de lire un fichier à un emplacement en particulier.
 				\item Après lecture d'un fichier, le contenu est envoyé au gestionnaire du réseau de neurone qui va en effectuer le traitement.
-				\item Afin de sauvegarder un réseau de neurone, les différentes matrices et vecteurs contenants les poids et les biais du réseau de neurone doivent être envoyés au gestionnaire d'entrées/sorties.
+				\item Afin de sauvegarder un réseau de neurone, les différentes matrices et vecteurs contenant les poids et les biais du réseau de neurone doivent être envoyés au gestionnaire d'entrées/sorties.
 				\item Lors de l'apprentissage, la solution calculée est envoyée au module d'apprentissage.
 				\item Afin de permettre l'apprentissage du réseau de neurone, la solution attendue doit être récupérée puis envoyée au module d'apprentissage.
 				\item Après avoir calculé les modifications à apporter aux poids et biais du réseau de neurone, celles-ci doivent être envoyé au gestionnaire du réseau de neurone afin que celui-ci les applique.
@@ -170,7 +170,7 @@ Nous distinguons deux types d'apprentissages :
 			%\includegraphics[height=224, width=350]{interface.png}
 		%\end{center}
 	\subsection{Facilité D'utilisation et Facteur Humain}
-		Le produit nécessitera une compréhension de la langue française. L'application aidera l'utilisateur à ne pas faire d'erreur en lui proposant des conseil et en utilisant des message de confirmation pour les actions tel que la suppression.
+		Le produit nécessitera une compréhension de la langue française. L'application aidera l'utilisateur à ne pas faire d'erreur en lui proposant des conseil et en utilisant des messages de confirmation pour les actions tel que la suppression.
 	\subsection{Facilité D'apprentissage}
 		La prise en main par un utilisateur apte à l'utilisation de l'application sera quasi immédiate.
 	\subsection{Rapidité D'exécution et Temps de Latence}
@@ -206,7 +206,7 @@ Nous distinguons deux types d'apprentissages :
 \section{Estimation des Coûts}
 	\subsection{Coût Humain}
 		Minimum :
-			1/2 journée de travail seul par semaine
+			1/2 journée de travail seul par semaine, 
 	    1/2 journée de travail en équipe par semaine
 	\subsection{Répartition des tâches :}
 	\begin{center}	
@@ -220,7 +220,7 @@ Nous distinguons deux types d'apprentissages :
 		\end{tabular}
 	\end{center}	
 \section{Implémentations Supplémentaires Possibles}
-	Afin d'améliorer les performance de l'application, il serait possible d'opter pour la version stochastique de la descente de gradient où la rétro-propagation est effectuée sur la moyenne de l'erreur de plusieur images et non plus sur l'erreur de chaque image.
+	Afin d'améliorer les performances de l'application, il serait possible d'opter pour la version stochastique de la descente de gradient où la rétro-propagation est effectuée sur la moyenne de l'erreur de plusieur images et non plus sur l'erreur de chaque image.
 Il serait également possible d'implémenter un algorithme de multiplication matriciel (type Strassen) afin de rendre la calcul le plus commun de cette application plus rapide.
 
 \section{Idées pour les Futures Versions}
@@ -232,7 +232,7 @@ Ce type de réseaux fait l'extraction des caractéristiques des images.
 
 \section{Conclusion}
 	%a terminer ;)
-	Il serait plus adéquat d'utiliser le langage C plutôt qu'un autre langage pour la nature elle-même du langage qui est procédurale : pas d'interdépendance des différents éléments de notre programme, un seul algorithme complexe à développer ; utilisation des structures de données bien spécifiques (tableaux, matrices), mais aussi la conception de notre application est plutôt linéaire.\\\\Nous citons aussi d'autres points forts du langage :
+	Il serait plus adéquat d'utiliser le langage C plutôt qu'un autre langage de part la nature même du langage qui est procédurale : pas d'interdépendance des différents éléments de notre programme; un seul algorithme complexe à développer ; utilisation des structures de données bien spécifiques (tableaux, matrices) et on ajoutera que la conception de notre application est plutôt linéaire.\\\\Nous citons aussi d'autres points forts du langage :
 	\begin{itemize}
 		\item La simplicité : simple à utiliser (assimiler l'ensemble de ses mécanismes)
 		\item La puissance : langage universel, convenant aussi bien  à la programmation système qu'au codage d'algorithmes et à la représentation de structure de données complexes, au développement d'interface ou au calcul numérique.
