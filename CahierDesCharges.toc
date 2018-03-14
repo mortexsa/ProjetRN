@@ -9,33 +9,36 @@
 \contentsline {subsubsection}{\numberline {1.1.5}Limites des R\'eseaux de Neurones}{4}
 \contentsline {subsection}{\numberline {1.2}But du Projet}{5}
 \contentsline {section}{\numberline {2}Partie Prenant}{5}
-\contentsline {subsection}{\numberline {2.1}Commanditaire}{5}
-\contentsline {subsection}{\numberline {2.2}Utilisateur}{5}
+\contentsline {subsection}{\numberline {2.1}Utilisateur}{5}
 \contentsline {section}{\numberline {3}Contraintes sur le Projet}{5}
 \contentsline {subsection}{\numberline {3.1}Contraintes sur le Conception de la Solution}{5}
 \contentsline {subsection}{\numberline {3.2}Contraintes de planning}{5}
 \contentsline {section}{\numberline {4}Glossaire et Conventions de D\'enomination}{5}
 \contentsline {section}{\numberline {5}Exigences Fonctionnelles}{6}
 \contentsline {subsection}{\numberline {5.1}Diagramme de cas D'utilisation}{6}
-\contentsline {subsection}{\numberline {5.2}Organigramme et Liens entre Modules}{7}
-\contentsline {paragraph}{Connections entre les modules :}{7}
-\contentsline {paragraph}{Tableau des fonctionnalit\'es \color {red}+ estimation en co\^ut en ligne de code (680 lignes):}{8}
-\contentsline {section}{\numberline {6}Exigences Non Fonctionnelles}{8}
-\contentsline {subsection}{\numberline {6.1}Interface}{8}
-\contentsline {subsection}{\numberline {6.2}Facilit\'e D'utilisation et Facteur Humain}{9}
-\contentsline {subsection}{\numberline {6.3}Facilit\'e D'apprentissage}{9}
-\contentsline {subsection}{\numberline {6.4}Rapidit\'e D'ex\'ecution et Temps de Latence}{9}
-\contentsline {subsubsection}{\numberline {6.4.1}Algorithme de Propagation}{9}
-\contentsline {paragraph}{Fonctionnement :}{9}
-\contentsline {paragraph}{Complexit\'e :}{10}
-\contentsline {subsubsection}{\numberline {6.4.2}Algorithme de R\'etro-Propagation}{10}
-\contentsline {paragraph}{Fonctionnement :}{10}
-\contentsline {paragraph}{Complexit\'e :}{10}
-\contentsline {subsection}{\numberline {6.5}Fiabilit\'e}{10}
-\contentsline {section}{\numberline {7}Estimation des Co\^uts}{10}
-\contentsline {subsection}{\numberline {7.1}Co\^ut Humain}{10}
-\contentsline {subsection}{\numberline {7.2}R\'epartition des t\^aches :}{10}
-\contentsline {section}{\numberline {8}Impl\'ementations Suppl\'ementaires Possibles}{11}
-\contentsline {section}{\numberline {9}Id\'ees pour les Futures Versions}{11}
-\contentsline {section}{\numberline {10}Portabilit\'e}{11}
-\contentsline {section}{\numberline {11}Conclusion}{11}
+\contentsline {subsection}{\numberline {5.2}Organigramme et Liens entre Modules}{6}
+\contentsline {paragraph}{Connections entre les modules :}{6}
+\contentsline {paragraph}{Tableau des fonctionnalit\'es \color {red}+ estimation en co\^ut en ligne de code (680 lignes):}{7}
+\contentsline {section}{\numberline {6}Exigences Non Fonctionnelles}{7}
+\contentsline {subsection}{\numberline {6.1}Interface}{7}
+\contentsline {subsection}{\numberline {6.2}Facilit\'e D'utilisation et Facteur Humain}{7}
+\contentsline {subsection}{\numberline {6.3}Facilit\'e D'apprentissage}{7}
+\contentsline {subsection}{\numberline {6.4}Rapidit\'e D'ex\'ecution et Temps de Latence}{8}
+\contentsline {subsubsection}{\numberline {6.4.1}Algorithme de Propagation}{8}
+\contentsline {paragraph}{Fonctionnement :}{8}
+\contentsline {paragraph}{Complexit\'e :}{8}
+\contentsline {subsubsection}{\numberline {6.4.2}Algorithme de R\'etro-Propagation}{8}
+\contentsline {paragraph}{Fonctionnement :}{8}
+\contentsline {paragraph}{Complexit\'e :}{8}
+\contentsline {subsection}{\numberline {6.5}Fiabilit\'e}{8}
+\contentsline {section}{\numberline {7}Estimation des Co\^uts}{9}
+\contentsline {subsection}{\numberline {7.1}Co\^ut Humain}{9}
+\contentsline {subsection}{\numberline {7.2}R\'epartition des t\^aches :}{9}
+\contentsline {section}{\numberline {8}Impl\'ementations Suppl\'ementaires Possibles}{9}
+\contentsline {section}{\numberline {9}Id\'ees pour les Futures Versions}{9}
+\contentsline {section}{\numberline {10}Portabilit\'e}{9}
+\contentsline {section}{\numberline {11}Conclusion}{9}
+\contentsline {section}{\numberline {12}Annexe}{11}
+\contentsline {subsection}{\numberline {12.1}annexe 1}{11}
+\contentsline {subsection}{\numberline {12.2}annexe 2}{11}
+\contentsline {subsection}{\numberline {12.3}annexe 3}{12}

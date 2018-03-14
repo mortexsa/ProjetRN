@@ -14,7 +14,9 @@
 \begin{document}
 \maketitle
 \newpage
-\tableofcontents
+{\small
+\tableofcontents}
+\newpage
 
 \section{Présentation}
 	\subsection{Introduction}
@@ -52,7 +54,6 @@ Nous distinguons deux types d'apprentissages :
 		Afin de réaliser une l'analyse d'image sur de grands ensemble de données, il nous a été demandé de créer une application permettant de facilement créer et d'utiliser un réseau de neurone à l'aide d'une interface graphique. Afin de pouvoir efficacement utiliser les données à la disposition de l'entreprise nécessaire à l'apprentissage du réseau de neurone (qui sont un couple de données d'entrées et de résultats attendus) nous allons mettre un place un réseau de neurone de type MLP utilisant l'apprentissage supervisé.
 
 \section{Partie Prenant}
-	\subsection{Commanditaire}
 	\subsection{Utilisateur}
 		De part la nature assez ouverte de l'application, l'utilisateur devra être capable de définir les paramètres du réseau de neurone en fonction de son problème et donc de posséder une certaine connaissance des réseaux de neurones.
 
@@ -88,13 +89,15 @@ Nous distinguons deux types d'apprentissages :
 	
 \section{Exigences Fonctionnelles}
 	\subsection{Diagramme de cas D'utilisation}
-		\begin{center}
-			\includegraphics[height=188, width=230]{dcu.png}
-		\end{center}
+		voir annexe 1
+		%\begin{center}
+			%\includegraphics[height=188, width=230]{dcu.png}
+		%\end{center}
 	\subsection{Organigramme et Liens entre Modules}
-		\begin{center}
-			\includegraphics[height=159, width=230]{organigrame.png}
-		\end{center}
+		voir annexe 2
+		%\begin{center}
+			%\includegraphics[height=159, width=230]{organigrame.png}
+		%\end{center}
 		\paragraph{Connections entre les modules :}
 			\begin{enumerate}
 				\item Lors de la création d'un réseau de neurone, l'utilisateur choisit les différents paramètres du réseau de neurone, ces informations sont donc envoyées au gestionnaire du réseau de neurone qui va créer le réseau. Pendant la phase d'apprentissage, il faut également spécifier au réseau de neurone qu'il faut envoyer la solution calculée au module d'apprentissage.
@@ -163,9 +166,10 @@ Nous distinguons deux types d'apprentissages :
 	}
 \section{Exigences Non Fonctionnelles}
 	\subsection{Interface}
-		\begin{center}
-			\includegraphics[height=224, width=350]{interface.png}
-		\end{center}
+		voir annexe 3
+		%\begin{center}
+			%\includegraphics[height=224, width=350]{interface.png}
+		%\end{center}
 	\subsection{Facilité D'utilisation et Facteur Humain}
 		Le produit nécessitera une compréhension de la langue française. L'application aidera l'utilisateur à ne pas faire d'erreur en lui proposant des conseil et en utilisant des message de confirmation pour les actions tel que la suppression.
 	\subsection{Facilité D'apprentissage}
@@ -229,14 +233,37 @@ Ce type de réseaux fait l'extraction des caractéristiques des images.
 
 \section{Conclusion}
 	%a terminer ;)
-	Il serait plus adéquat d’utiliser le langage C plutôt qu'un autre langage pour la nature elle-même du langage qui est procédurale : pas d'interdépendance des différents éléments de notre programme, un seul algorithme complexe à développer ; utilisation des structures de données bien spécifiques (tableaux, matrices), mais aussi la conception de notre application est plutôt linéaire.\\\\Nous citons aussi d’autres points forts du langage :
+	Il serait plus adéquat d'utiliser le langage C plutôt qu'un autre langage pour la nature elle-même du langage qui est procédurale : pas d'interdépendance des différents éléments de notre programme, un seul algorithme complexe à développer ; utilisation des structures de données bien spécifiques (tableaux, matrices), mais aussi la conception de notre application est plutôt linéaire.\\\\Nous citons aussi d'autres points forts du langage :
 	\begin{itemize}
 		\item La simplicité : simple à utiliser (assimiler l'ensemble de ses mécanismes)
-		\item La puissance : langage universel, convenant aussi bien  à la programmation système qu'au codage d’algorithmes et à la représentation de structure de données complexes, au développement d’interface ou au calcul numérique.
+		\item La puissance : langage universel, convenant aussi bien  à la programmation système qu'au codage d'algorithmes et à la représentation de structure de données complexes, au développement d'interface ou au calcul numérique.
 		\item La portabilité : portable facilement sur des systèmes différents.
-		\item La souplesse : n’impose pas de cycle particulier.
+		\item La souplesse : n'impose pas de cycle particulier.
 		\item l'efficacité : grâce aux variétés de ses expressions ; il permet d'optimiser à la main les sources de programmes.\\
 	\end{itemize}
 	Pour conclure, notre application permettra à l'utilisateur de créer et de choisir un ou plusieurs réseaux de neurones ainsi que de traiter une image ou de réaliser un apprentissage en utilisant un répertoire d'images variées que l'utilisateur aura choisi préalablement. Cependant le temps d’exécution de notre système sera limité par un nombre élevé de neurones et donc l'utilisateur devra rester vigilant quant à l'utilisation de grandes images s'il veut un temps d'exécution raisonnable.
 	
+\newpage
+\section{Annexe}
+	\subsection{annexe 1}
+		%\includegraphics[height=188, width=230]{dcu.png}
+		
+		\begin{center}
+			\includegraphics[height=204, width=250]{dcu.png}
+		\end{center}
+
+	\subsection{annexe 2}
+		%\includegraphics[height=159, width=230]{organigrame.png}
+		
+		\begin{center}
+			\includegraphics[height=173, width=250]{organigrame.png}
+		\end{center}
+
+	\subsection{annexe 3}
+		%\includegraphics[height=224, width=350]{interface.png}
+		
+		\begin{center}
+			\includegraphics[height=320, width=500, angle=270]{interface.png}
+		\end{center}
+
 \end{document}
