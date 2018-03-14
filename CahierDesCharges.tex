@@ -119,46 +119,41 @@ Nous distinguons deux types d'apprentissages :
 		\hline
 		-Formatage des & -Algorithme de & -Récupération d'une & -Définition de la taille\\
 		
-		informations reçu par & rétropropagation \color{red}(50) & image au format & des couches cachéés du \\
+		informations reçu par & rétropropagation \color{red}(50) & image au format & des couches cachées du \\
 
 
 		le module lecture/ & -Calcul de la fonction & variable \color{red}(25) & réseau de neurones \color{red}(15)\\	
 		
-		ecriture fichier \color{red}(50) & coût: \color{red}(25) & -récupération du & -attribution d'une \\
+		ecriture fichier \color{red}(50) & coût: $\sum$(y'-y)^² & -récupération du & -attribution d'une \\
 
-		-initialisation des & -calcul du gradient de &  couple image + & signification des neurones\\
+		-initialisation des & \color{red}(25) &  couple image + & signification des neurones\\
 
-		poids à la création du & la fonction coût afin & attribution d'une & de sortie \color{red}(10)\\
+		poids à la création du & -calcul du gradient de & attribution d'une & de sortie \color{red}(10)\\
 
-		réseau de neurones & d'adapter les poids du & étiquette \color{red}(50) & -choix du format\\
+		réseau de neurones & la fonction coût afin & étiquette \color{red}(50) & -choix du format\\
 
-		\color{red}(15) & réseau de neurones & (les images récupérées & (BMP/MNIST)\color{red}(10)\\
+		\color{red}(15) & d'adapter les poids du & (les images récupérées & (BMP/MNIST)\color{red}(10)\\
 
-		-reconnaissance du & \color{red}(50) & seront de format & -création/suppression/\\
+		-reconnaissance du & réseau de neurones & seront de format & -création/suppression/\\
 
-		caractère présent sur & -calcul de la dérivée & BMP ou MNIST) & enregistrement d'un\\
+		caractère présent sur & \color{red}(50) & BMP ou MNIST) & enregistrement d'un\\
 
-		l'image \color{red}(50) & nécessaire pour la & & réseau de neurone \color{red}(10)\\
+		l'image \color{red}(50) & -calcul de la dérivée & & réseau de neurone \color{red}(10)\\
 
-		-calcul matriciel & rétropropagation \color{red}(25) & & -possibilité de création de \\
+		-calcul matriciel & nécessaire pour la & & -possibilité de création de \\
 
-		A = A x ... \color{red}(25) & & & plusieurs réseaux de\\
-		-calcul sigmoid sur la & & & neurones et donc de\\
+		A^{j} = A^{j-1}*W+B & rétropropagation \color{red}(25) & & plusieurs réseaux de\\
+		\color{red}(25) & & & neurones et donc de\\
 
-		matrice & & & sélection parmi plusieurs\\
+		-calcul sigmoid sur la& & & sélection parmi plusieurs\\
 
-		A = o(dsfs) \color{red}(15) & & & réseaux créés \color{red}(30)\\
+		matrice & & & réseaux créés \color{red}(30)\\
 
-		& & & -apprentissage interactif\\
-		& & & \color{red}(10)\\
+		A^{j} = $\sigma$(A^{j-1}*W) & & & -apprentissage interactif\\
+		\color{red}(15) & & & \color{red}(10)\\
 		& & & -choix du répertoire pour\\
 		& & & l'apprentissage et le\\
 		& & & traitement \color{red}(15)\\
-		& & & -conseil pour l'utilisateur\\
-		& & & pour la création de son\\
-		& & & réseau de neurones (ex :\\
-		& & & nombres de neurones\\
-		& & & optimales etc...) \color{red}(10)\\
 		& & & -mise en forme de\\
 		& & & l'interface \color{red}(200)\\
 
