@@ -109,15 +109,46 @@ Nous distinguons deux types d'apprentissages :
 	\paragraph{Tableau des fonctionnalités \color{red}+ estimation en coût en ligne de code (690 lignes):}
 	{\setlength{\tabcolsep}{0.07cm}
 		\begin{center}
+		\footnotesize
 		\begin{tabular}{|c|c|c|c|}
 		\hline
+
 		Gestionnaire du & Apprentissage & Gestionnaire d'entrées & Interface\\
 		Réseau de Neurones & & sorties & \\
 		(2 personnes) & (2 personnes) & (1 personne) & (1 personne)\\
 		\color{red}(155) & \color{red}(150) & \color{red}(75) & \color{red}(310)\\
 		\hline
 		-Formatage des & -Algorithme de & -Récupération d'une & -Définition de la taille\\
+		
 		informations reçu par & rétropropagation \color{red}(50) & image au format & des couches cachéés du \\
+
+
+		le module lecture/ & -Calcul de la fonction & variable \color{red}(25) & réseau de neurones \color{red}(15)\\	
+		
+		ecriture fichier \color{red}(50) & coût: \color{red}(25) & -récupération du & -attribution d'une \\
+
+		-initialisation des & -calcul du gradient de &  couple image + & signification des neurones\\
+
+		poids à la création du & la fonction coût afin & attribution d'une & de sortie \color{red}(10)\\
+
+		réseau de neurones & d'adapter les poids du & étiquette \color{red}(50) & -choix du format\\
+
+		\color{red}(15) & réseau de neurones & (les images récupérées & (BMP/MNIST)\color{red}(10)\\
+
+		-reconnaissance du & \color{red}(50) & seront de format & -création/suppression/\\
+
+		caractère présent sur & -calcul de la dérivée & BMP ou MNIST) & enregistrement d'un\\
+
+		l'image \color{red}(50) & nécessaire pour la & & réseau de neurone \color{red}(10)\\
+
+		-calcul matriciel & rétropropagation \color{red}(25) & & -possibilité de création de \\
+
+		A = A x ... \color{red}(25) & & & plusieurs réseaux de\\
+		-calcul sigmoid sur la & & & neurones et donc de\\
+
+		matrice & & & sélection parmi plusieurs\\
+
+		A = o(dsfs) \color{red}(15) & & & réseaux créés \color{red}(30)\\
 		\hline
 		\end{tabular}
 		\end{center}

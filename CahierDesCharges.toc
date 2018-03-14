@@ -22,20 +22,20 @@
 \contentsline {paragraph}{Tableau des fonctionnalit\'es \color {red}+ estimation en co\^ut en ligne de code (690 lignes):}{8}
 \contentsline {section}{\numberline {6}Exigences Non Fonctionnelles}{8}
 \contentsline {subsection}{\numberline {6.1}Interface}{8}
-\contentsline {subsection}{\numberline {6.2}Facilit\'e D'utilisation et Facteur Humain}{8}
-\contentsline {subsection}{\numberline {6.3}Facilit\'e D'apprentissage}{8}
+\contentsline {subsection}{\numberline {6.2}Facilit\'e D'utilisation et Facteur Humain}{9}
+\contentsline {subsection}{\numberline {6.3}Facilit\'e D'apprentissage}{9}
 \contentsline {subsection}{\numberline {6.4}Rapidit\'e D'ex\'ecution et Temps de Latence}{9}
 \contentsline {subsubsection}{\numberline {6.4.1}Algorithme de Propagation}{9}
 \contentsline {paragraph}{Fonctionnement :}{9}
 \contentsline {paragraph}{Complexit\'e :}{9}
 \contentsline {subsubsection}{\numberline {6.4.2}Algorithme de R\'etro-Propagation}{9}
 \contentsline {paragraph}{Fonctionnement :}{9}
-\contentsline {paragraph}{Complexit\'e :}{9}
-\contentsline {subsection}{\numberline {6.5}Fiabilit\'e}{9}
+\contentsline {paragraph}{Complexit\'e :}{10}
+\contentsline {subsection}{\numberline {6.5}Fiabilit\'e}{10}
 \contentsline {section}{\numberline {7}Estimation des Co\^uts}{10}
 \contentsline {subsection}{\numberline {7.1}Co\^ut Humain}{10}
 \contentsline {subsection}{\numberline {7.2}R\'epartition des t\^aches :}{10}
 \contentsline {section}{\numberline {8}Impl\'ementations Suppl\'ementaires Possibles}{10}
 \contentsline {section}{\numberline {9}Id\'ees pour les Futures Versions}{10}
-\contentsline {section}{\numberline {10}Portabilit\'e}{10}
-\contentsline {section}{\numberline {11}Conclusion}{10}
+\contentsline {section}{\numberline {10}Portabilit\'e}{11}
+\contentsline {section}{\numberline {11}Conclusion}{11}
