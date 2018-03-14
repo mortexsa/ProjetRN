@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.12)  14 MAR 2018 08:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.12)  14 MAR 2018 10:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -242,7 +242,7 @@ File: organigrame.png Graphic file (type png)
 Package pdftex.def Info: organigrame.png used on input line 96.
 (pdftex.def)             Requested size: 229.99982pt x 159.00368pt.
  [6 <./dcu.png>] [7 <./organigrame.png>]
-Overfull \hbox (12.2185pt too wide) in paragraph at lines 113--154
+Overfull \hbox (12.2185pt too wide) in paragraph at lines 113--167
  [] 
  []
 
@@ -250,26 +250,26 @@ Overfull \hbox (12.2185pt too wide) in paragraph at lines 113--154
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    \relax 
-l.159 ...ics[height=224, width=350]{interface.png}
+l.172 ...ics[height=224, width=350]{interface.png}
                                                   
 ? 
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    \relax 
-l.159 ...ics[height=224, width=350]{interface.png}
+l.172 ...ics[height=224, width=350]{interface.png}
                                                   
 ? 
 File: interface.png Graphic file (type png)
 <use interface.png>
-Package pdftex.def Info: interface.png used on input line 159.
+Package pdftex.def Info: interface.png used on input line 172.
 (pdftex.def)             Requested size: 350.0025pt x 223.99852pt.
 
-Overfull \hbox (5.0025pt too wide) in paragraph at lines 159--160
+Overfull \hbox (5.0025pt too wide) in paragraph at lines 172--173
  [] 
  []
 
-[8 <./interface.png>] [9]
-Overfull \hbox (2.84863pt too wide) in paragraph at lines 202--210
+[8] [9 <./interface.png>]
+Overfull \hbox (2.84863pt too wide) in paragraph at lines 215--223
  [] 
  []
 
@@ -282,7 +282,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.224 	Il serait plus adéquat d’
+l.237 	Il serait plus adéquat d’
                                 utiliser le langage C plutôt qu'un autre lan...
 
 ? 
@@ -294,12 +294,12 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.224 ... plutôt linéaire.\\\\Nous citons aussi d’
+l.237 ... plutôt linéaire.\\\\Nous citons aussi d’
                                                   autres points forts du lan...
 
 ? 
 
-Underfull \hbox (badness 10000) in paragraph at lines 224--225
+Underfull \hbox (badness 10000) in paragraph at lines 237--238
 
  []
 
@@ -311,7 +311,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.227 ... la programmation système qu'au codage d’
+l.240 ... la programmation système qu'au codage d’
                                                   algorithmes et à la représ...
 
 ? 
@@ -323,7 +323,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.227 ...de données complexes, au développement d’
+l.240 ...de données complexes, au développement d’
                                                   interface ou au calcul num...
 
 ? 
@@ -335,7 +335,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.229 		\item La souplesse : n’
+l.242 		\item La souplesse : n’
                                impose pas de cycle particulier.
 ? 
 
@@ -345,7 +345,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.232 	\\P
+l.245 	\\P
           our conclure, notre application permettra à l'utilisateur de créer...
 
 ? 
@@ -353,7 +353,7 @@ l.232 	\\P
 Here is how much of TeX's memory you used:
  2880 strings out of 493029
  39906 string characters out of 6136234
- 108127 words of memory out of 5000000
+ 111127 words of memory out of 5000000
  6382 multiletter control sequences out of 15000+600000
  13891 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -372,7 +372,7 @@ ublic/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1
 000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/
 texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fonts/type1/pu
 blic/cm-super/sfti1000.pfb>
-Output written on CahierDesCharges.pdf (11 pages, 342806 bytes).
+Output written on CahierDesCharges.pdf (11 pages, 343376 bytes).
 PDF statistics:
  104 PDF objects out of 1000 (max. 8388607)
  72 compressed objects within 1 object stream

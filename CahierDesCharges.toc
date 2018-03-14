@@ -27,15 +27,15 @@
 \contentsline {subsection}{\numberline {6.4}Rapidit\'e D'ex\'ecution et Temps de Latence}{9}
 \contentsline {subsubsection}{\numberline {6.4.1}Algorithme de Propagation}{9}
 \contentsline {paragraph}{Fonctionnement :}{9}
-\contentsline {paragraph}{Complexit\'e :}{9}
-\contentsline {subsubsection}{\numberline {6.4.2}Algorithme de R\'etro-Propagation}{9}
-\contentsline {paragraph}{Fonctionnement :}{9}
+\contentsline {paragraph}{Complexit\'e :}{10}
+\contentsline {subsubsection}{\numberline {6.4.2}Algorithme de R\'etro-Propagation}{10}
+\contentsline {paragraph}{Fonctionnement :}{10}
 \contentsline {paragraph}{Complexit\'e :}{10}
 \contentsline {subsection}{\numberline {6.5}Fiabilit\'e}{10}
 \contentsline {section}{\numberline {7}Estimation des Co\^uts}{10}
 \contentsline {subsection}{\numberline {7.1}Co\^ut Humain}{10}
 \contentsline {subsection}{\numberline {7.2}R\'epartition des t\^aches :}{10}
-\contentsline {section}{\numberline {8}Impl\'ementations Suppl\'ementaires Possibles}{10}
-\contentsline {section}{\numberline {9}Id\'ees pour les Futures Versions}{10}
+\contentsline {section}{\numberline {8}Impl\'ementations Suppl\'ementaires Possibles}{11}
+\contentsline {section}{\numberline {9}Id\'ees pour les Futures Versions}{11}
 \contentsline {section}{\numberline {10}Portabilit\'e}{11}
 \contentsline {section}{\numberline {11}Conclusion}{11}
