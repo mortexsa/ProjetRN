@@ -1,0 +1,3 @@
+
+
+void Stochastique(RN);
