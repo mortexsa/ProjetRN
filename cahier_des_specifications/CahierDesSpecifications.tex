@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage[latin1]{inputenc}    
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+
+\begin{document}
+\maketitle
+\newpage
+\title{Cahier des spécifications\\Sujet 10 : Réseau de Neurones}
+\author{Thibaut \bsc{Pepin}\\Soumia \bsc{Rezgui}\\Isaac \bsc{Szulek}\\Severine \bsc{Selaquet}\\Anthony \bsc{Montigne}\\Arezki \bsc{Slimani}}
+
+\section{Signatures des fonctions et des structures par modules}
+	\subsection{Gestionnaire du réseau de neurones}
+		\subsubsection{Structures}
+			struct COUCHE	//structure représentant une couche (ensemble de neurones) dans un réseau de neurone\\
+			{\\
+				float* A;	//tableau simple des activations des neurones\\
+				float* B;	//tableau simple des biais des neurones\\
+				float** W;	//matrice des poids synaptiques entre deux couches\\
+				int taille;	//taille des tableaux pour les activation et les biais (taille*taille pour la matrice des poids synaptiques)\\
+				
+				struct COUCHE* prec;	//pointeur sur la couche précédent la couche courante\\
+				struct COUCHE* suiv;	//pointeur sur la couche suivant la couche courante\\
+			};\\
+			typedef struct COUCHE COUCHE;\\
+			typedef COUCHE* Liste_couche;	//Liste_couche représente l'ensemble des couches d'un réseau de neurones\\
+			
+			
+			struct INFO_RN	//structure représentant les différentes informations caractérisant un réseau de neurones\\
+			{
+				char** etiquettes;	//tableau simple de chaine de caractère\\
+				char* nom;	//nom du réseau de neurones\\
+				char* date;	//date de création du réseau de neurones\\
+				int reussite;	//nombre de réussite (s'incrémente de 1 après chaque propagation de données réussie)\\
+				int echec;	//nombre d'échec (s'incrémente de 1 après chaque propagation de données non réussie)\\
+			};\\
+			typedef struct INFO_RN INFO_RN;\\
+			
+			struct RN	//structure représentant le réseau de neurones, contenant l'ensemble des couches et les informations du réseau de neurones\\
+			{
+				INFO_RN info;	//les informations du réseau de neurones contenues dans la structure INFO_RN\\
+				Liste_couche couche;	//la liste des couches qui composent le réseau de neurones contenant des structures COUCHE\\
+			};\\
+			typedef struct RN RN;\\
+			
+		\subsubsection{Fonctions}
+			void initialisation(RN*,INFO_RN) :\\
+				initialise aléatoirement les biais et les poids, les activations sont initialisées à 0 et les informations du réseau de neurones sont récupérées après leurs choix par l'utilisateur\\
+			
+			void ajout_couche_fin(RN,float*,float**,int) :\\
+				ajoute une nouvelle couche au réseau de neurone avec en paramètres : les valeurs des nouveaux biais, des poids synaptiques et leurs tailles\\
+			
+			void traitement(Image*,RN) :\\
+				propage les données d'entrées de l'image vers la sortie du réseau de neurones\\
+				
+			void multiplicationMatriceVecteur(float*,float**,float*) :\\
+				effectue la multiplication A*W avec en paramètres : les valeurs de l'activation, les valeurs des poids synaptiques et les valeurs de l'activation de la couche suivante pour contenir le résultat de la multiplication\\
+				
+			void additionVecteurVecteur(float*,float*) :\\
+				effectue l'addition de (A*W)+B avec en paramètres : les valeurs de l'activation de la couche suivante (contenant déjà le résultat de la multiplication A*B) et les valeurs des biais\\
+				
+			void sigmoideV(float*) :\\
+				applique la fonction sigmoïde sur A*W+B avec comme paramètre les valeurs de l'activation de la couche suivante (contenant le résultat de  A*W+B)\\
+\end{document}
