@@ -16,8 +16,8 @@ float* fct_cout(RN rn ,char* eti)
 	
 void BackProp(RN* rn, Image* im,char* sortie_att)
 {
-	Traitement(im, rn*);
-	char** sortie_calc = Reconnaissance(rn*);
+	Traitement(im, *rn);
+	char** sortie_calc = Reconnaissance(*rn);
 	
 	if(strcmp(sortie_calc[0],sortie_att)==0)
 		rn->info.reussite++;
