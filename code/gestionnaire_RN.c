@@ -1,4 +1,5 @@
 #include <math.h>
+#include "gestionnaire_IO.h"
 
 
 void MultiplicationMatricielle(float* in_M1, float** in_M2, float** out, int taille_M1,int taille_M2)
