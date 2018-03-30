@@ -26,7 +26,8 @@ typedef struct INFO_RN INFO_RN;
 struct RN
 {
 	INFO_RN info;
-	Liste_Couche couche;
+	Liste_Couche couche_deb;
+	Liste_Couche couche_fin;
 };
 typedef struct RN RN;
 
