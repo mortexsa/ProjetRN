@@ -1,3 +1,7 @@
+#ifndef RN_H
+#define RN_H
+
+#include "gestionnaire_IO.h"
 
 struct COUCHE
 {
@@ -37,7 +41,7 @@ void initialisation(RN*, INFO_RN);
 void AjoutFin(RN, float*, float**);
 
 
-void Traitement(Image*, RN);
+void Traitement(Image*, RN); //inclure IO.h pour qu'il reconnaisse la structure Image
 char** Reconnaissance(RN);
 
 void MultiplicationMatriceVecteur(float*, float**, float*, int, int);
@@ -45,4 +49,4 @@ void AdditionVecteurVecteur(float*, float*, float*, int);
 void SigmoideV(float*, float*, int);
 float Sigmoide(float);
 
-
+#endif

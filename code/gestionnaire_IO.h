@@ -1,4 +1,7 @@
+#ifndef GESTIONNAIRE_H
+#define GESTIONNAIRE_H
 
+#include "gestionnaire_RN.h"
 typedef struct Pixel
 {
 	unsigned char r,g,b;
@@ -23,5 +26,7 @@ void DelImage(Image*);
 
 char* ChargerEtiquette(const char* fichier);
 
-RN* ChargerRN(const char* fichier);
+//RN* ChargerRN(const char* fichier);
 void SaveRN(RN);
+
+#endif

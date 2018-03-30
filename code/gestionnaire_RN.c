@@ -2,16 +2,16 @@
 #include "gestionnaire_IO.h"
 
 
-void MultiplicationMatricielle(float* in_M1, float** in_M2, float** out, int taille_M1,int taille_M2)
+void MultiplicationMatricielle(float* in_M1, float** in_M2, float** out, int taille_M1,int taille_M2,int taille_M3)
 {
 	int i,j,k; 
 	
-	for(i=0;i<taille_M1;i++)
+	for(i=0;i<taille_M1;i++) //taille_M1 nbr de lignes de la 1ere matrice
 	{
-		for(j=0;j<taille_M2;j++)
+		for(j=0;j<taille_M2;j++)  // taille_M2 nbr de colonnes de la seconde matrice
 		{
 			out[i][j]=0;
-			for(k=0;k<taille_M2;k++)
+			for(k=0;k<taille_M3;k++) // taille_M3 dimenssion commune aux deux matrices (obligatoire)
 			{
 				out[i][j] += in_M1[i][k] * in_M2[k][j];
 				//[ligne][colonne]
@@ -43,8 +43,8 @@ void SigmoideV(float* in, float* out, int taille)
 }
 
 float Sigmoide(float in)
-{
-	float expo = (float)exp(-x);
+{   
+	float expo = (float)exp(-in);
 	return 1/(1+expo);
 }
 

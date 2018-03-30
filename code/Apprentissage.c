@@ -1,6 +1,8 @@
-#include "gestionnaire_RN.h"
+
+
 #include <strings.h>
 #include <math.h>
+#include "Apprentissage.h"
 
 //calcul de l'erreur 
 
@@ -24,7 +26,7 @@ void BackProp(RN* rn, Image* im,char* sortie_att)
 	else
 		rn->info.echec++;
 	
-	float* cout = fct_cout(rn*, sortie_att);
+	float* cout = fct_cout(*rn, sortie_att);
 }
 
 void SigmoideDER(float* in, float* out, int taille)
