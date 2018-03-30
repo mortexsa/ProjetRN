@@ -1,19 +1,23 @@
 #include <math.h>
 
 
-void MultiplicationMatriceVecteur(float* in_V, float** in_M, float* out, int taille_V,int taille_M)
+void MultiplicationMatricielle(float* in_M1, float** in_M2, float** out, int taille_M1,int taille_M2)
 {
-	int i,j; 
+	int i,j,k; 
 	
-	for(i=0;i<taille_M;i++)
+	for(i=0;i<taille_M1;i++)
 	{
-		out[i]=0;
-		for(j=0;j<taille_V;j++)
+		for(j=0;j<taille_M2;j++)
 		{
-			out[i] += in_V[j]*in_M[i][j];
+			out[i][j]=0;
+			for(k=0;k<taille_M2;k++)
+			{
+				out[i][j] += in_M1[i][k] * in_M2[k][j];
+			}
 		}
 	}
 }
+//[ligne][colonne]
 
 void AdditionVecteurVecteur(float* in_V1, float* in_V2, float* out, int taille)
 {

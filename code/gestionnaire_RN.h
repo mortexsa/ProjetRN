@@ -38,7 +38,7 @@ void AjoutFin(RN, float*, float*, float**);
 
 
 void Traitement(Image*, RN);
-char** Reconnaissance(RN); 
+char** Reconnaissance(RN);
 
 void MultiplicationMatriceVecteur(float*, float**, float*, int, int);
 void AdditionVecteurVecteur(float*, float*, float*, int);
