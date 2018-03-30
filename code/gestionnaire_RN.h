@@ -34,7 +34,7 @@ typedef struct RN RN;
 void initialisation(RN*, INFO_RN);
 
 
-void AjoutFin(RN, float*, float*, float**);
+void AjoutFin(RN, float*, float**);
 
 
 void Traitement(Image*, RN);
