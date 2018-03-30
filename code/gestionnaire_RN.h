@@ -4,6 +4,8 @@ struct COUCHE
 	float* A;
 	float* B;
 	float** W;
+	
+	int taille;
 		
 	struct COUCHE* prec;
 	struct COUCHE* suiv;
@@ -29,12 +31,17 @@ struct RN
 typedef struct RN RN;
 
 void initialisation(RN*, INFO_RN);
-void AjoutFin(RN, float*, float, float**);
 
 
-char* Traitement(Image*, RN);
+void AjoutFin(RN, float*, float*, float**);
 
-void MultiplicationMatriceVecteur(float*, float**, float*);
-void AdditionVecteurVecteur(float*, float*, float*);
-void Sigmoide(float*);
+
+void Traitement(Image*, RN);
+char** Reconnaissance(RN); 
+
+void MultiplicationMatriceVecteur(float*, float**, float*, int, int);
+void AdditionVecteurVecteur(float*, float*, float*, int);
+void SigmoideV(float*, float*, int);
+float Sigmoide(float);
+
 

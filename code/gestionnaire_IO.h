@@ -23,5 +23,5 @@ void DelImage(Image*);
 
 char* ChargerEtiquette(const char* fichier);
 
-RN ChargerRN(const char* fichier);
+RN* ChargerRN(const char* fichier);
 void SaveRN(RN)
