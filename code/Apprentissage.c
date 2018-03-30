@@ -1,7 +1,21 @@
 #include "gestionnaire_RN.h"
+#include <strings.h>
+#include <math.h>
 
+
+//calcul de l'erreur 
+
+float* fct_cout(RN rn ,char* eti){
+	
+float* errtmp = malloc(rn.couche_fin->taille*sizeof(float));	
+
+for(int i=0;i<rn.couche_fin->taille;i++){
+	errtmp[i] = (rn.couche->A[i] - ((strcmp(eti,rn.info.etiquettes[i]))==0)?1:0);	
+	}
+	}
+	
 void BackProp(RN, Image* ,char*)
-{
+{ 
 	
 }
 
