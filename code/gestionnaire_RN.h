@@ -1,49 +1,14 @@
 #ifndef RN_H
 #define RN_H
 
-#include "gestionnaire_IO.h"
-
-struct COUCHE
-{
-	float* A;
-	float* B;
-	float** W;
-	
-	int taille;
-		
-	struct COUCHE* prec;
-	struct COUCHE* suiv;
-};
-typedef struct COUCHE COUCHE;
-typedef COUCHE* Liste_Couche;
-
-struct INFO_RN
-{
-	char** etiquettes;
-	char* nom;
-	char* date;
-	int reussite;
-	int echec;
-};
-typedef struct INFO_RN INFO_RN;
-
-struct RN
-{
-	INFO_RN info;
-	Liste_Couche couche_deb;
-	Liste_Couche couche_fin;
-};
-typedef struct RN RN;
+#include "Structures.h"
 
 void initialisation(RN*, INFO_RN);
 
-
 void AjoutFin(RN, float*, float**);
 
-
-void Traitement(Image*, RN); //inclure IO.h pour qu'il reconnaisse la structure Image
-// .......
-char** Reconnaissance(RN);
+void Traitement(Image*, RN);
+char** Reconnaissance(RN);//wtf pk tu t appelle reconnaissance si t es meme pas reconnue ?!
 
 void MultiplicationMatricielle(float**, float**, float**, int, int, int);
 void AdditionVecteurVecteur(float*, float*, float*, int);
@@ -51,4 +16,24 @@ void SigmoideV(float*, float*, int);
 float Sigmoide(float);
 
 #endif
+
+
+
+//~ #ifndef STR_H
+//~ #define STR_H
+//~ #include "Structures.h"
+//~ #endif
+
+//~ void initialisation(RN*, INFO_RN);
+
+//~ void AjoutFin(RN, float*, float**);
+
+//~ void Traitement(Image*, RN); //inclure IO.h pour qu'il reconnaisse la structure Image
+//~ char** Reconnaissance(RN);
+
+//~ void MultiplicationMatricielle(float**, float**, float**, int, int, int);
+//~ void AdditionVecteurVecteur(float*, float*, float*, int);
+//~ void SigmoideV(float*, float*, int);
+//~ float Sigmoide(float);
+
 

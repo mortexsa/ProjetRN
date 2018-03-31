@@ -48,3 +48,7 @@ float Sigmoide(float in)
 	return 1/(1+expo);
 }
 
+void Traitement(Image* a, RN b)//juste un test
+{
+	
+}

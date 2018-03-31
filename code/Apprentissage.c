@@ -1,6 +1,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+
 #include "Apprentissage.h"
 
 //calcul de l'erreur 
