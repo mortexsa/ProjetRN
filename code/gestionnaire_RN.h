@@ -42,11 +42,13 @@ void AjoutFin(RN, float*, float**);
 
 
 void Traitement(Image*, RN); //inclure IO.h pour qu'il reconnaisse la structure Image
+// .......
 char** Reconnaissance(RN);
 
-void MultiplicationMatriceVecteur(float*, float**, float*, int, int);
+void MultiplicationMatricielle(float**, float**, float**, int, int, int);
 void AdditionVecteurVecteur(float*, float*, float*, int);
 void SigmoideV(float*, float*, int);
 float Sigmoide(float);
 
 #endif
+

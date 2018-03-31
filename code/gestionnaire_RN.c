@@ -1,8 +1,8 @@
 #include <math.h>
-#include "gestionnaire_IO.h"
+#include "gestionnaire_RN.h"
 
 
-void MultiplicationMatricielle(float* in_M1, float** in_M2, float** out, int taille_M1,int taille_M2,int taille_M3)
+void MultiplicationMatricielle(float** in_M1, float** in_M2, float** out, int taille_M1,int taille_M2,int taille_M3)
 {
 	int i,j,k; 
 	

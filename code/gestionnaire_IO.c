@@ -3,7 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "01_09_02_bmp.h"
+//#include "01_09_02_bmp.h"
+
+#include "gestionnaire_IO.h"
 
 Image* NouvelleImage(int w,int h)
 {

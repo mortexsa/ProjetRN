@@ -2,6 +2,7 @@
 #define GESTIONNAIRE_H
 
 #include "gestionnaire_RN.h"
+
 typedef struct Pixel
 {
 	unsigned char r,g,b;
