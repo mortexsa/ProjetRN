@@ -56,6 +56,11 @@ void BackProp(RN* rn, Image* im,char* sortie_att)
 	}
 }
 
+/*
+ * W -> W - rate*(DELTA(l)*A(l-1)T)
+ * B -> B - rate*DELTA(l)
+ */
+
 /*void SigmoideDER(float* in, float* out, int taille)
 {
 	int i;
