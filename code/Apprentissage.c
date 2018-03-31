@@ -6,20 +6,30 @@
 
 //calcul de l'erreur 
 
-float* fct_cout(RN rn ,char* eti)
-{	
-	float* errtmp = malloc(rn.couche_fin->taille*sizeof(float));	
+//~ float* fct_cout(RN rn ,char* eti)
+//~ {	
+	//~ float* errtmp = malloc(rn.couche_fin->taille*sizeof(float));	
 
+	//~ for(int i=0;i<rn.couche_fin->taille;i++)
+	//~ {
+		//~ errtmp[i] = (rn.couche_fin->A[i] - ((strcmp(eti,rn.info.etiquettes[i]))==0)?1:0);	
+	//~ }
+	
+	//~ return errtmp;
+//~ }
+
+void fct_cout(RN rn ,char* eti)
+{	
 	for(int i=0;i<rn.couche_fin->taille;i++)
 	{
-		errtmp[i] = (rn.couche_fin->A[i] - ((strcmp(eti,rn.info.etiquettes[i]))==0)?1:0);	
+		rn.couche_fin->DELTA[i] = (rn.couche_fin->A[i] - ((strcmp(eti,rn.info.etiquettes[i]))==0)?1:0);	
 	}
-	
-	return errtmp;
 }
 	
 void BackProp(RN* rn, Image* im,char* sortie_att)
 {
+	COUCHE* tmp = rn->couche_fin;
+	
 	Traitement(im, *rn);
 	char** sortie_calc = Reconnaissance(*rn);
 	
@@ -28,7 +38,22 @@ void BackProp(RN* rn, Image* im,char* sortie_att)
 	else
 		rn->info.echec++;
 	
-	float* cout = fct_cout(*rn, sortie_att);
+	//float* cout = fct_cout(*rn, sortie_att);
+	fct_cout(*rn, sortie_att);
+	
+	SigmoidePrimeZ(tmp->A,tmp->tmp,tmp->taille);
+	Hadamard(tmp->tmp,tmp->DELTA,tmp->DELTA,tmp->taille);
+	//l'erreur locale de la derniere couche est mtn calculée
+		
+	while(tmp->prec != NULL)
+	{
+		tmp = tmp->prec;
+		
+		//on propage l'erreur
+		SigmoidePrimeZ(tmp->A,tmp->tmp,tmp->taille);
+		MultiplicationMatricielleTransposee(tmp->suiv->W,&(tmp->suiv->DELTA),&(tmp->DELTA),tmp->taille,1,tmp->suiv->taille);
+		Hadamard(tmp->tmp,tmp->DELTA,tmp->DELTA,tmp->taille);
+	}
 }
 
 /*void SigmoideDER(float* in, float* out, int taille)
@@ -55,7 +80,12 @@ void BackProp(RN* rn, Image* im,char* sortie_att)
 	}
 }*/
 
-void MultiplicationMatricielleTransposee(float** in_M1, float** in_M2, float** out, int taille_M1,int taille_M2,int taille_M3) // = (in_M1)T * in_M2
+void SigmoidePrimeZ(float* in, float* out, int taille)
+{
+	
+}
+
+void MultiplicationMatricielleTransposeeTM(float** in_M1, float** in_M2, float** out, int taille_M1,int taille_M2,int taille_M3) // = (in_M1)T * in_M2
 {
 	int i,j,k; 
 	
@@ -67,6 +97,24 @@ void MultiplicationMatricielleTransposee(float** in_M1, float** in_M2, float** o
 			for(k=0;k<taille_M3;k++) // taille_M3 dimenssion commune aux deux matrices (obligatoire)
 			{
 				out[i][j] += in_M1[k][i] * in_M2[k][j];
+				//[ligne][colonne]
+			}
+		}
+	}
+}
+
+void MultiplicationMatricielleTransposeeMT(float** in_M1, float** in_M2, float** out, int taille_M1,int taille_M2,int taille_M3) // = (in_M1)T * in_M2
+{
+	int i,j,k; 
+	
+	for(i=0;i<taille_M1;i++) //taille_M1 nbr de lignes de la 1ere matrice
+	{
+		for(j=0;j<taille_M2;j++)  // taille_M2 nbr de lignes de la seconde matrice
+		{
+			out[i][j]=0;
+			for(k=0;k<taille_M3;k++) // taille_M3 dimenssion commune aux deux matrices (obligatoire)
+			{
+				out[i][j] += in_M1[i][k] * in_M2[j][k];
 				//[ligne][colonne]
 			}
 		}

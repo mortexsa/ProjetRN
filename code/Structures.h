@@ -18,6 +18,9 @@ struct COUCHE
 	float* B;
 	float** W;
 	
+	float* DELTA;//plane
+	float* tmp;//juste pour eviter d'avoir a faire des malloc dans la backprop pour stocker 2-3 truc
+	
 	int taille;
 		
 	struct COUCHE* prec;
