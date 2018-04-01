@@ -13,7 +13,7 @@ void fct_cout(RN rn ,char* eti)
 	}
 }
 	
-void BackProp(RN* rn, Image* im,char* sortie_att)
+void BackProp(RN* rn, Image* im,char* sortie_att, float eta)
 {
 	COUCHE* tmp = rn->couche_fin;
 	
@@ -25,11 +25,10 @@ void BackProp(RN* rn, Image* im,char* sortie_att)
 	else
 		rn->info.echec++;
 	
-	//float* cout = fct_cout(*rn, sortie_att);
 	fct_cout(*rn, sortie_att);
 	
-	SigmoidePrimeZ(tmp->A,tmp->tmp,tmp->taille);
-	Hadamard(tmp->tmp,tmp->DELTA,tmp->DELTA,tmp->taille);
+	SigmoidePrimeZ(tmp->A,tmp->DELTA_M,tmp->taille);
+	Hadamard(tmp->DELTA_M,tmp->DELTA,tmp->DELTA,tmp->taille);
 	//l'erreur locale de la derniere couche est mtn calculée
 		
 	while(tmp->prec != NULL)
@@ -37,9 +36,40 @@ void BackProp(RN* rn, Image* im,char* sortie_att)
 		tmp = tmp->prec;
 		
 		//on propage l'erreur
-		SigmoidePrimeZ(tmp->A,tmp->tmp,tmp->taille);
+		SigmoidePrimeZ(tmp->A,tmp->DELTA_M,tmp->taille);
 		MultiplicationMatricielleTransposeeTM(tmp->suiv->W,tmp->suiv->DELTA,tmp->DELTA,tmp->taille,tmp->suiv->taille);
-		Hadamard(tmp->tmp,tmp->DELTA,tmp->DELTA,tmp->taille);
+		Hadamard(tmp->DELTA_M,tmp->DELTA,tmp->DELTA,tmp->taille);
+		
+		//on en profite pour calculer la matrice de modif des poids DELTA_M puis apporter ces modifications aux poids et aux biais
+		if(tmp->prec != NULL)
+		{
+			MultiplicationMatricielleTransposeeMT(tmp->DELTA,tmp->prec->A,tmp->DELTA_M,tmp->taille,tmp->prec->taille);
+			ModifPoids(tmp->W,tmp->DELTA_M,tmp->prec->taille,tmp->taille,eta);
+			ModifBiais(tmp->B,tmp->DELTA,tmp->taille,eta);
+		}
+	}
+}
+
+void ModifPoids(float** W, float** DELTA, int W_w, int W_h, int eta)
+{
+	int i,j;
+	
+	for(i=0;i<W_h;i++)
+	{
+		for(j=0;j<W_w;j++)
+		{
+			W[i][j] -= eta*DELTA[i][j];
+		}
+	}
+}
+
+void ModifBiais(float* B, float* DELTA, int taille, int eta)
+{
+	int i;
+	
+	for(i=0;i<taille;i++)
+	{
+		B[i] -= eta*DELTA[i];
 	}
 }
 
@@ -48,13 +78,13 @@ void BackProp(RN* rn, Image* im,char* sortie_att)
  * B -> B - rate*DELTA(l)
  */
 
-void SigmoidePrimeZ(float* in, float* out, int taille)
+void SigmoidePrimeZ(float* in, float** out, int taille)
 {
 	int i;
 	
 	for(i=0;i<taille;i++)
 	{
-		out[i]=in[i]*(1-in[i]);
+		out[i][0]=in[i]*(1-in[i]);
 	}
 }
 
@@ -73,30 +103,25 @@ void MultiplicationMatricielleTransposeeTM(float** in_M, float* in_V, float* out
 	}
 }
 
-void MultiplicationMatricielleTransposeeMT(float** in_M1, float** in_M2, float** out, int taille_M1,int taille_M2,int taille_M3) // = (in_M1)T * in_M2
+void MultiplicationMatricielleTransposeeMT(float* in_M1, float* in_M2, float** out, int taille_M1,int taille_M2) // = in_M1 * (in_M2)T
 {
-	int i,j,k; 
+	int i,j; 
 	
 	for(i=0;i<taille_M1;i++) //taille_M1 nbr de lignes de la 1ere matrice
 	{
 		for(j=0;j<taille_M2;j++)  // taille_M2 nbr de lignes de la seconde matrice
 		{
-			out[i][j]=0;
-			for(k=0;k<taille_M3;k++) // taille_M3 dimenssion commune aux deux matrices (obligatoire)
-			{
-				out[i][j] += in_M1[i][k] * in_M2[j][k];
-				//[ligne][colonne]
-			}
+			out[i][j]=in_M1[i] * in_M2[j];
 		}
 	}
 }
 
-void Hadamard(float* in_a, float* in_b, float* out, int taille)
+void Hadamard(float** in_a, float* in_b, float* out, int taille)
 {
 	int i;
 	
 	for(i=0;i<taille;i++)
 	{
-		out[i] = in_a[i]*in_b[i];
+		out[i] = in_a[i][0]*in_b[i];
 	}
 }

@@ -4,11 +4,13 @@
 #include "gestionnaire_RN.h"
 #include "gestionnaire_IO.h"
 
-void BackProp(RN*, Image* ,char*);
-void SigmoidePrimeZ(float* in, float* out, int taille);
+void BackProp(RN*, Image* ,char*, float);
+void SigmoidePrimeZ(float* in, float** out, int taille);
 void MultiplicationMatricielleTransposeeTM(float**, float*, float*, int, int);
-void MultiplicationMatricielleTransposeeMT(float**, float**, float**, int, int, int);
-void Hadamard(float*, float*, float*, int);
+void MultiplicationMatricielleTransposeeMT(float*, float*, float**, int, int);
+void Hadamard(float**, float*, float*, int);
 void fct_cout(RN,char*);
+void ModifPoids(float**, float**, int, int, int);
+void ModifBiais(float*, float*, int, int);
 
 #endif
