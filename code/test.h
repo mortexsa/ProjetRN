@@ -38,6 +38,6 @@ typedef struct RN RN;
 
 void BackProp(RN*, char*);
 void SigmoidePrimeZ(float* in, float* out, int taille);
-void MultiplicationMatricielleTransposeeTM(float**, float**, float**, int, int, int);
+void MultiplicationMatricielleTransposeeTM(float**, float*, float*, int, int);
 void Hadamard(float*, float*, float*, int);
 void fct_cout(RN,char*);

@@ -8,7 +8,8 @@ void BackProp(RN*, Image* ,char*);
 //void SigmoideDER(float*, float*, int); //sert a rien normalement
 //void SigmoideINV(float*, float*, int); //sert a rien normalement
 void SigmoidePrimeZ(float* in, float* out, int taille);
-void MultiplicationMatricielleTransposeeTM(float**, float**, float**, int, int, int);
+void MultiplicationMatricielleTransposeeTM(float**, float*, float*, int, int);
+void MultiplicationMatricielleTransposeeMT(float**, float**, float**, int, int, int);
 void Hadamard(float*, float*, float*, int);
 //~ float* fct_cout(RN,char*);
 void fct_cout(RN,char*);

@@ -70,7 +70,8 @@ void BackProp(RN* rn, char* sortie_att)
 			printf("%f\n",tmp->tmp[i]);
 		}
 		
-		MultiplicationMatricielleTransposeeTM(tmp->suiv->W,&(tmp->suiv->DELTA),&(tmp->DELTA),tmp->taille,1,tmp->suiv->taille);
+		//MultiplicationMatricielleTransposeeTM(tmp->suiv->W,&(tmp->suiv->DELTA),&(tmp->DELTA),tmp->taille,1,tmp->suiv->taille);
+		MultiplicationMatricielleTransposeeTM(tmp->suiv->W,tmp->suiv->DELTA,tmp->DELTA,tmp->taille,tmp->suiv->taille);
 		printf("\nMultiplicationMatricielleTransposeeTM :\n\n");
 		
 		for(i=0;i<tmp->taille;i++)
@@ -88,21 +89,28 @@ void BackProp(RN* rn, char* sortie_att)
 	}
 }
 
-void MultiplicationMatricielleTransposeeTM(float** in_M1, float** in_M2, float** out, int taille_M1,int taille_M2,int taille_M3) // = (in_M1)T * in_M2
+//void MultiplicationMatricielleTransposeeTM(float** in_M, float* in_V, float* out, int taille_M1,int taille_M2,int taille_M3) // = (in_M1)T * in_M2
+void MultiplicationMatricielleTransposeeTM(float** in_M, float* in_V, float* out, int taille_M1,int taille_M3) // = (in_M1)T * in_M2
 {
-	int i,j,k; 
+	int i,k; 
 	
 	for(i=0;i<taille_M1;i++) //taille_M1 nbr de colonnes de la 1ere matrice
 	{
-		for(j=0;j<taille_M2;j++)  // taille_M2 nbr de colonnes de la seconde matrice
-		{
-			out[i][j]=0;
+		//for(j=0;j<taille_M2;j++)  // taille_M2 nbr de colonnes de la seconde matrice
+		//{
+			//printf("M3[%d][%d] = \n",i,j);
+			//out[i][j]=0;
+			out[i]=0;
 			for(k=0;k<taille_M3;k++) // taille_M3 dimenssion commune aux deux matrices (obligatoire)
 			{
-				out[i][j] += in_M1[k][i] * in_M2[k][j];
+				printf("M1[%d][%d] * M2[%d]\n",k,i,k);
+				
+				//out[i][0] += in_M1[k][i] * in_M2[k][j];
+				out[i] += in_M[k][i] * in_V[k];
 				//[ligne][colonne]
 			}
-		}
+			printf("\n\n");
+		//}
 	}
 }
 
@@ -146,6 +154,7 @@ void Hadamard(float* in_a, float* in_b, float* out, int taille)
 
 int main()
 {
+	int i;
 	RN rn;
 	rn.info.etiquettes = malloc(2*sizeof(char*));
 	rn.info.etiquettes[0] = malloc(10*sizeof(char));
@@ -190,7 +199,6 @@ int main()
 	C2->tmp = malloc(C2->taille*sizeof(float));
 	C3->tmp = malloc(C3->taille*sizeof(float));
 	
-	int i;
 	for(i=0;i<C1->taille;i++)
 	{
 		C1->W[i] = malloc(C0->taille*sizeof(float));
@@ -252,7 +260,7 @@ int main()
 	
 	rn.couche_deb = C0;
 	rn.couche_fin = C3;
-	
+		
 	BackProp(&rn,"eti_2");
 	
 	return 0;

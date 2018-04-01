@@ -51,7 +51,7 @@ void BackProp(RN* rn, Image* im,char* sortie_att)
 		
 		//on propage l'erreur
 		SigmoidePrimeZ(tmp->A,tmp->tmp,tmp->taille);
-		MultiplicationMatricielleTransposee(tmp->suiv->W,&(tmp->suiv->DELTA),&(tmp->DELTA),tmp->taille,1,tmp->suiv->taille);
+		MultiplicationMatricielleTransposeeTM(tmp->suiv->W,tmp->suiv->DELTA,tmp->DELTA,tmp->taille,tmp->suiv->taille);
 		Hadamard(tmp->tmp,tmp->DELTA,tmp->DELTA,tmp->taille);
 	}
 }
@@ -95,7 +95,7 @@ void SigmoidePrimeZ(float* in, float* out, int taille)
 	}
 }
 
-void MultiplicationMatricielleTransposeeTM(float** in_M1, float** in_M2, float** out, int taille_M1,int taille_M2,int taille_M3) // = (in_M1)T * in_M2
+/*void MultiplicationMatricielleTransposeeTM(float** in_M1, float** in_M2, float** out, int taille_M1,int taille_M2,int taille_M3) // = (in_M1)T * in_M2
 {
 	int i,j,k; 
 	
@@ -109,6 +109,21 @@ void MultiplicationMatricielleTransposeeTM(float** in_M1, float** in_M2, float**
 				out[i][j] += in_M1[k][i] * in_M2[k][j];
 				//[ligne][colonne]
 			}
+		}
+	}
+}*/
+
+void MultiplicationMatricielleTransposeeTM(float** in_M, float* in_V, float* out, int taille_M1,int taille_M3) // = (in_M1)T * in_M2
+{
+	int i,k; 
+	
+	for(i=0;i<taille_M1;i++) //taille_M1 nbr de colonnes de la 1ere matrice
+	{
+		out[i]=0;
+		for(k=0;k<taille_M3;k++) // taille_M3 dimenssion commune aux deux matrices (obligatoire)
+		{
+			out[i] += in_M[k][i] * in_V[k];
+			//[ligne][colonne]
 		}
 	}
 }
