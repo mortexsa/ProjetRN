@@ -1,22 +1,9 @@
+#include "test.h"
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
 
-#include "Apprentissage.h"
 
-//calcul de l'erreur 
-
-//~ float* fct_cout(RN rn ,char* eti)
-//~ {	
-	//~ float* errtmp = malloc(rn.couche_fin->taille*sizeof(float));	
-
-	//~ for(int i=0;i<rn.couche_fin->taille;i++)
-	//~ {
-		//~ errtmp[i] = (rn.couche_fin->A[i] - ((strcmp(eti,rn.info.etiquettes[i]))==0)?1:0);	
-	//~ }
-	
-	//~ return errtmp;
-//~ }
 
 void fct_cout(RN rn ,char* eti)
 {	
@@ -26,17 +13,17 @@ void fct_cout(RN rn ,char* eti)
 	}
 }
 	
-void BackProp(RN* rn, Image* im,char* sortie_att)
+void BackProp(RN* rn, char* sortie_att)
 {
 	COUCHE* tmp = rn->couche_fin;
 	
-	Traitement(im, *rn);
-	char** sortie_calc = Reconnaissance(*rn);
+	//Traitement(im, *rn);
+	//char** sortie_calc = Reconnaissance(*rn);
 	
-	if(strcmp(sortie_calc[0],sortie_att)==0)
+	/*if(strcmp(sortie_calc[0],sortie_att)==0)
 		rn->info.reussite++;
 	else
-		rn->info.echec++;
+		rn->info.echec++;*/
 	
 	//float* cout = fct_cout(*rn, sortie_att);
 	fct_cout(*rn, sortie_att);
@@ -51,47 +38,8 @@ void BackProp(RN* rn, Image* im,char* sortie_att)
 		
 		//on propage l'erreur
 		SigmoidePrimeZ(tmp->A,tmp->tmp,tmp->taille);
-		MultiplicationMatricielleTransposee(tmp->suiv->W,&(tmp->suiv->DELTA),&(tmp->DELTA),tmp->taille,1,tmp->suiv->taille);
+		MultiplicationMatricielleTransposeeTM(tmp->suiv->W,&(tmp->suiv->DELTA),&(tmp->DELTA),tmp->taille,1,tmp->suiv->taille);
 		Hadamard(tmp->tmp,tmp->DELTA,tmp->DELTA,tmp->taille);
-	}
-}
-
-/*
- * W -> W - rate*(DELTA(l)*A(l-1)T)
- * B -> B - rate*DELTA(l)
- */
-
-/*void SigmoideDER(float* in, float* out, int taille)
-{
-	int i;
-	float sig;
-	
-	for(i=0;i<taille;i++)
-	{
-		sig = Sigmoide(in[i]);
-		out[i] = sig*(1-sig);
-	}
-}*/
-
-/*void SigmoideINV(float* in, float* out, int taille)
-{
-	int i;
-	double tmp;
-	
-	for(i=0;i<taille;i++)
-	{
-		tmp = -log(1/in[i] - 1);
-		out[i] = (float)tmp;
-	}
-}*/
-
-void SigmoidePrimeZ(float* in, float* out, int taille)
-{
-	int i;
-	
-	for(i=0;i<taille;i++)
-	{
-		out[i]=in[i]*(1-in[i]);
 	}
 }
 
@@ -110,6 +58,16 @@ void MultiplicationMatricielleTransposeeTM(float** in_M1, float** in_M2, float**
 				//[ligne][colonne]
 			}
 		}
+	}
+}
+
+void SigmoidePrimeZ(float* in, float* out, int taille)
+{
+	int i;
+	
+	for(i=0;i<taille;i++)
+	{
+		out[i]=in[i]*(1-in[i]);
 	}
 }
 
@@ -139,4 +97,58 @@ void Hadamard(float* in_a, float* in_b, float* out, int taille)
 	{
 		out[i] = in_a[i]*in_b[i];
 	}
+}
+
+int main()
+{
+	RN rn;
+	rn.info.etiquettes = malloc(2*sizeof(char*));
+	rn.info.etiquettes[0] = malloc(10*sizeof(char));
+	rn.info.etiquettes[1] = malloc(10*sizeof(char));
+	
+	COUCHE* C0 = malloc(sizeof(COUCHE));
+	COUCHE* C1 = malloc(sizeof(COUCHE));
+	COUCHE* C2 = malloc(sizeof(COUCHE));
+	COUCHE* C3 = malloc(sizeof(COUCHE));
+	
+	
+	C0->taille = 2;
+	C1->taille = 3;
+	C2->taille = 3;
+	C3->taille = 2;
+	
+	C0->A = malloc(C0->taille*sizeof(float));
+	C1->A = malloc(C1->taille*sizeof(float));
+	C2->A = malloc(C2->taille*sizeof(float));
+	C3->A = malloc(C3->taille*sizeof(float));
+	
+	C0->B = malloc(C0->taille*sizeof(float));
+	C1->B = malloc(C1->taille*sizeof(float));
+	C2->B = malloc(C2->taille*sizeof(float));
+	C3->B = malloc(C3->taille*sizeof(float));
+	
+	//C0->W = malloc(C0->taille*sizeof(float*));
+	C1->W = malloc(C1->taille*sizeof(float*));
+	C2->W = malloc(C2->taille*sizeof(float*));
+	C3->W = malloc(C3->taille*sizeof(float*));
+	
+	int i;
+	for(i=0;i<C1->taille;i++)
+	{
+		C1->W[i] = malloc(C0->taille*sizeof(float));
+	}
+	for(i=0;i<C2->taille;i++)
+	{
+		C2->W[i] = malloc(C1->taille*sizeof(float));
+	}
+	for(i=0;i<C3->taille;i++)
+	{
+		C3->W[i] = malloc(C2->taille*sizeof(float));
+	}
+	
+	C1->W[0][0] = 5;  C1->W[0][1] = 7;
+	C1->W[1][0] = -2; C1->W[1][1] = 3;
+	C1->W[2][0] = 9;  C1->W[2][1] = -4;
+	
+	return 0;
 }
