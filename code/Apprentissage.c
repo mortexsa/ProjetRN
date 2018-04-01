@@ -22,7 +22,7 @@ void fct_cout(RN rn ,char* eti)
 {	
 	for(int i=0;i<rn.couche_fin->taille;i++)
 	{
-		rn.couche_fin->DELTA[i] = (rn.couche_fin->A[i] - ((strcmp(eti,rn.info.etiquettes[i]))==0)?1:0);	
+		rn.couche_fin->DELTA[i] = (rn.couche_fin->A[i] - (((strcmp(eti,rn.info.etiquettes[i]))==0)?1:0));	
 	}
 }
 	
