@@ -103,13 +103,13 @@ void MultiplicationMatricielleTransposeeTM(float** in_M, float* in_V, float* out
 			out[i]=0;
 			for(k=0;k<taille_M3;k++) // taille_M3 dimenssion commune aux deux matrices (obligatoire)
 			{
-				printf("M1[%d][%d] * M2[%d]\n",k,i,k);
+				//printf("M1[%d][%d] * M2[%d]\n",k,i,k);
 				
 				//out[i][0] += in_M1[k][i] * in_M2[k][j];
 				out[i] += in_M[k][i] * in_V[k];
 				//[ligne][colonne]
 			}
-			printf("\n\n");
+			//printf("\n\n");
 		//}
 	}
 }

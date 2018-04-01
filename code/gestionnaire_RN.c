@@ -48,7 +48,23 @@ float Sigmoide(float in)
 	return 1/(1+expo);
 }
 
-void Traitement(Image* a, RN b)//juste un test
+void initialisation(RN* rn, INFO_RN info)
 {
 	
 }
+
+void AjoutFin(RN rn, float* b, float** w)
+{
+	
+}
+
+void Traitement(Image* im, RN rn)
+{
+	
+}
+
+char** Reconnaissance(RN rn)
+{
+	
+}
+

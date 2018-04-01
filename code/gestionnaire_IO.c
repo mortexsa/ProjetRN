@@ -77,7 +77,7 @@ struct BMPHead
 	struct BMPImHead imhead;
 };
 
-Image* Charger(const char* fichier)
+Image* ChargerBmp(const char* fichier)
 {
 	struct BMPHead head;
 	Image* I;
@@ -154,4 +154,25 @@ int Sauver(Image* I,const char* fichier)
 	}
 	fclose(F);
 	return 0;
+}
+
+
+Image* ChargerMnist(const char* fichier)
+{
+	
+}
+
+char* ChargerEtiquette(const char* fichier)
+{
+	
+}
+
+RN* ChargerRN(const char* fichier)
+{
+	
+}
+
+void SaveRN(RN rn)
+{
+	
 }
