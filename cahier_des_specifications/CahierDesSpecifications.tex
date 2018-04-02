@@ -20,6 +20,9 @@
 				float** W;	//matrice des poids synaptiques entre deux couches\\
 				int taille;	//taille des tableaux pour les activation et les biais (taille*taille pour la matrice des poids synaptiques)\\
 				
+				float DELTA;      // Vecteur de modifcation des biais\\
+				float ** DELTA_M; // Matrice de modification des poids\\
+				
 				struct COUCHE* prec;	//pointeur sur la couche précédent la couche courante\\
 				struct COUCHE* suiv;	//pointeur sur la couche suivant la couche courante\\
 			};\\
@@ -40,7 +43,8 @@
 			struct RN	//structure représentant le réseau de neurones, contenant l'ensemble des couches et les informations du réseau de neurones\\
 			{
 				INFO_RN info;	//les informations du réseau de neurones contenues dans la structure INFO_RN\\
-				Liste_couche couche;	//la liste des couches qui composent le réseau de neurones contenant des structures COUCHE\\
+				Liste_couche couche_deb;	//pointeur sur la 1ere couche du RN\\
+				Liste_couche couche_fin;    //pointeur sur la derniere couche du RN\\
 			};\\
 			typedef struct RN RN;\\
 			
@@ -52,7 +56,10 @@
 				ajoute une nouvelle couche au réseau de neurone avec en paramètres : les valeurs des nouveaux biais, des poids synaptiques et leurs tailles\\
 			
 			void traitement(Image*,RN) :\\
-				propage les données d'entrées de l'image vers la sortie du réseau de neurones\\
+				propage les données d'entrées de l'image vers la sortie du réseau de neurones, en prenant en entrée une image et un RN\\
+				
+			char** Reconnaissance(RN);\\
+				calcule de la sortie avec comme parametre un RN\\
 				
 			void multiplicationMatriceVecteur(float*,float**,float*) :\\
 				effectue la multiplication A*W avec en paramètres : les valeurs de l'activation, les valeurs des poids synaptiques et les valeurs de l'activation de la couche suivante pour contenir le résultat de la multiplication\\
@@ -62,4 +69,29 @@
 				
 			void sigmoideV(float*) :\\
 				applique la fonction sigmoïde sur A*W+B avec comme paramètre les valeurs de l'activation de la couche suivante (contenant le résultat de  A*W+B)\\
+				
+			float Sigmoide(float);\\
+			    application de la fonction sigmoide 1/1+e(-x)\\
+			    
+	\subsection{Gestionnaire d'apprentissage}
+	     \subsubsection{Fonctions}
+			void BackProp(RN*, Image* ,char*, float);\\
+				fonction permettant l'apprentissage avec comme parametres un RN , une image , valeur de sortie attendu, et une valeur à appliquer lors de la modification des biais et des poids.\\
+				
+			void SigmoidePrimeZ(float* in, float** out, int taille);\\
+				
+			void MultiplicationMatricielleTransposeeTM(float**, float*, float*, int, int);\\ 
+			
+			void MultiplicationMatricielleTransposeeMT(float*, float*, float**, int, int);\\
+			
+			void Hadamard(float**, float*, float*, int);\\
+				fonction permettant de faire le produit hadamard en prenant en entrée la metrice des poids , le vecteurs des biais et le vecteur de sortie ainsi que leur taille\\
+			void fct_cout(RN,char*);\\
+				effectue le calcul d'erreur entre la sortie attendu et la sortie obtenue en prenant en parmetre le RN ainsi que la sortie attendu \\
+				
+			void ModifPoids(float**, float**, int, int, int);\\
+				fonction permettant la modification des poids du reseaux de neurones avec comme parametres la matrice des poids ainsi que la matrice de modification des poids ,ainsi que la hauteur de largeur de la matrice , l'etat à appliquer \\
+				
+			void ModifBiais(float*, float*, int, int);\\
+				fonction permettant la modification des biais avec comme parametres les valeurs des biais ,
 \end{document}
