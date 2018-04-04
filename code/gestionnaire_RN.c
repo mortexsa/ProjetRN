@@ -2,21 +2,22 @@
 #include "gestionnaire_RN.h"
 
 
-void MultiplicationMatricielle(float** in_M1, float** in_M2, float** out, int taille_M1,int taille_M2,int taille_M3)
+void MultiplicationMatriceVecteur(float** in_M, float* in_V, float* out, int taille_M1/*,int taille_M2*/,int taille_M3)
 {
-	int i,j,k; 
+	int i/*,j*/,k; 
 	
 	for(i=0;i<taille_M1;i++) //taille_M1 nbr de lignes de la 1ere matrice
 	{
-		for(j=0;j<taille_M2;j++)  // taille_M2 nbr de colonnes de la seconde matrice
-		{
-			out[i][j]=0;
+		/*for(j=0;j<taille_M2;j++)  // taille_M2 nbr de colonnes de la seconde matrice
+		{*/
+			out[i]=0;
 			for(k=0;k<taille_M3;k++) // taille_M3 dimenssion commune aux deux matrices (obligatoire)
 			{
-				out[i][j] += in_M1[i][k] * in_M2[k][j];
+				//out[i][j] += in_M1[i][k] * in_M2[k][j];
+				out[i] += in_M[i][k] * in_V[k];
 				//[ligne][colonne]
 			}
-		}
+		/*}*/
 	}
 }
 
