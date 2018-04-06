@@ -1,6 +1,7 @@
 #include <math.h>
 #include "gestionnaire_RN.h"
 #include <string.h>
+#include <stdlib.h>
 
 void MultiplicationMatriceVecteur(float** in_M, float* in_V, float* out, int taille_M1,int taille_M3)
 {
