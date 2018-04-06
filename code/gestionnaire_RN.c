@@ -65,12 +65,16 @@ RN* initialisation(INFO_RN info)
 	rn->info.echec = info.echec;	
 return rn;	
 }
-/*void AjoutFin(RN rn, float* b, float** w)
-{
-	
+/*ajouter une couche à la fin */
+void Ajout_couche_Fin(RN rn, int taille)
+{ 
+COUCHE* new = malloc(taille*sizeof(COUCHE));
+new->suiv=NULL;
+new->prec=rn.couche_fin;
+rn.couche_fin->suiv=new;
 }
 
-void Traitement(Image* im, RN rn)
+/*void Traitement(Image* im, RN rn)
 {
 	
 }
@@ -78,5 +82,5 @@ void Traitement(Image* im, RN rn)
 char** Reconnaissance(RN rn)
 {
 	
-}
-*/
+}*/
+
