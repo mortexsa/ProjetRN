@@ -3,7 +3,7 @@
 
 #include "Structures.h"
 
-void initialisation(RN*, INFO_RN);
+RN* initialisation(INFO_RN);
 
 void AjoutFin(RN, float*, float**);
 

@@ -27,7 +27,7 @@ struct COUCHE
 	struct COUCHE* suiv;
 };
 typedef struct COUCHE COUCHE;
-typedef COUCHE* Liste_Couche;
+typedef COUCHE* Liste_Couche; //jz nz vois pas l'interet du typedef ici
 
 struct INFO_RN
 {
