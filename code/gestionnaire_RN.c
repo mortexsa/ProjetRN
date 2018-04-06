@@ -99,12 +99,31 @@ rn.couche_fin->suiv=new;
 new->taille=taille;
 }
 
-/*void Traitement(Image* im, RN rn)
+/*propagation de l'image application de AJ=σ(AJ-1*W+b)*/
+void propagation(Image* im, RN rn)
 {
+COUCHE* tmp = rn.couche_deb;
 	
+	//insertion activation
+for(int i=0;i<tmp->taille;i++){
+	//tmp->A[i]=val;
+	}	
+	//
+	
+	tmp = tmp->suiv;
+	
+	while(tmp != NULL)
+	{
+		MultiplicationMatriceVecteur(tmp->W,tmp->prec->A,tmp->A,tmp->taille,tmp->prec->taille);
+		AdditionVecteurVecteur(tmp->B,tmp->A,tmp->A,tmp->taille);
+		SigmoideV(tmp->A,tmp->A,tmp->taille);
+		Reconnaissance(rn);
+		
+	tmp=tmp->suiv;}	
 }
 
-char** Reconnaissance(RN rn)
+
+/*char** Reconnaissance(RN rn)
 {
 	
 }*/
