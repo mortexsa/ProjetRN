@@ -66,13 +66,37 @@ RN* initialisation(INFO_RN info)
 	rn->info.echec = info.echec;	
 return rn;	
 }
+
+
+//mettre des val aleatoire dans W et B
+void remplissage(RN rn) 
+{ int i,j;
+	
+	COUCHE* tmp = rn.couche_deb;
+	
+while(tmp!=NULL){
+	for(i=0;i<rn.couche_deb->taille;i++) //taille_M1 nbr de lignes de la 1ere matrice
+	{	//rn.couche_deb->A[i] = 0;         pas sur de mettre les activation à 0
+		rn.couche_deb->B[i] = rand();
+		
+		for(j=0;j<rn.couche_deb->taille;j++)  // taille_M2 nbr de colonnes de la seconde matrice
+		{
+			
+				rn.couche_deb->W[i][j]= rand(); //attricution de poids aleatoires
+		} 
+	}
+	tmp=tmp->suiv;
+}
+}
+
 /*ajouter une couche à la fin */
 void Ajout_couche_Fin(RN rn, int taille)
 { 
-COUCHE* new = malloc(taille*sizeof(COUCHE));
+COUCHE* new = malloc(sizeof(COUCHE));
 new->suiv=NULL;
 new->prec=rn.couche_fin;
 rn.couche_fin->suiv=new;
+new->taille=taille;
 }
 
 /*void Traitement(Image* im, RN rn)
