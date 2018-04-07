@@ -17,7 +17,7 @@ void BackProp(RN* rn, Image* im,char* sortie_att, float eta)
 {
 	COUCHE* tmp = rn->couche_fin;
 	
-	Traitement(im, *rn);
+	Propagation(im, *rn);
 	char** sortie_calc = Reconnaissance(*rn);
 	
 	if(strcmp(sortie_calc[0],sortie_att)==0)

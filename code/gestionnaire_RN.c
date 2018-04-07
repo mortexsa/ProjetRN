@@ -69,7 +69,7 @@ return rn;
 
 
 //mettre des val aleatoire dans W et B
-void remplissage(RN rn) 
+void Remplissage(RN rn) 
 { int i,j;
 	
 	COUCHE* tmp = rn.couche_deb;
@@ -100,7 +100,7 @@ new->taille=taille;
 }
 
 /*propagation de l'image application de AJ=σ(AJ-1*W+b)*/
-void propagation(Image* im, RN rn)
+void Propagation(Image* im, RN rn)
 {
 COUCHE* tmp = rn.couche_deb;
 	
@@ -123,8 +123,8 @@ for(int i=0;i<tmp->taille;i++){
 }
 
 
-/*char** Reconnaissance(RN rn)
+char** Reconnaissance(RN rn)
 {
 	
-}*/
+}
 
