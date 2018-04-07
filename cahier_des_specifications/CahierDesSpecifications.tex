@@ -7,7 +7,7 @@
 \usepackage{geometry}
 \geometry{hmargin=3.45cm,vmargin=3cm}
 \usepackage{color}
-\definecolor{myblue}{rgb}{0, 0, 1}
+\definecolor{myblue}{rgb}{0.15, 0.15, 0.8}
 
 \begin{document}
 
@@ -90,41 +90,94 @@
 \section{Signatures des Fonctions}
 	\subsection{Gestionnaires d'apprentissage}
 		\begin{flushleft}
-			\textcolor{myblue}{\textbf{void}} BackProp(RN*, \textcolor{myblue}{\textbf{Image*}} ,\textcolor{myblue}{\textbf{char*}}, \textcolor{myblue}{\textbf{float}});\\
-			\textcolor{myblue}{\textbf{void}} SigmoidePrimeZ(\textcolor{myblue}{\textbf{float*}} in, \textcolor{myblue}{\textbf{float**}} out, \textcolor{myblue}{\textbf{int}} taille);\\
+			\textcolor{myblue}{\textbf{void}} BackProp(\textcolor{myblue}{\textbf{RN*}}, \textcolor{myblue}{\textbf{Image*}} ,\textcolor{myblue}{\textbf{char*}}, \textcolor{myblue}{\textbf{float}});
+			\medbreak
+				Backprop va effectuer l'algorithme de propagation-inverse puis va modifier les poids et les biais du réseau de neurones passé en paramètre. Pour cela il est nécessaire d'avoir le couple donnée d'entrée et sortie attendue présent ici sous la forme Image* et char*, on effectuera donc la propagation sur l'image et on comparera l'étiquette de sortie avec le char* qui est l'étiquette attendue.
+			\bigbreak
+			\textcolor{myblue}{\textbf{void}} SigmoidePrimeZ(\textcolor{myblue}{\textbf{float*}} in, \textcolor{myblue}{\textbf{float**}} out, \textcolor{myblue}{\textbf{int}} taille);
+			\medbreak
+			SigmoidePrimeZ va récupérer les éléments stockés dans le premier tableau contenant 'taille' éléments puis effectuer l'opération $x*(1-x)$ sur chaque éléments avant de les écrire dans les deuxième tableau passé en paramètre. Cette opération n'est pas la dérivée de la fonction sigmoide, il s'agit d'une petite optimisation qui nous permet de trouver le même résultat plus rapidement. En effet lors de la propagation inverse il nous est necessaire d'effectuer l'opération : \\$\sigma'(z) = \sigma(z)*(1-\sigma(z))$\\ ou z vient de : \\$a^L = \sigma(w^L*a^{L-1}+b^L) = \sigma(z^L)$\\ or z n'est pas stocké dans notre structure et on peut de toute facon simplifier par :\\$\sigma'(z)=a*(1-a)$\\ d'ou cette fonction.\\
+			Le deuxième tableau est a deux dimension car DELTA\_M est disponible au moment ou cette opération est effectué, on va donc l'utiliser plutot que de créer un autre tableau pour stocker le résultat.
+			\bigbreak
 			\textcolor{myblue}{\textbf{void}} MultiplicationMatricielleTransposeeTM(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}});\\
-			\textcolor{myblue}{\textbf{void}} MultiplicationMatricielleTransposeeMT(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}});\\
-			\textcolor{myblue}{\textbf{void}} Hadamard(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}});\\
-			\textcolor{myblue}{\textbf{void}} fct\_cout(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{char*}});\\
+			\textcolor{myblue}{\textbf{void}} MultiplicationMatricielleTransposeeMT(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}});
+			\medbreak
+				
+			\bigbreak
+			\textcolor{myblue}{\textbf{void}} Hadamard(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}});
+			\medbreak
+				Hadamard effectue le produit vectoriel de Hadamard sur les deux premier tableau pour stocker le résultat dans le troisième tableau. Tous ces tableau étant de la même taille, celle ci est passé en paramètre.
+			\bigbreak
+			\textcolor{myblue}{\textbf{void}} fct\_cout(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{char*}});
+			\medbreak
+			 fct\_cout va calculer l'erreur entre le résultat obtenue lors de la propagation et le résultat attendu, soit le char*, pour chacun des neurones de la derniere couche du réseau de neurones puis va stocker le résultat dans le tableau DELTA de la derniere couche du réseau. 
+			\bigbreak
 			\textcolor{myblue}{\textbf{void}} ModifPoids(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}});\\
 			\textcolor{myblue}{\textbf{void}} ModifBiais(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}});
+			\medbreak
 		\end{flushleft}
 		
 	\subsection{Gestionnaire d'entrées sorties}
 		\begin{flushleft}
-			\textcolor{myblue}{\textbf{Image*}} ChargerBmp(\textcolor{myblue}{\textbf{const char*}} fichier);\\
-			\textcolor{myblue}{\textbf{Image*}} ChargerMnist(\textcolor{myblue}{\textbf{const char*}} fichier);\\
-			\textcolor{myblue}{\textbf{int}} Sauver(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{const char*}} fichier);\\
-			\textcolor{myblue}{\textbf{Image*}} NouvelleImage(\textcolor{myblue}{\textbf{int}} w,\textcolor{myblue}{\textbf{int}} h);\\
-			\textcolor{myblue}{\textbf{Image*}} CopieImage(\textcolor{myblue}{\textbf{Image*}});\\
-			\textcolor{myblue}{\textbf{void}} SetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j,Pixel p);\\
-			\textcolor{myblue}{\textbf{Pixel}} GetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j);\\
-			\textcolor{myblue}{\textbf{void}} DelImage(Image*);\\
-			\textcolor{myblue}{\textbf{char*}} ChargerEtiquette(\textcolor{myblue}{\textbf{const char*}} fichier);\\
-			\textcolor{myblue}{\textbf{RN*}} ChargerRN(\textcolor{myblue}{\textbf{const char*}} fichier);\\
+			\textcolor{myblue}{\textbf{Image*}} ChargerBmp(\textcolor{myblue}{\textbf{const char*}} fichier);
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{Image*}} ChargerMnist(\textcolor{myblue}{\textbf{const char*}} fichier);
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{int}} Sauver(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{const char*}} fichier);
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{Image*}} NouvelleImage(\textcolor{myblue}{\textbf{int}} w,\textcolor{myblue}{\textbf{int}} h);
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{Image*}} CopieImage(\textcolor{myblue}{\textbf{Image*}});
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{void}} SetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j,Pixel p);
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{Pixel}} GetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j);
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{void}} DelImage(Image*);
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{char*}} ChargerEtiquette(\textcolor{myblue}{\textbf{const char*}} fichier);
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{RN*}} ChargerRN(\textcolor{myblue}{\textbf{const char*}} fichier);
+			\medbreak
+			\bigbreak
 			\textcolor{myblue}{\textbf{void}} SaveRN(\textcolor{myblue}{\textbf{RN}});
+			\medbreak
 		\end{flushleft}
 	
-	\subsection{Gestionnaire de l'apprentissage}
+	\subsection{Gestionnaire du réseau de neurones}
 		\begin{flushleft}
-			\textcolor{myblue}{\textbf{RN*}} initialisation(\textcolor{myblue}{\textbf{INFO\_RN}});\\
-			\textcolor{myblue}{\textbf{void}} AjoutFin(RN, \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float**}});\\
-			\textcolor{myblue}{\textbf{void}} Traitement(\textcolor{myblue}{\textbf{Image*}}, \textcolor{myblue}{\textbf{RN}});\\
-			\textcolor{myblue}{\textbf{char**}} Reconnaissance(\textcolor{myblue}{\textbf{RN}});\\
-			\textcolor{myblue}{\textbf{void}} MultiplicationMatricielle(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}});\\
-			\textcolor{myblue}{\textbf{void}} AdditionVecteurVecteur(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}});\\
-			\textcolor{myblue}{\textbf{void}} SigmoideV(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}});\\
+			\textcolor{myblue}{\textbf{RN*}} initialisation(\textcolor{myblue}{\textbf{INFO\_RN}});
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{void}} AjoutFin(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}});
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{void}} Propagation(\textcolor{myblue}{\textbf{Image*}}, \textcolor{myblue}{\textbf{RN}});
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{char**}} Reconnaissance(\textcolor{myblue}{\textbf{RN}});
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{void}} MultiplicationMatriceVecteur(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}});
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{void}} AdditionVecteurVecteur(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}});
+			\medbreak
+			\bigbreak
+			\textcolor{myblue}{\textbf{void}} SigmoideV(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}});
+			\medbreak
+			\bigbreak
 			\textcolor{myblue}{\textbf{float}} Sigmoide(\textcolor{myblue}{\textbf{float}});
+			\medbreak
 		\end{flushleft}		
 		
 \end{document}
