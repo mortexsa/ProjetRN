@@ -3,95 +3,128 @@
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage{graphicx}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\usepackage{geometry}
+\geometry{hmargin=3.45cm,vmargin=3cm}
+\usepackage{color}
+\definecolor{myblue}{rgb}{0, 0, 1}
 
 \begin{document}
-\maketitle
+
 \newpage
 \title{Cahier des spécifications\\Sujet 10 : Réseau de Neurones}
 \author{Thibaut \bsc{Pepin}\\Soumia \bsc{Rezgui}\\Isaac \bsc{Szulek}\\Severine \bsc{Selaquet}\\Anthony \bsc{Montigne}\\Arezki \bsc{Slimani}}
+\maketitle
 
-\section{Signatures des fonctions et des structures par modules}
-	\subsection{Gestionnaire du réseau de neurones}
-		\subsubsection{Structures}
-			struct COUCHE	//structure représentant une couche (ensemble de neurones) dans un réseau de neurone\\
-			{\\
-				float* A;	//tableau simple des activations des neurones\\
-				float* B;	//tableau simple des biais des neurones\\
-				float** W;	//matrice des poids synaptiques entre deux couches\\
-				int taille;	//taille des tableaux pour les activation et les biais (taille*taille pour la matrice des poids synaptiques)\\
-				
-				float DELTA;      // Vecteur de modifcation des biais\\
-				float ** DELTA_M; // Matrice de modification des poids\\
-				
-				struct COUCHE* prec;	//pointeur sur la couche précédent la couche courante\\
-				struct COUCHE* suiv;	//pointeur sur la couche suivant la couche courante\\
-			};\\
-			typedef struct COUCHE COUCHE;\\
-			typedef COUCHE* Liste_couche;	//Liste_couche représente l'ensemble des couches d'un réseau de neurones\\
-			
-			
-			struct INFO_RN	//structure représentant les différentes informations caractérisant un réseau de neurones\\
-			{
-				char** etiquettes;	//tableau simple de chaine de caractère\\
-				char* nom;	//nom du réseau de neurones\\
-				char* date;	//date de création du réseau de neurones\\
-				int reussite;	//nombre de réussite (s'incrémente de 1 après chaque propagation de données réussie)\\
-				int echec;	//nombre d'échec (s'incrémente de 1 après chaque propagation de données non réussie)\\
-			};\\
-			typedef struct INFO_RN INFO_RN;\\
-			
-			struct RN	//structure représentant le réseau de neurones, contenant l'ensemble des couches et les informations du réseau de neurones\\
-			{
-				INFO_RN info;	//les informations du réseau de neurones contenues dans la structure INFO_RN\\
-				Liste_couche couche_deb;	//pointeur sur la 1ere couche du RN\\
-				Liste_couche couche_fin;    //pointeur sur la derniere couche du RN\\
-			};\\
-			typedef struct RN RN;\\
-			
-		\subsubsection{Fonctions}
-			void initialisation(RN*,INFO_RN) :\\
-				initialise aléatoirement les biais et les poids, les activations sont initialisées à 0 et les informations du réseau de neurones sont récupérées après leurs choix par l'utilisateur\\
-			
-			void ajout_couche_fin(RN,float*,float**,int) :\\
-				ajoute une nouvelle couche au réseau de neurone avec en paramètres : les valeurs des nouveaux biais, des poids synaptiques et leurs tailles\\
-			
-			void traitement(Image*,RN) :\\
-				propage les données d'entrées de l'image vers la sortie du réseau de neurones, en prenant en entrée une image et un RN\\
-				
-			char** Reconnaissance(RN);\\
-				calcule de la sortie avec comme parametre un RN\\
-				
-			void multiplicationMatriceVecteur(float*,float**,float*) :\\
-				effectue la multiplication A*W avec en paramètres : les valeurs de l'activation, les valeurs des poids synaptiques et les valeurs de l'activation de la couche suivante pour contenir le résultat de la multiplication\\
-				
-			void additionVecteurVecteur(float*,float*) :\\
-				effectue l'addition de (A*W)+B avec en paramètres : les valeurs de l'activation de la couche suivante (contenant déjà le résultat de la multiplication A*B) et les valeurs des biais\\
-				
-			void sigmoideV(float*) :\\
-				applique la fonction sigmoïde sur A*W+B avec comme paramètre les valeurs de l'activation de la couche suivante (contenant le résultat de  A*W+B)\\
-				
-			float Sigmoide(float);\\
-			    application de la fonction sigmoide 1/1+e(-x)\\
-			    
-	\subsection{Gestionnaire d'apprentissage}
-	     \subsubsection{Fonctions}
-			void BackProp(RN*, Image* ,char*, float);\\
-				fonction permettant l'apprentissage avec comme parametres un RN , une image , valeur de sortie attendu, et une valeur à appliquer lors de la modification des biais et des poids.\\
-				
-			void SigmoidePrimeZ(float* in, float** out, int taille);\\
-				
-			void MultiplicationMatricielleTransposeeTM(float**, float*, float*, int, int);\\ 
-			
-			void MultiplicationMatricielleTransposeeMT(float*, float*, float**, int, int);\\
-			
-			void Hadamard(float**, float*, float*, int);\\
-				fonction permettant de faire le produit hadamard en prenant en entrée la metrice des poids , le vecteurs des biais et le vecteur de sortie ainsi que leur taille\\
-			void fct_cout(RN,char*);\\
-				effectue le calcul d'erreur entre la sortie attendu et la sortie obtenue en prenant en parmetre le RN ainsi que la sortie attendu \\
-				
-			void ModifPoids(float**, float**, int, int, int);\\
-				fonction permettant la modification des poids du reseaux de neurones avec comme parametres la matrice des poids ainsi que la matrice de modification des poids ,ainsi que la hauteur de largeur de la matrice , l'etat à appliquer \\
-				
-			void ModifBiais(float*, float*, int, int);\\
-				fonction permettant la modification des biais avec comme parametres les valeurs des biais ,
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Structures de Données}
+	\subsection{Réseau de neurones}
+	Pour le choix de notre structure de données nous avons rapidement adopté la représentation d'un réseau de neurone comme un ensemble de couches et non comme un ensemble de neurone individuel. Chaque Couche devait donc contenir l'ensemble des activation, des biais et des poids des neurones de cette couches sous la forme de vecteurs pour les activations et les biais et sous forme de matrice pour les poids, nous les avons integré dans une structure couche comme tableau a une ou deux dimensions car les calculs a effectuer necessite d'acceder aux éléments sans ordre particulier.
+	
+	Afin de stocker l'ensemble des couches constituant le réseau de neurone, nous avons opté pour une liste doublement chainé, en effet, les deux algorithme necessitant d'acceder aux contenues des couches vont propager des information de la premiere couche a la derniere couche pour l'algorithme de propagation et de la derniere couches a la premiere couche pour l'algorithme de rétro-propagation, d'ou le double chainage.
+	
+	Afin de regrouper les informations générales d'un réseau de neurone, nous avons créer une petite structure contenant toutes sortes d'informations comme la date de création.
+	
+	Un réseau de neurone est donc constitué d'une structure d'information ainsi que d'un pointeur sur la premiere couche et d'un autre pointeur sur la derniere couche.
+
+	\begin{flushleft}
+	
+		struct COUCHE	//structure représentant une couche (ensemble de neurones) dans un réseau de neurone\\
+		\{\\
+			\tab \textcolor{myblue}{\textbf{float*}} A;	//tableau représentant le vecteur des activation des neurone d'une couche.Possède autant d'élements que de neurone présent dans la couche\\
+			\tab \textcolor{myblue}{\textbf{float*}} B;	//tableau représentant le vecteur des biais des neurone d'une couche. De meme taille que A\\
+			\tab \textcolor{myblue}{\textbf{float**}} W;	//tableau a deux dimensions représentant la matrice des poids entre les neurones de la couches précedente et les neurones de cette couche. Ce tableau est donc de taille (taille de la couche actuelle x taille de la couche précedente) et est composé d'élement $w_{ij}$ ou j est le numéro du neurone de la couches précedente et i le numéro du neurone de la couche actuelle.\\
+			\tab \textcolor{myblue}{\textbf{int}} taille;	//Indique le nombre de neurones présent dans cette couche\\
+			\tab \textcolor{myblue}{\textbf{float}} DELTA;      //tableau représentant le vecteur des modifications a apporter aux biais de cette couches lors de la rétro-propagation des neurone d'une couche.De meme taille que A\\
+			\tab \textcolor{myblue}{\textbf{float**}} DELTA\_M; //tableau a deux dimensions représentant la matrice des modifications a apporter aux poids de cette couches lors de la rétro-propagation des neurone d'une couche. De meme taille que W\\
+			\medbreak
+			\tab \textcolor{myblue}{\textbf{struct COUCHE*}} prec;	//pointeur sur la couche précédente.\\
+			\tab \textcolor{myblue}{\textbf{struct COUCHE*}} suiv;	//pointeur sur la couche suivante.\\
+		\};\\
+		\bigbreak
+		typedef struct COUCHE COUCHE;\\
+		typedef COUCHE* Liste\_couche;\\
+		\bigbreak
+		struct INFO\_RN	//structure représentant les différentes informations caractérisant un réseau de neurones.\\
+		\{\\
+			\tab \textcolor{myblue}{\textbf{char**}} etiquettes;	//tableau de chaine de caractère comprenant la signification des neurones de sortie.\\
+			\tab \textcolor{myblue}{\textbf{char*}} nom;	//nom donné au réseau de neurones.\\
+			\tab \textcolor{myblue}{\textbf{char*}} date;	//date de création du réseau de neurones.\\
+			\tab \textcolor{myblue}{\textbf{int}} reussite;	//nombre de fois ou le réseau de neurone a obtnenue la réponse attendue lors de l'apprentissage.\\
+			\tab \textcolor{myblue}{\textbf{int}} echec;	//nombre de fois ou le réseau de neurone n'a pas obtnenue la réponse attendue lors de l'apprentissage.\\
+		\};\\
+		\bigbreak
+		typedef struct INFO\_RN INFO\_RN;\\
+		\bigbreak
+		struct RN	//structure représentant le réseau de neurones, contenant l'ensemble des couches et les informations du réseau de neurones.\\
+		\{\\
+			\tab \textcolor{myblue}{\textbf{INFO\_RN}} info;	//les informations du réseau de neurones.\\
+			\tab \textcolor{myblue}{\textbf{Liste\_couche}} couche\_deb;	//pointeur sur la 1ere couche du RN.\\
+			\tab \textcolor{myblue}{\textbf{Liste\_couche}} couche\_fin;    //pointeur sur la derniere couche du RN.\\
+		\};\\
+		\bigbreak
+		typedef struct RN RN;
+		
+	\end{flushleft}
+	
+	\subsection{Image}
+	Afin de représenté une image, nous avons opté pour un tableau a une dimension de pixel afin de se rapprocher de la structure des vecteurs d'activations. Chaque pixel étant une structure contenant la quantité de rouge, de vert et de bleu présent dans un nombre entre 0 et 255 d'ou le type char qui convient parfaitement pour des valeur dans cet intervalle.
+	\begin{flushleft}
+		typedef struct Pixel\\
+			\{\\
+				\tab \textcolor{myblue}{\textbf{unsigned char}} r,g,b;\\
+			\} Pixel;
+		\bigbreak
+		typedef struct Image\\
+			\{\\
+				\tab \textcolor{myblue}{\textbf{int}} w,h;\\
+				\tab \textcolor{myblue}{\textbf{Pixel*}} dat;\\
+			\} Image;
+	\end{flushleft}
+	
+\section{Signatures des Fonctions}
+	\subsection{Gestionnaires d'apprentissage}
+		\begin{flushleft}
+			\textcolor{myblue}{\textbf{void}} BackProp(RN*, \textcolor{myblue}{\textbf{Image*}} ,\textcolor{myblue}{\textbf{char*}}, \textcolor{myblue}{\textbf{float}});\\
+			\textcolor{myblue}{\textbf{void}} SigmoidePrimeZ(\textcolor{myblue}{\textbf{float*}} in, \textcolor{myblue}{\textbf{float**}} out, \textcolor{myblue}{\textbf{int}} taille);\\
+			\textcolor{myblue}{\textbf{void}} MultiplicationMatricielleTransposeeTM(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}});\\
+			\textcolor{myblue}{\textbf{void}} MultiplicationMatricielleTransposeeMT(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}});\\
+			\textcolor{myblue}{\textbf{void}} Hadamard(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}});\\
+			\textcolor{myblue}{\textbf{void}} fct\_cout(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{char*}});\\
+			\textcolor{myblue}{\textbf{void}} ModifPoids(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}});\\
+			\textcolor{myblue}{\textbf{void}} ModifBiais(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}});
+		\end{flushleft}
+		
+	\subsection{Gestionnaire d'entrées sorties}
+		\begin{flushleft}
+			\textcolor{myblue}{\textbf{Image*}} ChargerBmp(\textcolor{myblue}{\textbf{const char*}} fichier);\\
+			\textcolor{myblue}{\textbf{Image*}} ChargerMnist(\textcolor{myblue}{\textbf{const char*}} fichier);\\
+			\textcolor{myblue}{\textbf{int}} Sauver(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{const char*}} fichier);\\
+			\textcolor{myblue}{\textbf{Image*}} NouvelleImage(\textcolor{myblue}{\textbf{int}} w,\textcolor{myblue}{\textbf{int}} h);\\
+			\textcolor{myblue}{\textbf{Image*}} CopieImage(\textcolor{myblue}{\textbf{Image*}});\\
+			\textcolor{myblue}{\textbf{void}} SetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j,Pixel p);\\
+			\textcolor{myblue}{\textbf{Pixel}} GetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j);\\
+			\textcolor{myblue}{\textbf{void}} DelImage(Image*);\\
+			\textcolor{myblue}{\textbf{char*}} ChargerEtiquette(\textcolor{myblue}{\textbf{const char*}} fichier);\\
+			\textcolor{myblue}{\textbf{RN*}} ChargerRN(\textcolor{myblue}{\textbf{const char*}} fichier);\\
+			\textcolor{myblue}{\textbf{void}} SaveRN(\textcolor{myblue}{\textbf{RN}});
+		\end{flushleft}
+	
+	\subsection{Gestionnaire de l'apprentissage}
+		\begin{flushleft}
+			\textcolor{myblue}{\textbf{RN*}} initialisation(\textcolor{myblue}{\textbf{INFO\_RN}});\\
+			\textcolor{myblue}{\textbf{void}} AjoutFin(RN, \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float**}});\\
+			\textcolor{myblue}{\textbf{void}} Traitement(\textcolor{myblue}{\textbf{Image*}}, \textcolor{myblue}{\textbf{RN}});\\
+			\textcolor{myblue}{\textbf{char**}} Reconnaissance(\textcolor{myblue}{\textbf{RN}});\\
+			\textcolor{myblue}{\textbf{void}} MultiplicationMatricielle(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}});\\
+			\textcolor{myblue}{\textbf{void}} AdditionVecteurVecteur(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}});\\
+			\textcolor{myblue}{\textbf{void}} SigmoideV(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}});\\
+			\textcolor{myblue}{\textbf{float}} Sigmoide(\textcolor{myblue}{\textbf{float}});
+		\end{flushleft}		
+		
 \end{document}
