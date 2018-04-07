@@ -86,7 +86,7 @@
 				\tab \textcolor{myblue}{\textbf{Pixel*}} dat;\\
 			\} Image;
 	\end{flushleft}
-	
+	\newpage
 	
 	
 	
@@ -119,38 +119,36 @@
 		
 		
 	\subsection{Gestionnaire d'entrées sorties}
-		\subsubsection{\textcolor{myblue}{\textbf{Image*}} ChargerBmp(\textcolor{myblue}{\textbf{const char*}} fichier)}
-		
-		
-		\subsubsection{\textcolor{myblue}{\textbf{Image*}} ChargerMnist(\textcolor{myblue}{\textbf{const char*}} fichier)}
-		
+		\subsubsection{\textcolor{myblue}{\textbf{Image*}} ChargerBmp(\textcolor{myblue}{\textbf{const char*}} fichier)\\
+		\textcolor{myblue}{\textbf{Image*}} ChargerMnist(\textcolor{myblue}{\textbf{const char*}} fichier)}
+		ChargerBmp et ChargerMnist vont lire a l'emplacement donné en paramètre et renvoyer le contenue du fichier sous forme de la structure Image si celui ci contient une image au format bmp non compressé ou au même format que celui utilisé par la base de données MNIST. Le fichier est ensuite supprimé ou partiellement effacé.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{int}} Sauver(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{const char*}} fichier)}
-		
+		Sauver va enregistrer l'image passé en paramètre a l'emplacement lui aussi passé en paramètre au format bmp.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{Image*}} NouvelleImage(\textcolor{myblue}{\textbf{int}} w,\textcolor{myblue}{\textbf{int}} h)}
-		
+		NouvelleImage alloue la mémoire nécessaire pour stocker une image dont la taille est passé en paramètre dans une structure Image puis renvoi l'addresse de l'image créé.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{Image*}} CopieImage(\textcolor{myblue}{\textbf{Image*}})}
-		
+		CopieImage crée une copie de l'image passée en paramètre puis renvoi son addresse.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} SetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j,Pixel p)}
-		
+			SetPixel modifie le pixel aux coordonnées i*j de l'image passée en paramètre afin de correspondre au pixel p.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{Pixel}} GetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j)}
-		
+		GetPixel renvoi le pixel aux coordonnées i*j de l'image passée en paramètre.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} DelImage(Image*)}
-		
+		DelImage libere la mémoire d'une variable de type Image.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{char*}} ChargerEtiquette(\textcolor{myblue}{\textbf{const char*}} fichier)}
 		
 		
 		\subsubsection{\textcolor{myblue}{\textbf{RN*}} ChargerRN(\textcolor{myblue}{\textbf{const char*}} fichier)}
-		
+		ChargerRN initialise et remplie un réseau de neurone dont les informations sont a l'emplacement passé en pparamètre avant de renvoyé l'addresse de celui-ci
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} SaveRN(\textcolor{myblue}{\textbf{RN}})}
-		
+		SaveRN va créer ou modifier tous les fichiers nécessair afin de sauvegarder le réseau de neurone passé en paramètre.
 		
 	
 	\subsection{Gestionnaire du réseau de neurones}
