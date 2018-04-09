@@ -15,5 +15,4 @@ void Propagation(Image*, RN);
 char** Reconnaissance(RN);
 
 
-
 #endif

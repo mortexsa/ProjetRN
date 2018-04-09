@@ -145,7 +145,7 @@
 		
 		
 		\subsubsection{\textcolor{myblue}{\textbf{RN*}} ChargerRN(\textcolor{myblue}{\textbf{const char*}} fichier)}
-		ChargerRN initialise et remplie un réseau de neurone dont les informations sont a l'emplacement passé en pparamètre avant de renvoyé l'addresse de celui-ci
+		ChargerRN initialise et remplie un réseau de neurone dont les informations sont à l'emplacement passé en paramètre avant de renvoyé l'addresse de celui-ci
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} SaveRN(\textcolor{myblue}{\textbf{RN}})}
 		SaveRN va créer ou modifier tous les fichiers nécessair afin de sauvegarder le réseau de neurone passé en paramètre.
@@ -153,28 +153,28 @@
 	
 	\subsection{Gestionnaire du réseau de neurones}
 		\subsubsection{\textcolor{myblue}{\textbf{RN*}} initialisation(\textcolor{myblue}{\textbf{INFO\_RN}})}
-		
+		Initialise un nouveau réseau de neurones à partir des informations renseignées par l'utilisateur.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutFin(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}})}
-		
+		Ajoute une nouvelle couche au réseau de neurones spécifié avec sa taille.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} Propagation(\textcolor{myblue}{\textbf{Image*}}, \textcolor{myblue}{\textbf{RN}})}
-		
+		Propage les données d'entrées de l'image dans le réseau de neurones
 		
 		\subsubsection{\textcolor{myblue}{\textbf{char**}} Reconnaissance(\textcolor{myblue}{\textbf{RN}})}
-		
+		Retourne les étiquettes des 3 valeurs du réseau de neurones avec les valeurs des activations les plus élévées.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} MultiplicationMatriceVecteur(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}})}
-		
+		Effectue la multiplication A*W avec en paramètres : les valeurs des poids synaptiques, les valeurs de l'activation, les valeurs contenant la sortie du programme (les activations de la couche suivante) et deux tailles, une pour la matrice des poids et l'autre est celle commune entre la matrice des poids et les valeurs de l'activation.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} AdditionVecteurVecteur(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}})}
-		
+		Effectue l'addition de (A*W)+B avec en paramètres : les valeurs des biais ,les valeurs de l'activation de la couche suivante (contenant déjà le résultat de la multiplication A*B), les valeurs contenant la sortie du programme (les activations de la couche suivante) et la taille (nombre de neurones sur la couche).
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} SigmoideV(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}})}
-		
+		Calcule de la sigmoide appliquée sur les valeurs de l'activation de la couche suivante, les valeurs contenant la sortie du programme (les activations de la couche suivante) et la taille de la couche.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{float}} Sigmoide(\textcolor{myblue}{\textbf{float}})}
-		
+		Calcule de la sigmoide (contenant la fonction sigmoide). 
 		
 		
 \end{document}
