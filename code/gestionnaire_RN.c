@@ -127,39 +127,50 @@ char** Reconnaissance(RN rn)
 {
 	/*
 	char* top[3];
+	int t[3];
 	
 	int i;
+	int max1 = 0;
+	int max2 = 0;
+	int max3 = 0;
 	
-	for(i=0;i<rn.couche_deb->taille;i++)
-		{if(rn.couche_deb->A[i]>max)				
+	for(i=0;i<rn.couche_fin->taille;i++)
+		{if(rn.couche_fin->A[i]>max1)				
 			{
-				top[0] = rn.info->etiquettes[i];
+				max1 = rn.couche_fin->A[i];
+				t[0] = i;
+		
 			}
 		}
 		
-	for(i=0;i<rn.couche_deb->taille;i++)
-		{if(rn.couche_deb->A[i]>max)
-			{if(top[0]!=rn.couche_deb->A[i])				
+	for(i=0;i<rn.couche_fin->taille;i++)
+		{if(rn.couche_fin->A[i]>max2)
+			{if(max1!=rn.couche_fin->A[i])				
 				{
-				top[1] = rn.info->etiquettes[i];
+				max2 = rn.couche_fin->A[i];
+				t[1] = i;
 				}
 			}
 		}
 		
-	for(i=0;i<rn.couche_deb->taille;i++)
-		{if(rn.couche_deb->A[i]>max)
-			{if(top[0]!=rn.couche_deb->A[i])				
-				{if(top[1]!=n.couche_deb->A[i])	
+	for(i=0;i<rn.couche_fin->taille;i++)
+		{if(rn.couche_fin->A[i]>max3)
+			{if(max1!=rn.couche_fin->A[i])				
+				{if(max2!=rn.couche_fin->A[i])	
 					{
-						top[2] = rn.info->etiquettes[i];
+						max3 = rn.couche_fin->A[i];
+						t[2] = i;
 					}
 				}
 			}
 		}
+		
+	top[0] = rn.info->etiquettes[t[0]];
+	top[1] = rn.info->etiquettes[t[1]];
+	top[2] = rn.info->etiquettes[t[2]];
+		
 	
 	return top;
-
 	*/
-	
 }
 
