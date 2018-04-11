@@ -72,17 +72,17 @@ return rn;
 void Remplissage(RN rn) 
 { int i,j;
 	
-	COUCHE* tmp = rn.couche_deb;
-	
+	COUCHE* tmp = rn.couche_deb->suiv;
+	//faire le test pour tester si il y a au moins deux couches
 while(tmp!=NULL){
-	for(i=0;i<rn.couche_deb->taille;i++) //taille_M1 nbr de lignes de la 1ere matrice
+	for(i=0;i<tmp->taille;i++) //taille_M1 nbr de lignes de la 1ere matrice
 	{	//rn.couche_deb->A[i] = 0;         pas sur de mettre les activation à 0
-		rn.couche_deb->B[i] = rand();
+		tmp->B[i] = rand();
 		
-		for(j=0;j<rn.couche_deb->taille;j++)  // taille_M2 nbr de colonnes de la seconde matrice
+		for(j=0;j<tmp->prec->taille;j++)  // taille_M2 nbr de colonnes de la seconde matrice
 		{
 			
-				rn.couche_deb->W[i][j]= rand(); //attricution de poids aleatoires
+				tmp->W[i][j]= rand(); //attricution de poids aleatoires
 		} 
 	}
 	tmp=tmp->suiv;
@@ -125,6 +125,41 @@ for(int i=0;i<tmp->taille;i++){
 
 char** Reconnaissance(RN rn)
 {
+	/*
+	char* top[3];
+	
+	int i;
+	
+	for(i=0;i<rn.couche_deb->taille;i++)
+		{if(rn.couche_deb->A[i]>max)				
+			{
+				top[0] = rn.info->etiquettes[i];
+			}
+		}
+		
+	for(i=0;i<rn.couche_deb->taille;i++)
+		{if(rn.couche_deb->A[i]>max)
+			{if(top[0]!=rn.couche_deb->A[i])				
+				{
+				top[1] = rn.info->etiquettes[i];
+				}
+			}
+		}
+		
+	for(i=0;i<rn.couche_deb->taille;i++)
+		{if(rn.couche_deb->A[i]>max)
+			{if(top[0]!=rn.couche_deb->A[i])				
+				{if(top[1]!=n.couche_deb->A[i])	
+					{
+						top[2] = rn.info->etiquettes[i];
+					}
+				}
+			}
+		}
+	
+	return top;
+
+	*/
 	
 }
 
