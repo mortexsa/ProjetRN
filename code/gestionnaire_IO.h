@@ -2,6 +2,7 @@
 #define GESTIONNAIRE_H
 
 #include "Structures.h"
+#include "gestionnaire_RN.h"
 
 Image* ChargerBmp(const char* fichier);
 Image* ChargerMnist(const char* fichier);

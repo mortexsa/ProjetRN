@@ -186,27 +186,27 @@ void SaveRN(RN rn)
 	}
 	
 	char path[100];
-	strcpy(path,"../sav/");
-	strcat(path,rn.info.date);
-	strcat(path,"_\0");
-	strcat(path,rn.info.nom);
+	sprintf(path,"../sav/%s_%s\0",rn.info.date,rn.info.nom);
 	
 	if(opendir(path) == NULL)
 	{
 		mkdir(path,S_IRWXU);
 	}
 	
+	printf("%s\n",path);
+	
 	FILE* fichier = NULL;
 	COUCHE* tmp = rn.couche_deb->suiv;
 	char path2[100];
-	int i = 2,m;
+	int i = 1,m;
 	int temp[2];
 	
 	if(tmp)
 	{
 		while(tmp)
 		{
-			sprintf(path2,"%s/C%d\0",path,i);
+			sprintf(path2,"%s/C%d.rn\0",path,i);
+			printf("%s\n",path2);
 			if((fichier = fopen(path2,"wb+"))==NULL)
 			{
 				exit(-1);
@@ -227,5 +227,4 @@ void SaveRN(RN rn)
 			i++;
 		}
 	}
-	
 }
