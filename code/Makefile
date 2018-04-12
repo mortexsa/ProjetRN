@@ -1,6 +1,10 @@
 all: clear neurone
 	
 
+run: all
+	./neurone
+	
+
 neurone: gestionnaire_IO.o gestionnaire_RN.o Apprentissage.o interface.o neurone.o
 	gcc -o neurone gestionnaire_IO.o gestionnaire_RN.o Apprentissage.o interface.o neurone.o -lm -lpthread -Wall
 	

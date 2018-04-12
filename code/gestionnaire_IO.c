@@ -5,6 +5,12 @@
 #include <assert.h>
 //#include "01_09_02_bmp.h"
 
+#include <sys/types.h>
+#include <dirent.h>
+#include <sys/dir.h>
+#include <errno.h>
+#include <sys/stat.h>
+
 #include "gestionnaire_IO.h"
 
 Image* NouvelleImage(int w,int h)
@@ -174,5 +180,52 @@ RN* ChargerRN(const char* fichier)
 
 void SaveRN(RN rn)
 {
+	if(opendir("../sav") == NULL)
+	{
+		mkdir("../sav",S_IRWXU);
+	}
+	
+	char path[100];
+	strcpy(path,"../sav/");
+	strcat(path,rn.info.date);
+	strcat(path,"_\0");
+	strcat(path,rn.info.nom);
+	
+	if(opendir(path) == NULL)
+	{
+		mkdir(path,S_IRWXU);
+	}
+	
+	FILE* fichier = NULL;
+	COUCHE* tmp = rn.couche_deb->suiv;
+	char path2[100];
+	int i = 2,m;
+	int temp[2];
+	
+	if(tmp)
+	{
+		while(tmp)
+		{
+			sprintf(path2,"%s/C%d\0",path,i);
+			if((fichier = fopen(path2,"wb+"))==NULL)
+			{
+				exit(-1);
+			}
+			
+			temp[0] = tmp->prec->taille;
+			temp[1] = tmp->taille;
+			fwrite(&temp,sizeof(int),2,fichier);
+			
+			fwrite(tmp->B,sizeof(float),temp[1],fichier);
+			
+			for(m=0;m<temp[1];m++)
+			{
+				fwrite(tmp->W[m],sizeof(float),temp[0],fichier);
+			}
+			
+			tmp = tmp->suiv;
+			i++;
+		}
+	}
 	
 }
