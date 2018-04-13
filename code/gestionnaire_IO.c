@@ -278,4 +278,12 @@ void SaveRN(RN rn)
 			i++;
 		}
 	}
+	
+	sprintf(path2,"%s/INFO",path);
+	if((fichier = fopen(path2,"w+")) == NULL)
+		exit(-1);
+	fprintf(fichier,"%s\n%s\n%d\n%d",rn.info.nom,rn.info.date,rn.info.reussite,rn.info.echec);
+	for(i=0;i<rn.couche_fin->taille;i++)
+		fprintf(fichier,"%s\n",rn.info.etiquettes[i]);
+	fclose(fichier);
 }
