@@ -53,62 +53,91 @@ float Sigmoide(float in)
 /*initialisation des champs du reseau de neurones*/
 RN* initialisation(INFO_RN info)
 {
-	
 	RN* rn = malloc(sizeof(RN));
 	rn->couche_deb=NULL;
 	rn->couche_fin=NULL;
 	
-//remplissage de la structure
-	rn->info.etiquettes = info.etiquettes;
+	//remplissage de la structure
+	//rn->info.etiquettes = info.etiquettes;
+	rn->info.nom = malloc(sizeof(char)*strlen(info.nom));
+	rn->info.date = malloc(sizeof(char)*strlen(info.date));
 	strcpy(rn->info.nom,info.nom);
 	strcpy(rn->info.date,info.date);
 	rn->info.reussite = info.reussite;
 	rn->info.echec = info.echec;	
-return rn;	
+	
+	return rn;	
 }
 
 
 //mettre des val aleatoire dans W et B
 void Remplissage(RN rn) 
-{ int i,j;
+{
+	int i,j;
 	
 	COUCHE* tmp = rn.couche_deb->suiv;
 	//faire le test pour tester si il y a au moins deux couches
-while(tmp!=NULL){
-	for(i=0;i<tmp->taille;i++) //taille_M1 nbr de lignes de la 1ere matrice
-	{	//rn.couche_deb->A[i] = 0;         pas sur de mettre les activation à 0
-		tmp->B[i] = rand();
-		
-		for(j=0;j<tmp->prec->taille;j++)  // taille_M2 nbr de colonnes de la seconde matrice
+	while(tmp!=NULL)
 		{
-			
+		for(i=0;i<tmp->taille;i++) //taille_M1 nbr de lignes de la 1ere matrice
+		{	//rn.couche_deb->A[i] = 0;         pas sur de mettre les activation à 0
+			tmp->B[i] = rand();
+		
+			for(j=0;j<tmp->prec->taille;j++)  // taille_M2 nbr de colonnes de la seconde matrice
+			{
 				tmp->W[i][j]= rand(); //attricution de poids aleatoires
-		} 
+			} 
+		}
+		tmp=tmp->suiv;
 	}
-	tmp=tmp->suiv;
-}
 }
 
 /*ajouter une couche à la fin */
-void Ajout_couche_Fin(RN rn, int taille)
+void Ajout_couche_Fin(RN* rn, int taille)
 { 
-COUCHE* new = malloc(sizeof(COUCHE));
-new->suiv=NULL;
-new->prec=rn.couche_fin;
-rn.couche_fin->suiv=new;
-new->taille=taille;
+	COUCHE* new = malloc(sizeof(COUCHE));
+	new->suiv = NULL;
+	new->prec = rn->couche_fin;
+	rn->couche_fin->suiv = new;
+	new->taille = taille;
+	
+	new->A = malloc(taille*sizeof(float));
+	new->B = malloc(taille*sizeof(float));
+	new->W = malloc(taille*sizeof(float*));
+	new->DELTA = malloc(taille*sizeof(float));
+	new->DELTA_M = malloc(taille*sizeof(float*));
+	
+	int i,taille_prec = new->prec->taille;
+	for(i = 0;i<taille;i++)
+	{
+		new->W[i] = malloc(taille_prec*sizeof(float));
+		new->DELTA_M[i] = malloc(taille_prec*sizeof(float));
+	}
+}
+
+void AjoutPremiereCouche(RN* rn, int taille)
+{ 
+	COUCHE* new = malloc(sizeof(COUCHE));
+	new->suiv = NULL;
+	new->prec = NULL;
+	rn->couche_fin = new;
+	rn->couche_deb = new;
+	new->taille = taille;
+	
+	new->A = malloc(taille*sizeof(float));
 }
 
 /*propagation de l'image application de AJ=σ(AJ-1*W+b)*/
 void Propagation(Image* im, RN rn)
 {
-COUCHE* tmp = rn.couche_deb;
+	COUCHE* tmp = rn.couche_deb;
 	
 	//insertion activation
-for(int i=0;i<tmp->taille;i++){
-	//tmp->A[i]=val;
-	}	
-	//
+	for(int i=0;i<tmp->taille;i++)
+		{
+		//tmp->A[i]=val;
+		}	
+		//
 	
 	tmp = tmp->suiv;
 	
@@ -127,7 +156,7 @@ char** Reconnaissance(RN rn)
 {
 	/*
 	char* top[3];
-	int t[3];
+	int t[3]; // serieusement ??? --'
 	
 	int i;
 	int max1 = 0;

@@ -10,7 +10,8 @@ void SigmoideV(float*, float*, int);
 float Sigmoide(float);
 RN* initialisation(INFO_RN);
 void Remplissage(RN rn); 
-void Ajout_couche_FinFin(RN, float*, float**);
+void Ajout_couche_Fin(RN* rn, int taille);
+void AjoutPremiereCouche(RN* rn, int taille);
 void Propagation(Image*, RN);
 char** Reconnaissance(RN);
 

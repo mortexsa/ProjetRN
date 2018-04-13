@@ -14,7 +14,7 @@ int main()
 	
 	strcpy(rn.info.etiquettes[0],"eti_1\0");
 	strcpy(rn.info.etiquettes[1],"eti_2\0");
-	
+		
 	COUCHE* C0 = malloc(sizeof(COUCHE));
 	COUCHE* C1 = malloc(sizeof(COUCHE));
 	COUCHE* C2 = malloc(sizeof(COUCHE));
@@ -96,9 +96,12 @@ int main()
 	rn.info.nom = malloc(20*sizeof(char));
 	
 	strcpy(rn.info.date,"2018-04-12\0");
-	strcpy(rn.info.nom,"test1\0");
 	
+	
+	strcpy(rn.info.nom,"test1\0");
+
 	SaveRN(rn);
+	ChargerRN(rn.info);
 	
 	return 0;
 }

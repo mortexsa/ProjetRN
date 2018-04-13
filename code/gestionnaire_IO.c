@@ -13,6 +13,8 @@
 
 #include "gestionnaire_IO.h"
 
+#define debug printf("line : %d in function : %s in file %s\n",__LINE__,__func__,__FILE__);
+
 Image* NouvelleImage(int w,int h)
 {
 	Image* I = malloc(sizeof(Image));
@@ -168,14 +170,60 @@ Image* ChargerMnist(const char* fichier)
 	
 }
 
-char* ChargerEtiquette(const char* fichier)
+char* ChargerEtiquetteMNIST(const char* fichier)
 {
 	
 }
 
-RN* ChargerRN(const char* fichier)
+char* ChargerEtiquetteBMP(const char* fichier)
 {
 	
+}
+
+INFO_RN* ChargerInfo()
+{
+	
+}
+
+RN* ChargerRN(INFO_RN info)
+{
+	RN* rn = initialisation(info);
+	char path[100];
+	int i = 1,j;
+	sprintf(path,"../sav/%s_%s/C%d.rn",info.date,info.nom,i);
+	FILE* fichier = fopen(path,"rb");	
+	if(!fichier)
+		exit(-1);
+	
+	int t[2];
+	fread(t,sizeof(int),2,fichier);
+	
+	AjoutPremiereCouche(rn,t[0]);
+	
+	fseek(fichier, 0, SEEK_SET);
+	
+	while(fichier)
+	{
+		fread(t,sizeof(int),2,fichier);
+		//printf("%s\n%d %d\n",path,t[0],t[1]);
+		debug
+		Ajout_couche_Fin(rn,t[1]);
+		debug
+		fread(rn->couche_fin->B,sizeof(float),t[1],fichier);
+		debug
+		for(j=0;j<t[1];j++)
+		{
+			debug
+			fread(rn->couche_fin->W[j],sizeof(float),t[0],fichier);
+		}
+		
+		
+		
+		fclose(fichier);
+		i++;
+		sprintf(path,"../sav/%s_%s/C%d.rn",info.date,info.nom,i);
+		fichier = fopen(path,"r");
+	}
 }
 
 void SaveRN(RN rn)
@@ -186,14 +234,14 @@ void SaveRN(RN rn)
 	}
 	
 	char path[100];
-	sprintf(path,"../sav/%s_%s\0",rn.info.date,rn.info.nom);
+	sprintf(path,"../sav/%s_%s",rn.info.date,rn.info.nom);
 	
 	if(opendir(path) == NULL)
 	{
 		mkdir(path,S_IRWXU);
 	}
 	
-	printf("%s\n",path);
+	//printf("%s\n",path);
 	
 	FILE* fichier = NULL;
 	COUCHE* tmp = rn.couche_deb->suiv;
@@ -205,16 +253,18 @@ void SaveRN(RN rn)
 	{
 		while(tmp)
 		{
-			sprintf(path2,"%s/C%d.rn\0",path,i);
-			printf("%s\n",path2);
-			if((fichier = fopen(path2,"wb+"))==NULL)
+			sprintf(path2,"%s/C%d.rn",path,i);
+			
+			if((fichier = fopen(path2,"wb+")) == NULL)
 			{
 				exit(-1);
 			}
 			
 			temp[0] = tmp->prec->taille;
 			temp[1] = tmp->taille;
-			fwrite(&temp,sizeof(int),2,fichier);
+			fwrite(temp,sizeof(int),2,fichier);
+			
+			//printf("%s\n%d %d\n",path2,temp[0],temp[1]);
 			
 			fwrite(tmp->B,sizeof(float),temp[1],fichier);
 			
@@ -223,6 +273,7 @@ void SaveRN(RN rn)
 				fwrite(tmp->W[m],sizeof(float),temp[0],fichier);
 			}
 			
+			fclose(fichier);
 			tmp = tmp->suiv;
 			i++;
 		}

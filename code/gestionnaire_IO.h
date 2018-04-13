@@ -15,9 +15,12 @@ void DelImage(Image*);
 
 
 
-char* ChargerEtiquette(const char* fichier);
+char* ChargerEtiquetteMNIST(const char* fichier);
+char* ChargerEtiquetteBMP(const char* fichier);
 
-RN* ChargerRN(const char* fichier);
+INFO_RN* ChargerInfo();
+
+RN* ChargerRN(INFO_RN info);
 void SaveRN(RN);
 
 #endif
