@@ -85,7 +85,6 @@ struct BMPHead
 	struct BMPImHead imhead;
 };
 
-//a modifier
 Image* ChargerBmp(const char* fichier, int w_max, int h_max)
 {
 	struct BMPHead head;
@@ -99,13 +98,29 @@ Image* ChargerBmp(const char* fichier, int w_max, int h_max)
 		return NULL;
 	fread(&head,sizeof(struct BMPHead),1,F);
 	if (head.signature[0]!='B' || head.signature[1]!='M')
-		return NULL;  // mauvaise signature, ou BMP non supporté.
+	{
+		fclose(F);
+		remove(fichier);
+		return NULL;
+	}  // mauvaise signature, ou BMP non supporté.
 	if (head.imhead.bpp!=24)
-		return NULL;  // supporte que le 24 bits pour l'instant
+	{
+		fclose(F);
+		remove(fichier);
+		return NULL;
+	}  // supporte que le 24 bits pour l'instant
 	if (head.imhead.compression!=0)
-		return NULL;  // rarrissime, je ne sais même pas si un logiciel écrit/lit des BMP compressés. 
+	{
+		fclose(F);
+		remove(fichier);
+		return NULL;
+	}  // rarrissime, je ne sais même pas si un logiciel écrit/lit des BMP compressés. 
 	if (head.imhead.cpalette!=0 || head.imhead.cIpalette!=0)
-		return NULL; // pas de palette supportée, cependant, a bpp 24, il n'y a pas de palette.
+	{
+		fclose(F);
+		remove(fichier);
+		return NULL;
+	} // pas de palette supportée, cependant, a bpp 24, il n'y a pas de palette.
 	if(head.imhead.height>h_max || head.imhead.width>w_max)
 	{
 		fclose(F);
@@ -171,7 +186,6 @@ int Sauver(Image* I,const char* fichier)
 	return 0;
 }
 
-// a modifier
 Image* ChargerMnist(const char* path, int w_max, int h_max)
 {
 	int t[3];
@@ -249,12 +263,27 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 			{
 				couple->image = ChargerMnist(path, w_max, h_max);
 			}
+			else
+			{
+				remove(path);
+				remove(path2);
+			}
 		}
 		else if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen(".bmp")]),".bmp") == 0)
 		{
-			couple->image = ChargerBmp(path, w_max, h_max);
-			couple->etiquette = malloc(sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp") + 1));
-			strncpy(couple->etiquette,fichier->d_name,sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp")));
+			if(couple->image = ChargerBmp(path, w_max, h_max))
+			{
+				couple->etiquette = malloc(sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp") + 1));
+				strncpy(couple->etiquette,fichier->d_name,sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp")));
+			}
+			else
+			{
+				remove(path);
+			}
+		}
+		else
+		{
+			remove(path);
 		}
 	}
 	
