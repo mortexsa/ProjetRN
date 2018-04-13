@@ -179,5 +179,13 @@
 		\subsubsection{\textcolor{myblue}{\textbf{float}} Sigmoide(\textcolor{myblue}{\textbf{float}})}
 		Calcule de la sigmoide (contenant la fonction sigmoide). 
 		
+	\subsection{circulation d'informations entre les differents modules de l'application}
+	
+	Dans l'interface l'utilisateur a le possibilité de choisir un réseau de neurones parmi d'autres déjà crées pour cela l'information sera transmise au gestionnaire Réseau de neurones afin qu'il puisse charger un réseau de neurones via la fonction chargerRN .
+	Il peut egalement créer un nouveau réseau de neurones ,dans ce cas-là il devra entrer les données nécessaires pour sa création (couches d'entrées, couches cachées ,neurones de sortie ainsi que les étiquèttes et format du fichier) ces informations-là seront récupérées par le gestionnaire Réseau de neurones sous forme de structure appelée RN , pour l'utiliser par la suite dans la partie traitement où ce qu’on a appelé propagation.
+	Qui dans cette partie ,le réseau de neurones devra récupérer une image du gestionnaire entrée/sortie à travers la structure Image, calculer le résultat et l'nvoyer à nouveau à l'interface,ainsi que la matrice des poids pour que l'utilisateur visualise au mieux les opérations qui s'effectuent derrière.Le résultat calculé par le gestionnaire des réseaux de neurones sera récupéré sous forme de fonction propagation par le module apprentissage pour pouvoir l'utiliser dans la retro-propagation ,
+	qui va également récupérer les étiquèttes du gestionnaire Entrée/sortie via la fonction chargerCoupleAttIn ,ou chargerEtiquette (selon le format du ficher) qui seront utile pour le traitement.
+	Par la suite les modifications à apporter aux poids et aux biais seront récupérés par le gestionnaire réseau de neurones afin de les appliquer.Le réseau de neurones sera par la suite enregistrer dans le gestionnaire entrée/sortie à travers la fonction SaveRN.
+		
 		
 \end{document}
