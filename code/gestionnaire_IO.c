@@ -182,7 +182,60 @@ char* ChargerEtiquetteBMP(const char* fichier)
 
 INFO_RN* ChargerInfo()
 {
+	char path[268],tmp[268];
+	FILE* verif;
+	int i;
+	DIR* rep = opendir("../sav");
+	if (rep == NULL)
+        exit(1);
+    struct dirent* fichier = NULL;
+    
+    while((fichier = readdir(rep))&&(fichier->d_type == DT_DIR))
+    {
+		sprintf(path,"../sav/%s/INFO",fichier->d_name);
+		if((verif = fopen(path,"r")))
+		{
+			i++;
+			fclose(verif);
+		}
+	}
 	
+    if (closedir(rep) == -1)
+        exit(-1);
+    
+    INFO_RN* res = malloc(i*sizeof(INFO_RN));
+    
+    rep = opendir("../sav");
+	if (rep == NULL)
+        exit(1);
+    
+    i=0;
+    while((fichier = readdir(rep))&&(fichier->d_type == DT_DIR))
+    {
+		sprintf(path,"../sav/%s/INFO",fichier->d_name);
+		printf("%s\n",path);
+		verif = fopen(path,"r");
+		if(verif)
+		{
+			fscanf(verif,"%s\n",tmp);
+			res[i].nom = malloc(strlen(tmp)*sizeof(char));
+			strcpy(res[i].nom,tmp);
+			
+			fscanf(verif,"%s\n",tmp);
+			res[i].date = malloc(strlen(tmp)*sizeof(char));
+			strcpy(res[i].date,tmp);
+			
+			fscanf(verif,"%d\n%d\n",&(res[i].reussite),&(res[i].echec));
+			
+			fclose(verif);
+			i++;
+		}
+	}
+	
+    if(closedir(rep) == -1)
+		exit(-1);
+        
+	return res;
 }
 
 RN* ChargerRN(INFO_RN info)
@@ -223,6 +276,30 @@ RN* ChargerRN(INFO_RN info)
 		fichier = fopen(path,"r");
 	}
 	
+	sprintf(path,"../sav/%s_%s/INFO",info.date,info.nom);
+	fichier = fopen(path,"rb");
+	if(!fichier)
+		exit(-1);
+		
+	i=0;
+	while(fgets(path, 1024, fichier))
+		i++;
+	i-=4;
+	rn->info.etiquettes = malloc(i*sizeof(char*));
+	fseek(fichier, 0, SEEK_SET);
+	
+	i=0;
+	while(fgets(path, 1024, fichier))
+	{
+		if(i>=4)
+		{
+			rn->info.etiquettes[i-4] = malloc(strlen(path)*sizeof(char));
+			strcpy(rn->info.etiquettes[i-4],path);
+		}
+		i++;
+	}
+	fclose(fichier);
+		
 	return rn;
 }
 
@@ -282,7 +359,7 @@ void SaveRN(RN rn)
 	sprintf(path2,"%s/INFO",path);
 	if((fichier = fopen(path2,"w+")) == NULL)
 		exit(-1);
-	fprintf(fichier,"%s\n%s\n%d\n%d",rn.info.nom,rn.info.date,rn.info.reussite,rn.info.echec);
+	fprintf(fichier,"%s\n%s\n%d\n%d\n",rn.info.nom,rn.info.date,rn.info.reussite,rn.info.echec);
 	for(i=0;i<rn.couche_fin->taille;i++)
 		fprintf(fichier,"%s\n",rn.info.etiquettes[i]);
 	fclose(fichier);

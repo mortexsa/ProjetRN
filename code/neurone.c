@@ -162,5 +162,7 @@ int main()
 		c++;
 	}
 	
+	ChargerInfo();
+	
 	return 0;
 }
