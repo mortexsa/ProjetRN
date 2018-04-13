@@ -4,8 +4,8 @@
 #include "Structures.h"
 #include "gestionnaire_RN.h"
 
-Image* ChargerBmp(const char* fichier);
-Image* ChargerMnist(const char* fichier);
+Image* ChargerBmp(const char* fichier, int, int);
+Image* ChargerMnist(const char* fichier, int, int);
 int Sauver(Image*,const char* fichier);
 Image* NouvelleImage(int w,int h);
 Image* CopieImage(Image*);
@@ -16,7 +16,8 @@ void DelImage(Image*);
 
 
 char* ChargerEtiquetteMNIST(const char* fichier);
-char* ChargerEtiquetteBMP(const char* fichier);
+
+App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max);
 
 INFO_RN* ChargerInfo();
 

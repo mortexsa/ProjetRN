@@ -50,4 +50,11 @@ struct RN
 };
 typedef struct RN RN;
 
+struct Apprentissage
+{
+	Image* image;
+	char* etiquette;
+};
+typedef struct Apprentissage App;
+
 #endif

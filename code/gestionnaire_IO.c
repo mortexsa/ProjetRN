@@ -85,7 +85,8 @@ struct BMPHead
 	struct BMPImHead imhead;
 };
 
-Image* ChargerBmp(const char* fichier)
+//a modifier
+Image* ChargerBmp(const char* fichier, int w_max, int h_max)
 {
 	struct BMPHead head;
 	Image* I;
@@ -105,6 +106,12 @@ Image* ChargerBmp(const char* fichier)
 		return NULL;  // rarrissime, je ne sais même pas si un logiciel écrit/lit des BMP compressés. 
 	if (head.imhead.cpalette!=0 || head.imhead.cIpalette!=0)
 		return NULL; // pas de palette supportée, cependant, a bpp 24, il n'y a pas de palette.
+	if(head.imhead.height>h_max || head.imhead.width>w_max)
+	{
+		fclose(F);
+		remove(fichier);
+		return NULL;
+	}
 	I = NouvelleImage(head.imhead.width,head.imhead.height);
 	pitch = corrpitch[(3*head.imhead.width)%4];
 	for(j=0;j<I->h;j++)
@@ -164,10 +171,50 @@ int Sauver(Image* I,const char* fichier)
 	return 0;
 }
 
-
-Image* ChargerMnist(const char* fichier)
+// a modifier
+Image* ChargerMnist(const char* path, int w_max, int h_max)
 {
+	int t[3];
 	
+	FILE* fichier = fopen(path,"rb+");
+	if(!fichier)
+		exit(-1);
+	
+	fread(t,sizeof(int),4,fichier);
+	
+	if(t[2]>h_max || t[3]>w_max)
+	{
+		fclose(fichier);
+		remove(path);
+		return NULL;
+	}
+	
+	Image* im = NouvelleImage(t[3],t[2]);
+	
+	fseek(fichier,t[1]-1+4*sizeof(int),SEEK_SET);
+	
+	unsigned char tmp[t[3]*t[2]];
+	fread(tmp,1,t[3]*t[2],fichier);
+	
+	t[1]--;
+	fseek(fichier,sizeof(int),SEEK_SET);
+	fwrite(&(t[1]),sizeof(int),1,fichier);
+	
+	fclose(fichier);
+	
+	if(t[1] == 0)
+		remove(path);
+	
+	
+	int i;
+	for(i=0;i<t[3]*t[2];i++)
+	{
+		im->dat[i].r = tmp[i];
+		im->dat[i].g = tmp[i];
+		im->dat[i].b = tmp[i];
+	}
+	
+	return im;
 }
 
 char* ChargerEtiquetteMNIST(const char* fichier)
@@ -175,9 +222,43 @@ char* ChargerEtiquetteMNIST(const char* fichier)
 	
 }
 
-char* ChargerEtiquetteBMP(const char* fichier)
+App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 {
+	App* couple = malloc(sizeof(App));
+	couple->image = NULL;
 	
+	DIR* rep = opendir(repertoire_app);
+	if (rep == NULL)
+        exit(1);
+        
+	char path[512],path2[512];
+	struct dirent* fichier = NULL;
+	
+	while(!couple->image)
+	{
+		fichier = readdir(rep);
+		if(!fichier)
+			return NULL;
+		
+		sprintf(path,"%s/%s",repertoire_app,fichier->d_name);
+		if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen(".idx3-ubyte")]),".idx3-ubyte") == 0)
+		{
+			strncpy(path2,path,sizeof(char)*(strlen(fichier->d_name) - strlen(".idx3-ubyte")));
+			strcat(path2,".idx3-ubyte");
+			if((couple->etiquette = ChargerEtiquetteMNIST(path2)))
+			{
+				couple->image = ChargerMnist(path, w_max, h_max);
+			}
+		}
+		else if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen(".bmp")]),".bmp") == 0)
+		{
+			couple->image = ChargerBmp(path, w_max, h_max);
+			couple->etiquette = malloc(sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp") + 1));
+			strncpy(couple->etiquette,fichier->d_name,sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp")));
+		}
+	}
+	
+	return couple;
 }
 
 INFO_RN* ChargerInfo()

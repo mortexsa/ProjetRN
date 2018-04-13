@@ -164,5 +164,13 @@ int main()
 	
 	ChargerInfo();
 	
+	printf("\n\n%d\n\n",sizeof(int));
+	
+	Image* im = NouvelleImage(10,10);
+	
+	//~ printf("%d %d %d\n",&(im->dat[0].r),&(im->dat[0].g),&(im->dat[0].b));
+	//~ printf("%d %d %d\n",&(im->dat[1].r),&(im->dat[1].g),&(im->dat[1].b));
+	//~ printf("%d %d %d\n",&(im->dat[2].r),&(im->dat[2].g),&(im->dat[2].b));
+	
 	return 0;
 }
