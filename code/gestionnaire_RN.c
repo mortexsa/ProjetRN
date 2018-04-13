@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void MultiplicationMatriceVecteur(float** in_M, float* in_V, float* out, int taille_M1,int taille_M3)
+void MultiplicationMatriceVecteur(type** in_M, type* in_V, type* out, int taille_M1,int taille_M3)
 {
 	int i,k; 
 	
@@ -22,7 +22,7 @@ void MultiplicationMatriceVecteur(float** in_M, float* in_V, float* out, int tai
  * in_V2 vecteur des biais de la couche l
  * activation de l
  * */
-void AdditionVecteurVecteur(float* in_V1, float* in_V2, float* out ,int taille)
+void AdditionVecteurVecteur(type* in_V1, type* in_V2, type* out ,int taille)
 {
 	int i; 	
 	for(i=0;i<taille;i++)
@@ -33,7 +33,7 @@ void AdditionVecteurVecteur(float* in_V1, float* in_V2, float* out ,int taille)
 
 /*sigmoide appliquée sur un vecteur 
  * AJ=σ(AJ-1*W+b)*/
-void SigmoideV(float* in_V, float* out, int taille)
+void SigmoideV(type* in_V, type* out, int taille)
 {
 	int i; 
 	
@@ -44,9 +44,9 @@ void SigmoideV(float* in_V, float* out, int taille)
 }
 
 /*calcul de la sigmoide sur un float*/
-float Sigmoide(float in)
+type Sigmoide(type in)
 {   
-	float expo = (float)exp(-in);
+	type expo = (type)exp(-in);
 	return 1/(1+expo);
 }
 
@@ -94,24 +94,26 @@ void Remplissage(RN rn)
 
 /*ajouter une couche à la fin */
 void Ajout_couche_Fin(RN* rn, int taille)
-{ 
+{
 	COUCHE* new = malloc(sizeof(COUCHE));
 	new->suiv = NULL;
 	new->prec = rn->couche_fin;
 	rn->couche_fin->suiv = new;
 	new->taille = taille;
 	
-	new->A = malloc(taille*sizeof(float));
-	new->B = malloc(taille*sizeof(float));
-	new->W = malloc(taille*sizeof(float*));
-	new->DELTA = malloc(taille*sizeof(float));
-	new->DELTA_M = malloc(taille*sizeof(float*));
+	rn->couche_fin = new;
+	
+	new->A = malloc(taille*sizeof(type));
+	new->B = malloc(taille*sizeof(type));
+	new->W = malloc(taille*sizeof(type*));
+	new->DELTA = malloc(taille*sizeof(type));
+	new->DELTA_M = malloc(taille*sizeof(type*));
 	
 	int i,taille_prec = new->prec->taille;
 	for(i = 0;i<taille;i++)
 	{
-		new->W[i] = malloc(taille_prec*sizeof(float));
-		new->DELTA_M[i] = malloc(taille_prec*sizeof(float));
+		new->W[i] = malloc(taille_prec*sizeof(type));
+		new->DELTA_M[i] = malloc(taille_prec*sizeof(type));
 	}
 }
 
@@ -124,7 +126,11 @@ void AjoutPremiereCouche(RN* rn, int taille)
 	rn->couche_deb = new;
 	new->taille = taille;
 	
-	new->A = malloc(taille*sizeof(float));
+	new->A = malloc(taille*sizeof(type));
+	new->B = NULL;
+	new->W = NULL;
+	new->DELTA = NULL;
+	new->DELTA_M = NULL;
 }
 
 /*propagation de l'image application de AJ=σ(AJ-1*W+b)*/

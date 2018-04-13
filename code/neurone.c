@@ -31,12 +31,12 @@ int main()
 	C2->A = malloc(C2->taille*sizeof(float));
 	C3->A = malloc(C3->taille*sizeof(float));
 	
-	C0->B = malloc(C0->taille*sizeof(float));
+	C0->B = NULL;
 	C1->B = malloc(C1->taille*sizeof(float));
 	C2->B = malloc(C2->taille*sizeof(float));
 	C3->B = malloc(C3->taille*sizeof(float));
 	
-	//C0->W = malloc(C0->taille*sizeof(float*));
+	C0->W = NULL;
 	C1->W = malloc(C1->taille*sizeof(float*));
 	C2->W = malloc(C2->taille*sizeof(float*));
 	C3->W = malloc(C3->taille*sizeof(float*));
@@ -101,7 +101,66 @@ int main()
 	strcpy(rn.info.nom,"test1\0");
 
 	SaveRN(rn);
-	ChargerRN(rn.info);
+	
+	int a,b,c = 0;
+	COUCHE* tmp;
+	
+	tmp = rn.couche_deb;
+	
+	//printf("");
+	
+	while(tmp)
+	{
+		printf("\n\nCouche %d :\n\n",c);
+		if(tmp->B)
+		{
+			for(a = 0;a < tmp->taille;a++)
+			{
+				printf("%f\n",tmp->B[a]);
+			}
+			printf("\n");
+			for(a = 0;a < tmp->taille;a++)
+			{
+				for(b=0;b<tmp->prec->taille;b++)
+				{
+					printf("%f ",tmp->W[a][b]);
+				}
+				printf("\n");
+			}
+		}
+		
+		tmp = tmp->suiv;
+		c++;
+	}
+	
+	RN* rn2 = ChargerRN(rn.info);
+	
+	tmp = rn2->couche_deb;
+	c = 0;
+	
+	while(tmp)
+	{
+		printf("\n\nCouche %d :\n\n",c);
+		if(tmp->B)
+		{
+			for(a = 0;a < tmp->taille;a++)
+			{
+				printf("%f\n",tmp->B[a]);
+			}
+			printf("\n");
+			for(a = 0;a < tmp->taille;a++)
+			{
+				for(b=0;b<tmp->prec->taille;b++)
+				{
+					printf("%f ",tmp->W[a][b]);
+				}
+				printf("\n");
+			}
+		}
+		
+		tmp = tmp->suiv;
+		c++;
+	}
 	
 	return 0;
 }

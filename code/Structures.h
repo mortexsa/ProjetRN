@@ -1,6 +1,9 @@
 #ifndef STRUCT_H
 #define STRUCT_H
 
+#define debug printf("line : %d in function : %s in file %s\n",__LINE__,__func__,__FILE__);
+#define type float
+
 typedef struct Pixel
 {
 	unsigned char r,g,b;
@@ -14,12 +17,12 @@ typedef struct Image
 
 struct COUCHE
 {
-	float* A;
-	float* B;
-	float** W;
+	type* A;
+	type* B;
+	type** W;
 	
-	float* DELTA;     // Vecteur de modifcation des biais
-	float** DELTA_M;  // Matrice de modification des poids
+	type* DELTA;     // Vecteur de modifcation des biais
+	type** DELTA_M;  // Matrice de modification des poids
 	
 	int taille;
 		

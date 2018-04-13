@@ -206,24 +206,24 @@ RN* ChargerRN(INFO_RN info)
 	{
 		fread(t,sizeof(int),2,fichier);
 		//printf("%s\n%d %d\n",path,t[0],t[1]);
-		debug
+		
 		Ajout_couche_Fin(rn,t[1]);
-		debug
-		fread(rn->couche_fin->B,sizeof(float),t[1],fichier);
-		debug
+		
+		fread(rn->couche_fin->B,sizeof(type),t[1],fichier);
+		
 		for(j=0;j<t[1];j++)
 		{
-			debug
-			fread(rn->couche_fin->W[j],sizeof(float),t[0],fichier);
+			fread(rn->couche_fin->W[j],sizeof(type),t[0],fichier);
 		}
 		
-		
-		
 		fclose(fichier);
+		
 		i++;
 		sprintf(path,"../sav/%s_%s/C%d.rn",info.date,info.nom,i);
 		fichier = fopen(path,"r");
 	}
+	
+	return rn;
 }
 
 void SaveRN(RN rn)
@@ -266,11 +266,11 @@ void SaveRN(RN rn)
 			
 			//printf("%s\n%d %d\n",path2,temp[0],temp[1]);
 			
-			fwrite(tmp->B,sizeof(float),temp[1],fichier);
+			fwrite(tmp->B,sizeof(type),temp[1],fichier);
 			
 			for(m=0;m<temp[1];m++)
 			{
-				fwrite(tmp->W[m],sizeof(float),temp[0],fichier);
+				fwrite(tmp->W[m],sizeof(type),temp[0],fichier);
 			}
 			
 			fclose(fichier);
