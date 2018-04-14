@@ -175,6 +175,9 @@
 		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutCoucheFin(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}})}
 		Ajoute une nouvelle couche a la liste doublement chaînée représentant le réseau de neurone. L'entier passé en paramètre est le nombre de neurone de cette couche.
 		
+		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutPremiereCouche(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}})}
+		Ajoute la premiere couche de la liste doublement chaînée représentant le réseau de neurone. L'entier passé en paramètre est le nombre de neurone de cette couche.
+		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} Propagation(\textcolor{myblue}{\textbf{Image*}}, \textcolor{myblue}{\textbf{RN}})}
 		Propagation va récupérer l'image passée en paramètre et va l'enregistrer dans le tableau des activations de la première couche du réseau de neurones. Afin de propager ces informations jusqu'a la dernière couche, la formule suivante va être appliquée sur chacune des couches :\\ $A^j = \sigma(W^j*A^{j-1}+B^j)$\\
 		avec j le numéro de la couche.
