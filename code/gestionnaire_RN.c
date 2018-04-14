@@ -76,7 +76,9 @@ void Remplissage(RN rn)
 	int i,j;
 	
 	COUCHE* tmp = rn.couche_deb->suiv;
-	//faire le test pour tester si il y a au moins deux couches
+	
+if(tmp!=NULL && tmp->suiv!=NULL){  //faire le test pour tester si il y a au moins deux couches
+	
 	while(tmp!=NULL)
 		{
 		for(i=0;i<tmp->taille;i++) //taille_M1 nbr de lignes de la 1ere matrice
@@ -90,6 +92,10 @@ void Remplissage(RN rn)
 		}
 		tmp=tmp->suiv;
 	}
+}
+
+else { printf("le nombre de couche est < à 2");//envoyer un message d'erreur 
+	exit(1);}
 }
 
 /*ajouter une couche à la fin */
