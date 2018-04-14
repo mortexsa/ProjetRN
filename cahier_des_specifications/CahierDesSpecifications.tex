@@ -18,7 +18,7 @@
 
 \newpage
 
-\tableofcontents
+\small{\tableofcontents}
 
 \newpage
 
@@ -73,7 +73,7 @@
 	\end{flushleft}
 	
 	\subsection{Image}
-	Afin de représenté une image, nous avons opté pour un tableau a une dimension de pixel afin de se rapprocher de la structure des vecteurs d'activations. Chaque pixel étant une structure contenant la quantité de rouge, de vert et de bleu présent dans un nombre entre 0 et 255 d'ou le type char qui convient parfaitement pour des valeur dans cet intervalle.
+	Afin de représenter une image, nous avons opté pour un tableau a une dimension de pixel afin de se rapprocher de la structure des vecteurs d'activations. Chaque pixel étant une structure contenant la quantité de rouge, de vert et de bleu présent dans un nombre entre 0 et 255 d'ou le type char qui convient parfaitement pour des valeur dans cet intervalle.
 	\begin{flushleft}
 		typedef struct Pixel\\
 			\{\\
@@ -86,6 +86,17 @@
 				\tab \textcolor{myblue}{\textbf{Pixel*}} dat;\\
 			\} Image;
 	\end{flushleft}
+	
+	\subsection{Apprentissage}
+	Le couple d'information sortie attendue et donnée d'entrée étant nécessaire lors de l'apprentissage, nous les avons regroupé dans une petite structure.
+	\begin{flushleft}
+		typedef struct Apprentissage\\
+			\{\\
+				\tab \textcolor{myblue}{\textbf{Image*}} image;\\
+				\tab \textcolor{myblue}{\textbf{char*}} etiquette;\\
+			\} App;
+	\end{flushleft}
+	
 	\newpage
 	
 	
@@ -119,9 +130,9 @@
 		
 		
 	\subsection{Gestionnaire d'entrées sorties}
-		\subsubsection{\textcolor{myblue}{\textbf{Image*}} ChargerBmp(\textcolor{myblue}{\textbf{const char*}} fichier)\\
-		\textcolor{myblue}{\textbf{Image*}} ChargerMnist(\textcolor{myblue}{\textbf{const char*}} fichier)}
-		ChargerBmp et ChargerMnist vont lire a l'emplacement donné en paramètre et renvoyer le contenue du fichier sous forme de la structure Image si celui ci contient une image au format bmp non compressé ou au même format que celui utilisé par la base de données MNIST. Le fichier est ensuite supprimé ou partiellement effacé.
+		\subsubsection{\textcolor{myblue}{\textbf{Image*}} ChargerBmp(\textcolor{myblue}{\textbf{const char*}} fichier,  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}})\\
+		\textcolor{myblue}{\textbf{Image*}} ChargerMnist(\textcolor{myblue}{\textbf{const char*}} fichier,  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}})}
+		ChargerBmp et ChargerMnist vont lire a l'emplacement donné en paramètre et renvoyer le contenue du fichier sous forme de la structure Image si celui ci contient une image au format bmp non compressé ou au même format que celui utilisé par la base de données MNIST. Le fichier est ensuite supprimé ou partiellement effacé. Les deux entiers correspondent a la largeur et la hauteur maximal de l'image accepté par le réseau de neurone définie par l'utilisateur.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{int}} Sauver(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{const char*}} fichier)}
 		Sauver va enregistrer l'image passé en paramètre a l'emplacement lui aussi passé en paramètre au format bmp.
@@ -132,57 +143,65 @@
 		\subsubsection{\textcolor{myblue}{\textbf{Image*}} CopieImage(\textcolor{myblue}{\textbf{Image*}})}
 		CopieImage crée une copie de l'image passée en paramètre puis renvoi son addresse.
 		
-		\subsubsection{\textcolor{myblue}{\textbf{void}} SetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j,Pixel p)}
+		\subsubsection{\textcolor{myblue}{\textbf{void}} SetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j,\textcolor{myblue}{\textbf{Pixel}} p)}
 			SetPixel modifie le pixel aux coordonnées i*j de l'image passée en paramètre afin de correspondre au pixel p.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{Pixel}} GetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j)}
 		GetPixel renvoi le pixel aux coordonnées i*j de l'image passée en paramètre.
 		
-		\subsubsection{\textcolor{myblue}{\textbf{void}} DelImage(Image*)}
+		\subsubsection{\textcolor{myblue}{\textbf{void}} DelImage(\textcolor{myblue}{\textbf{Image*}})}
 		DelImage libere la mémoire d'une variable de type Image.
 		
-		\subsubsection{\textcolor{myblue}{\textbf{char*}} ChargerEtiquette(\textcolor{myblue}{\textbf{const char*}} fichier)}
+		\subsubsection{\textcolor{myblue}{\textbf{char*}} ChargerEtiquetteMNIST(\textcolor{myblue}{\textbf{const char*}} fichier)}
+		ChargerEtiquetteMNIST va récupérer la dernière étiquette présente dans le fichier passé en paramètre puis va supprimer celle ci du fichier ou supprimer le fichier si celui ci ne contient plus aucune étiquettes.
 		
+		\subsubsection{\textcolor{myblue}{\textbf{App*}} ChargementCoupleAttIn(\textcolor{myblue}{\textbf{char*}} repertoire, \textcolor{myblue}{\textbf{int}}, \textcolor{myblue}{\textbf{int}})}
+		ChargementCoupleAttIn va rechercher dans le répertoire le premier couple donnée d'entrée et étiquette présent tout en supprimant tout fichier au mauvais format ou non reconnu. Les deux entiers correspondent a la largeur et la hauteur maximal de l'image accepté par le réseau de neurone définie par l'utilisateur.
 		
-		\subsubsection{\textcolor{myblue}{\textbf{RN*}} ChargerRN(\textcolor{myblue}{\textbf{const char*}} fichier)}
-		ChargerRN initialise et remplie un réseau de neurone dont les informations sont à l'emplacement passé en paramètre avant de renvoyé l'addresse de celui-ci
+		\subsubsection{\textcolor{myblue}{\textbf{INFO\_RN*}} ChargerInfo()}
+		ChargerInfo récupère les structures INFO\_RN de tous les réseaux de neurones enrigistré dans le repertoire ../sav/ et le retourne sous la forme de tableau.
+		
+		\subsubsection{\textcolor{myblue}{\textbf{RN*}} ChargerRN(\textcolor{myblue}{\textbf{INFO\_RN}} info)}
+		ChargerRN initialise et remplie un réseau de neurone dont les informations sont à l'emplacement passé en paramètre avant de renvoyé l'addresse de celui-ci.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} SaveRN(\textcolor{myblue}{\textbf{RN}})}
-		SaveRN va créer ou modifier tous les fichiers nécessair afin de sauvegarder le réseau de neurone passé en paramètre.
+		SaveRN va créer ou modifier tous les fichiers nécessaires afin de sauvegarder le réseau de neurone passé en paramètre.
 		
 	
 	\subsection{Gestionnaire du réseau de neurones}
 		\subsubsection{\textcolor{myblue}{\textbf{RN*}} initialisation(\textcolor{myblue}{\textbf{INFO\_RN}})}
-		Initialise un nouveau réseau de neurones à partir des informations renseignées par l'utilisateur.
+		Initialise un nouveau réseau de neurones à partir des informations renseignées par l'utilisateur présent dans la structure INFO\_RN passé en paramètre.
 		
-		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutFin(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}})}
-		Ajoute une nouvelle couche au réseau de neurones spécifié avec sa taille.
+		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutCoucheFin(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}})}
+		Ajoute une nouvelle couche a la liste doublement chaînée représentant le réseau de neurone. L'entier passé en paramètre est le nombre de neurone de cette couche.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} Propagation(\textcolor{myblue}{\textbf{Image*}}, \textcolor{myblue}{\textbf{RN}})}
-		Propage les données d'entrées de l'image dans le réseau de neurones.
+		Propagation va récupérer l'image passée en paramètre et va l'enregistrer dans le tableau des activations de la première couche du réseau de neurones. Afin de propager ces informations jusqu'a la dernière couche, la formule suivante va être appliquée sur chacune des couches :\\ $A^j = \sigma(W^j*A^{j-1}+B^j)$\\
+		avec j le numéro de la couche.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} Remplissage(\textcolor{myblue}{\textbf{RN}})}
 		Attribution de valeurs aléatoires aux biais et aux poids synaptiques du reseau de neurones passé en argument.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{char**}} Reconnaissance(\textcolor{myblue}{\textbf{RN}})}
-		Retourne les étiquettes des 3 valeurs du réseau de neurones avec les valeurs des activations les plus élévées.
+		Retourne les étiquettes des 3 neurones de la dernière couche du réseau possédant les activation les plus élevées sous la forme d'un tableau trié par activation décroissante.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} MultiplicationMatriceVecteur(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}})}
-		Effectue la multiplication A*W avec en paramètres : les valeurs des poids synaptiques, les valeurs de l'activation, les valeurs contenant la sortie du programme (les activations de la couche suivante) et deux tailles, une pour la matrice des poids et l'autre est celle commune entre la matrice des poids et les valeurs de l'activation.
+		Effectue la multiplication de la matrice et du vecteur passés avec en paramètres puis enregistre le résultat dans le troisième tableau. Les deux entiers sont les taille de la matrice et du vecteur.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} AdditionVecteurVecteur(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}})}
-		Effectue l'addition de (A*W)+B avec en paramètres : les valeurs des biais ,les valeurs de l'activation de la couche suivante (contenant déjà le résultat de la multiplication A*B), les valeurs contenant la sortie du programme (les activations de la couche suivante) et la taille (nombre de neurones sur la couche).
+		Effectue l'addition des deux vecteur passés en paramètre avec en paramètres  puis enregistre le résultat dans le troisième tableau. L'entiers est la taille des deux vecteur.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} SigmoideV(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}})}
-		Calcule de la sigmoide appliquée sur les valeurs de l'activation de la couche suivante, les valeurs contenant la sortie du programme (les activations de la couche suivante) et la taille de la couche.
+		SigmoideV applique la fonction sigmoide sur chacun des éléments du premier tableau passé en paramètre puis enregistre le résultat dans le second tableau, l'entier étant la taille de ces tableaux
 		
-		\subsubsection{\textcolor{myblue}{\textbf{float}} Sigmoide(\textcolor{myblue}{\textbf{float}})}
-		Calcule de la sigmoide (contenant la fonction sigmoide). 
+		\subsubsection{\textcolor{myblue}{\textbf{float}} Sigmoide(\textcolor{myblue}{\textbf{float}} x)}
+		Sigmoide calcule la sigmoide du nombre passé en paramètre, soit : \\
+		$\sigma(x) = \frac{1}{1+e^{-x}}$
 		
 	\subsection{circulation d'informations entre les differents modules de l'application}
 	
 	Dans l'interface l'utilisateur a le possibilité de choisir un réseau de neurones parmi d'autres déjà crées pour cela l'information sera transmise au gestionnaire Réseau de neurones afin qu'il puisse charger un réseau de neurones via la fonction chargerRN .
-	Il peut egalement créer un nouveau réseau de neurones ,dans ce cas-là il devra entrer les données nécessaires pour sa création (couches d'entrées, couches cachées ,neurones de sortie ainsi que les étiquèttes et format du fichier) ces informations-là seront récupérées par le gestionnaire Réseau de neurones sous forme de structure appelée RN , pour l'utiliser par la suite dans la partie traitement où ce qu’on a appelé propagation.
+	Il peut egalement créer un nouveau réseau de neurones ,dans ce cas-là il devra entrer les données nécessaires pour sa création (couches d'entrées, couches cachées ,neurones de sortie ainsi que les étiquèttes et format du fichier) ces informations-là seront récupérées par le gestionnaire Réseau de neurones sous forme de structure appelée RN , pour l'utiliser par la suite dans la partie traitement où ce qu'on a appelé propagation.
 	Qui dans cette partie ,le réseau de neurones devra récupérer une image du gestionnaire entrée/sortie à travers la structure Image, calculer le résultat et l'nvoyer à nouveau à l'interface,ainsi que la matrice des poids pour que l'utilisateur visualise au mieux les opérations qui s'effectuent derrière.Le résultat calculé par le gestionnaire des réseaux de neurones sera récupéré sous forme de fonction propagation par le module apprentissage pour pouvoir l'utiliser dans la retro-propagation ,
 	qui va également récupérer les étiquèttes du gestionnaire Entrée/sortie via la fonction chargerCoupleAttIn ,ou chargerEtiquette (selon le format du ficher) qui seront utile pour le traitement.
 	Par la suite les modifications à apporter aux poids et aux biais seront récupérés par le gestionnaire réseau de neurones afin de les appliquer.Le réseau de neurones sera par la suite enregistrer dans le gestionnaire entrée/sortie à travers la fonction SaveRN.
