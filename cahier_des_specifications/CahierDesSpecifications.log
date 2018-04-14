@@ -1,0 +1,450 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=latex 2018.4.9)  14 APR 2018 16:25
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**CahierDesSpecifications.tex
+(./CahierDesSpecifications.tex
+LaTeX2e <2017-04-15>
+Babel <3.18> and hyphenation patterns for 9 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2015/03/17 v1.2c Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def
+File: latin1.def 2015/03/17 v1.2c Input encoding file
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+))
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2018/02/14 3.18 The Babel package
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2018/02/14 3.18 Babel switching mechanism
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel-french/french.ldf
+Language: french 2018/02/04 v3.4b French support from the babel system
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2018/02/14 3.18 Babel common definitions
+\babel@savecnt=\count87
+\U@D=\dimen103
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@dirlevel=\count88
+)
+\l@acadian = a dialect from \language\l@french 
+\FB@nonchar=\count89
+Package babel Info: Making : an active character on input line 411.
+Package babel Info: Making ; an active character on input line 412.
+Package babel Info: Making ! an active character on input line 413.
+Package babel Info: Making ? an active character on input line 414.
+\FBguill@level=\count90
+\FB@everypar=\toks16
+\FB@Mht=\dimen104
+\mc@charclass=\count91
+\mc@charfam=\count92
+\mc@charslot=\count93
+\std@mcc=\count94
+\dec@mcc=\count95
+\c@FBcaption@count=\count96
+\listindentFB=\skip43
+\descindentFB=\skip44
+\labelwidthFB=\skip45
+\leftmarginFB=\skip46
+\parindentFFN=\dimen105
+\FBfnindent=\skip47
+))
+(/usr/share/texlive/texmf-dist/tex/latex/carlisle/scalefnt.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: dvips.def on input line 99.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/dvips.def
+File: dvips.def 2017/06/20 v3.1d Graphics/color driver for dvips
+))
+\Gin@req@height=\dimen106
+\Gin@req@width=\dimen107
+)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count97
+\Gm@cntv=\count98
+\c@Gm@tempcnt=\count99
+\Gm@bindingoffset=\dimen108
+\Gm@wd@mp=\dimen109
+\Gm@odd@mp=\dimen110
+\Gm@even@mp=\dimen111
+\Gm@layoutwidth=\dimen112
+\Gm@layoutheight=\dimen113
+\Gm@layouthoffset=\dimen114
+\Gm@layoutvoffset=\dimen115
+\Gm@dimlist=\toks18
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: dvips.def on input line 147.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+))
+(./CahierDesSpecifications.aux)
+\openout1 = `CahierDesSpecifications.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Info: Redefining \degres on input line 12.
+LaTeX Info: Redefining \dots on input line 12.
+LaTeX Info: Redefining \up on input line 12.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: dvips
+*geometry* verbose mode - [ preamble ] result:
+* driver: dvips
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(98.16191pt, 417.97118pt, 98.16191pt)
+* v-part:(T,H,B)=(85.35826pt, 624.25346pt, 85.35826pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=417.97118pt
+* \textheight=624.25346pt
+* \oddsidemargin=25.89192pt
+* \evensidemargin=25.89192pt
+* \topmargin=-23.91173pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 17.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <17.28> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 17.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 17.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 17.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 17.
+ [1
+
+]
+(./CahierDesSpecifications.toc
+LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 2.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 3.
+)
+\tf@toc=\write3
+\openout3 = `CahierDesSpecifications.toc'.
+
+ [2]
+LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <14.4> not available
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 25.
+LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 26.
+ [3] [4]
+Overfull \hbox (6.93568pt too wide) in paragraph at lines 113--115
+\T1/cmr/m/n/9 Le deuxi√^^Dme ta-bleau est a deux di-men-sion car DELTA_M est di
+s-po-nible au mo-ment ou cette op√[]ration
+ []
+
+[5] [6] [7]
+
+! LaTeX Error: Cannot determine size of graphic in pic-min.PNG (no BoundingBox)
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.210 ...phics[height=244, width=300]{pic-min.PNG}
+                                                  
+? 
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \relax 
+l.210 ...phics[height=244, width=300]{pic-min.PNG}
+                                                  
+? 
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \relax 
+l.210 ...phics[height=244, width=300]{pic-min.PNG}
+                                                  
+? 
+File: pic-min.PNG Graphic file (type eps)
+<pic-min.PNG>
+! Missing $ inserted.
+<inserted text> 
+                $
+l.216 ...ar la suite dans la partie traitement o√π
+                                                   ce qu'on a appel√© propag...
+
+? 
+! Extra }, or forgotten $.
+\mathonesuperior ->{^1}
+                       
+l.216 ...ar la suite dans la partie traitement o√π
+                                                   ce qu'on a appel√© propag...
+
+? 
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \" invalid in math mode on input line 216.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.216 ... les op√©rations qui s'effectuent derri√®
+                                                  re.Le r√©sultat calcul√© p...
+
+? 
+! Missing { inserted.
+<to be read again> 
+                   \egroup 
+l.216 ... les op√©rations qui s'effectuent derri√®
+                                                  re.Le r√©sultat calcul√© p...
+
+? 
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.216 ... les op√©rations qui s'effectuent derri√®
+                                                  re.Le r√©sultat calcul√© p...
+
+? 
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 216.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 217.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 217.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 217.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 217.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 217.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 217.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 217.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 217.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.218 
+      
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.218 
+      
+? 
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no Ë in font cmex10!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+Missing character: There is no √ in font cmr9!
+
+Overfull \hbox (4266.72156pt too wide) in paragraph at lines 215--218
+\T1/cmr/m/n/9 o√$[]\OML/cmm/m/it/9 cequ[]onaappel[]propagation; quidanscettepar
+tie; ler[]seaudeneuronesdevrar[]cup[]reruneimagedugestionnaireentr[]e=sortie tr
+averslastructureImage; calculerler[]sultatetl[]envoyer nouveau l[]interface; ai
+nsiquelamatricedespoidspourquel[]utilisateurvisualiseaumieuxlesop[]rationsquis[
+]effectuentderri[]$ 
+ []
+
+[8] (./CahierDesSpecifications.aux) )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 216 ({)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 2802 strings out of 494822
+ 38513 string characters out of 6177918
+ 112781 words of memory out of 5000000
+ 6115 multiletter control sequences out of 15000+600000
+ 16681 words of font info for 41 fonts, out of 8000000 for 9000
+ 59 hyphenation exceptions out of 8191
+ 28i,10n,30p,1430b,423s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on CahierDesSpecifications.dvi (8 pages, 53540 bytes).
