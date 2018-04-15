@@ -172,10 +172,10 @@
 		\subsubsection{\textcolor{myblue}{\textbf{RN*}} initialisation(\textcolor{myblue}{\textbf{INFO\_RN}})}
 		Initialise un nouveau réseau de neurones à partir des informations renseignées par l'utilisateur présent dans la structure INFO\_RN passé en paramètre.
 		
-		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutCoucheFin(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}})}
+		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutCoucheFin(\textcolor{myblue}{\textbf{RN*}}, \textcolor{myblue}{\textbf{int}})}
 		Ajoute une nouvelle couche a la liste doublement chaînée représentant le réseau de neurone. L'entier passé en paramètre est le nombre de neurone de cette couche.
 		
-		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutPremiereCouche(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}})}
+		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutPremiereCouche(\textcolor{myblue}{\textbf{RN*}}, \textcolor{myblue}{\textbf{int}})}
 		Ajoute la premiere couche de la liste doublement chaînée représentant le réseau de neurone. L'entier passé en paramètre est le nombre de neurone de cette couche.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} Propagation(\textcolor{myblue}{\textbf{Image*}}, \textcolor{myblue}{\textbf{RN}})}
@@ -196,6 +196,9 @@
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} SigmoideV(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}})}
 		SigmoideV applique la fonction sigmoide sur chacun des éléments du premier tableau passé en paramètre puis enregistre le résultat dans le second tableau, l'entier étant la taille de ces tableaux
+		
+		\subsubsection{\textcolor{myblue}{\textbf{void}} libererRN(\textcolor{myblue}{\textbf{RN*}})}
+		Libère la mémoire allouée par le réseau de neurones en paramètre de la fonction.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{float}} Sigmoide(\textcolor{myblue}{\textbf{float}} x)}
 		Sigmoide calcule la sigmoide du nombre passé en paramètre, soit : \\

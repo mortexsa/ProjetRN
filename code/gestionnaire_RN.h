@@ -14,6 +14,7 @@ void Ajout_couche_Fin(RN* rn, int taille);
 void AjoutPremiereCouche(RN* rn, int taille);
 void Propagation(Image*, RN);
 char** Reconnaissance(RN);
+void libererRN(RN* rn);
 
 
 #endif

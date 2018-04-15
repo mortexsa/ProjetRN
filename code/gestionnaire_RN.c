@@ -168,8 +168,6 @@ char** Reconnaissance(RN rn)
 {
 	/*
 	char* top[3];
-	int t[3]; // serieusement ??? --'
-	
 	int i;
 	int max1 = 0;
 	int max2 = 0;
@@ -179,7 +177,7 @@ char** Reconnaissance(RN rn)
 		{if(rn.couche_fin->A[i]>max1)				
 			{
 				max1 = rn.couche_fin->A[i];
-				t[0] = i;
+				top[0] = rn.info->etiquettes[i];
 		
 			}
 		}
@@ -189,7 +187,7 @@ char** Reconnaissance(RN rn)
 			{if(max1!=rn.couche_fin->A[i])				
 				{
 				max2 = rn.couche_fin->A[i];
-				t[1] = i;
+				top[1] = rn.info->etiquettes[i];
 				}
 			}
 		}
@@ -200,18 +198,18 @@ char** Reconnaissance(RN rn)
 				{if(max2!=rn.couche_fin->A[i])	
 					{
 						max3 = rn.couche_fin->A[i];
-						t[2] = i;
+						top[2] = rn.info->etiquettes[i];
 					}
 				}
 			}
 		}
-		
-	top[0] = rn.info->etiquettes[t[0]];
-	top[1] = rn.info->etiquettes[t[1]];
-	top[2] = rn.info->etiquettes[t[2]];
-		
-	
+			
 	return top;
 	*/
+}
+
+void libererRN(RN* rn)
+{
+
 }
 
