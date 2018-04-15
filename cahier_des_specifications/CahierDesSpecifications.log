@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=latex 2018.4.9)  14 APR 2018 16:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=latex 2018.4.9)  15 APR 2018 22:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -222,11 +222,11 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
  [2]
 LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <14.4> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 25.
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 30.
 LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 26.
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 31.
  [3] [4]
-Overfull \hbox (6.93568pt too wide) in paragraph at lines 113--115
+Overfull \hbox (6.93568pt too wide) in paragraph at lines 115--117
 \T1/cmr/m/n/9 Le deuxi�^^Dme ta-bleau est a deux di-men-sion car DELTA_M est di
 s-po-nible au mo-ment ou cette op�[]ration
  []
@@ -240,19 +240,19 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.210 ...phics[height=244, width=300]{pic-min.PNG}
+l.212 ...phics[height=244, width=300]{pic-min.PNG}
                                                   
 ? 
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    \relax 
-l.210 ...phics[height=244, width=300]{pic-min.PNG}
+l.212 ...phics[height=244, width=300]{pic-min.PNG}
                                                   
 ? 
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    \relax 
-l.210 ...phics[height=244, width=300]{pic-min.PNG}
+l.212 ...phics[height=244, width=300]{pic-min.PNG}
                                                   
 ? 
 File: pic-min.PNG Graphic file (type eps)
@@ -260,138 +260,138 @@ File: pic-min.PNG Graphic file (type eps)
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.216 ...ar la suite dans la partie traitement où
+l.218 ...ar la suite dans la partie traitement où
                                                    ce qu'on a appelé propag...
 
 ? 
 ! Extra }, or forgotten $.
 \mathonesuperior ->{^1}
                        
-l.216 ...ar la suite dans la partie traitement où
+l.218 ...ar la suite dans la partie traitement où
                                                    ce qu'on a appelé propag...
 
 ? 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \" invalid in math mode on input line 216.
+LaTeX Warning: Command \" invalid in math mode on input line 218.
 
 ! Please use \mathaccent for accents in math mode.
 \add@accent ...@spacefactor \spacefactor }\accent 
                                                   #1 #2\egroup \spacefactor ...
-l.216 ... les opérations qui s'effectuent derriè
+l.218 ... les opérations qui s'effectuent derriè
                                                   re.Le résultat calculé p...
 
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \egroup 
-l.216 ... les opérations qui s'effectuent derriè
+l.218 ... les opérations qui s'effectuent derriè
                                                   re.Le résultat calculé p...
 
 ? 
 ! You can't use `\spacefactor' in math mode.
 \add@accent ...}\accent #1 #2\egroup \spacefactor 
                                                   \accent@spacefactor 
-l.216 ... les opérations qui s'effectuent derriè
+l.218 ... les opérations qui s'effectuent derriè
                                                   re.Le résultat calculé p...
 
 ? 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 218.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 217.
+LaTeX Warning: Command \~ invalid in math mode on input line 219.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 217.
+LaTeX Warning: Command \~ invalid in math mode on input line 219.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 217.
+LaTeX Warning: Command \~ invalid in math mode on input line 219.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 217.
+LaTeX Warning: Command \~ invalid in math mode on input line 219.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 217.
+LaTeX Warning: Command \~ invalid in math mode on input line 219.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 217.
+LaTeX Warning: Command \~ invalid in math mode on input line 219.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 217.
+LaTeX Warning: Command \~ invalid in math mode on input line 219.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 217.
+LaTeX Warning: Command \~ invalid in math mode on input line 219.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.218 
+l.220 
       
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.218 
+l.220 
       
 ? 
 Missing character: There is no � in font cmr9!
@@ -425,7 +425,7 @@ Missing character: There is no � in font cmr9!
 Missing character: There is no � in font cmr9!
 Missing character: There is no � in font cmr9!
 
-Overfull \hbox (4266.72156pt too wide) in paragraph at lines 215--218
+Overfull \hbox (4266.72156pt too wide) in paragraph at lines 217--220
 \T1/cmr/m/n/9 o�$[]\OML/cmm/m/it/9 cequ[]onaappel[]propagation; quidanscettepar
 tie; ler[]seaudeneuronesdevrar[]cup[]reruneimagedugestionnaireentr[]e=sortie tr
 averslastructureImage; calculerler[]sultatetl[]envoyer nouveau l[]interface; ai
@@ -436,7 +436,7 @@ nsiquelamatricedespoidspourquel[]utilisateurvisualiseaumieuxlesop[]rationsquis[
 [8] (./CahierDesSpecifications.aux) )
 (\end occurred inside a group at level 1)
 
-### simple group (level 1) entered at line 216 ({)
+### simple group (level 1) entered at line 218 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
  2802 strings out of 494822
@@ -447,4 +447,4 @@ Here is how much of TeX's memory you used:
  59 hyphenation exceptions out of 8191
  28i,10n,30p,1430b,423s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on CahierDesSpecifications.dvi (8 pages, 53540 bytes).
+Output written on CahierDesSpecifications.dvi (8 pages, 55036 bytes).

@@ -21,15 +21,17 @@
 \small{\tableofcontents}
 
 \newpage
+\section{Introduction}
+ Nous souhaitons analyser des images, un problème compliqué qui a besoin de prendre en entrée une image et dont le but est d'essayer de deviner ce que représente cette image.
+Pour cela il nous faut une structure qui sera capable de prendre beaucoup de données en entrée et de capturer des relations complexes entres les entrées et les sorties,c'est là qu'interviennent les réseaux de neurones artificiels.
+Ainsi, afin d'indiquer comment réaliser le besoin defini par le cahier des charges, il est necessaire de reprendre les besoins du maitre d'ouvrage, en les exprimant cette fois par les maîtres d'oeuvres.
+En ce sens , nous avons donc réaliser une description détailler pour notre conception technique.Le document suivant est ainsi la définition écrite, en terme de fonctionalité et de performance,du cahier des charges préalablement établis.
 
 \section{Structures de Données}
 	\subsection{Réseau de neurones}
-	Pour le choix de notre structure de données nous avons rapidement adopté la représentation d'un réseau de neurone comme un ensemble de couches et non comme un ensemble de neurone individuel. Chaque Couche devait donc contenir l'ensemble des activation, des biais et des poids des neurones de cette couches sous la forme de vecteurs pour les activations et les biais et sous forme de matrice pour les poids, nous les avons integré dans une structure couche comme tableau a une ou deux dimensions car les calculs a effectuer necessite d'acceder aux éléments sans ordre particulier.
-	
-	Afin de stocker l'ensemble des couches constituant le réseau de neurone, nous avons opté pour une liste doublement chainé, en effet, les deux algorithme necessitant d'acceder aux contenues des couches vont propager des information de la premiere couche a la derniere couche pour l'algorithme de propagation et de la derniere couches a la premiere couche pour l'algorithme de rétro-propagation, d'ou le double chainage.
-	
-	Afin de regrouper les informations générales d'un réseau de neurone, nous avons créer une petite structure contenant toutes sortes d'informations comme la date de création.
-	
+	Pour le choix de notre structure de données nous avons rapidement adopté la représentation d'un réseau de neurone comme un ensemble de couches et non comme un ensemble de neurone individuel. Chaque Couche devait donc contenir l'ensemble des activation, des biais et des poids des neurones de cette couches sous la forme de vecteurs pour les activations et les biais et sous forme de matrice pour les poids, nous les avons integré dans une structure couche comme tableau a une ou deux dimensions car les calculs a effectuer necessite d'acceder aux éléments sans ordre particulier.	
+	Afin de stocker l'ensemble des couches constituant le réseau de neurone, nous avons opté pour une liste doublement chainé, en effet, les deux algorithme necessitant d'acceder aux contenues des couches vont propager des information de la premiere couche a la derniere couche pour l'algorithme de propagation et de la derniere couches a la premiere couche pour l'algorithme de rétro-propagation, d'ou le double chainage.	
+	Afin de regrouper les informations générales d'un réseau de neurone, nous avons créer une petite structure contenant toutes sortes d'informations comme la date de création.	
 	Un réseau de neurone est donc constitué d'une structure d'information ainsi que d'un pointeur sur la premiere couche et d'un autre pointeur sur la derniere couche.
 
 	\begin{flushleft}
@@ -172,10 +174,10 @@
 		\subsubsection{\textcolor{myblue}{\textbf{RN*}} initialisation(\textcolor{myblue}{\textbf{INFO\_RN}})}
 		Initialise un nouveau réseau de neurones à partir des informations renseignées par l'utilisateur présent dans la structure INFO\_RN passé en paramètre.
 		
-		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutCoucheFin(\textcolor{myblue}{\textbf{RN*}}, \textcolor{myblue}{\textbf{int}})}
+		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutCoucheFin(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}})}
 		Ajoute une nouvelle couche a la liste doublement chaînée représentant le réseau de neurone. L'entier passé en paramètre est le nombre de neurone de cette couche.
 		
-		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutPremiereCouche(\textcolor{myblue}{\textbf{RN*}}, \textcolor{myblue}{\textbf{int}})}
+		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutPremiereCouche(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}})}
 		Ajoute la premiere couche de la liste doublement chaînée représentant le réseau de neurone. L'entier passé en paramètre est le nombre de neurone de cette couche.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} Propagation(\textcolor{myblue}{\textbf{Image*}}, \textcolor{myblue}{\textbf{RN}})}
@@ -196,9 +198,6 @@
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} SigmoideV(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}})}
 		SigmoideV applique la fonction sigmoide sur chacun des éléments du premier tableau passé en paramètre puis enregistre le résultat dans le second tableau, l'entier étant la taille de ces tableaux
-		
-		\subsubsection{\textcolor{myblue}{\textbf{void}} libererRN(\textcolor{myblue}{\textbf{RN*}})}
-		Libère la mémoire allouée par le réseau de neurones en paramètre de la fonction.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{float}} Sigmoide(\textcolor{myblue}{\textbf{float}} x)}
 		Sigmoide calcule la sigmoide du nombre passé en paramètre, soit : \\
