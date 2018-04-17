@@ -203,9 +203,20 @@ En ce sens , nous avons donc réaliser une description détailler pour notre con
 		Sigmoide calcule la sigmoide du nombre passé en paramètre, soit : \\
 		$\sigma(x) = \frac{1}{1+e^{-x}}$
 	\subsection{Interface}
-			\subsection{choix de la bibliothèque graphique }
+		\subsection{choix de la bibliothèque graphique }
 			afin de realiser l'interface de notre application nous avons choisi la bibliothèque graphique GTK+ qui est une bibliothèque permettant de créer des interfaces graphiques GUI (Graphical User Interface) très facilement.Utilisable avec plusieurs langages de programmation.
 		Même si elle a eté ecrite en C sa structure orienté objet et sa licence ont permis aux developpeurs d'adapter GTK+ à leur langage preferé.GTK+ s'intègre relativement bien sur les systèmes GNU/Linux.
+	\subsection{schéma interface}
+				\begin{center} 
+					\includegraphics[height=244, width=400]{croquis.PNG}
+				\end{center}
+	\subsection{scénario}
+			lors de l'utilisation de l'application une page s'ouvre à l'utilisateur afin qu'il puisse faire ses manipulations.Il a un menu à sa porté où il y'a des exemples des reseaux de neurones deja crées prealablement, il peut en choisir un et continuer l'usage de l'application.
+Ou bien il peut creer ses propres reseaux de neurones en cliquant sur le bouton creer qui le dirigera vers une nouvelle page ou il devra remplir les differents champs avec les informations necessaires: comme le nombres de couches cachées ainsi que le nombre de neurones ,les ettiquettes des neurones de sortie 
+mais surtout il devra choisir un format de repertoire d'image adequat (BMP ou MNIST) ainsi il cliquera sur le bouton valider pour valider les informations ,ou bien sur retour il se redirigera à la page d'acceuil.
+ apres validation des informations, une nouvelle page s'ouvrira ,ou l'utilisateur pourra lancer la traitement (la propagation) , la il devra choisir un fichier parmis d'autres pour fournir les images.dans un premier temps sans apprentissage le resultata du traitement ne sera pas bon.
+ le lancement de l'apprentissage du reseau de neurones permettera de lui apprendre la reconnaissance d'images , l'utilisateur pourra l'arreter à n'importe quel moment ou le laisser jusqu'a la fin.
+ Apres terminaison de l'apprentissage l'utilisateur pourra tester son reseau de neurones en lui fournissant une image et avoir un resultat de ce qu'elle represente ainsi que le top 3 des meilleurs activations du reseau. 
 	\newpage
 
 \section{circulation d'informations entre les differents modules de l'application}

@@ -36,6 +36,10 @@
 \contentsline {subsubsection}{\numberline {3.3.8}\leavevmode {\color {myblue}\textbf {void}} AdditionVecteurVecteur(\leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}})}{7}
 \contentsline {subsubsection}{\numberline {3.3.9}\leavevmode {\color {myblue}\textbf {void}} SigmoideV(\leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}})}{7}
 \contentsline {subsubsection}{\numberline {3.3.10}\leavevmode {\color {myblue}\textbf {float}} Sigmoide(\leavevmode {\color {myblue}\textbf {float}} x)}{7}
-\contentsline {section}{\numberline {4}circulation d'informations entre les differents modules de l'application}{8}
-\contentsline {subsection}{\numberline {4.1}organigramme et flux d'information}{8}
-\contentsline {subsection}{\numberline {4.2}explication}{8}
+\contentsline {subsection}{\numberline {3.4}Interface}{8}
+\contentsline {subsection}{\numberline {3.5}choix de la biblioth\~A\"{}que graphique }{8}
+\contentsline {subsection}{\numberline {3.6}sch\~A\IeC {\copyright }ma interface}{8}
+\contentsline {subsection}{\numberline {3.7}sc\~A\IeC {\copyright }nario}{8}
+\contentsline {section}{\numberline {4}circulation d'informations entre les differents modules de l'application}{9}
+\contentsline {subsection}{\numberline {4.1}organigramme et flux d'information}{9}
+\contentsline {subsection}{\numberline {4.2}explication}{9}
