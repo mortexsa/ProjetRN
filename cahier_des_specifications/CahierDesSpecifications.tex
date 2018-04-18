@@ -29,8 +29,8 @@ En ce sens , nous avons donc réaliser une description détailler pour notre con
 
 \section{Structures de Données}
 	\subsection{Réseau de neurones}
-	Pour le choix de notre structure de données nous avons rapidement adopté la représentation d'un réseau de neurone comme un ensemble de couches et non comme un ensemble de neurone individuel. Chaque Couche devait donc contenir l'ensemble des activation, des biais et des poids des neurones de cette couches sous la forme de vecteurs pour les activations et les biais et sous forme de matrice pour les poids, nous les avons integré dans une structure couche comme tableau a une ou deux dimensions car les calculs a effectuer necessite d'acceder aux éléments sans ordre particulier.	
-	Afin de stocker l'ensemble des couches constituant le réseau de neurone, nous avons opté pour une liste doublement chainé, en effet, les deux algorithme necessitant d'acceder aux contenues des couches vont propager des information de la premiere couche a la derniere couche pour l'algorithme de propagation et de la derniere couches a la premiere couche pour l'algorithme de rétro-propagation, d'ou le double chainage.	
+	Pour le choix de notre structure de données nous avons rapidement adopté la représentation d'un réseau de neurones comme un ensemble de couches et non comme un ensemble de neurones individuels. Chaque couche devait donc contenir l'ensemble des activations, des biais et des poids des neurones de cette couche sous la forme de vecteurs pour les activations et les biais et sous forme de matrice pour les poids, nous les avons integré dans une structure couche comme tableau à une ou deux dimensions car les calculs a effectuer necessite d'acceder aux éléments sans ordre particulier.	
+	Afin de stocker l'ensemble des couches constituant le réseau de neurone, nous avons opté pour une liste doublement chainé, en effet, les deux algorithme necessitant d'acceder aux contenues des couches vont propager des information de la premiere couche a la derniere couche pour l'algorithme de propagation et de la derniere couches à la premiere couche pour l'algorithme de rétro-propagation, d'ou le double chainage.	
 	Afin de regrouper les informations générales d'un réseau de neurone, nous avons créer une petite structure contenant toutes sortes d'informations comme la date de création.	
 	Un réseau de neurone est donc constitué d'une structure d'information ainsi que d'un pointeur sur la premiere couche et d'un autre pointeur sur la derniere couche.
 
@@ -171,7 +171,7 @@ En ce sens , nous avons donc réaliser une description détailler pour notre con
 		
 	
 	\subsection{Gestionnaire du réseau de neurones}
-		\subsubsection{\textcolor{myblue}{\textbf{RN*}} initialisation(\textcolor{myblue}{\textbf{INFO\_RN}})}
+		\subsubsection{\textcolor{myblue}{\textbf{RN*}} Initialisation(\textcolor{myblue}{\textbf{INFO\_RN}})}
 		Initialise un nouveau réseau de neurones à partir des informations renseignées par l'utilisateur présent dans la structure INFO\_RN passé en paramètre.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutCoucheFin(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}})}
@@ -207,9 +207,9 @@ En ce sens , nous avons donc réaliser une description détailler pour notre con
 		Libère la mémoire allouée par le réseau de neurones en paramètre de la fonction.
 		
 	\section{Interface}
-		\subsection{choix de la bibliothèque graphique }
-			afin de realiser l'interface de notre application nous avons choisi la bibliothèque graphique GTK+ qui est une bibliothèque permettant de créer des interfaces graphiques GUI (Graphical User Interface) très facilement.Utilisable avec plusieurs langages de programmation.
-		Même si elle a eté ecrite en C sa structure orienté objet et sa licence ont permis aux developpeurs d'adapter GTK+ à leur langage preferé.GTK+ s'intègre relativement bien sur les systèmes GNU/Linux.
+		\subsection{Choix de la bibliothèque graphique }
+			Afin de réaliser l'interface de notre application nous avons choisi la bibliothèque graphique GTK+ qui est une bibliothèque permettant de créer des interfaces graphiques GUI (Graphical User Interface) très facilement.Utilisable avec plusieurs langages de programmation.
+		Même si elle a été écrite en C, sa structure orienté objet et sa licence ont permis aux developpeurs d'adapter GTK+ à leur langage préferé. GTK+ s'intègre relativement bien sur les systèmes GNU/Linux.
 		\subsection{Schéma interface}
 			\begin{center} 
 				\includegraphics[height=244, width=400]{cap.PNG}
@@ -255,6 +255,8 @@ Le module apprentissage va également récupérer les étiquettes ainsi que l'im
 Le module apprentissage récuperera aussi le top 3 des neurones de sortie via la fonction reconnaissance du gestionnaire réseau de neurones afin qu'on puisse calculer le nombre de reussite et d'échec en comparant la sortie obtenue avec celle attendue.
 Par la suite les modifications à apporter aux poids et aux biais seront récupérées par le gestionnaire du réseau de neurones afin de les appliquer.
 Le réseau de neurones sera par la suite enregistré dans le gestionnaire entrée/sortie à travers la fonction SaveRN.	
-	
-				
+
+\section{Conclusion}
+Pour conclure le choix du langage nous semble approprié pour la réalisation de notre application. En effet, nous n'avons pas rencontré de difficultés particulières lors de la rédaction du cahier des spécifications. Cependant, les operations sur les matrices et les vecteurs auraient pu être simplifier, par exemple, le langage Python propose des fonctions effectuants des actions penible a implementer en langage C (commme la transposition des matrices).
+
 \end{document}
