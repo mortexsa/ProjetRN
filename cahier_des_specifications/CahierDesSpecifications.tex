@@ -210,32 +210,51 @@ En ce sens , nous avons donc réaliser une description détailler pour notre con
 		\subsection{choix de la bibliothèque graphique }
 			afin de realiser l'interface de notre application nous avons choisi la bibliothèque graphique GTK+ qui est une bibliothèque permettant de créer des interfaces graphiques GUI (Graphical User Interface) très facilement.Utilisable avec plusieurs langages de programmation.
 		Même si elle a eté ecrite en C sa structure orienté objet et sa licence ont permis aux developpeurs d'adapter GTK+ à leur langage preferé.GTK+ s'intègre relativement bien sur les systèmes GNU/Linux.
-	\subsection{schéma interface}
-				\begin{center} 
-					\includegraphics[height=244, width=400]{croquis.PNG}
-				\end{center}
-	\subsection{scénario}
-			lors de l'utilisation de l'application une page s'ouvre à l'utilisateur afin qu'il puisse faire ses manipulations.Il a un menu à sa porté où il y'a des exemples des reseaux de neurones deja crées prealablement, il peut en choisir un et continuer l'usage de l'application.
-Ou bien il peut creer ses propres reseaux de neurones en cliquant sur le bouton creer qui le dirigera vers une nouvelle page ou il devra remplir les differents champs avec les informations necessaires: comme le nombres de couches cachées ainsi que le nombre de neurones ,les ettiquettes des neurones de sortie 
-mais surtout il devra choisir un format de repertoire d'image adequat (BMP ou MNIST) ainsi il cliquera sur le bouton valider pour valider les informations ,ou bien sur retour il se redirigera à la page d'acceuil.
- apres validation des informations, une nouvelle page s'ouvrira ,ou l'utilisateur pourra lancer la traitement (la propagation) , la il devra choisir un fichier parmis d'autres pour fournir les images.dans un premier temps sans apprentissage le resultata du traitement ne sera pas bon.
- le lancement de l'apprentissage du reseau de neurones permettera de lui apprendre la reconnaissance d'images , l'utilisateur pourra l'arreter à n'importe quel moment ou le laisser jusqu'a la fin.
- Apres terminaison de l'apprentissage l'utilisateur pourra tester son reseau de neurones en lui fournissant une image et avoir un resultat de ce qu'elle represente ainsi que le top 3 des meilleurs activations du reseau. 
+		\subsection{Schéma interface}
+			\begin{center} 
+				\includegraphics[height=244, width=400]{cap.PNG}
+			\end{center}
+		\subsection{Scénario}
+	Lors de l'utilisation de l'application une page s'ouvre à l'utilisateur afin qu'il puisse faire ses manipulations. Il a un menu 
+à sa portée où il peut selectionner des reseaux de neurones qu'il a déjà crée préalablement.
+Il peut en choisir un et continuer l'usage de l'application ou bien il peut en créer un à nouveau en cliquant sur le bouton creer qui le dirigera vers une nouvelle page ou il devra remplir les differents champs avec les informations necessaires comme :\\ 
+- tailleMax qui est la taille maximale des images qu'il devra analyser (qui precisera le nombre de neurones d'entrée du reseau de neurones).\\
+- le nombre de couches cachées ainsi que le nombre de neurones.\\
+- les etiquettes des neurones de sortie.\\
+- choisir le repertoire d'image où elles sont stoquées.\\
+ Ainsi il cliquera sur le bouton valider pour confirmer les informations, ou bien sur le bouton retour qui le redirigera à la page d'accueil.
+Après validation des informations une nouvelle page s'ouvrira où l'utilisateur pourra lancer le traitement (c'est à dire la propagation). 
+Là il devra choisir un fichier parmis d'autres pour fournir les images utiles au traitement.
+Dans un premier temps, sans apprentissage, le résultat du traitement ne sera pas correct.
+Le lancement de l'apprentissage du réseau de neurones permettera de lui apprendre à reconnaître des images. 
+L'utilisateur pourra arrêter le processus d'apprentissage à n'importe quel moment ou le laisser continuer jusqu'à ce que le répertoire soit vide.
+Après la fin de l'apprentissage l'utilisateur pourra tester son réseau de neurones en lui fournissant une image et pourra obtenir le top 3 des meilleurs activations des neurones de sortie du réseau. 
+A la fin l'utilisateur pourra supprimer le réseau de neurones.
+  
 	\newpage
 
-\section{circulation d'informations entre les differents modules de l'application}
-	\subsection{organigramme et flux d'information}
+\section{Circulation d'informations entre les differents modules de l'application}
+	\subsection{Organigramme et flux d'information}
 		%illegal unit of mesure à verifier
 		\begin{center} 
-
 			\includegraphics[height=244, width=300]{pic-min.PNG}
-
-		\end{center}	
-	\subsection{explication}
-		
-	Dans l'interface l'utilisateur a la possibilité de choisir un réseau de neurones parmi d'autres déjà crées.pour cela l'information sera transmise au gestionnaire Réseau de neurones afin qu'il puisse charger un réseau de neurones via la fonction chargerRN.
-Il peut egalement créer un nouveau réseau de neurones ,dans ce cas-là il devra entrer les données nécessaires pour sa création (couches d'entrées, couches cachées ,neurones de sortie ainsi que les étiquèttes et le format du fichier) ces informations-là seront récupérées par le gestionnaire Réseau de neurones sous forme de structure appelée RN , pour l'utiliser par la suite dans la partie traitement où ce qu'on a appelé propagation, qui dans cette partie ,le réseau de neurones devra récupérer une image du gestionnaire entrée/sortie à travers la structure Image, calculer le résultat et l'envoyer à nouveau à l'interface,ainsi que la matrice des poids pour que l'utilisateur visualise au mieux les opérations qui s'effectuent derrière.Le résultat calculé par le gestionnaire des réseaux de neurones sera récupéré sous forme de fonction propagation par le module Apprentissage pour pouvoir l'utiliser dans la retro-propagation,qui va également récupérer les etiquettes ainsi que l'image du gestionnaire Entrée/sortie via la fonction coupleImageEtiquette qui seront utile pour l'apprentissage.le module Apprentissage recuperera aussi le top 3 des neurones de sortie via la fonction reconnaissance du gestionnaire Reseau de neurones afin qu'on puisse calculer le nombre de reussite et d'echec en comparant la sortie obtenue avec celle attendue.
-Par la suite les modifications à apporter aux poids et aux biais seront récupérés par le gestionnaire Réseau de neurones afin de les appliquer.Le Réseau de neurones sera par la suite enregistrer dans le gestionnaire Entrée/Sortie à travers la fonction void SaveRN.
-		
-		
+		\end{center}
+			
+	\subsection{Explication}	
+	Dans l'interface l'utilisateur a la possibilité de choisir un réseau de neurones parmis d'autres qu'il a déjà crée.
+Pour cela l'information sera transmise au gestionnaire du réseau de neurones afin qu'il puisse charger un réseau de neurones via la fonction chargerRN.
+Il peut également créer un nouveau réseau de neurones, dans ce cas-là il devra entrer les données nécessaires pour sa création (la taille maximale, les couches d'entrées, les couches cachées ainsi que les étiquettes et le repertoire des images). 
+Ces informations-là seront récupérées par le gestionnaire du réseau de neurones sous forme d'une structure appelée RN. 
+On utilisera par la suite la structure dans la partie traitement(la propagation).
+Dans cette partie, le réseau de neurones devra : \\
+- récupérer une image du gestionnaire entrée/sortie à travers la structure Image.\\
+- calculer le résultat et l'envoyer à nouveau à l'interface.\\
+- envoyer la matrice des poids pour que l'utilisateur visualise au mieux les opérations qui s'effectuent derrière.\\
+Le résultat calculé par le gestionnaire des réseaux de neurones sera récupéré via la fonction propagation par le module apprentissage pour pouvoir l'utiliser dans la retro-propagation.
+Le module apprentissage va également récupérer les étiquettes ainsi que l'image du gestionnaire entrée/sortie via la fonction coupleImageEtiquette qui seront utile pour l'apprentissage.
+Le module apprentissage récuperera aussi le top 3 des neurones de sortie via la fonction reconnaissance du gestionnaire réseau de neurones afin qu'on puisse calculer le nombre de reussite et d'échec en comparant la sortie obtenue avec celle attendue.
+Par la suite les modifications à apporter aux poids et aux biais seront récupérées par le gestionnaire du réseau de neurones afin de les appliquer.
+Le réseau de neurones sera par la suite enregistré dans le gestionnaire entrée/sortie à travers la fonction SaveRN.	
+	
+				
 \end{document}

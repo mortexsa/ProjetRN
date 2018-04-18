@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=latex 2018.4.9)  17 APR 2018 21:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=latex 2018.4.9)  18 APR 2018 10:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -233,256 +233,326 @@ s-po-nible au mo-ment ou cette op√[]ration
 
 [5] [6] [7]
 
-! LaTeX Error: Cannot determine size of graphic in croquis.PNG (no BoundingBox)
-.
+! LaTeX Error: Cannot determine size of graphic in cap.PNG (no BoundingBox).
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.211 ...phics[height=244, width=400]{croquis.PNG}
+l.215 ...egraphics[height=244, width=400]{cap.PNG}
                                                   
 ? 
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    \relax 
-l.211 ...phics[height=244, width=400]{croquis.PNG}
+l.215 ...egraphics[height=244, width=400]{cap.PNG}
                                                   
 ? 
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    \relax 
-l.211 ...phics[height=244, width=400]{croquis.PNG}
+l.215 ...egraphics[height=244, width=400]{cap.PNG}
                                                   
 ? 
-File: croquis.PNG Graphic file (type eps)
-<croquis.PNG>
+File: cap.PNG Graphic file (type eps)
+<cap.PNG>
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.214 ...nipulations.Il a un menu √† sa port√© o√π
-                                                   il y'a des exemples des r...
+l.219 √† sa port√©e o√π
+                        il peut selectionner des reseaux de neurones qu'il a...
 
 ? 
 ! Extra }, or forgotten $.
 \mathonesuperior ->{^1}
                        
-l.214 ...nipulations.Il a un menu √† sa port√© o√π
-                                                   il y'a des exemples des r...
+l.219 √† sa port√©e o√π
+                        il peut selectionner des reseaux de neurones qu'il a...
 
 ? 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 214.
+LaTeX Warning: Command \~ invalid in math mode on input line 219.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 215.
+LaTeX Warning: Command \~ invalid in math mode on input line 219.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 216.
+LaTeX Warning: Command \~ invalid in math mode on input line 219.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 218.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.220 	\newpage
-               
-? 
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-
-Overfull \hbox (963.68939pt too wide) in paragraph at lines 214--220
-\T1/cmr/m/n/9 tions.Il a un menu √  sa port√[] o√$[]\OML/cmm/m/it/9 ily[]adesex
-emplesdesreseauxdeneuronesdejacr[]esprealablement; ilpeutenchoisirunetcontinuer
-l[]usagedel[]application:Oubienilpeutcreersespropresreseauxdeneuronesencliquant
-surleboutoncreerquiledirigeraversunenouvellepageouildevraremplirlesdifferentsch
-ampsaveclesinformationsnecessaires \OT1/cmr/m/n/9 :
- []
+LaTeX Warning: Command \~ invalid in math mode on input line 219.
 
 
-Overfull \hbox (3416.00316pt too wide) in paragraph at lines 214--220
-\OML/cmm/m/it/9 commelenombresdecouchescach[]esainsiquelenombredeneurones; lese
-ttiquettesdesneuronesdesortiemaissurtoutildevrachoisirunformatderepertoired[]im
-ageadequat\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 BMPouMNIST\OT1/cmr/m/n/9 )\OML/cmm/m/
-it/9 ainsiilcliquerasurleboutonvaliderpourvaliderlesinformations; oubiensurreto
-urilseredirigera lapaged[]acceuil:apresvalidationdesinformations; unenouvellepa
-ges[]ouvrira; oul[]utilisateurpourralancerlatraitement\OT1/cmr/m/n/9 (\OML/cmm/
-m/it/9 lapropagation\OT1/cmr/m/n/9 )\OML/cmm/m/it/9 ; laildevrachoisirunfichier
-parmisd[]autrespourfournirlesimages:dansunpremiertempssansapprentissageleresult
-atadutraitementneserapasbon:lelancementdel[]apprentissagedureseaudeneuronesperm
-etteradeluiapprendrelareconnaissanced[]images; l[]utilisateurpourral[]arreter n
-[]importequelmomentoulelaisserjusqu[]alafin:Apresterminaisondel[]apprentissagel
-[]utilisateurpourratestersonreseaudeneuronesenluifournissantuneimageetavoirunre
-sultatdecequ[]ellerepresenteainsiqueletop\OT1/cmr/m/n/9 3\OML/cmm/m/it/9 desmei
-lleursactivationsdureseau:$ 
- []
-
-[8]
-
-! LaTeX Error: Cannot determine size of graphic in pic-min.PNG (no BoundingBox)
-.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.227 ...phics[height=244, width=300]{pic-min.PNG}
-                                                  
-? 
-! Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.227 ...phics[height=244, width=300]{pic-min.PNG}
-                                                  
-? 
-! Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.227 ...phics[height=244, width=300]{pic-min.PNG}
-                                                  
-? 
-File: pic-min.PNG Graphic file (type eps)
-<pic-min.PNG>
-! Missing $ inserted.
-<inserted text> 
-                $
-l.233 ...ar la suite dans la partie traitement o√π
-                                                   ce qu'on a appel√© propag...
-
-? 
-! Extra }, or forgotten $.
-\mathonesuperior ->{^1}
-                       
-l.233 ...ar la suite dans la partie traitement o√π
-                                                   ce qu'on a appel√© propag...
-
-? 
-
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 220.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 220.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 221.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 222.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 224.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 224.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 225.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 226.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
-
-
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
-
-
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
-
-
-LaTeX Warning: Command \" invalid in math mode on input line 233.
+LaTeX Warning: Command \" invalid in math mode on input line 226.
 
 ! Please use \mathaccent for accents in math mode.
 \add@accent ...@spacefactor \spacefactor }\accent 
                                                   #1 #2\egroup \spacefactor ...
-l.233 ... les op√©rations qui s'effectuent derri√®
-                                                  re.Le r√©sultat calcul√© p...
+l.226 Apr√®
+           s validation des informations une nouvelle page s'ouvrira o√π l'u...
 
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \egroup 
-l.233 ... les op√©rations qui s'effectuent derri√®
-                                                  re.Le r√©sultat calcul√© p...
+l.226 Apr√®
+           s validation des informations une nouvelle page s'ouvrira o√π l'u...
 
 ? 
 ! You can't use `\spacefactor' in math mode.
 \add@accent ...}\accent #1 #2\egroup \spacefactor 
                                                   \accent@spacefactor 
-l.233 ... les op√©rations qui s'effectuent derri√®
-                                                  re.Le r√©sultat calcul√© p...
+l.226 Apr√®
+           s validation des informations une nouvelle page s'ouvrira o√π l'u...
 
 ? 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 226.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 226.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 227.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 228.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 229.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 229.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \~ invalid in math mode on input line 229.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \textregistered invalid in math mode on input line 229.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 229.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 233.
+LaTeX Warning: Command \textcircled invalid in math mode on input line 229.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 234.
+LaTeX Warning: Command \~ invalid in math mode on input line 230.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 234.
+LaTeX Warning: Command \~ invalid in math mode on input line 230.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.230 L'utilisateur pourra arr√
+                               ™ter le processus d'apprentissage √† n'import...
+
+? 
+! Missing { inserted.
+<to be read again> 
+                   \edef 
+l.230 L'utilisateur pourra arr√
+                               ™ter le processus d'apprentissage √† n'import...
+
+? 
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.230 L'utilisateur pourra arr√
+                               ™ter le processus d'apprentissage √† n'import...
+
+? 
+
+LaTeX Warning: Command \textordfeminine invalid in math mode on input line 230.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 234.
 
+LaTeX Warning: Command \~ invalid in math mode on input line 230.
 
-LaTeX Warning: Command \~ invalid in math mode on input line 234.
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.230 ...a arr√™ter le processus d'apprentissage √
+                                                  † n'importe quel moment ou...
 
+? 
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.230 ...a arr√™ter le processus d'apprentissage √
+                                                  † n'importe quel moment ou...
 
-LaTeX Warning: Command \~ invalid in math mode on input line 234.
+? 
 
+LaTeX Warning: Command \~ invalid in math mode on input line 230.
 
-LaTeX Warning: Command \~ invalid in math mode on input line 234.
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.230 ...el moment ou le laisser continuer jusqu'√
+                                                  † ce que le r√©pertoire so...
 
+? 
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.230 ...el moment ou le laisser continuer jusqu'√
+                                                  † ce que le r√©pertoire so...
 
-LaTeX Warning: Command \~ invalid in math mode on input line 234.
+? 
 
+LaTeX Warning: Command \~ invalid in math mode on input line 230.
 
-LaTeX Warning: Command \~ invalid in math mode on input line 234.
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.230 ...e laisser continuer jusqu'√† ce que le r√
+                                                  ©pertoire soit vide.
+? 
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.230 ...e laisser continuer jusqu'√† ce que le r√
+                                                  ©pertoire soit vide.
+? 
 
+LaTeX Warning: Command \~ invalid in math mode on input line 231.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.231 Apr√
+          ®s la fin de l'apprentissage l'utilisateur pourra tester son r√©se...
+
+? 
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.231 Apr√
+          ®s la fin de l'apprentissage l'utilisateur pourra tester son r√©se...
+
+? 
+
+LaTeX Warning: Command \" invalid in math mode on input line 231.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.231 Apr√®
+           s la fin de l'apprentissage l'utilisateur pourra tester son r√©se...
+
+? 
+! Missing { inserted.
+<to be read again> 
+                   \egroup 
+l.231 Apr√®
+           s la fin de l'apprentissage l'utilisateur pourra tester son r√©se...
+
+? 
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.231 Apr√®
+           s la fin de l'apprentissage l'utilisateur pourra tester son r√©se...
+
+? 
+
+LaTeX Warning: Command \~ invalid in math mode on input line 231.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.231 ...issage l'utilisateur pourra tester son r√
+                                                  ©seau de neurones en lui f...
+
+? 
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.231 ...issage l'utilisateur pourra tester son r√
+                                                  ©seau de neurones en lui f...
+
+? 
+
+LaTeX Warning: Command \~ invalid in math mode on input line 231.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.231 ... activations des neurones de sortie du r√
+                                                  ©seau.
+? 
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.231 ... activations des neurones de sortie du r√
+                                                  ©seau.
+? 
+
+LaTeX Warning: Command \~ invalid in math mode on input line 232.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.232 ... fin l'utilisateur pourra supprimer le r√
+                                                  ©seau de neurones.
+? 
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.232 ... fin l'utilisateur pourra supprimer le r√
+                                                  ©seau de neurones.
+? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.235 
+l.233 
       
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.235 
+l.233 
       
 ? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.233 
+      
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.233 
+      
+? 
+Missing character: There is no √ in font cmr9!
 Missing character: There is no √ in font cmr9!
 Missing character: There is no √ in font cmr9!
 Missing character: There is no √ in font cmr9!
@@ -502,39 +572,74 @@ Missing character: There is no √ in font cmr9!
 Missing character: There is no √ in font cmr9!
 Missing character: There is no √ in font cmr9!
 Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
-Missing character: There is no √ in font cmr9!
+Missing character: There is no Á in font cmex10!
+Missing character: There is no Á in font cmex10!
+Missing character: There is no Á in font cmex10!
+Missing character: There is no Á in font cmex10!
+Missing character: There is no Á in font cmex10!
+Missing character: There is no Ë in font cmex10!
+Missing character: There is no Á in font cmex10!
+Missing character: There is no Á in font cmex10!
+Missing character: There is no Á in font cmex10!
 
-Overfull \hbox (4266.72156pt too wide) in paragraph at lines 232--235
-\T1/cmr/m/n/9 o√$[]\OML/cmm/m/it/9 cequ[]onaappel[]propagation; quidanscettepar
-tie; ler[]seaudeneuronesdevrar[]cup[]reruneimagedugestionnaireentr[]e=sortie tr
-averslastructureImage; calculerler[]sultatetl[]envoyer nouveau l[]interface; ai
-nsiquelamatricedespoidspourquel[]utilisateurvisualiseaumieuxlesop[]rationsquis[
-]effectuentderri[]$ 
+Overfull \hbox (969.40717pt too wide) in paragraph at lines 218--233
+\T1/cmr/m/n/9 la-tions. Il a un menu √  sa port√[]e o√$[]\OML/cmm/m/it/9 ilpeut
+selectionnerdesreseauxdeneuronesqu[]ilad[]j cr[]epr[]alablement:Ilpeutenchoisir
+unetcontinuerl[]usagedel[]applicationoubienilpeutencr[]erun nouveauencliquantsu
+rleboutoncreerquiledirigeraversunenouvellepageouildevraremplirlesdifferentscham
+psaveclesinformationsnecessairescomme \OT1/cmr/m/n/9 :
  []
 
-[9] (./CahierDesSpecifications.aux) )
-(\end occurred inside a group at level 2)
 
-### simple group (level 2) entered at line 233 ({)
-### simple group (level 1) entered at line 214 ({)
+Overfull \hbox (118.16074pt too wide) in paragraph at lines 218--233
+\OMS/cmsy/m/n/9 ^^@ \OML/cmm/m/it/9 tailleMaxquiestlataillemaximaledesimagesqu[
+]ildevraanalyser\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 quipreciseralenombredeneuronesd
+[]entr[]edureseaudeneurones\OT1/cmr/m/n/9 )\OML/cmm/m/it/9 :[] 
+ []
+
+
+Overfull \hbox (3306.64948pt too wide) in paragraph at lines 218--233
+\OML/cmm/m/it/9 Ainsiilcliquerasurleboutonvaliderpourconfirmerlesinformations; 
+oubiensurleboutonretourquileredirigera lapaged[]accueil:Apr[]$ 
+ []
+
+[8]
+
+! LaTeX Error: Cannot determine size of graphic in pic-min.PNG (no BoundingBox)
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.240 ...phics[height=244, width=300]{pic-min.PNG}
+                                                  
+? 
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \relax 
+l.240 ...phics[height=244, width=300]{pic-min.PNG}
+                                                  
+? 
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \relax 
+l.240 ...phics[height=244, width=300]{pic-min.PNG}
+                                                  
+? 
+File: pic-min.PNG Graphic file (type eps)
+<pic-min.PNG> [9] (./CahierDesSpecifications.aux) )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 219 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 2805 strings out of 494822
- 38559 string characters out of 6177918
+ 2809 strings out of 494822
+ 38614 string characters out of 6177918
  112781 words of memory out of 5000000
- 6117 multiletter control sequences out of 15000+600000
+ 6122 multiletter control sequences out of 15000+600000
  16681 words of font info for 41 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 28i,10n,30p,1430b,423s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,12n,30p,1732b,423s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on CahierDesSpecifications.dvi (9 pages, 58368 bytes).
+Output written on CahierDesSpecifications.dvi (9 pages, 61704 bytes).
