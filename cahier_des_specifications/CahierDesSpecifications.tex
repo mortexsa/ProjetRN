@@ -25,25 +25,30 @@
  Nous souhaitons analyser des images, un problème compliqué qui a besoin de prendre en entrée une image et dont le but est d'essayer de deviner ce que représente cette image.
 Pour cela il nous faut une structure qui sera capable de prendre beaucoup de données en entrée et de capturer des relations complexes entres les entrées et les sorties,c'est là qu'interviennent les réseaux de neurones artificiels.
 Ainsi, afin d'indiquer comment réaliser le besoin defini par le cahier des charges, il est necessaire de reprendre les besoins du maitre d'ouvrage, en les exprimant cette fois par les maîtres d'oeuvres.
-En ce sens , nous avons donc réaliser une description détailler pour notre conception technique.Le document suivant est ainsi la définition écrite, en terme de fonctionalité et de performance,du cahier des charges préalablement établis.
+En ce sens , nous avons donc réaliser une description détaillée pour notre conception technique. Le document suivant est ainsi la définition écrite, en terme de fonctionalité et de performance, du cahier des charges préalablement établis.
 
 \section{Structures de Données}
 	\subsection{Réseau de neurones}
-	Pour le choix de notre structure de données nous avons rapidement adopté la représentation d'un réseau de neurones comme un ensemble de couches et non comme un ensemble de neurones individuels. Chaque couche devait donc contenir l'ensemble des activations, des biais et des poids des neurones de cette couche sous la forme de vecteurs pour les activations et les biais et sous forme de matrice pour les poids, nous les avons integré dans une structure couche comme tableau à une ou deux dimensions car les calculs a effectuer necessite d'acceder aux éléments sans ordre particulier.	
-	Afin de stocker l'ensemble des couches constituant le réseau de neurone, nous avons opté pour une liste doublement chainé, en effet, les deux algorithme necessitant d'acceder aux contenues des couches vont propager des information de la premiere couche a la derniere couche pour l'algorithme de propagation et de la derniere couches à la premiere couche pour l'algorithme de rétro-propagation, d'ou le double chainage.	
-	Afin de regrouper les informations générales d'un réseau de neurone, nous avons créer une petite structure contenant toutes sortes d'informations comme la date de création.	
-	Un réseau de neurone est donc constitué d'une structure d'information ainsi que d'un pointeur sur la premiere couche et d'un autre pointeur sur la derniere couche.
+	Pour le choix de notre structure de données nous avons rapidement adopté la représentation d'un réseau de neurones comme un ensemble de couches et non comme un ensemble de neurones individuels. 
+	Chaque couche doit donc contenir l'ensemble des activations, des biais et des poids des neurones de cette couche.
+	On stocke les activations et les biais dans des vecteurs et les poids dans des matrices.
+	Nous les avons integré dans une structure couche comme tableau à une ou deux dimensions (car les calculs a effectuer necessite d'accéder aux éléments sans ordre particulier).	
+	Afin de stocker l'ensemble des couches constituant le réseau de neurone, nous avons opté pour une liste doublement chainée. 
+	En effet, les deux algorithmes necessitant d'accéder aux contenus des couches vont propager des informations de la premiere couche à la dernière couche pour l'algorithme de propagation. 
+	Et de la dernière couche à la première couche pour l'algorithme de rétro-propagation (d'où le double chainage).	
+	Afin de regrouper les informations générales d'un réseau de neurones, nous avons crée une petite structure contenant toutes sortes d'informations comme la date de création.	
+	Un réseau de neurones est donc constitué d'une structure d'informations ainsi que d'un pointeur sur la premiere couche et d'un autre pointeur sur la dernière couche.
 
 	\begin{flushleft}
 	
 		struct COUCHE	//structure représentant une couche (ensemble de neurones) dans un réseau de neurone\\
 		\{\\
-			\tab \textcolor{myblue}{\textbf{float*}} A;	//tableau représentant le vecteur des activation des neurone d'une couche.Possède autant d'élements que de neurone présent dans la couche\\
-			\tab \textcolor{myblue}{\textbf{float*}} B;	//tableau représentant le vecteur des biais des neurone d'une couche. De meme taille que A\\
-			\tab \textcolor{myblue}{\textbf{float**}} W;	//tableau a deux dimensions représentant la matrice des poids entre les neurones de la couches précedente et les neurones de cette couche. Ce tableau est donc de taille (taille de la couche actuelle x taille de la couche précedente) et est composé d'élement $w_{ij}$ ou j est le numéro du neurone de la couches précedente et i le numéro du neurone de la couche actuelle.\\
+			\tab \textcolor{myblue}{\textbf{float*}} A;	//tableau représentant le vecteur des activation des neurones d'une couche. Possède autant d'élements que de neurones présent dans la couche.\\
+			\tab \textcolor{myblue}{\textbf{float*}} B;	//tableau représentant le vecteur des biais des neurones d'une couche de même taille que le tableau A.\\
+			\tab \textcolor{myblue}{\textbf{float**}} W;	//tableau à deux dimensions représentant la matrice des poids entre les neurones de la couche précedente et les neurones de cette couche. Ce tableau est donc de taille (taille de la couche actuelle * taille de la couche précedente) et est composé d'élements $w_{ij}$ où j est le numéro du neurone de la couche précedente et i le numéro du neurone de la couche actuelle.\\
 			\tab \textcolor{myblue}{\textbf{int}} taille;	//Indique le nombre de neurones présent dans cette couche\\
-			\tab \textcolor{myblue}{\textbf{float}} DELTA;      //tableau représentant le vecteur des modifications a apporter aux biais de cette couches lors de la rétro-propagation des neurone d'une couche.De meme taille que A\\
-			\tab \textcolor{myblue}{\textbf{float**}} DELTA\_M; //tableau a deux dimensions représentant la matrice des modifications a apporter aux poids de cette couches lors de la rétro-propagation des neurone d'une couche. De meme taille que W\\
+			\tab \textcolor{myblue}{\textbf{float}} DELTA;      //tableau représentant le vecteur des modifications à apporter aux biais de cette couche lors de la rétro-propagation des neurones d'une couche de même taille que le tableau A.\\
+			\tab \textcolor{myblue}{\textbf{float**}} DELTA\_M; //tableau à deux dimensions représentant la matrice des modifications à apporter aux poids de cette couche lors de la rétro-propagation des neurones d'une couche de même taille que la matrice W\\
 			\medbreak
 			\tab \textcolor{myblue}{\textbf{struct COUCHE*}} prec;	//pointeur sur la couche précédente.\\
 			\tab \textcolor{myblue}{\textbf{struct COUCHE*}} suiv;	//pointeur sur la couche suivante.\\
@@ -57,8 +62,8 @@ En ce sens , nous avons donc réaliser une description détailler pour notre con
 			\tab \textcolor{myblue}{\textbf{char**}} etiquettes;	//tableau de chaine de caractère comprenant la signification des neurones de sortie.\\
 			\tab \textcolor{myblue}{\textbf{char*}} nom;	//nom donné au réseau de neurones.\\
 			\tab \textcolor{myblue}{\textbf{char*}} date;	//date de création du réseau de neurones.\\
-			\tab \textcolor{myblue}{\textbf{int}} reussite;	//nombre de fois ou le réseau de neurone a obtnenue la réponse attendue lors de l'apprentissage.\\
-			\tab \textcolor{myblue}{\textbf{int}} echec;	//nombre de fois ou le réseau de neurone n'a pas obtnenue la réponse attendue lors de l'apprentissage.\\
+			\tab \textcolor{myblue}{\textbf{int}} reussite;	//nombre de fois ou le réseau de neurones a obtnenu la réponse attendue lors de l'apprentissage.\\
+			\tab \textcolor{myblue}{\textbf{int}} echec;	//nombre de fois ou le réseau de neurones n'a pas obtnenu la réponse attendue lors de l'apprentissage.\\
 		\};\\
 		\bigbreak
 		typedef struct INFO\_RN INFO\_RN;\\
@@ -66,8 +71,8 @@ En ce sens , nous avons donc réaliser une description détailler pour notre con
 		struct RN	//structure représentant le réseau de neurones, contenant l'ensemble des couches et les informations du réseau de neurones.\\
 		\{\\
 			\tab \textcolor{myblue}{\textbf{INFO\_RN}} info;	//les informations du réseau de neurones.\\
-			\tab \textcolor{myblue}{\textbf{Liste\_couche}} couche\_deb;	//pointeur sur la 1ere couche du RN.\\
-			\tab \textcolor{myblue}{\textbf{Liste\_couche}} couche\_fin;    //pointeur sur la derniere couche du RN.\\
+			\tab \textcolor{myblue}{\textbf{Liste\_couche}} couche\_deb;	//pointeur sur la 1ère couche du RN.\\
+			\tab \textcolor{myblue}{\textbf{Liste\_couche}} couche\_fin;    //pointeur sur la dernière couche du RN.\\
 		\};\\
 		\bigbreak
 		typedef struct RN RN;
@@ -75,7 +80,8 @@ En ce sens , nous avons donc réaliser une description détailler pour notre con
 	\end{flushleft}
 	
 	\subsection{Image}
-	Afin de représenter une image, nous avons opté pour un tableau a une dimension de pixel afin de se rapprocher de la structure des vecteurs d'activations. Chaque pixel étant une structure contenant la quantité de rouge, de vert et de bleu présent dans un nombre entre 0 et 255 d'ou le type char qui convient parfaitement pour des valeur dans cet intervalle.
+	Afin de représenter une image, nous avons opté pour un tableau à une dimension de pixel afin de se rapprocher de la structure des vecteurs d'activations.
+	Chaque pixel étant une structure contenant la quantité de rouge, de vert et de bleu présent dans un nombre entre 0 et 255 d'où le type char qui convient parfaitement pour des valeurs dans cet intervalle.
 	\begin{flushleft}
 		typedef struct Pixel\\
 			\{\\
@@ -90,7 +96,7 @@ En ce sens , nous avons donc réaliser une description détailler pour notre con
 	\end{flushleft}
 	
 	\subsection{Apprentissage}
-	Le couple d'information sortie attendue et donnée d'entrée étant nécessaire lors de l'apprentissage, nous les avons regroupé dans une petite structure.
+	Le couple d'information sortie attendue et donnée d'entrée étant nécessaire lors de l'apprentissage. Nous les avons regroupé dans une petite structure.
 	\begin{flushleft}
 		typedef struct Apprentissage\\
 			\{\\
@@ -108,96 +114,102 @@ En ce sens , nous avons donc réaliser une description détailler pour notre con
 	
 \section{Signatures des Fonctions}
 	\subsection{Gestionnaires d'apprentissage}
-			\subsubsection{\textcolor{myblue}{\textbf{void}} BackProp(\textcolor{myblue}{\textbf{RN*}}, \textcolor{myblue}{\textbf{Image*}} ,\textcolor{myblue}{\textbf{char*}}, \textcolor{myblue}{\textbf{float}})}
-				Backprop va effectuer l'algorithme de propagation-inverse puis va modifier les poids et les biais du réseau de neurones passé en paramètre. Pour cela il est nécessaire d'avoir le couple donnée d'entrée et sortie attendue présent ici sous la forme Image* et char*, on effectuera donc la propagation sur l'image et on comparera l'étiquette de sortie avec le char* qui est l'étiquette attendue.
+			\subsubsection{\textcolor{myblue}{\textbf{void}} BackProp(\textcolor{myblue}{\textbf{RN*}}, \textcolor{myblue}{\textbf{App*}}, \textcolor{myblue}{\textbf{float}})}
+				Backprop va effectuer l'algorithme de propagation-inverse puis va modifier les poids et les biais du réseau de neurones passé en paramètre.
+				Pour cela il est nécessaire d'avoir le couple donnée d'entrée et sortie attendue présent ici dans la structure App*, on effectuera donc la propagation sur l'image et on comparera l'étiquette de sortie avec le char* qui est l'étiquette attendue.
 				
 			\subsubsection{\textcolor{myblue}{\textbf{void}} SigmoidePrimeZ(\textcolor{myblue}{\textbf{float*}} in, \textcolor{myblue}{\textbf{float**}} out, \textcolor{myblue}{\textbf{int}} taille)}
-			SigmoidePrimeZ va récupérer les éléments stockés dans le premier tableau contenant 'taille' éléments puis effectuer l'opération $x*(1-x)$ sur chaque éléments avant de les écrire dans les deuxième tableau passé en paramètre. Cette opération n'est pas la dérivée de la fonction sigmoide, il s'agit d'une petite optimisation qui nous permet de trouver le même résultat plus rapidement. En effet lors de la propagation inverse il nous est necessaire d'effectuer l'opération : \\$\sigma'(z) = \sigma(z)*(1-\sigma(z))$\\ ou z vient de : \\$a^L = \sigma(w^L*a^{L-1}+b^L) = \sigma(z^L)$\\ or z n'est pas stocké dans notre structure et on peut de toute facon simplifier par :\\$\sigma'(z)=a*(1-a)$\\ d'ou cette fonction.\\
-			Le deuxième tableau est a deux dimension car DELTA\_M est disponible au moment ou cette opération est effectué, on va donc l'utiliser plutôt que de créer un autre tableau pour stocker le résultat.
+			SigmoidePrimeZ va récupérer les éléments stockés dans le premier tableau contenant 'taille' éléments puis effectuer l'opération $x*(1-x)$ sur chaque éléments avant de les écrire dans le deuxième tableau passé en paramètre. Cette opération n'est pas la dérivée de la fonction sigmoide, il s'agit d'une petite optimisation qui nous permet de trouver le même résultat plus rapidement. En effet lors de la propagation inverse il nous est necessaire d'effectuer l'opération : \\$\sigma'(z) = \sigma(z)*(1-\sigma(z))$\\ ou z vient de : \\$a^L = \sigma(w^L*a^{L-1}+b^L) = \sigma(z^L)$\\ or z n'est pas stocké dans notre structure et on peut de toute facon simplifier par :\\$\sigma'(z)=a*(1-a)$\\ d'ou cette fonction.\\
+			Le deuxième tableau est a deux dimension car DELTA\_M est disponible au moment ou cette opération est effectuée, on va donc l'utiliser plutôt que de créer un autre tableau pour stocker le résultat.
 			
 			\subsubsection{\textcolor{myblue}{\textbf{void}} MultiplicationMatricielleTransposeeTM(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}})\\
 			\textcolor{myblue}{\textbf{void}} MultiplicationMatricielleTransposeeMT(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}})}
-				Lors de la retro-propagation certaines matrice doivent être transposées, ce qui est pénible a effectuer. Cependant, ces matrices transposées sont toujours multipliée par une autre matrice ce qui nous donne deux cas possible : \\$A^T*B$ ou $B*A^T$\\MultiplicationMatricielleTransposeeTM et MultiplicationMatricielleTransposeeMT représentent ces deux cas mais ne transposent pas de matrice, elle effectue un produit matricielle ou les matrice ne sont pas lu dans le sens conventionnel du produit matriciel afin d'obtenir le même résultat.
+				Lors de la retro-propagation certaines matrices doivent être transposées, ce qui est pénible à effectuer. Cependant, ces matrices transposées sont toujours multipliées par une autre matrice ce qui nous donne deux cas possibles : \\$A^T*B$ ou $B*A^T$\\MultiplicationMatricielleTransposeeTM et MultiplicationMatricielleTransposeeMT représentent ces deux cas mais ne transposent pas de matrice, elle effectue un produit matricielle où les matrices ne sont pas lues dans le sens conventionnel du produit matriciel afin d'obtenir le même résultat.
 				
 			\subsubsection{\textcolor{myblue}{\textbf{void}} Hadamard(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}})}
-				Hadamard effectue le produit vectoriel de Hadamard sur les deux premier tableau pour stocker le résultat dans le troisième tableau. Tous ces tableau étant de la même taille, celle ci est passé en paramètre.
+				Hadamard effectue le produit vectoriel de Hadamard sur les deux premiers tableaux pour stocker le résultat dans le troisième tableau. Tous ces tableaux étant de même taille, celle ci est passée en paramètre.
 				
 			\subsubsection{\textcolor{myblue}{\textbf{void}} fct\_cout(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{char*}})}
-			 fct\_cout va calculer l'erreur entre le résultat obtenue lors de la propagation et le résultat attendu, soit le char*, pour chacun des neurones de la derniere couche du réseau de neurones puis va stocker le résultat dans le tableau DELTA de la derniere couche du réseau.
+			 fct\_cout va calculer l'erreur entre le résultat obtenu lors de la propagation et le résultat attendu, soit le char*, pour chacun des neurones de la dernière couche du réseau de neurones puis va stocker le résultat dans le tableau DELTA de la dernière couche du réseau.
 			
 			\subsubsection{\textcolor{myblue}{\textbf{void}} ModifPoids(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}} eta)\\
 			\textcolor{myblue}{\textbf{void}} ModifBiais(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}} eta)}
-			ModifPoids et ModifBiais vont modifier le premier tableau passé en paramètre en lui soustrayant le deuxieme tableau multiplié par la vitesse d'apprentissage 'eta', les autres paramètre sont les tailles des tableaux
+			ModifPoids et ModifBiais vont modifier le premier tableau passé en paramètre en lui soustrayant le deuxième tableau multiplié par la vitesse d'apprentissage 'eta', les autres paramètres sont les tailles des tableaux.
 		
 		
 		
 	\subsection{Gestionnaire d'entrées sorties}
 		\subsubsection{\textcolor{myblue}{\textbf{Image*}} ChargerBmp(\textcolor{myblue}{\textbf{const char*}} fichier,  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}})\\
 		\textcolor{myblue}{\textbf{Image*}} ChargerMnist(\textcolor{myblue}{\textbf{const char*}} fichier,  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}})}
-		ChargerBmp et ChargerMnist vont lire a l'emplacement donné en paramètre et renvoyer le contenue du fichier sous forme de la structure Image si celui ci contient une image au format bmp non compressé ou au même format que celui utilisé par la base de données MNIST. Le fichier est ensuite supprimé ou partiellement effacé. Les deux entiers correspondent a la largeur et la hauteur maximal de l'image accepté par le réseau de neurone définie par l'utilisateur.
+		ChargerBmp et ChargerMnist vont lire à l'emplacement donné en paramètre et renvoyer le contenu du fichier sous forme de la structure Image, si celui ci contient une image au format bmp non compressé ou au même format que celui utilisé par la base de données MNIST.
+		Le fichier est ensuite supprimé ou partiellement effacé.
+		Les deux entiers correspondent à la largeur et la hauteur maximale de l'image acceptée par le réseau de neurones défini par l'utilisateur.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{int}} Sauver(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{const char*}} fichier)}
-		Sauver va enregistrer l'image passé en paramètre a l'emplacement lui aussi passé en paramètre au format bmp.
+		Sauver va enregistrer l'image passée en paramètre à l'emplacement lui aussi passé en paramètre au format bmp.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{Image*}} NouvelleImage(\textcolor{myblue}{\textbf{int}} w,\textcolor{myblue}{\textbf{int}} h)}
-		NouvelleImage alloue la mémoire nécessaire pour stocker une image dont la taille est passé en paramètre dans une structure Image puis renvoi l'addresse de l'image créé.
+		NouvelleImage alloue la mémoire nécessaire pour stocker une image dont la taille est passée en paramètre dans une structure Image puis renvoie l'adresse de l'image créée.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{Image*}} CopieImage(\textcolor{myblue}{\textbf{Image*}})}
-		CopieImage crée une copie de l'image passée en paramètre puis renvoi son addresse.
+		CopieImage crée une copie de l'image passée en paramètre puis renvoie son addresse.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} SetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j,\textcolor{myblue}{\textbf{Pixel}} p)}
-			SetPixel modifie le pixel aux coordonnées i*j de l'image passée en paramètre afin de correspondre au pixel p.
+		SetPixel modifie le pixel aux coordonnées i*j de l'image passée en paramètre afin de correspondre au pixel p.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{Pixel}} GetPixel(\textcolor{myblue}{\textbf{Image*}},\textcolor{myblue}{\textbf{int}} i,\textcolor{myblue}{\textbf{int}} j)}
-		GetPixel renvoi le pixel aux coordonnées i*j de l'image passée en paramètre.
+		GetPixel renvoie le pixel aux coordonnées i*j de l'image passée en paramètre.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} DelImage(\textcolor{myblue}{\textbf{Image*}})}
-		DelImage libere la mémoire d'une variable de type Image.
+		DelImage libère la mémoire d'une variable de type Image.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{char*}} ChargerEtiquetteMNIST(\textcolor{myblue}{\textbf{const char*}} fichier)}
-		ChargerEtiquetteMNIST va récupérer la dernière étiquette présente dans le fichier passé en paramètre puis va supprimer celle ci du fichier ou supprimer le fichier si celui ci ne contient plus aucune étiquettes.
+		ChargerEtiquetteMNIST va récupérer la dernière étiquette présente dans le fichier passé en paramètre puis va supprimer celle-ci du fichier ou supprimer le fichier si celui ci ne contient plus aucune étiquettes.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{App*}} ChargementCoupleAttIn(\textcolor{myblue}{\textbf{char*}} repertoire, \textcolor{myblue}{\textbf{int}}, \textcolor{myblue}{\textbf{int}})}
-		ChargementCoupleAttIn va rechercher dans le répertoire le premier couple donnée d'entrée et étiquette présent tout en supprimant tout fichier au mauvais format ou non reconnu. Les deux entiers correspondent a la largeur et la hauteur maximal de l'image accepté par le réseau de neurone définie par l'utilisateur.
+		ChargementCoupleAttIn va rechercher dans le répertoire le premier couple donnée d'entrée et étiquette présent tout en supprimant tout fichier au mauvais format ou non reconnu.
+		Les deux entiers correspondent à la largeur et la hauteur maximale de l'image acceptée par le réseau de neurones définie par l'utilisateur.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{INFO\_RN*}} ChargerInfo()}
-		ChargerInfo récupère les structures INFO\_RN de tous les réseaux de neurones enrigistré dans le repertoire ../sav/ et le retourne sous la forme de tableau.
+		ChargerInfo récupère les structures INFO\_RN de tous les réseaux de neurones enrigistrés dans le repertoire ../sav/ et le retourne sous forme de tableau.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{RN*}} ChargerRN(\textcolor{myblue}{\textbf{INFO\_RN}} info)}
-		ChargerRN initialise et remplie un réseau de neurone dont les informations sont à l'emplacement passé en paramètre avant de renvoyé l'addresse de celui-ci.
+		ChargerRN initialise et remplit un réseau de neurones dont les informations sont à l'emplacement passé en paramètre avant de renvoyer l'addresse de celui-ci.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} SaveRN(\textcolor{myblue}{\textbf{RN}})}
-		SaveRN va créer ou modifier tous les fichiers nécessaires afin de sauvegarder le réseau de neurone passé en paramètre.
+		SaveRN va créer ou modifier tous les fichiers nécessaires afin de sauvegarder le réseau de neurones passé en paramètre.
 		
 	
 	\subsection{Gestionnaire du réseau de neurones}
 		\subsubsection{\textcolor{myblue}{\textbf{RN*}} Initialisation(\textcolor{myblue}{\textbf{INFO\_RN}})}
-		Initialise un nouveau réseau de neurones à partir des informations renseignées par l'utilisateur présent dans la structure INFO\_RN passé en paramètre.
+		Initialise un nouveau réseau de neurones à partir des informations renseignées par l'utilisateur présent dans la structure INFO\_RN passée en paramètre.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutCoucheFin(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}})}
-		Ajoute une nouvelle couche a la liste doublement chaînée représentant le réseau de neurone. L'entier passé en paramètre est le nombre de neurone de cette couche.
+		Ajoute une nouvelle couche à la liste doublement chaînée représentant le réseau de neurones. L'entier passé en paramètre est le nombre de neurones de cette couche.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} AjoutPremiereCouche(\textcolor{myblue}{\textbf{RN}}, \textcolor{myblue}{\textbf{int}})}
-		Ajoute la premiere couche de la liste doublement chaînée représentant le réseau de neurone. L'entier passé en paramètre est le nombre de neurone de cette couche.
+		Ajoute la premiere couche de la liste doublement chaînée représentant le réseau de neurones. L'entier passé en paramètre est le nombre de neurones de cette couche.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} Propagation(\textcolor{myblue}{\textbf{Image*}}, \textcolor{myblue}{\textbf{RN}})}
-		Propagation va récupérer l'image passée en paramètre et va l'enregistrer dans le tableau des activations de la première couche du réseau de neurones. Afin de propager ces informations jusqu'a la dernière couche, la formule suivante va être appliquée sur chacune des couches :\\ $A^j = \sigma(W^j*A^{j-1}+B^j)$\\
+		Propagation va récupérer l'image passée en paramètre et va l'enregistrer dans le tableau des activations de la première couche du réseau de neurones.
+		Afin de propager ces informations jusqu'a la dernière couche, la formule suivante va être appliquée sur chacune des couches :\\ $A^j = \sigma(W^j*A^{j-1}+B^j)$\\
 		avec j le numéro de la couche.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} Remplissage(\textcolor{myblue}{\textbf{RN}})}
 		Attribution de valeurs aléatoires aux biais et aux poids synaptiques du reseau de neurones passé en argument.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{char**}} Reconnaissance(\textcolor{myblue}{\textbf{RN}})}
-		Retourne les étiquettes des 3 neurones de la dernière couche du réseau possédant les activation les plus élevées sous la forme d'un tableau trié par activation décroissante.
+		Retourne les étiquettes des 3 neurones de la dernière couche du réseau possédant les activations les plus élevées sous la forme d'un tableau trié par activation décroissante.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} MultiplicationMatriceVecteur(\textcolor{myblue}{\textbf{float**}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}},  \textcolor{myblue}{\textbf{int}})}
-		Effectue la multiplication de la matrice et du vecteur passés avec en paramètres puis enregistre le résultat dans le troisième tableau. Les deux entiers sont les taille de la matrice et du vecteur.
+		Effectue la multiplication de la matrice et du vecteur passés avec en paramètres puis enregistre le résultat dans le troisième tableau.
+		Les deux entiers sont les tailles de la matrice et du vecteur.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} AdditionVecteurVecteur(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}})}
-		Effectue l'addition des deux vecteur passés en paramètre avec en paramètres  puis enregistre le résultat dans le troisième tableau. L'entiers est la taille des deux vecteur.
+		Effectue l'addition des deux vecteurs passés en paramètre avec en paramètres , puis enregistre le résultat dans le troisième tableau. L'entier est la taille des deux vecteurs.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{void}} SigmoideV(\textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{float*}},  \textcolor{myblue}{\textbf{int}})}
-		SigmoideV applique la fonction sigmoide sur chacun des éléments du premier tableau passé en paramètre puis enregistre le résultat dans le second tableau, l'entier étant la taille de ces tableaux
+		SigmoideV applique la fonction sigmoide sur chacun des éléments du premier tableau passé en paramètre puis enregistre le résultat dans le second tableau, l'entier étant la taille de ces tableaux.
 		
 		\subsubsection{\textcolor{myblue}{\textbf{float}} Sigmoide(\textcolor{myblue}{\textbf{float}} x)}
 		Sigmoide calcule la sigmoide du nombre passé en paramètre, soit : \\
@@ -257,6 +269,8 @@ Par la suite les modifications à apporter aux poids et aux biais seront récup�
 Le réseau de neurones sera par la suite enregistré dans le gestionnaire entrée/sortie à travers la fonction SaveRN.	
 
 \section{Conclusion}
-Pour conclure le choix du langage nous semble approprié pour la réalisation de notre application. En effet, nous n'avons pas rencontré de difficultés particulières lors de la rédaction du cahier des spécifications. Cependant, les operations sur les matrices et les vecteurs auraient pu être simplifier, par exemple, le langage Python propose des fonctions effectuants des actions penible a implementer en langage C (commme la transposition des matrices).
+Pour conclure le choix du langage nous semble approprié pour la réalisation de notre application. En effet, nous n'avons pas rencontré de difficultés particulières lors de la rédaction du cahier des spécifications.
+ Cependant, les operations sur les matrices et les vecteurs auraient pu être simplifiées. 
+ Par exemple, le langage Python propose des fonctions effectuants des actions pénibles à implementer en langage C (commme la transposition des matrices).
 
 \end{document}
