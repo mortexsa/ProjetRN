@@ -2,6 +2,8 @@
 #include "gestionnaire_RN.h"
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 
 void MultiplicationMatriceVecteur(type** in_M, type* in_V, type* out, int taille_M1,int taille_M3)
 {
@@ -73,16 +75,17 @@ RN* initialisation(INFO_RN info)
 //mettre des val aleatoire dans W et B
 void Remplissage(RN rn) 
 {
+	srand(time(NULL));
 	int i,j;
 	
 	COUCHE* tmp = rn.couche_deb->suiv;
 	
-if(tmp!=NULL && tmp->suiv!=NULL){  //faire le test pour tester si il y a au moins deux couches
+//if(tmp!=NULL && tmp->suiv!=NULL){  //faire le test pour tester si il y a au moins deux couches
 	
 	while(tmp!=NULL)
 		{
 		for(i=0;i<tmp->taille;i++) //taille_M1 nbr de lignes de la 1ere matrice
-		{	//rn.couche_deb->A[i] = 0;         pas sur de mettre les activation à 0
+		{
 			tmp->B[i] = rand();
 		
 			for(j=0;j<tmp->prec->taille;j++)  // taille_M2 nbr de colonnes de la seconde matrice
@@ -92,10 +95,10 @@ if(tmp!=NULL && tmp->suiv!=NULL){  //faire le test pour tester si il y a au moin
 		}
 		tmp=tmp->suiv;
 	}
-}
+//}
 
-else { printf("le nombre de couche est < à 2");//envoyer un message d'erreur 
-	exit(1);}
+/*else { printf("le nombre de couche est < à 2");//envoyer un message d'erreur 
+	exit(1);}*/
 }
 
 /*ajouter une couche à la fin */
@@ -143,14 +146,19 @@ void AjoutPremiereCouche(RN* rn, int taille)
 void Propagation(Image* im, RN rn)
 {
 	COUCHE* tmp = rn.couche_deb;
+	float act;
 	
 	//insertion activation
 	for(int i=0;i<tmp->taille;i++)
 		{
-		//tmp->A[i]=val;
+			act=(float)im->dat[i].r/255;
+			rn.couche_deb->A[3*i] = act;
+			act=(float)im->dat[i].g/255;
+			rn.couche_deb->A[3*i+1] = act;
+			act=(float)im->dat[i].b/255;
+			rn.couche_deb->A[3*i+2] = act;
 		}	
-		//
-	
+
 	tmp = tmp->suiv;
 	
 	while(tmp != NULL)
@@ -166,50 +174,79 @@ void Propagation(Image* im, RN rn)
 
 char** Reconnaissance(RN rn)
 {
-	/*
-	char* top[3];
+	
+	char** top= malloc(sizeof(char*)*3);
 	int i;
-	int max1 = 0;
-	int max2 = 0;
-	int max3 = 0;
+	int id1=0;
+	int id2=0;
+	int id3=0;
 	
 	for(i=0;i<rn.couche_fin->taille;i++)
-		{if(rn.couche_fin->A[i]>max1)				
-			{
-				max1 = rn.couche_fin->A[i];
-				top[0] = rn.info->etiquettes[i];
-		
-			}
+	{
+		if(rn.couche_fin->A[i]>rn.couche_fin->A[id1])				
+		{
+			id1 = i;
 		}
-		
+	}
+	top[0] = malloc(sizeof(char)*strlen(rn.info.etiquettes[id1]));
+	strcpy(top[0],rn.info.etiquettes[id1]);
+	
 	for(i=0;i<rn.couche_fin->taille;i++)
-		{if(rn.couche_fin->A[i]>max2)
-			{if(max1!=rn.couche_fin->A[i])				
-				{
-				max2 = rn.couche_fin->A[i];
-				top[1] = rn.info->etiquettes[i];
-				}
-			}
+	{
+		if(id2 != id1 && rn.couche_fin->A[i]>rn.couche_fin->A[id2])				
+		{
+			id2 = i;
 		}
-		
+	}
+	top[1] = malloc(sizeof(char)*strlen(rn.info.etiquettes[id2]));
+	strcpy(top[1],rn.info.etiquettes[id2]);
+	
 	for(i=0;i<rn.couche_fin->taille;i++)
-		{if(rn.couche_fin->A[i]>max3)
-			{if(max1!=rn.couche_fin->A[i])				
-				{if(max2!=rn.couche_fin->A[i])	
-					{
-						max3 = rn.couche_fin->A[i];
-						top[2] = rn.info->etiquettes[i];
-					}
-				}
-			}
+	{
+		if(id3 != id1 && id3 != id1 && rn.couche_fin->A[i]>rn.couche_fin->A[id3])				
+		{
+			id3 = i;
 		}
+	}
+	top[2] = malloc(sizeof(char)*strlen(rn.info.etiquettes[id3]));
+	strcpy(top[2],rn.info.etiquettes[id3]);
 			
 	return top;
-	*/
+	
 }
 
 void libererRN(RN* rn)
 {
-
+	int i;
+	for(i=0;i<rn->couche_fin->taille;i++)
+	{
+		free(rn->info.etiquettes[i]);
+	}
+	free(rn->info.etiquettes);
+	free(rn->info.date);
+	free(rn->info.nom);
+	
+	COUCHE* tmp = rn->couche_deb;
+	free(tmp->A);
+	tmp = tmp->suiv;
+	free(tmp->prec);
+	
+	while(tmp)
+	{
+		for(i=0;i<tmp->taille;i++)
+		{
+			free(tmp->W[i]);
+			free(tmp->DELTA_M[i]);
+		}
+		free(tmp->W);
+		free(tmp->DELTA_M);
+		free(tmp->DELTA);
+		free(tmp->A);
+		free(tmp->B);
+		
+		tmp = tmp->suiv;
+		free(tmp->prec);
+	}
+	
 }
 
