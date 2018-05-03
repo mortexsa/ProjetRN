@@ -1,4 +1,5 @@
 #include "interface.h"
+#include "test.h"
 
 #include <string.h>
 #include <stdlib.h>

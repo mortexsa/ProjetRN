@@ -188,13 +188,18 @@ int Sauver(Image* I,const char* fichier)
 
 Image* ChargerMnist(const char* path, int w_max, int h_max)
 {
+	debug
 	int t[3];
 	
 	FILE* fichier = fopen(path,"rb+");
 	if(!fichier)
 		exit(-1);
 	
+	debug
+	
 	fread(t,sizeof(int),4,fichier);
+	
+	debug
 	
 	if(t[2]>h_max || t[3]>w_max)
 	{
@@ -202,6 +207,8 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 		remove(path);
 		return NULL;
 	}
+	
+	debug
 	
 	Image* im = NouvelleImage(t[3],t[2]);
 	

@@ -2,6 +2,7 @@
 #define STRUCT_H
 
 #define debug printf("line : %d in function : %s in file %s\n",__LINE__,__func__,__FILE__);
+
 #define type float
 
 typedef struct Pixel
@@ -21,7 +22,7 @@ struct COUCHE
 	type* B;
 	type** W;
 	
-	type* DELTA;     // Vecteur de modifcation des biais
+	type* DELTA;     // Vecteur de modification des biais
 	type** DELTA_M;  // Matrice de modification des poids
 	
 	int taille;
@@ -30,7 +31,7 @@ struct COUCHE
 	struct COUCHE* suiv;
 };
 typedef struct COUCHE COUCHE;
-typedef COUCHE* Liste_Couche; //jz nz vois pas l'interet du typedef ici
+typedef COUCHE* Liste_Couche;
 
 struct INFO_RN
 {
