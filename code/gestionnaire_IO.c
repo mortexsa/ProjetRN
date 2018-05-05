@@ -321,7 +321,6 @@ INFO_RN* ChargerInfo()
         exit(-1);
     
     INFO_RN* res = malloc(i*sizeof(INFO_RN));
-    
     rep = opendir("../sav");
 	if (rep == NULL)
         exit(1);
@@ -330,7 +329,7 @@ INFO_RN* ChargerInfo()
     while((fichier = readdir(rep))&&(fichier->d_type == DT_DIR))
     {
 		sprintf(path,"../sav/%s/INFO",fichier->d_name);
-		printf("%s\n",path);
+		//printf("%s\n",path);
 		verif = fopen(path,"r");
 		if(verif)
 		{
@@ -351,7 +350,7 @@ INFO_RN* ChargerInfo()
 	
     if(closedir(rep) == -1)
 		exit(-1);
-        
+    
 	return res;
 }
 
