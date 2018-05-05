@@ -378,11 +378,11 @@ RN* ChargerRN(INFO_RN info)
 		
 		Ajout_couche_Fin(rn,t[1]);
 		
-		fread(rn->couche_fin->B,sizeof(type),t[1],fichier);
+		fread(rn->couche_fin->B,sizeof(float),t[1],fichier);
 		
 		for(j=0;j<t[1];j++)
 		{
-			fread(rn->couche_fin->W[j],sizeof(type),t[0],fichier);
+			fread(rn->couche_fin->W[j],sizeof(float),t[0],fichier);
 		}
 		
 		fclose(fichier);
@@ -459,11 +459,11 @@ void SaveRN(RN rn)
 			
 			//printf("%s\n%d %d\n",path2,temp[0],temp[1]);
 			
-			fwrite(tmp->B,sizeof(type),temp[1],fichier);
+			fwrite(tmp->B,sizeof(float),temp[1],fichier);
 			
 			for(m=0;m<temp[1];m++)
 			{
-				fwrite(tmp->W[m],sizeof(type),temp[0],fichier);
+				fwrite(tmp->W[m],sizeof(float),temp[0],fichier);
 			}
 			
 			fclose(fichier);

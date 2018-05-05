@@ -16,6 +16,8 @@
 #include <errno.h>
 #include <sys/stat.h>
 
-void afficherkloul();
+#include <gtk/gtk.h>
 
+int nombreReseau();
+void page_principal();
 #endif

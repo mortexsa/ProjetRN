@@ -11,7 +11,7 @@
 
 int main()
 {
-	afficherkloul();
+	page_principal();
 	//test_chargerMNIST("/home/user/Bureau/train set images/train-images.idx3-ubyte");
 }
 

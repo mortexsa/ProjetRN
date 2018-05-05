@@ -3,7 +3,7 @@
 
 #define debug printf("line : %d in function : %s in file %s\n",__LINE__,__func__,__FILE__);
 
-#define type float
+//#define float float
 
 typedef struct Pixel
 {
@@ -18,12 +18,12 @@ typedef struct Image
 
 struct COUCHE
 {
-	type* A;
-	type* B;
-	type** W;
+	float* A;
+	float* B;
+	float** W;
 	
-	type* DELTA;     // Vecteur de modification des biais
-	type** DELTA_M;  // Matrice de modification des poids
+	float* DELTA;     // Vecteur de modification des biais
+	float** DELTA_M;  // Matrice de modification des poids
 	
 	int taille;
 		

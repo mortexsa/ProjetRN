@@ -5,12 +5,12 @@
 #include "gestionnaire_IO.h"
 
 void BackProp(RN*, Image* ,char*, float);
-void SigmoidePrimeZ(type* in, type** out, int taille);
-void MultiplicationMatricielleTransposeeTM(type**, type*, type*, int, int);
-void MultiplicationMatricielleTransposeeMT(type*, type*, type**, int, int);
-void Hadamard(type**, type*, type*, int);
+void SigmoidePrimeZ(float* in, float** out, int taille);
+void MultiplicationMatricielleTransposeeTM(float**, float*, float*, int, int);
+void MultiplicationMatricielleTransposeeMT(float*, float*, float**, int, int);
+void Hadamard(float**, float*, float*, int);
 void fct_cout(RN,char*);
-void ModifPoids(type**, type**, int, int, int);
-void ModifBiais(type*, type*, int, int);
+void ModifPoids(float**, float**, int, int, int);
+void ModifBiais(float*, float*, int, int);
 
 #endif

@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <time.h>
 
-void MultiplicationMatriceVecteur(type** in_M, type* in_V, type* out, int taille_M1,int taille_M3)
+void MultiplicationMatriceVecteur(float** in_M, float* in_V, float* out, int taille_M1,int taille_M3)
 {
 	int i,k; 
 	
@@ -24,7 +24,7 @@ void MultiplicationMatriceVecteur(type** in_M, type* in_V, type* out, int taille
  * in_V2 vecteur des biais de la couche l
  * activation de l
  * */
-void AdditionVecteurVecteur(type* in_V1, type* in_V2, type* out ,int taille)
+void AdditionVecteurVecteur(float* in_V1, float* in_V2, float* out ,int taille)
 {
 	int i; 	
 	for(i=0;i<taille;i++)
@@ -35,7 +35,7 @@ void AdditionVecteurVecteur(type* in_V1, type* in_V2, type* out ,int taille)
 
 /*sigmoide appliquée sur un vecteur 
  * AJ=σ(AJ-1*W+b)*/
-void SigmoideV(type* in_V, type* out, int taille)
+void SigmoideV(float* in_V, float* out, int taille)
 {
 	int i; 
 	
@@ -46,9 +46,9 @@ void SigmoideV(type* in_V, type* out, int taille)
 }
 
 /*calcul de la sigmoide sur un float*/
-type Sigmoide(type in)
+float Sigmoide(float in)
 {   
-	type expo = (type)exp(-in);
+	float expo = (float)exp(-in);
 	return 1/(1+expo);
 }
 
@@ -112,17 +112,17 @@ void Ajout_couche_Fin(RN* rn, int taille)
 	
 	rn->couche_fin = new;
 	
-	new->A = malloc(taille*sizeof(type));
-	new->B = malloc(taille*sizeof(type));
-	new->W = malloc(taille*sizeof(type*));
-	new->DELTA = malloc(taille*sizeof(type));
-	new->DELTA_M = malloc(taille*sizeof(type*));
+	new->A = malloc(taille*sizeof(float));
+	new->B = malloc(taille*sizeof(float));
+	new->W = malloc(taille*sizeof(float*));
+	new->DELTA = malloc(taille*sizeof(float));
+	new->DELTA_M = malloc(taille*sizeof(float*));
 	
 	int i,taille_prec = new->prec->taille;
 	for(i = 0;i<taille;i++)
 	{
-		new->W[i] = malloc(taille_prec*sizeof(type));
-		new->DELTA_M[i] = malloc(taille_prec*sizeof(type));
+		new->W[i] = malloc(taille_prec*sizeof(float));
+		new->DELTA_M[i] = malloc(taille_prec*sizeof(float));
 	}
 }
 
@@ -135,7 +135,7 @@ void AjoutPremiereCouche(RN* rn, int taille)
 	rn->couche_deb = new;
 	new->taille = taille;
 	
-	new->A = malloc(taille*sizeof(type));
+	new->A = malloc(taille*sizeof(float));
 	new->B = NULL;
 	new->W = NULL;
 	new->DELTA = NULL;
