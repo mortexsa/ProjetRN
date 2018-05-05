@@ -1,46 +1,47 @@
-\babel@toc {french}{}
-\contentsline {section}{\numberline {1}Introduction}{3}
-\contentsline {section}{\numberline {2}Structures de Donn\~A\IeC {\copyright }es}{3}
-\contentsline {subsection}{\numberline {2.1}R\~A\IeC {\copyright }seau de neurones}{3}
-\contentsline {subsection}{\numberline {2.2}Image}{4}
-\contentsline {subsection}{\numberline {2.3}Apprentissage}{4}
-\contentsline {section}{\numberline {3}Signatures des Fonctions}{5}
-\contentsline {subsection}{\numberline {3.1}Gestionnaires d'apprentissage}{5}
-\contentsline {subsubsection}{\numberline {3.1.1}\leavevmode {\color {myblue}\textbf {void}} BackProp(\leavevmode {\color {myblue}\textbf {RN*}}, \leavevmode {\color {myblue}\textbf {Image*}} ,\leavevmode {\color {myblue}\textbf {char*}}, \leavevmode {\color {myblue}\textbf {float}})}{5}
-\contentsline {subsubsection}{\numberline {3.1.2}\leavevmode {\color {myblue}\textbf {void}} SigmoidePrimeZ(\leavevmode {\color {myblue}\textbf {float*}} in, \leavevmode {\color {myblue}\textbf {float**}} out, \leavevmode {\color {myblue}\textbf {int}} taille)}{5}
-\contentsline {subsubsection}{\numberline {3.1.3}\leavevmode {\color {myblue}\textbf {void}} MultiplicationMatricielleTransposeeTM(\leavevmode {\color {myblue}\textbf {float**}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}})\\ \leavevmode {\color {myblue}\textbf {void}} MultiplicationMatricielleTransposeeMT(\leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float**}}, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}})}{5}
-\contentsline {subsubsection}{\numberline {3.1.4}\leavevmode {\color {myblue}\textbf {void}} Hadamard(\leavevmode {\color {myblue}\textbf {float**}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}})}{5}
-\contentsline {subsubsection}{\numberline {3.1.5}\leavevmode {\color {myblue}\textbf {void}} fct\_cout(\leavevmode {\color {myblue}\textbf {RN}}, \leavevmode {\color {myblue}\textbf {char*}})}{5}
-\contentsline {subsubsection}{\numberline {3.1.6}\leavevmode {\color {myblue}\textbf {void}} ModifPoids(\leavevmode {\color {myblue}\textbf {float**}}, \leavevmode {\color {myblue}\textbf {float**}}, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}} eta)\\ \leavevmode {\color {myblue}\textbf {void}} ModifBiais(\leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}} eta)}{5}
-\contentsline {subsection}{\numberline {3.2}Gestionnaire d'entr\~A\IeC {\copyright }es sorties}{6}
-\contentsline {subsubsection}{\numberline {3.2.1}\leavevmode {\color {myblue}\textbf {Image*}} ChargerBmp(\leavevmode {\color {myblue}\textbf {const char*}} fichier, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}})\\ \leavevmode {\color {myblue}\textbf {Image*}} ChargerMnist(\leavevmode {\color {myblue}\textbf {const char*}} fichier, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}})}{6}
-\contentsline {subsubsection}{\numberline {3.2.2}\leavevmode {\color {myblue}\textbf {int}} Sauver(\leavevmode {\color {myblue}\textbf {Image*}},\leavevmode {\color {myblue}\textbf {const char*}} fichier)}{6}
-\contentsline {subsubsection}{\numberline {3.2.3}\leavevmode {\color {myblue}\textbf {Image*}} NouvelleImage(\leavevmode {\color {myblue}\textbf {int}} w,\leavevmode {\color {myblue}\textbf {int}} h)}{6}
-\contentsline {subsubsection}{\numberline {3.2.4}\leavevmode {\color {myblue}\textbf {Image*}} CopieImage(\leavevmode {\color {myblue}\textbf {Image*}})}{6}
-\contentsline {subsubsection}{\numberline {3.2.5}\leavevmode {\color {myblue}\textbf {void}} SetPixel(\leavevmode {\color {myblue}\textbf {Image*}},\leavevmode {\color {myblue}\textbf {int}} i,\leavevmode {\color {myblue}\textbf {int}} j,\leavevmode {\color {myblue}\textbf {Pixel}} p)}{6}
-\contentsline {subsubsection}{\numberline {3.2.6}\leavevmode {\color {myblue}\textbf {Pixel}} GetPixel(\leavevmode {\color {myblue}\textbf {Image*}},\leavevmode {\color {myblue}\textbf {int}} i,\leavevmode {\color {myblue}\textbf {int}} j)}{6}
-\contentsline {subsubsection}{\numberline {3.2.7}\leavevmode {\color {myblue}\textbf {void}} DelImage(\leavevmode {\color {myblue}\textbf {Image*}})}{6}
-\contentsline {subsubsection}{\numberline {3.2.8}\leavevmode {\color {myblue}\textbf {char*}} ChargerEtiquetteMNIST(\leavevmode {\color {myblue}\textbf {const char*}} fichier)}{6}
-\contentsline {subsubsection}{\numberline {3.2.9}\leavevmode {\color {myblue}\textbf {App*}} ChargementCoupleAttIn(\leavevmode {\color {myblue}\textbf {char*}} repertoire, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}})}{6}
-\contentsline {subsubsection}{\numberline {3.2.10}\leavevmode {\color {myblue}\textbf {INFO\_RN*}} ChargerInfo()}{6}
-\contentsline {subsubsection}{\numberline {3.2.11}\leavevmode {\color {myblue}\textbf {RN*}} ChargerRN(\leavevmode {\color {myblue}\textbf {INFO\_RN}} info)}{6}
-\contentsline {subsubsection}{\numberline {3.2.12}\leavevmode {\color {myblue}\textbf {void}} SaveRN(\leavevmode {\color {myblue}\textbf {RN}})}{7}
-\contentsline {subsection}{\numberline {3.3}Gestionnaire du r\~A\IeC {\copyright }seau de neurones}{7}
-\contentsline {subsubsection}{\numberline {3.3.1}\leavevmode {\color {myblue}\textbf {RN*}} initialisation(\leavevmode {\color {myblue}\textbf {INFO\_RN}})}{7}
-\contentsline {subsubsection}{\numberline {3.3.2}\leavevmode {\color {myblue}\textbf {void}} AjoutCoucheFin(\leavevmode {\color {myblue}\textbf {RN}}, \leavevmode {\color {myblue}\textbf {int}})}{7}
-\contentsline {subsubsection}{\numberline {3.3.3}\leavevmode {\color {myblue}\textbf {void}} AjoutPremiereCouche(\leavevmode {\color {myblue}\textbf {RN}}, \leavevmode {\color {myblue}\textbf {int}})}{7}
-\contentsline {subsubsection}{\numberline {3.3.4}\leavevmode {\color {myblue}\textbf {void}} Propagation(\leavevmode {\color {myblue}\textbf {Image*}}, \leavevmode {\color {myblue}\textbf {RN}})}{7}
-\contentsline {subsubsection}{\numberline {3.3.5}\leavevmode {\color {myblue}\textbf {void}} Remplissage(\leavevmode {\color {myblue}\textbf {RN}})}{7}
-\contentsline {subsubsection}{\numberline {3.3.6}\leavevmode {\color {myblue}\textbf {char**}} Reconnaissance(\leavevmode {\color {myblue}\textbf {RN}})}{7}
-\contentsline {subsubsection}{\numberline {3.3.7}\leavevmode {\color {myblue}\textbf {void}} MultiplicationMatriceVecteur(\leavevmode {\color {myblue}\textbf {float**}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}})}{7}
-\contentsline {subsubsection}{\numberline {3.3.8}\leavevmode {\color {myblue}\textbf {void}} AdditionVecteurVecteur(\leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}})}{7}
-\contentsline {subsubsection}{\numberline {3.3.9}\leavevmode {\color {myblue}\textbf {void}} SigmoideV(\leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}})}{7}
-\contentsline {subsubsection}{\numberline {3.3.10}\leavevmode {\color {myblue}\textbf {float}} Sigmoide(\leavevmode {\color {myblue}\textbf {float}} x)}{7}
-\contentsline {subsubsection}{\numberline {3.3.11}\leavevmode {\color {myblue}\textbf {void}} libererRN(\leavevmode {\color {myblue}\textbf {RN*}})}{8}
-\contentsline {subsection}{\numberline {3.4}Interface}{8}
-\contentsline {subsection}{\numberline {3.5}choix de la biblioth\~A\"{}que graphique }{8}
-\contentsline {subsection}{\numberline {3.6}Sch\~A\IeC {\copyright }ma interface}{8}
-\contentsline {subsection}{\numberline {3.7}Sc\~A\IeC {\copyright }nario}{8}
-\contentsline {section}{\numberline {4}Circulation d'informations entre les differents modules de l'application}{9}
-\contentsline {subsection}{\numberline {4.1}Organigramme et flux d'information}{9}
-\contentsline {subsection}{\numberline {4.2}Explication}{9}
+\select@language {french}
+\contentsline {section}{\numberline {1}Introduction}{4}
+\contentsline {section}{\numberline {2}Structures de Donn\~A\IeC {\copyright }es}{4}
+\contentsline {subsection}{\numberline {2.1}R\~A\IeC {\copyright }seau de neurones}{4}
+\contentsline {subsection}{\numberline {2.2}Image}{5}
+\contentsline {subsection}{\numberline {2.3}Apprentissage}{5}
+\contentsline {section}{\numberline {3}Signatures des Fonctions}{6}
+\contentsline {subsection}{\numberline {3.1}Gestionnaires d'apprentissage}{6}
+\contentsline {subsubsection}{\numberline {3.1.1}\leavevmode {\color {myblue}\textbf {void}} BackProp(\leavevmode {\color {myblue}\textbf {RN*}}, \leavevmode {\color {myblue}\textbf {App*}}, \leavevmode {\color {myblue}\textbf {float}})}{6}
+\contentsline {subsubsection}{\numberline {3.1.2}\leavevmode {\color {myblue}\textbf {void}} SigmoidePrimeZ(\leavevmode {\color {myblue}\textbf {float*}} in, \leavevmode {\color {myblue}\textbf {float**}} out, \leavevmode {\color {myblue}\textbf {int}} taille)}{6}
+\contentsline {subsubsection}{\numberline {3.1.3}\leavevmode {\color {myblue}\textbf {void}} MultiplicationMatricielleTransposeeTM(\leavevmode {\color {myblue}\textbf {float**}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}})\\ \leavevmode {\color {myblue}\textbf {void}} MultiplicationMatricielleTransposeeMT(\leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float**}}, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}})}{6}
+\contentsline {subsubsection}{\numberline {3.1.4}\leavevmode {\color {myblue}\textbf {void}} Hadamard(\leavevmode {\color {myblue}\textbf {float**}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}})}{6}
+\contentsline {subsubsection}{\numberline {3.1.5}\leavevmode {\color {myblue}\textbf {void}} fct\_cout(\leavevmode {\color {myblue}\textbf {RN}}, \leavevmode {\color {myblue}\textbf {char*}})}{6}
+\contentsline {subsubsection}{\numberline {3.1.6}\leavevmode {\color {myblue}\textbf {void}} ModifPoids(\leavevmode {\color {myblue}\textbf {float**}}, \leavevmode {\color {myblue}\textbf {float**}}, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}} eta)\\ \leavevmode {\color {myblue}\textbf {void}} ModifBiais(\leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}} eta)}{6}
+\contentsline {subsection}{\numberline {3.2}Gestionnaire d'entr\~A\IeC {\copyright }es sorties}{7}
+\contentsline {subsubsection}{\numberline {3.2.1}\leavevmode {\color {myblue}\textbf {Image*}} ChargerBmp(\leavevmode {\color {myblue}\textbf {const char*}} fichier, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}})\\ \leavevmode {\color {myblue}\textbf {Image*}} ChargerMnist(\leavevmode {\color {myblue}\textbf {const char*}} fichier, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}})}{7}
+\contentsline {subsubsection}{\numberline {3.2.2}\leavevmode {\color {myblue}\textbf {int}} Sauver(\leavevmode {\color {myblue}\textbf {Image*}},\leavevmode {\color {myblue}\textbf {const char*}} fichier)}{7}
+\contentsline {subsubsection}{\numberline {3.2.3}\leavevmode {\color {myblue}\textbf {Image*}} NouvelleImage(\leavevmode {\color {myblue}\textbf {int}} w,\leavevmode {\color {myblue}\textbf {int}} h)}{7}
+\contentsline {subsubsection}{\numberline {3.2.4}\leavevmode {\color {myblue}\textbf {Image*}} CopieImage(\leavevmode {\color {myblue}\textbf {Image*}})}{7}
+\contentsline {subsubsection}{\numberline {3.2.5}\leavevmode {\color {myblue}\textbf {void}} SetPixel(\leavevmode {\color {myblue}\textbf {Image*}},\leavevmode {\color {myblue}\textbf {int}} i,\leavevmode {\color {myblue}\textbf {int}} j,\leavevmode {\color {myblue}\textbf {Pixel}} p)}{7}
+\contentsline {subsubsection}{\numberline {3.2.6}\leavevmode {\color {myblue}\textbf {Pixel}} GetPixel(\leavevmode {\color {myblue}\textbf {Image*}},\leavevmode {\color {myblue}\textbf {int}} i,\leavevmode {\color {myblue}\textbf {int}} j)}{7}
+\contentsline {subsubsection}{\numberline {3.2.7}\leavevmode {\color {myblue}\textbf {void}} DelImage(\leavevmode {\color {myblue}\textbf {Image*}})}{7}
+\contentsline {subsubsection}{\numberline {3.2.8}\leavevmode {\color {myblue}\textbf {char*}} ChargerEtiquetteMNIST(\leavevmode {\color {myblue}\textbf {const char*}} fichier)}{7}
+\contentsline {subsubsection}{\numberline {3.2.9}\leavevmode {\color {myblue}\textbf {App*}} ChargementCoupleAttIn(\leavevmode {\color {myblue}\textbf {char*}} repertoire, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}})}{7}
+\contentsline {subsubsection}{\numberline {3.2.10}\leavevmode {\color {myblue}\textbf {INFO\_RN*}} ChargerInfo()}{7}
+\contentsline {subsubsection}{\numberline {3.2.11}\leavevmode {\color {myblue}\textbf {RN*}} ChargerRN(\leavevmode {\color {myblue}\textbf {INFO\_RN}} info)}{7}
+\contentsline {subsubsection}{\numberline {3.2.12}\leavevmode {\color {myblue}\textbf {void}} SaveRN(\leavevmode {\color {myblue}\textbf {RN}})}{8}
+\contentsline {subsection}{\numberline {3.3}Gestionnaire du r\~A\IeC {\copyright }seau de neurones}{8}
+\contentsline {subsubsection}{\numberline {3.3.1}\leavevmode {\color {myblue}\textbf {RN*}} Initialisation(\leavevmode {\color {myblue}\textbf {INFO\_RN}})}{8}
+\contentsline {subsubsection}{\numberline {3.3.2}\leavevmode {\color {myblue}\textbf {void}} AjoutCoucheFin(\leavevmode {\color {myblue}\textbf {RN}}, \leavevmode {\color {myblue}\textbf {int}})}{8}
+\contentsline {subsubsection}{\numberline {3.3.3}\leavevmode {\color {myblue}\textbf {void}} AjoutPremiereCouche(\leavevmode {\color {myblue}\textbf {RN}}, \leavevmode {\color {myblue}\textbf {int}})}{8}
+\contentsline {subsubsection}{\numberline {3.3.4}\leavevmode {\color {myblue}\textbf {void}} Propagation(\leavevmode {\color {myblue}\textbf {Image*}}, \leavevmode {\color {myblue}\textbf {RN}})}{8}
+\contentsline {subsubsection}{\numberline {3.3.5}\leavevmode {\color {myblue}\textbf {void}} Remplissage(\leavevmode {\color {myblue}\textbf {RN}})}{8}
+\contentsline {subsubsection}{\numberline {3.3.6}\leavevmode {\color {myblue}\textbf {char**}} Reconnaissance(\leavevmode {\color {myblue}\textbf {RN}})}{8}
+\contentsline {subsubsection}{\numberline {3.3.7}\leavevmode {\color {myblue}\textbf {void}} MultiplicationMatriceVecteur(\leavevmode {\color {myblue}\textbf {float**}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}}, \leavevmode {\color {myblue}\textbf {int}})}{8}
+\contentsline {subsubsection}{\numberline {3.3.8}\leavevmode {\color {myblue}\textbf {void}} AdditionVecteurVecteur(\leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}})}{8}
+\contentsline {subsubsection}{\numberline {3.3.9}\leavevmode {\color {myblue}\textbf {void}} SigmoideV(\leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {float*}}, \leavevmode {\color {myblue}\textbf {int}})}{8}
+\contentsline {subsubsection}{\numberline {3.3.10}\leavevmode {\color {myblue}\textbf {float}} Sigmoide(\leavevmode {\color {myblue}\textbf {float}} x)}{8}
+\contentsline {subsubsection}{\numberline {3.3.11}\leavevmode {\color {myblue}\textbf {void}} LibererRN(\leavevmode {\color {myblue}\textbf {RN*}})}{9}
+\contentsline {section}{\numberline {4}Interface}{9}
+\contentsline {subsection}{\numberline {4.1}Choix de la biblioth\~A\"{}que graphique }{9}
+\contentsline {subsection}{\numberline {4.2}Sch\~A\IeC {\copyright }ma interface}{9}
+\contentsline {subsection}{\numberline {4.3}Sc\~A\IeC {\copyright }nario de l'utilisation de l'interface}{9}
+\contentsline {section}{\numberline {5}Circulation d'informations entre les differents modules de l'application}{10}
+\contentsline {subsection}{\numberline {5.1}Organigramme et flux d'information}{10}
+\contentsline {subsection}{\numberline {5.2}Explication}{10}
+\contentsline {section}{\numberline {6}Conclusion}{11}

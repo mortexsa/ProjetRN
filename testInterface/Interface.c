@@ -1,17 +1,16 @@
 #include "Interface.h"
 #include <stdlib.h>
 #include <gtk/gtk.h>
- 
-int main(int argc, char **argv)
-{
-    GtkWidget *pWindow;
+
+
+
+void page_principal(){
+	GtkWidget *pWindow;
     GtkWidget *pLabel;
  	GtkWidget *pVBox;
  	GtkWidget *pHBox;
  	GtkWidget *pButton[6];
-    gtk_init(&argc,&argv);
- 
-    pWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+ 	pWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(pWindow), "TFOu");
     gtk_window_set_default_size(GTK_WINDOW(pWindow), 640, 400);
     g_signal_connect(G_OBJECT(pWindow), "destroy", G_CALLBACK(gtk_main_quit), NULL);
@@ -33,9 +32,70 @@ int main(int argc, char **argv)
     pButton[5] = gtk_button_new_with_label("Quitter");
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[4], TRUE, TRUE, 2);
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[5], TRUE, TRUE, 2);
-    g_signal_connect(G_OBJECT(pButton[5]), "clicked", G_CALLBACK(gtk_main_quit), NULL);
     gtk_widget_show_all(pWindow);
-    gtk_main();
+    g_signal_connect(G_OBJECT(pButton[5]), "clicked", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(G_OBJECT(pButton[4]), "clicked", G_CALLBACK(gtk_widget_hide),pWindow);
+}
+
+void page_creation(){
+	GtkWidget *pWindow;
+    GtkWidget *pVBox;
+    GtkWidget *pEntry;
+    GtkWidget *pButton;
+    GtkWidget *pLabel;
+    pWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title(GTK_WINDOW(pWindow), "Le widget GtkEntry");
+    gtk_window_set_default_size(GTK_WINDOW(pWindow), 640, 400);
+    g_signal_connect(G_OBJECT(pWindow), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    pVBox = gtk_vbox_new(TRUE, 0);
+    gtk_widget_show_all(pWindow);
+}
+
+void test(){
+   GtkWidget* pWindow;
+   GtkWidget *pMainVBox;
+   GtkWidget *pFrame;
+   GtkWidget *pSpin;
  
-    return EXIT_SUCCESS;
+   
+ 
+   pWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+   gtk_window_set_title(GTK_WINDOW(pWindow), "GtkSpinButton");
+   gtk_window_set_default_size(GTK_WINDOW(pWindow), 320, 200);
+   gtk_container_set_border_width(GTK_CONTAINER(pWindow), 4);
+ 
+   pMainVBox = gtk_vbox_new(TRUE, 0);
+   gtk_container_add(GTK_CONTAINER(pWindow), pMainVBox);
+ 
+   pFrame = gtk_frame_new("Rouge");
+   /* Création du widget GtkSpinButton */
+   pSpin = gtk_spin_button_new_with_range(0, 255, 1);
+   gtk_container_add(GTK_CONTAINER(pFrame), pSpin);
+   gtk_box_pack_start(GTK_BOX(pMainVBox), pFrame, FALSE, FALSE, 0);
+ 
+   pFrame = gtk_frame_new("Vert");
+   pSpin = gtk_spin_button_new_with_range(0, 255, 1);
+   gtk_container_add(GTK_CONTAINER(pFrame), pSpin);
+   gtk_box_pack_start(GTK_BOX(pMainVBox), pFrame, FALSE, FALSE, 0);
+ 
+   pFrame = gtk_frame_new("Bleu");
+   pSpin = gtk_spin_button_new_with_range(0, 255, 1);
+   gtk_container_add(GTK_CONTAINER(pFrame), pSpin);
+   gtk_box_pack_start(GTK_BOX(pMainVBox), pFrame, FALSE, FALSE, 0);
+ 
+   gtk_widget_show_all(pWindow);
+ 
+   g_signal_connect(G_OBJECT(pWindow), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+}
+
+int main(int argc, char **argv)
+{
+ 
+  // gtk_init(&argc,&argv);
+  // page_principal();
+  // gtk_main();
+
+  INFO_RN* merde = ChargerInfo();
+ 
+  return EXIT_SUCCESS;
 }
