@@ -16,8 +16,7 @@
 #include <errno.h>
 #include <sys/stat.h>
 
-#include <gtk/gtk.h>
 
 int nombreReseau();
-void page_principal();
+void page_principale();
 #endif

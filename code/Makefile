@@ -1,8 +1,40 @@
-all: clean compil
-	./main
+all: clear neurone
+	
 
-compil:
-	gcc test.c interface.c gestionnaire_IO.c gestionnaire_RN.c  Apprentissage.c `pkg-config --cflags --libs gtk+-2.0` -o main
+run: all
+	./test
+	
+
+neurone: gestionnaire_IO.o gestionnaire_RN.o Apprentissage.o interface.o test.o 
+	gcc -o test gestionnaire_IO.o gestionnaire_RN.o Apprentissage.o interface.o test.o `pkg-config --cflags --libs gtk+-2.0` -lm -lpthread -Wall
+	
+
+Apprentissage.o: Apprentissage.h Apprentissage.c gestionnaire_RN.h gestionnaire_IO.h
+	gcc -c -o Apprentissage.o Apprentissage.c -Wall -lm
+	
+
+gestionnaire_RN.o: gestionnaire_RN.h gestionnaire_RN.c Structures.h
+	gcc -c -o gestionnaire_RN.o gestionnaire_RN.c -Wall -lm
+	
+
+gestionnaire_IO.o: gestionnaire_IO.h gestionnaire_IO.c Structures.h
+	gcc -c -o gestionnaire_IO.o gestionnaire_IO.c -Wall
+	
+
+interface.o: interface.h interface.c Apprentissage.h gestionnaire_RN.h gestionnaire_IO.h
+	gcc -c -o interface.o interface.c `pkg-config --cflags --libs gtk+-2.0`-Wall -lpthread
+	
+
+test.o: test.h test.c interface.h
+	gcc -c -o test.o test.c `pkg-config --cflags --libs gtk+-2.0` -Wall
+	
+
+
+clear:
+	clear
+	
 
 clean:
-	rm -fr main
+	rm -f *.o
+	rm -f neurone
+	

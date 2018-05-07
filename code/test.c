@@ -8,31 +8,18 @@
 #define WHT   "\x1B[8;47m"
 #define BLK   "\x1B[8;40m"
 #define RESET "\x1B[0m"
+#include <gtk/gtk.h>
 
-int main()
-{
-	page_principal();
-	//test_chargerMNIST("/home/user/Bureau/train set images/train-images.idx3-ubyte");
-}
+int main(int argc, char **argv)
+{ 
+	//printf("oui je marche parfaitement ! soumsoum t'inquiete pas et le nbr des sous reseaux sont :%d!\n",nombreReseau());
+	
+ gtk_init(&argc,&argv);//initialise la bibilo , toujours appeler en debut de programme 
 
-void test_chargerMNIST(char* path)
-{	
-	// Image* im = ChargerMnist(path, 28, 28);
+ page_principale();
+
+ gtk_main();//appeler dans toutes les fct gtk , cette fct attends le clique de la souris ou toucher le clavier 
 	
-	// debug
 	
-	// int i, j;
-	// for(i=0;i<28;i++)
-	// {
-	// 	for(j=0;j<28;j++)
-	// 	{
-	// 		if(im->dat[i*28+j].r > 0.5)
-	// 			printf(WHT "1" RESET);
-	// 		else
-	// 			printf(BLK "0" RESET);
-	// 	}
-	// 	printf("\n");
-	// }
-	
-	// DelImage(im);
+	return 0;
 }

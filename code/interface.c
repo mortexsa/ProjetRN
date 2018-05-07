@@ -1,4 +1,7 @@
+
 #include "interface.h"
+
+#include <stdlib.h>
 #include <gtk/gtk.h>
 
 int nombreReseau(){
@@ -15,37 +18,55 @@ int nombreReseau(){
     return i;
 }
 
-void page_principal(){
+void page_principale(){	
 	int taille=nombreReseau();
 	INFO_RN* info=ChargerInfo();
-	GtkWidget *pWindow;
-    GtkWidget *pLabel;
- 	GtkWidget *pVBox;
- 	GtkWidget *pHBox;
- 	GtkWidget **pButton;
- 	pButton = malloc((taille+2)*sizeof(GtkWidget*));
- 	pWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(pWindow), "TFOu");
-    gtk_window_set_default_size(GTK_WINDOW(pWindow), 640, 400);
-    g_signal_connect(G_OBJECT(pWindow), "destroy", G_CALLBACK(gtk_main_quit), NULL);
-    pVBox = gtk_vbox_new(FALSE, 0);
-    pHBox = gtk_hbox_new(FALSE, 0);
-    pLabel = gtk_label_new("Programme de merde");
-    gtk_container_add(GTK_CONTAINER(pWindow), pVBox);
-    gtk_box_pack_start(GTK_BOX(pVBox), pLabel, FALSE, FALSE, 0);
-    
-    for(int i=0;i<taille;i++){
-    pButton[i] = gtk_button_new_with_label(info[i].nom);
-    gtk_box_pack_start(GTK_BOX(pVBox), pButton[i], FALSE, TRUE, 2);
+	
+	GtkWidget *Window;//poiteur sur la fenetre 
+	GtkWidget *Vbox;
+	GtkWidget *Hbox;
+	GtkWidget **button;
+	button = malloc((taille+2)*sizeof(GtkWidget*));
+	GtkWidget *label;
+	
+	Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);//creation de la fenetre graphique par defaut elle aura une taille 200*200pixel
+	
+	gtk_window_set_default_size(GTK_WINDOW(Window), 640, 400); //donner les dimmenssion de la fenetre 
+	
+	g_signal_connect(G_OBJECT(Window), "destroy", G_CALLBACK(gtk_main_quit), NULL); //pour pouvoir fermer la fenetre avec exit 
+	
+	
+	Vbox = gtk_vbox_new(FALSE, 0);
+	Hbox = gtk_hbox_new(FALSE, 0);
+	
+	label = gtk_label_new("Reseaux de neurones");
+	
+	gtk_container_add(GTK_CONTAINER(Window), Vbox);
+	
+	gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
+	
+	for(int i=0;i<taille;i++){
+    button[i] = gtk_button_new_with_label(info[i].nom);
+    gtk_box_pack_start(GTK_BOX(Vbox), button[i], FALSE, TRUE, 2);
     }
-    gtk_box_pack_start(GTK_BOX(pVBox), pHBox, FALSE, TRUE, 2);
-    pButton[taille] = gtk_button_new_with_label("Creer");
-    pButton[taille+1] = gtk_button_new_with_label("Quitter");
-    gtk_box_pack_start(GTK_BOX(pHBox), pButton[taille], TRUE, TRUE, 2);
-    gtk_box_pack_start(GTK_BOX(pHBox), pButton[taille+1], TRUE, TRUE, 2);
-    gtk_widget_show_all(pWindow);
-    g_signal_connect(G_OBJECT(pButton[5]), "clicked", G_CALLBACK(gtk_main_quit), NULL);
-    g_signal_connect(G_OBJECT(pButton[4]), "clicked", G_CALLBACK(gtk_widget_hide),pWindow);
-}
+	
+	 
+	gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
 
+    button[taille] = gtk_button_new_with_label("Creer");
+
+    button[taille+1] = gtk_button_new_with_label("Quitter");
+
+    gtk_box_pack_start(GTK_BOX(Hbox), button[taille], TRUE, TRUE, 2);
+
+    gtk_box_pack_start(GTK_BOX(Hbox), button[taille+1], TRUE, TRUE, 2);
+	 
+	gtk_widget_show_all(Window); //afin d'afficher tout dans la fenetre 
+  
+    g_signal_connect(G_OBJECT(button[taille+1]), "clicked", G_CALLBACK(gtk_main_quit), NULL);
+
+    //g_signal_connect(G_OBJECT(button[taille]), "clicked", G_CALLBACK(gtk_widget_hide),Window); //elle ne fait qu'effacer le boutton 
+    
+    
+	}
 
