@@ -11,7 +11,7 @@
 
 int main()
 {
-	test_chargerMNIST("/home/user/Bureau/train set images/train-images.idx3-ubyte");
+	test_chargerMNIST("/home/user/Bureau/train-images-idx3-ubyte");
 }
 
 void test_chargerMNIST(char* path)
@@ -19,6 +19,8 @@ void test_chargerMNIST(char* path)
 	Image* im = ChargerMnist(path, 28, 28);
 	
 	debug
+	
+	if(!im) exit(-1);
 	
 	int i, j;
 	for(i=0;i<28;i++)

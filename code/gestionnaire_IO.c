@@ -10,6 +10,9 @@
 #include <sys/dir.h>
 #include <errno.h>
 #include <sys/stat.h>
+#include <stdint.h>
+#include <inttypes.h>
+#include <unistd.h>
 
 #include "gestionnaire_IO.h"
 
@@ -188,38 +191,44 @@ int Sauver(Image* I,const char* fichier)
 
 Image* ChargerMnist(const char* path, int w_max, int h_max)
 {
-	debug
-	int t[3];
+	unsigned int t[4];
 	
 	FILE* fichier = fopen(path,"rb+");
 	if(!fichier)
 		exit(-1);
 	
-	debug
+	fread(t,4,4,fichier);
 	
-	fread(t,sizeof(int),4,fichier);
+	int k;
+	for(k=0;k<4;k++)
+	{
+		t[k] = ((t[k]&0xFF)<<24) + ((t[k]&0xFF00)<<8) + ((t[k]&0xFF0000)>>8) + (t[k]>>24);
+	}
+
 	
-	debug
-	
+	printf("%u\n%u\n%u\n%u\n",t[0],t[1],t[2],t[3]);
 	if(t[2]>h_max || t[3]>w_max)
 	{
+		debug
 		fclose(fichier);
 		remove(path);
 		return NULL;
 	}
 	
-	debug
 	
+	debug
+		
 	Image* im = NouvelleImage(t[3],t[2]);
 	
-	fseek(fichier,t[1]-1+4*sizeof(int),SEEK_SET);
+	fseek(fichier,t[1]*t[2]*t[3]-t[2]*t[3]+4*4,SEEK_SET);
 	
 	unsigned char tmp[t[3]*t[2]];
 	fread(tmp,1,t[3]*t[2],fichier);
 	
 	t[1]--;
-	fseek(fichier,sizeof(int),SEEK_SET);
-	fwrite(&(t[1]),sizeof(int),1,fichier);
+	t[1] = ((t[1]&0xFF)<<24) + ((t[1]&0xFF00)<<8) + ((t[1]&0xFF0000)>>8) + (t[1]>>24);
+	fseek(fichier,4,SEEK_SET);
+	fwrite(&t[1],4,1,fichier);
 	
 	fclose(fichier);
 	
