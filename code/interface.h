@@ -18,5 +18,6 @@
 
 
 int nombreReseau();
+void creation();
 void page_principale();
 #endif
