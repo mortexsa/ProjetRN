@@ -12,13 +12,12 @@
 int main()
 {
 	test_chargerMNIST("/home/user/Bureau/train-images-idx3-ubyte");
+	test_ChargerEtiquetteMNIST("/home/user/Bureau/train-labels-idx1-ubyte");
 }
 
 void test_chargerMNIST(char* path)
 {	
 	Image* im = ChargerMnist(path, 28, 28);
-	
-	debug
 	
 	if(!im) exit(-1);
 	
@@ -27,7 +26,7 @@ void test_chargerMNIST(char* path)
 	{
 		for(j=0;j<28;j++)
 		{
-			if(im->dat[i*28+j].r > 0.5)
+			if(im->dat[i*28+j].r > 0)
 				printf(WHT "1" RESET);
 			else
 				printf(BLK "0" RESET);
@@ -36,4 +35,11 @@ void test_chargerMNIST(char* path)
 	}
 	
 	DelImage(im);
+}
+
+void test_ChargerEtiquetteMNIST(char* path)
+{
+	char* c = ChargerEtiquetteMNIST(path);
+	printf("%c\n",*c);
+	free(c);
 }

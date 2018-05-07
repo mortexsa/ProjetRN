@@ -214,9 +214,6 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 		remove(path);
 		return NULL;
 	}
-	
-	
-	debug
 		
 	Image* im = NouvelleImage(t[3],t[2]);
 	
@@ -247,7 +244,7 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 	return im;
 }
 
-char ChargerEtiquetteMNIST(const char* path)
+char* ChargerEtiquetteMNIST(const char* path)
 {
 	unsigned int t[2];
 	
@@ -264,11 +261,11 @@ char ChargerEtiquetteMNIST(const char* path)
 	}
 	
 	printf("%u\n%u\n",t[0],t[1]);
-	debug
 		
-	char c;
+	char* c = malloc(sizeof(char));
 	fseek(fichier,t[1]-1+4*2,SEEK_SET);
-	fread(&c,1,1,fichier);
+	fread(c,1,1,fichier);
+	*c += 48;
 	
 	t[1]--;
 	t[1] = ((t[1]&0xFF)<<24) + ((t[1]&0xFF00)<<8) + ((t[1]&0xFF0000)>>8) + (t[1]>>24);
