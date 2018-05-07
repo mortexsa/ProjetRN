@@ -247,9 +247,40 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 	return im;
 }
 
-char* ChargerEtiquetteMNIST(const char* fichier)
+char ChargerEtiquetteMNIST(const char* path)
 {
+	unsigned int t[2];
 	
+	FILE* fichier = fopen(path,"rb+");
+	if(!fichier)
+		exit(-1);
+	
+	fread(t,4,2,fichier);
+	
+	int k;
+	for(k=0;k<2;k++)
+	{
+		t[k] = ((t[k]&0xFF)<<24) + ((t[k]&0xFF00)<<8) + ((t[k]&0xFF0000)>>8) + (t[k]>>24);
+	}
+	
+	printf("%u\n%u\n",t[0],t[1]);
+	debug
+		
+	char c;
+	fseek(fichier,t[1]-1+4*2,SEEK_SET);
+	fread(&c,1,1,fichier);
+	
+	t[1]--;
+	t[1] = ((t[1]&0xFF)<<24) + ((t[1]&0xFF00)<<8) + ((t[1]&0xFF0000)>>8) + (t[1]>>24);
+	fseek(fichier,4,SEEK_SET);
+	fwrite(&t[1],4,1,fichier);
+	
+	fclose(fichier);
+	
+	if(t[1] == 0)
+		remove(path);
+	
+	return c;
 }
 
 App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
@@ -287,7 +318,7 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 		}
 		else if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen(".bmp")]),".bmp") == 0)
 		{
-			if(couple->image = ChargerBmp(path, w_max, h_max))
+			if((couple->image = ChargerBmp(path, w_max, h_max)))
 			{
 				couple->etiquette = malloc(sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp") + 1));
 				strncpy(couple->etiquette,fichier->d_name,sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp")));
