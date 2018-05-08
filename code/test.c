@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 #include "test.h"
 
@@ -11,12 +12,18 @@
 
 int main()
 {
+	srand(time(NULL));
 	//test_chargerMNIST("/home/user/Bureau/App/train-images-idx3-ubyte");
 	//test_ChargerEtiquetteMNIST("/home/user/Bureau/App/train-labels-idx1-ubyte");
 	
 	//test_ChargementCoupleAttIn("/home/user/Bureau/App");
 	
-	test_Apprentissage("/home/user/Bureau/App");
+	//test_Apprentissage("/home/user/Bureau/App");
+	
+	//test_MultiplicationMatricielleTransposeeTM();
+	//test_MultiplicationMatricielleTransposeeMT();
+	
+	test_Propagation();
 }
 
 void test_chargerMNIST(char* path)
@@ -134,23 +141,139 @@ void test_Apprentissage(char* path)
 		
 		i++;
 		
-		if(!(i%10))
+		if(!(i%500))
 			SaveRN(*rn);
 		
 		DelApp(app);
 	}
 	
 	SaveRN(*rn);
-	libererRN(rn);//y a un pb la dedans
+	libererRN(rn);
+}
+
+void test_MultiplicationMatricielleTransposeeTM()
+{
+	int i, j;
+	float *inV,**inM, *out;
+	
+	inV = malloc(sizeof(float)*5);
+	out = malloc(sizeof(float)*5);
+	inM = malloc(sizeof(float*)*5);
+	
+	for(i=0;i<5;i++)
+	{
+		inM[i] = malloc(sizeof(float)*5);
+		
+		inV[i] = rand()%10 - 5;
+		for(j=0;j<5;j++)
+			inM[i][j] = rand()%10 - 5;
+	}
+	
+	MultiplicationMatricielleTransposeeTM(inM,inV,out,5,5);
+	
+	for(i=0;i<5;i++)
+	{
+		for(j=0;j<5;j++)
+			printf("%f  ",inM[i][j]);
+		printf("\n");
+	}
+	printf("\n");
+	for(i=0;i<5;i++)
+	{
+		printf("%f\n",inV[i]);
+	}
+	printf("\n");
+	for(i=0;i<5;i++)
+	{
+		printf("%f\n",out[i]);
+	}
+	printf("\n");
+}
+
+void test_MultiplicationMatricielleTransposeeMT()
+{
+	int i, j;
+	float *inV1,*inV2, **out;
+	
+	inV1 = malloc(sizeof(float)*5);
+	inV2 = malloc(sizeof(float)*5);
+	out = malloc(sizeof(float*)*5);
+	
+	for(i=0;i<5;i++)
+	{
+		out[i] = malloc(sizeof(float)*5);
+		
+		inV1[i] = rand()%10 - 5;
+		inV2[i] = rand()%10 - 5;
+	}
+	
+	MultiplicationMatricielleTransposeeMT(inV1,inV2,out,5,5);
+	
+	for(i=0;i<5;i++)
+	{
+		printf("%f\n",inV1[i]);
+	}
+	printf("\n");
+	for(i=0;i<5;i++)
+	{
+		printf("%f\n",inV2[i]);
+	}
+	printf("\n");
+	for(i=0;i<5;i++)
+	{
+		for(j=0;j<5;j++)
+			printf("%f  ",out[i][j]);
+		printf("\n");
+	}
+	printf("\n");
 }
 
 
+void test_Propagation()
+{
+	int i,j;
+	
+	RN* rn = malloc(sizeof(RN));
+	rn->couche_deb=NULL;
+	rn->couche_fin=NULL;
 
+	AjoutPremiereCouche(rn, 5);
+	Ajout_couche_Fin(rn, 5);
 
-
-
-
-
+	Remplissage(*rn);
+	
+	for(i=0;i<5;i++)
+		rn->couche_deb->A[i] = (float) (rand()%201 -100)/100;
+	
+	COUCHE* tmp = rn->couche_deb;
+	tmp = tmp->suiv;
+	
+	while(tmp != NULL)
+	{
+		MultiplicationMatriceVecteur(tmp->W,tmp->prec->A,tmp->A,tmp->taille,tmp->prec->taille);
+		AdditionVecteurVecteur(tmp->B,tmp->A,tmp->A,tmp->taille);
+		SigmoideV(tmp->A,tmp->A,tmp->taille);
+		
+		tmp=tmp->suiv;
+	}
+	
+	for(i=0;i<5;i++)
+		printf("%f\n",rn->couche_deb->A[i]);
+	printf("\n");
+	for(i=0;i<5;i++)
+		printf("%f\n",rn->couche_fin->B[i]);
+	printf("\n");
+	for(i=0;i<5;i++)
+	{
+		for(j=0;j<5;j++)
+			printf("%f  ",rn->couche_fin->W[i][j]);
+		printf("\n");
+	}
+	printf("\n");
+	for(i=0;i<5;i++)
+		printf("%f\n",rn->couche_fin->A[i]);
+	printf("\n");
+}
 
 
 

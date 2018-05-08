@@ -269,10 +269,11 @@ char* ChargerEtiquetteMNIST(const char* path)
 	
 	//printf("%u\n%u\n",t[0],t[1]);
 		
-	char* c = malloc(sizeof(char));
+	char* c = malloc(sizeof(char)*2);
 	fseek(fichier,t[1]-1+4*2,SEEK_SET);
 	fread(c,1,1,fichier);
 	*c += 48;
+	c[1] = '\0';
 	
 	t[1]--;
 	t[1] = ((t[1]&0xFF)<<24) + ((t[1]&0xFF00)<<8) + ((t[1]&0xFF0000)>>8) + (t[1]>>24);

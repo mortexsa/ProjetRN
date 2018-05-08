@@ -86,11 +86,11 @@ void Remplissage(RN rn)
 		{
 		for(i=0;i<tmp->taille;i++) //taille_M1 nbr de lignes de la 1ere matrice
 		{
-			tmp->B[i] = rand();
+			tmp->B[i] = rand()%10 - 5;
 		
 			for(j=0;j<tmp->prec->taille;j++)  // taille_M2 nbr de colonnes de la seconde matrice
 			{
-				tmp->W[i][j]= rand()%100; //attricution de poids aleatoires
+				tmp->W[i][j]= rand()%10 - 5; //attricution de poids aleatoires
 			} 
 		}
 		tmp=tmp->suiv;
@@ -157,8 +157,16 @@ void Propagation(Image* im, RN rn)
 			rn.couche_deb->A[3*i+1] = act;
 			act=(float)im->dat[i].b/255;
 			rn.couche_deb->A[3*i+2] = act;
+			
+			/*if(rn.couche_deb->A[3*i] > 0)
+				printf("\x1B[8;47m \x1B[0m");
+			else
+				printf("\x1B[8;40m \x1B[0m");
+			
+			if(i%im->w == 0)
+				printf("\n");*/
 		}	
-	
+	//printf("\n");
 	tmp = tmp->suiv;
 	
 	while(tmp != NULL)
@@ -177,13 +185,13 @@ char** Reconnaissance(RN rn)
 	
 	char** top = malloc(sizeof(char*)*3);
 	int i;
-	int id1=0;
-	int id2=0;
-	int id3=0;
+	int id1 = 0;
+	int id2 = 0;
+	int id3 = 0;
 	
 	for(i=0;i<rn.couche_fin->taille;i++)
 	{
-		printf("%f\n",rn.couche_fin->A[i]);
+		//printf("%f\n",rn.couche_fin->A[i]);
 		if(rn.couche_fin->A[i]>rn.couche_fin->A[id1])				
 		{
 			id1 = i;
@@ -192,9 +200,10 @@ char** Reconnaissance(RN rn)
 	top[0] = malloc(sizeof(char)*strlen(rn.info.etiquettes[id1]));
 	strcpy(top[0],rn.info.etiquettes[id1]);
 	
+	while(id2 == id1) id2++;
 	for(i=0;i<rn.couche_fin->taille;i++)
 	{
-		if(id2 != id1 && rn.couche_fin->A[i]>rn.couche_fin->A[id2])				
+		if(i != id1 && rn.couche_fin->A[i]>rn.couche_fin->A[id2])				
 		{
 			id2 = i;
 		}
@@ -202,13 +211,15 @@ char** Reconnaissance(RN rn)
 	top[1] = malloc(sizeof(char)*strlen(rn.info.etiquettes[id2]));
 	strcpy(top[1],rn.info.etiquettes[id2]);
 	
+	while(id3 == id1 || id3 == id2) id3++;
 	for(i=0;i<rn.couche_fin->taille;i++)
 	{
-		if(id3 != id1 && id3 != id1 && rn.couche_fin->A[i]>rn.couche_fin->A[id3])				
+		if(i != id1 && i != id2 && rn.couche_fin->A[i]>rn.couche_fin->A[id3])				
 		{
 			id3 = i;
 		}
 	}
+	
 	top[2] = malloc(sizeof(char)*strlen(rn.info.etiquettes[id3]));
 	strcpy(top[2],rn.info.etiquettes[id3]);
 			
@@ -244,10 +255,10 @@ void libererRN(RN* rn)
 		free(tmp->DELTA);
 		free(tmp->A);
 		free(tmp->B);
-		
 		tmp = tmp->suiv;
-		free(tmp->prec);
+		if(tmp)
+			free(tmp->prec);
 	}
-	
+	free(rn->couche_fin);
 }
 

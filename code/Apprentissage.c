@@ -25,13 +25,13 @@ void BackProp(RN* rn, Image* im,char* sortie_att, float eta)
 		rn->info.reussite++;
 	else
 		rn->info.echec++;
+	//printf("%s\n",sortie_att);
+	//printf("%s %s %s\n",sortie_calc[0],sortie_calc[1],sortie_calc[2]);
 	
 	free(sortie_calc[0]);
 	free(sortie_calc[1]);
 	free(sortie_calc[2]);
 	free(sortie_calc);
-	
-	//printf("%s %s %s\n",sortie_calc[0],sortie_calc[1],sortie_calc[2]);
 	
 	fct_cout(*rn, sortie_att);
 	
@@ -39,14 +39,10 @@ void BackProp(RN* rn, Image* im,char* sortie_att, float eta)
 	Hadamard(tmp->DELTA_M,tmp->DELTA,tmp->DELTA,tmp->taille);
 	//l'erreur locale de la derniere couche est mtn calculée
 	
-	//--
 	tmp = tmp->prec;
-	//--
 	
 	while(tmp->prec != NULL)
 	{
-		//tmp = tmp->prec;
-		
 		//on propage l'erreur
 		SigmoidePrimeZ(tmp->A,tmp->DELTA_M,tmp->taille);
 		MultiplicationMatricielleTransposeeTM(tmp->suiv->W,tmp->suiv->DELTA,tmp->DELTA,tmp->taille,tmp->suiv->taille);
@@ -59,9 +55,8 @@ void BackProp(RN* rn, Image* im,char* sortie_att, float eta)
 			ModifPoids(tmp->W,tmp->DELTA_M,tmp->prec->taille,tmp->taille,eta);
 			ModifBiais(tmp->B,tmp->DELTA,tmp->taille,eta);
 		}
-		//--
+		
 		tmp = tmp->prec;
-		//--
 	}
 }
 
