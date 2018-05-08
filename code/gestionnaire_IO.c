@@ -206,7 +206,7 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 	}
 
 	
-	printf("%u\n%u\n%u\n%u\n",t[0],t[1],t[2],t[3]);
+	//printf("%u\n%u\n%u\n%u\n",t[0],t[1],t[2],t[3]);
 	if(t[2]>h_max || t[3]>w_max)
 	{
 		debug
@@ -260,7 +260,7 @@ char* ChargerEtiquetteMNIST(const char* path)
 		t[k] = ((t[k]&0xFF)<<24) + ((t[k]&0xFF00)<<8) + ((t[k]&0xFF0000)>>8) + (t[k]>>24);
 	}
 	
-	printf("%u\n%u\n",t[0],t[1]);
+	//printf("%u\n%u\n",t[0],t[1]);
 		
 	char* c = malloc(sizeof(char));
 	fseek(fichier,t[1]-1+4*2,SEEK_SET);
@@ -298,14 +298,38 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 		if(!fichier)
 			return NULL;
 		
+		printf("%s\n",fichier->d_name);
+		
 		sprintf(path,"%s/%s",repertoire_app,fichier->d_name);
-		if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen(".idx3-ubyte")]),".idx3-ubyte") == 0)
+		//~ printf("%s\n",path);
+		
+		if(strcmp(fichier->d_name,".") == 0 || strcmp(fichier->d_name,"..") == 0);
+		else if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen("-idx3-ubyte")]),"-idx3-ubyte") == 0)
 		{
-			strncpy(path2,path,sizeof(char)*(strlen(fichier->d_name) - strlen(".idx3-ubyte")));
-			strcat(path2,".idx3-ubyte");
+			sprintf(path2,"%s",path);
+			sprintf(&path2[strlen(path) - strlen("-idx3-ubyte")],"-idx1-ubyte");
+			//~ printf("%s\n",path2);
+			
 			if((couple->etiquette = ChargerEtiquetteMNIST(path2)))
 			{
 				couple->image = ChargerMnist(path, w_max, h_max);
+			}
+			else
+			{
+				remove(path);
+				remove(path2);
+			}
+		}
+		else if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen("-idx1-ubyte")]),"-idx1-ubyte") == 0)
+		{
+			sprintf(path2,"%s",path);
+			sprintf(&path2[strlen(path) - strlen("-idx1-ubyte")],"-idx3-ubyte");
+			//~ printf("%s\n",path2);
+			
+			debug
+			if((couple->etiquette = ChargerEtiquetteMNIST(path)))
+			{
+				couple->image = ChargerMnist(path2, w_max, h_max);
 			}
 			else
 			{
