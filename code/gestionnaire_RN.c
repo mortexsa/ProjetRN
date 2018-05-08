@@ -86,11 +86,11 @@ void Remplissage(RN rn)
 		{
 		for(i=0;i<tmp->taille;i++) //taille_M1 nbr de lignes de la 1ere matrice
 		{
-			tmp->B[i] = rand()%10 - 5;
+			tmp->B[i] = (float) (rand()%201 - 100)/100;
 		
 			for(j=0;j<tmp->prec->taille;j++)  // taille_M2 nbr de colonnes de la seconde matrice
 			{
-				tmp->W[i][j]= rand()%10 - 5; //attricution de poids aleatoires
+				tmp->W[i][j]= (float) (rand()%201 - 100)/100; //attricution de poids aleatoires
 			} 
 		}
 		tmp=tmp->suiv;

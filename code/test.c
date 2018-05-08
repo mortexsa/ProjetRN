@@ -18,12 +18,14 @@ int main()
 	
 	//test_ChargementCoupleAttIn("/home/user/Bureau/App");
 	
-	//test_Apprentissage("/home/user/Bureau/App");
+	test_Apprentissage("/home/user/Bureau/App");
 	
 	//test_MultiplicationMatricielleTransposeeTM();
 	//test_MultiplicationMatricielleTransposeeMT();
 	
-	test_Propagation();
+	//test_Propagation();
+	
+	//test_BackProp();
 }
 
 void test_chargerMNIST(char* path)
@@ -128,20 +130,21 @@ void test_Apprentissage(char* path)
 	
 	SaveRN(*rn);
 	
-	int i;
+	int i = 0;
 	App* app;
 	float po;
 	
 	while((app = ChargementCoupleAttIn(path,28,28)))
 	{
-		BackProp(rn,app->image,app->etiquette,1);
+		BackProp(rn,app->image,app->etiquette,2.5);
 		
-		po = (float) rn->info.reussite / rn->info.echec;
+		po = (float) rn->info.reussite / (rn->info.echec + rn->info.reussite);
+		po *= 100;
 		printf("%d : %f%c\n",i,po,'%');
 		
 		i++;
 		
-		if(!(i%500))
+		if(!(i%5000))
 			SaveRN(*rn);
 		
 		DelApp(app);
@@ -272,10 +275,119 @@ void test_Propagation()
 	printf("\n");
 	for(i=0;i<5;i++)
 		printf("%f\n",rn->couche_fin->A[i]);
-	printf("\n");
+	printf("\n\n\n\n");
 }
 
+void test_BackProp()
+{
+	int i,j;
+	
+	RN* rn = malloc(sizeof(RN));
+	rn->couche_deb=NULL;
+	rn->couche_fin=NULL;
+	
+	rn->info.nom = malloc(sizeof(char)*10);
+	rn->info.date = malloc(sizeof(char)*20);
+	strcpy(rn->info.nom,"MNIST");
+	strcpy(rn->info.date,"2018-05-08");
+	rn->info.reussite = 0;
+	rn->info.echec = 0;
+	
+	rn->info.etiquettes = malloc(sizeof(char*)*10);
+	
+	rn->info.etiquettes[0] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[0],"0\0");
+	rn->info.etiquettes[1] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[1],"1\0");
+	rn->info.etiquettes[2] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[2],"2\0");
+	rn->info.etiquettes[3] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[3],"3\0");
+	rn->info.etiquettes[4] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[4],"4\0");
 
+	AjoutPremiereCouche(rn, 5);
+	Ajout_couche_Fin(rn, 5);
+
+	Remplissage(*rn);
+	
+	for(i=0;i<5;i++)
+		rn->couche_deb->A[i] = (float) (rand()%201 -100)/100;
+	
+	COUCHE* tmp = rn->couche_deb;
+	tmp = tmp->suiv;
+	
+	while(tmp != NULL)
+	{
+		MultiplicationMatriceVecteur(tmp->W,tmp->prec->A,tmp->A,tmp->taille,tmp->prec->taille);
+		AdditionVecteurVecteur(tmp->B,tmp->A,tmp->A,tmp->taille);
+		SigmoideV(tmp->A,tmp->A,tmp->taille);
+		
+		tmp=tmp->suiv;
+	}
+	
+	
+	for(i=0;i<5;i++)
+		printf("%f\n",rn->couche_deb->A[i]);
+	printf("\n");
+	for(i=0;i<5;i++)
+		printf("%f\n",rn->couche_fin->B[i]);
+	printf("\n");
+	for(i=0;i<5;i++)
+	{
+		for(j=0;j<5;j++)
+			printf("%f  ",rn->couche_fin->W[i][j]);
+		printf("\n");
+	}
+	printf("\n");
+	for(i=0;i<5;i++)
+		printf("%f\n",rn->couche_fin->A[i]);
+	printf("\n\n\n");
+	
+	
+	int eta = 1;
+	tmp = rn->couche_fin;
+	
+	fct_cout(*rn, "1");
+	
+	SigmoidePrimeZ(tmp->A,tmp->DELTA_M,tmp->taille);
+	Hadamard(tmp->DELTA_M,tmp->DELTA,tmp->DELTA,tmp->taille);
+	//l'erreur locale de la derniere couche est mtn calculée
+	
+	tmp = tmp->prec;
+	
+	while(tmp->prec != NULL)
+	{
+		//on propage l'erreur
+		SigmoidePrimeZ(tmp->A,tmp->DELTA_M,tmp->taille);
+		MultiplicationMatricielleTransposeeTM(tmp->suiv->W,tmp->suiv->DELTA,tmp->DELTA,tmp->taille,tmp->suiv->taille);
+		Hadamard(tmp->DELTA_M,tmp->DELTA,tmp->DELTA,tmp->taille);
+		
+		tmp = tmp->prec;
+	}
+	
+	tmp = tmp->suiv;
+	while(tmp)
+	{
+		MultiplicationMatricielleTransposeeMT(tmp->DELTA,tmp->prec->A,tmp->DELTA_M,tmp->taille,tmp->prec->taille);
+		ModifPoids(tmp->W,tmp->DELTA_M,tmp->prec->taille,tmp->taille,eta);
+		ModifBiais(tmp->B,tmp->DELTA,tmp->taille,eta);
+		
+		tmp = tmp->suiv;
+	}
+	
+	
+	for(i=0;i<5;i++)
+		printf("%f\n",rn->couche_fin->B[i]);
+	printf("\n");
+	for(i=0;i<5;i++)
+	{
+		for(j=0;j<5;j++)
+			printf("%f  ",rn->couche_fin->W[i][j]);
+		printf("\n");
+	}
+	printf("\n");
+}
 
 
 

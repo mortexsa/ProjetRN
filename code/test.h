@@ -8,3 +8,4 @@ void test_Apprentissage(char* path);
 void test_MultiplicationMatricielleTransposeeTM();
 void test_MultiplicationMatricielleTransposeeMT();
 void test_Propagation();
+void test_BackProp();

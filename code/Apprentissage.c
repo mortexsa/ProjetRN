@@ -48,15 +48,26 @@ void BackProp(RN* rn, Image* im,char* sortie_att, float eta)
 		MultiplicationMatricielleTransposeeTM(tmp->suiv->W,tmp->suiv->DELTA,tmp->DELTA,tmp->taille,tmp->suiv->taille);
 		Hadamard(tmp->DELTA_M,tmp->DELTA,tmp->DELTA,tmp->taille);
 		
-		//on en profite pour calculer la matrice de modif des poids DELTA_M puis apporter ces modifications aux poids et aux biais
+		/*//on en profite pour calculer la matrice de modif des poids DELTA_M puis apporter ces modifications aux poids et aux biais
 		if(tmp->prec != NULL)
 		{
 			MultiplicationMatricielleTransposeeMT(tmp->DELTA,tmp->prec->A,tmp->DELTA_M,tmp->taille,tmp->prec->taille);
 			ModifPoids(tmp->W,tmp->DELTA_M,tmp->prec->taille,tmp->taille,eta);
 			ModifBiais(tmp->B,tmp->DELTA,tmp->taille,eta);
-		}
+		}*/
 		
 		tmp = tmp->prec;
+	}
+	
+	//on calcule la matrice de modif des poids DELTA_M puis on apporte ces modifications aux poids et aux biais
+	tmp = tmp->suiv;
+	while(tmp)
+	{
+		MultiplicationMatricielleTransposeeMT(tmp->DELTA,tmp->prec->A,tmp->DELTA_M,tmp->taille,tmp->prec->taille);
+		ModifPoids(tmp->W,tmp->DELTA_M,tmp->prec->taille,tmp->taille,eta);
+		ModifBiais(tmp->B,tmp->DELTA,tmp->taille,eta);
+		
+		tmp = tmp->suiv;
 	}
 }
 
