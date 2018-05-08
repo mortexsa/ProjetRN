@@ -1,6 +1,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "Apprentissage.h"
 
@@ -18,22 +19,33 @@ void BackProp(RN* rn, Image* im,char* sortie_att, float eta)
 	COUCHE* tmp = rn->couche_fin;
 	
 	Propagation(im, *rn);
-	char** sortie_calc = Reconnaissance(*rn);
 	
+	char** sortie_calc = Reconnaissance(*rn);
 	if(strcmp(sortie_calc[0],sortie_att)==0)
 		rn->info.reussite++;
 	else
 		rn->info.echec++;
+	
+	free(sortie_calc[0]);
+	free(sortie_calc[1]);
+	free(sortie_calc[2]);
+	free(sortie_calc);
+	
+	//printf("%s %s %s\n",sortie_calc[0],sortie_calc[1],sortie_calc[2]);
 	
 	fct_cout(*rn, sortie_att);
 	
 	SigmoidePrimeZ(tmp->A,tmp->DELTA_M,tmp->taille);
 	Hadamard(tmp->DELTA_M,tmp->DELTA,tmp->DELTA,tmp->taille);
 	//l'erreur locale de la derniere couche est mtn calculée
-		
+	
+	//--
+	tmp = tmp->prec;
+	//--
+	
 	while(tmp->prec != NULL)
 	{
-		tmp = tmp->prec;
+		//tmp = tmp->prec;
 		
 		//on propage l'erreur
 		SigmoidePrimeZ(tmp->A,tmp->DELTA_M,tmp->taille);
@@ -47,6 +59,9 @@ void BackProp(RN* rn, Image* im,char* sortie_att, float eta)
 			ModifPoids(tmp->W,tmp->DELTA_M,tmp->prec->taille,tmp->taille,eta);
 			ModifBiais(tmp->B,tmp->DELTA,tmp->taille,eta);
 		}
+		//--
+		tmp = tmp->prec;
+		//--
 	}
 }
 
@@ -124,4 +139,11 @@ void Hadamard(type** in_a, type* in_b, type* out, int taille)
 	{
 		out[i] = in_a[i][0]*in_b[i];
 	}
+}
+
+void DelApp(App* app)
+{
+	DelImage(app->image);
+	free(app->etiquette);
+	free(app);
 }

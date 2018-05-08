@@ -12,5 +12,6 @@ void Hadamard(type**, type*, type*, int);
 void fct_cout(RN,char*);
 void ModifPoids(type**, type**, int, int, int);
 void ModifBiais(type*, type*, int, int);
+void DelApp(App*);
 
 #endif

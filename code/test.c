@@ -14,7 +14,9 @@ int main()
 	//test_chargerMNIST("/home/user/Bureau/App/train-images-idx3-ubyte");
 	//test_ChargerEtiquetteMNIST("/home/user/Bureau/App/train-labels-idx1-ubyte");
 	
-	test_ChargementCoupleAttIn("/home/user/Bureau/App");
+	//test_ChargementCoupleAttIn("/home/user/Bureau/App");
+	
+	test_Apprentissage("/home/user/Bureau/App");
 }
 
 void test_chargerMNIST(char* path)
@@ -73,7 +75,73 @@ void test_ChargementCoupleAttIn(char* path)
 
 void test_Apprentissage(char* path)
 {
+	RN* rn = malloc(sizeof(RN));
+	rn->couche_deb=NULL;
+	rn->couche_fin=NULL;
 	
+	rn->info.nom = malloc(sizeof(char)*10);
+	rn->info.date = malloc(sizeof(char)*20);
+	strcpy(rn->info.nom,"MNIST");
+	strcpy(rn->info.date,"2018-05-08");
+	rn->info.reussite = 0;
+	rn->info.echec = 0;
+	
+	rn->info.etiquettes = malloc(sizeof(char*)*10);
+	
+	rn->info.etiquettes[0] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[0],"0\0");
+	rn->info.etiquettes[1] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[1],"1\0");
+	rn->info.etiquettes[2] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[2],"2\0");
+	rn->info.etiquettes[3] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[3],"3\0");
+	rn->info.etiquettes[4] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[4],"4\0");
+	rn->info.etiquettes[5] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[5],"5\0");
+	rn->info.etiquettes[6] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[6],"6\0");
+	rn->info.etiquettes[7] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[7],"7\0");
+	rn->info.etiquettes[8] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[8],"8\0");
+	rn->info.etiquettes[9] = malloc(sizeof(char)*5);
+	strcpy(rn->info.etiquettes[9],"9\0");
+
+	AjoutPremiereCouche(rn, 2352);
+	
+	Ajout_couche_Fin(rn, 16);
+	Ajout_couche_Fin(rn, 16);
+	Ajout_couche_Fin(rn, 16);
+	
+	Ajout_couche_Fin(rn, 10);
+
+	Remplissage(*rn);
+	
+	SaveRN(*rn);
+	
+	int i;
+	App* app;
+	float po;
+	
+	while((app = ChargementCoupleAttIn(path,28,28)))
+	{
+		BackProp(rn,app->image,app->etiquette,1);
+		
+		po = (float) rn->info.reussite / rn->info.echec;
+		printf("%d : %f%c\n",i,po,'%');
+		
+		i++;
+		
+		if(!(i%10))
+			SaveRN(*rn);
+		
+		DelApp(app);
+	}
+	
+	SaveRN(*rn);
+	libererRN(rn);//y a un pb la dedans
 }
 
 

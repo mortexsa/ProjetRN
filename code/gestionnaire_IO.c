@@ -195,7 +195,10 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 	
 	FILE* fichier = fopen(path,"rb+");
 	if(!fichier)
+	{
+		debug
 		exit(-1);
+	}
 	
 	fread(t,4,4,fichier);
 	
@@ -250,7 +253,11 @@ char* ChargerEtiquetteMNIST(const char* path)
 	
 	FILE* fichier = fopen(path,"rb+");
 	if(!fichier)
+	{
+		printf("%d\n",errno);
+		debug
 		exit(-1);
+	}
 	
 	fread(t,4,2,fichier);
 	
@@ -298,7 +305,7 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 		if(!fichier)
 			return NULL;
 		
-		printf("%s\n",fichier->d_name);
+		//~ printf("%s\n",fichier->d_name);
 		
 		sprintf(path,"%s/%s",repertoire_app,fichier->d_name);
 		//~ printf("%s\n",path);
@@ -354,6 +361,7 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 			remove(path);
 		}
 	}
+	closedir(rep);
 	
 	return couple;
 }
@@ -483,18 +491,21 @@ RN* ChargerRN(INFO_RN info)
 
 void SaveRN(RN rn)
 {
-	if(opendir("../sav") == NULL)
+	DIR* rep;
+	if((rep = opendir("../sav")) == NULL)
 	{
 		mkdir("../sav",S_IRWXU);
 	}
+	closedir(rep);
 	
 	char path[100];
 	sprintf(path,"../sav/%s_%s",rn.info.date,rn.info.nom);
 	
-	if(opendir(path) == NULL)
+	if((rep = opendir(path)) == NULL)
 	{
 		mkdir(path,S_IRWXU);
 	}
+	closedir(rep);
 	
 	//printf("%s\n",path);
 	
@@ -509,9 +520,11 @@ void SaveRN(RN rn)
 		while(tmp)
 		{
 			sprintf(path2,"%s/C%d.rn",path,i);
-			
+			printf("%s\n",path2);
 			if((fichier = fopen(path2,"wb+")) == NULL)
 			{
+				printf("%d\n",errno);
+				debug
 				exit(-1);
 			}
 			
@@ -536,9 +549,15 @@ void SaveRN(RN rn)
 	
 	sprintf(path2,"%s/INFO",path);
 	if((fichier = fopen(path2,"w+")) == NULL)
+	{
+		debug
 		exit(-1);
+	}
+	
 	fprintf(fichier,"%s\n%s\n%d\n%d\n",rn.info.nom,rn.info.date,rn.info.reussite,rn.info.echec);
+	
 	for(i=0;i<rn.couche_fin->taille;i++)
 		fprintf(fichier,"%s\n",rn.info.etiquettes[i]);
+	
 	fclose(fichier);
 }

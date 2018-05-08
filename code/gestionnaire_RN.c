@@ -90,7 +90,7 @@ void Remplissage(RN rn)
 		
 			for(j=0;j<tmp->prec->taille;j++)  // taille_M2 nbr de colonnes de la seconde matrice
 			{
-				tmp->W[i][j]= rand(); //attricution de poids aleatoires
+				tmp->W[i][j]= rand()%100; //attricution de poids aleatoires
 			} 
 		}
 		tmp=tmp->suiv;
@@ -149,7 +149,7 @@ void Propagation(Image* im, RN rn)
 	float act;
 	
 	//insertion activation
-	for(int i=0;i<tmp->taille;i++)
+	for(int i=0;i<im->w*im->h;i++)
 		{
 			act=(float)im->dat[i].r/255;
 			rn.couche_deb->A[3*i] = act;
@@ -158,7 +158,7 @@ void Propagation(Image* im, RN rn)
 			act=(float)im->dat[i].b/255;
 			rn.couche_deb->A[3*i+2] = act;
 		}	
-
+	
 	tmp = tmp->suiv;
 	
 	while(tmp != NULL)
@@ -166,16 +166,16 @@ void Propagation(Image* im, RN rn)
 		MultiplicationMatriceVecteur(tmp->W,tmp->prec->A,tmp->A,tmp->taille,tmp->prec->taille);
 		AdditionVecteurVecteur(tmp->B,tmp->A,tmp->A,tmp->taille);
 		SigmoideV(tmp->A,tmp->A,tmp->taille);
-		Reconnaissance(rn);
 		
-	tmp=tmp->suiv;}	
+		tmp=tmp->suiv;
+	}	
 }
 
 
 char** Reconnaissance(RN rn)
 {
 	
-	char** top= malloc(sizeof(char*)*3);
+	char** top = malloc(sizeof(char*)*3);
 	int i;
 	int id1=0;
 	int id2=0;
@@ -183,6 +183,7 @@ char** Reconnaissance(RN rn)
 	
 	for(i=0;i<rn.couche_fin->taille;i++)
 	{
+		printf("%f\n",rn.couche_fin->A[i]);
 		if(rn.couche_fin->A[i]>rn.couche_fin->A[id1])				
 		{
 			id1 = i;
