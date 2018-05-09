@@ -20,11 +20,26 @@ void BackProp(RN* rn, Image* im,char* sortie_att, float eta)
 	
 	Propagation(im, *rn);
 	
+	//int i;
+	
 	char** sortie_calc = Reconnaissance(*rn);
 	if(strcmp(sortie_calc[0],sortie_att)==0)
 		rn->info.reussite++;
 	else
 		rn->info.echec++;
+		
+	/*for(i=0;i<im->w*im->h;i++)
+	{
+		if(i%im->w == 0)
+			printf("\n");
+		if(im->dat[i].r > 0.5)
+			printf(" ");
+		else
+			printf("#");
+	}
+	printf("\n%s %s %s   %s\n",sortie_calc[0],sortie_calc[1],sortie_calc[2],sortie_att);*/
+	
+	
 	//printf("%s\n",sortie_att);
 	//printf("%s %s %s\n",sortie_calc[0],sortie_calc[1],sortie_calc[2]);
 	
@@ -71,7 +86,7 @@ void BackProp(RN* rn, Image* im,char* sortie_att, float eta)
 	}
 }
 
-void ModifPoids(type** W, type** DELTA, int W_w, int W_h, int eta)
+void ModifPoids(type** W, type** DELTA, int W_w, int W_h, float eta)
 {
 	int i,j;
 	
@@ -84,7 +99,7 @@ void ModifPoids(type** W, type** DELTA, int W_w, int W_h, int eta)
 	}
 }
 
-void ModifBiais(type* B, type* DELTA, int taille, int eta)
+void ModifBiais(type* B, type* DELTA, int taille, float eta)
 {
 	int i;
 	

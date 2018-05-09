@@ -10,8 +10,8 @@ void MultiplicationMatricielleTransposeeTM(type**, type*, type*, int, int);
 void MultiplicationMatricielleTransposeeMT(type*, type*, type**, int, int);
 void Hadamard(type**, type*, type*, int);
 void fct_cout(RN,char*);
-void ModifPoids(type**, type**, int, int, int);
-void ModifBiais(type*, type*, int, int);
+void ModifPoids(type**, type**, int, int, float);
+void ModifBiais(type*, type*, int, float);
 void DelApp(App*);
 
 #endif

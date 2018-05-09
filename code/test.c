@@ -120,9 +120,28 @@ void test_Apprentissage(char* path)
 
 	AjoutPremiereCouche(rn, 2352);
 	
+	//76% eta = 1
+	/*Ajout_couche_Fin(rn, 16);
 	Ajout_couche_Fin(rn, 16);
-	Ajout_couche_Fin(rn, 16);
-	Ajout_couche_Fin(rn, 16);
+	Ajout_couche_Fin(rn, 16);*/
+	
+	//86% eta = 1
+	/*Ajout_couche_Fin(rn, 64);
+	Ajout_couche_Fin(rn, 64);*/
+	
+	//83% eta = 1
+	/*Ajout_couche_Fin(rn, 128);
+	Ajout_couche_Fin(rn, 128);*/
+	
+	//85% eta = 1
+	/*Ajout_couche_Fin(rn, 64);
+	Ajout_couche_Fin(rn, 64);
+	Ajout_couche_Fin(rn, 64);*/
+	
+	//87% eta = 1.5
+	Ajout_couche_Fin(rn, 64);
+	Ajout_couche_Fin(rn, 64);
+	Ajout_couche_Fin(rn, 64);
 	
 	Ajout_couche_Fin(rn, 10);
 
@@ -136,7 +155,7 @@ void test_Apprentissage(char* path)
 	
 	while((app = ChargementCoupleAttIn(path,28,28)))
 	{
-		BackProp(rn,app->image,app->etiquette,2.5);
+		BackProp(rn,app->image,app->etiquette,0.5);
 		
 		po = (float) rn->info.reussite / (rn->info.echec + rn->info.reussite);
 		po *= 100;
