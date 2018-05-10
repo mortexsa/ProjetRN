@@ -17,6 +17,12 @@ int nombreReseau(){
     }
     return i;
 }
+
+void destroy_fct(GtkWidget *widget, gpointer data)
+{
+    gtk_main_quit();
+}
+
 void creation(){
     GtkWidget *pWindow;
     GtkWidget *pVBox;
@@ -31,7 +37,8 @@ void creation(){
     GtkWidget *pHBox;
  	GtkWidget *pButton[2];
  
- 
+    //destroyed(window,data);
+     
     pWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     
 
@@ -39,7 +46,7 @@ void creation(){
     //gtk_container_set_border_width(GTK_CONTAINER(pWindow), 5);
     gtk_window_set_title(GTK_WINDOW(pWindow), "Creation Reseaux de neurones ");
     gtk_window_set_default_size(GTK_WINDOW(pWindow), 640, 400);
-    g_signal_connect(G_OBJECT(pWindow), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    
  
  //pour mes boutons 
     pHBox = gtk_hbox_new(FALSE, 0);
@@ -104,10 +111,20 @@ void creation(){
     pButton[1] = gtk_button_new_with_label("Quitter");
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[0], TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[1], TRUE, TRUE, 0);
-    g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(gtk_main_quit), NULL); 
-   
+    //g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(page_principale), NULL);
+    g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(gtk_main_quit), NULL);
+
+      
     gtk_widget_show_all(pWindow);
 }
+
+
+
+//delete evenement 
+
+/*static gboolean delet_event(GtkWidget *window, Gtkgpointer data){
+	}*/
+	
 void page_principale(){	
 	int taille=nombreReseau();
 	INFO_RN* info=ChargerInfo();
@@ -155,7 +172,7 @@ void page_principale(){
   
     g_signal_connect(G_OBJECT(button[taille+1]), "clicked", G_CALLBACK(gtk_main_quit), NULL);
 
-    g_signal_connect(G_OBJECT(button[taille]), "clicked", G_CALLBACK(creation),Window); //elle ne fait qu'effacer le boutton 
+    g_signal_connect(G_OBJECT(button[taille]), "clicked", G_CALLBACK(creation),NULL); 
     
     
 	}
