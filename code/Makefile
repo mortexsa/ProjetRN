@@ -6,7 +6,7 @@ run: all
 	
 
 neurone: gestionnaire_IO.o gestionnaire_RN.o Apprentissage.o interface.o test.o 
-	gcc -o test gestionnaire_IO.o gestionnaire_RN.o Apprentissage.o interface.o test.o `pkg-config --cflags --libs gtk+-2.0` -lm -lpthread -Wall
+	gcc -o test gestionnaire_IO.o gestionnaire_RN.o Apprentissage.o interface.o test.o `pkg-config --cflags --libs gtk+-2.0` -g -lm -lpthread -Wall
 	
 
 Apprentissage.o: Apprentissage.h Apprentissage.c gestionnaire_RN.h gestionnaire_IO.h

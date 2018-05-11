@@ -23,7 +23,13 @@ void destroy_fct(GtkWidget *widget, gpointer data)
     gtk_main_quit();
 }
 
-void creation(){
+
+void creation(GtkWidget *widget, gpointer data){
+
+    //pour suprimer l'ancienne page
+    gtk_widget_hide(data);
+
+
     GtkWidget *pWindow;
     GtkWidget *pVBox;
     GtkWidget *pFrame;
@@ -36,7 +42,7 @@ void creation(){
 //pour les boutons    
     GtkWidget *pHBox;
  	GtkWidget *pButton[2];
- 
+    
     //destroyed(window,data);
      
     pWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -45,7 +51,7 @@ void creation(){
     /* On ajoute un espace de 5 sur les bords de la fenetre */
     //gtk_container_set_border_width(GTK_CONTAINER(pWindow), 5);
     gtk_window_set_title(GTK_WINDOW(pWindow), "Creation Reseaux de neurones ");
-    gtk_window_set_default_size(GTK_WINDOW(pWindow), 640, 400);
+    gtk_window_set_default_size(GTK_WINDOW(pWindow), 500, 400);
     
  
  //pour mes boutons 
@@ -108,7 +114,7 @@ void creation(){
     /*gtk_container_add(GTK_CONTAINER(pWindow), pVBox);
     gtk_box_pack_start(GTK_BOX(pHBox), pLabel, FALSE, FALSE, 2); */
     pButton[0] = gtk_button_new_with_label("Creer");
-    pButton[1] = gtk_button_new_with_label("Quitter");
+    pButton[1] = gtk_button_new_with_label("Retour");
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[0], TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[1], TRUE, TRUE, 0);
     //g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(page_principale), NULL);
@@ -153,7 +159,7 @@ void page_principale(){
 	gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
 	
 	for(int i=0;i<taille;i++){
-    button[i] = gtk_button_new_with_label(info[i].nom);
+    button[i] = gtk_button_new_with_label("info[i].nom");
     gtk_box_pack_start(GTK_BOX(Vbox), button[i], FALSE, TRUE, 2);
     }
 	
@@ -172,7 +178,7 @@ void page_principale(){
   
     g_signal_connect(G_OBJECT(button[taille+1]), "clicked", G_CALLBACK(gtk_main_quit), NULL);
 
-    g_signal_connect(G_OBJECT(button[taille]), "clicked", G_CALLBACK(creation),NULL); 
+    g_signal_connect(G_OBJECT(button[taille]), "clicked", G_CALLBACK(creation),Window); 
     
     
 	}

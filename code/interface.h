@@ -4,6 +4,7 @@
 #include "gestionnaire_RN.h"
 #include "Apprentissage.h"
 #include "gestionnaire_IO.h"
+#include "Structures.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

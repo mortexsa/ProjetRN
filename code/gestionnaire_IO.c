@@ -301,39 +301,42 @@ INFO_RN* ChargerInfo()
 {
 	char path[268],tmp[268];
 	FILE* verif;
-	int i;
+	int i = 0;
 	DIR* rep = opendir("../sav");
 	if (rep == NULL)
         exit(1);
     struct dirent* fichier = NULL;
-    
     while((fichier = readdir(rep))&&(fichier->d_type == DT_DIR))
     {
 		sprintf(path,"../sav/%s/INFO",fichier->d_name);
 		if((verif = fopen(path,"r")))
 		{
 			i++;
+
 			fclose(verif);
 		}
 	}
 	
     if (closedir(rep) == -1)
         exit(-1);
-    
     INFO_RN* res = malloc(i*sizeof(INFO_RN));
     rep = opendir("../sav");
 	if (rep == NULL)
         exit(1);
     
     i=0;
+
     while((fichier = readdir(rep))&&(fichier->d_type == DT_DIR))
     {
+
 		sprintf(path,"../sav/%s/INFO",fichier->d_name);
 		//printf("%s\n",path);
 		verif = fopen(path,"r");
 		if(verif)
 		{
+
 			fscanf(verif,"%s\n",tmp);
+			printf("%s\n", tmp);
 			res[i].nom = malloc(strlen(tmp)*sizeof(char));
 			strcpy(res[i].nom,tmp);
 			
