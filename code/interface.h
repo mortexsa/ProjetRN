@@ -19,6 +19,5 @@
 
 
 int nombreReseau();
-void creation();
-void page_principale();
+void afficherInterface();
 #endif

@@ -18,19 +18,20 @@ int nombreReseau(){
     return i;
 }
 
-void destroy_fct(GtkWidget *widget, gpointer data)
-{
-    gtk_main_quit();
-}
-
 
 void creation(GtkWidget *widget, gpointer data){
 
     //pour suprimer l'ancienne page
-    gtk_widget_hide(data);
+    GList *children = gtk_container_get_children(GTK_CONTAINER(data));
 
+    while (children) {
+        gtk_widget_destroy(children->data);
+        children = g_list_next(children);
+    }
 
-    GtkWidget *pWindow;
+    g_list_free(children);
+
+    //GtkWidget *pWindow;
     GtkWidget *pVBox;
     GtkWidget *pFrame;
     GtkWidget *pVBoxFrame;
@@ -45,19 +46,19 @@ void creation(GtkWidget *widget, gpointer data){
     
     //destroyed(window,data);
      
-    pWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    // pWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     
 
-    /* On ajoute un espace de 5 sur les bords de la fenetre */
-    //gtk_container_set_border_width(GTK_CONTAINER(pWindow), 5);
-    gtk_window_set_title(GTK_WINDOW(pWindow), "Creation Reseaux de neurones ");
-    gtk_window_set_default_size(GTK_WINDOW(pWindow), 500, 400);
+    // /* On ajoute un espace de 5 sur les bords de la fenetre */
+    // //gtk_container_set_border_width(GTK_CONTAINER(pWindow), 5);
+    // gtk_window_set_title(GTK_WINDOW(pWindow), "Creation Reseaux de neurones ");
+    //gtk_window_set_default_size(GTK_WINDOW(data), 500, 400);
     
  
  //pour mes boutons 
     pHBox = gtk_hbox_new(FALSE, 0);
     pVBox = gtk_vbox_new(TRUE, 0);
-    gtk_container_add(GTK_CONTAINER(pWindow), pVBox);
+    gtk_container_add(GTK_CONTAINER(data), pVBox);
  
     /* Creation du premier GtkFrame */
     pFrame = gtk_frame_new("parametres du Reseau :");
@@ -80,8 +81,8 @@ void creation(GtkWidget *widget, gpointer data){
     pEntry = gtk_entry_new();
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
  
-    /* Creation d un GtkHSeparator */
-    pSeparator = gtk_hseparator_new();
+   /* Creation d un GtkHSeparator */
+   pSeparator = gtk_hseparator_new();
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pSeparator, TRUE, FALSE, 0);
  
     pLabel = gtk_label_new("etiquettes de sortie :");
@@ -121,28 +122,25 @@ void creation(GtkWidget *widget, gpointer data){
     g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(gtk_main_quit), NULL);
 
       
-    gtk_widget_show_all(pWindow);
+    gtk_widget_show_all(data);
 }
 
 
 
-//delete evenement 
+// //delete evenement 
 
-/*static gboolean delet_event(GtkWidget *window, Gtkgpointer data){
-	}*/
+// /*static gboolean delet_event(GtkWidget *window, Gtkgpointer data){
+// 	}*/
 	
-void page_principale(){	
+void page_principale(GtkWidget *Window){	
 	int taille=nombreReseau();
 	INFO_RN* info=ChargerInfo();
-	
-	GtkWidget *Window;//poiteur sur la fenetre 
 	GtkWidget *Vbox;
 	GtkWidget *Hbox;
 	GtkWidget **button;
 	button = malloc((taille+2)*sizeof(GtkWidget*));
 	GtkWidget *label;
 	
-	Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);//creation de la fenetre graphique par defaut elle aura une taille 200*200pixel
 	
 	gtk_window_set_default_size(GTK_WINDOW(Window), 640, 400); //donner les dimmenssion de la fenetre 
 	
@@ -159,7 +157,7 @@ void page_principale(){
 	gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
 	
 	for(int i=0;i<taille;i++){
-    button[i] = gtk_button_new_with_label("info[i].nom");
+    button[i] = gtk_button_new_with_label(info[i].nom);
     gtk_box_pack_start(GTK_BOX(Vbox), button[i], FALSE, TRUE, 2);
     }
 	
@@ -183,4 +181,8 @@ void page_principale(){
     
 	}
 	
-
+void afficherInterface(){
+    GtkWidget *Window;
+    Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);//creation de la fenetre graphique par defaut elle aura une taille 200*200pixel
+    page_principale(Window);
+}
