@@ -38,11 +38,40 @@ void selectReseau(GtkWidget *widget, gpointer data){
     INFO_RN *info = (INFO_RN*) data;
     GtkWidget *pWidget = gtk_widget_get_parent(widget);
     GtkWidget *label;
+    GtkWidget *button[4];
+    GtkWidget *Hbox;
     viderContainer(pWidget);
+    Hbox = gtk_hbox_new(FALSE, 0);
     char tab[200];
     strcpy(tab, "Nom du Reseau de Neurone :  ");
     label = gtk_label_new(strcat(tab,info->nom));
     gtk_box_pack_start(GTK_BOX(pWidget), label, FALSE, FALSE, 0);
+    
+    strcpy(tab, "Pourcentage de reussite :  ");
+    char b[5];
+    sprintf(b,"%d", info->reussite);
+    label = gtk_label_new(strcat(tab,b));    
+    gtk_box_pack_start(GTK_BOX(pWidget), label, FALSE, FALSE, 0);
+
+    strcpy(tab, "Date de creation :  ");
+    label = gtk_label_new(strcat(tab,info->date));    
+    gtk_box_pack_start(GTK_BOX(pWidget), label, FALSE, FALSE, 0);
+    
+    button[0] = gtk_button_new_with_label("Afficher la matrice des poids");
+    gtk_box_pack_start(GTK_BOX(pWidget), button[0], FALSE, TRUE, 2);
+
+
+    gtk_box_pack_start(GTK_BOX(pWidget), Hbox, FALSE, TRUE, 2);
+    
+    button[1] = gtk_button_new_with_label("Retour");
+    button[2] = gtk_button_new_with_label("Traitement");
+    button[3] = gtk_button_new_with_label("Apprentissage");
+    
+    gtk_box_pack_start(GTK_BOX(Hbox), button[1], TRUE, TRUE, 2);
+    gtk_box_pack_start(GTK_BOX(Hbox), button[2], TRUE, TRUE, 2);
+    gtk_box_pack_start(GTK_BOX(Hbox), button[3], TRUE, TRUE, 2);
+
+    g_signal_connect(G_OBJECT(button[1]), "clicked", G_CALLBACK(retourAccueille), G_OBJECT(pWidget));
 
     gtk_widget_show_all(pWidget);
 }
