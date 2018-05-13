@@ -103,7 +103,7 @@ void page_principale(GtkWidget *Window){
 
 void creation(GtkWidget *widget, gpointer data){
 
-    //pour suprimer l'ancienne page
+  //pour suprimer l'ancienne page
     viderContainer(data);
 
     //GtkWidget *pWindow;
@@ -138,7 +138,7 @@ void creation(GtkWidget *widget, gpointer data){
     /* Creation du premier GtkFrame */
     pFrame = gtk_frame_new("parametres du Reseau :");
     gtk_box_pack_start(GTK_BOX(pVBox), pFrame, TRUE, FALSE, 0);
- 
+    
     /* Creation et insertion d une boite pour le premier GtkFrame */
     pVBoxFrame = gtk_vbox_new(TRUE, 0);
     gtk_container_add(GTK_CONTAINER(pFrame), pVBoxFrame);
@@ -146,10 +146,17 @@ void creation(GtkWidget *widget, gpointer data){
     /* Creation et insertion des elements contenus dans le premier GtkFrame */
     pLabel = gtk_label_new("Nom du Reseau de neurones :");
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
+    pEntry = gtk_entry_new(); //pour que l'utilisateur peut saisir une entrée
+    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
+    
+    sUtf8 = g_locale_to_utf8("nombre de couches cachées :", -1, NULL, NULL, NULL);
+    pLabel = gtk_label_new(sUtf8);
+    g_free(sUtf8);
+    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
     pEntry = gtk_entry_new();
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
  
-    sUtf8 = g_locale_to_utf8("nombre couches cachées :", -1, NULL, NULL, NULL);
+    sUtf8 = g_locale_to_utf8("nombre de neurones cachés :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
@@ -157,12 +164,12 @@ void creation(GtkWidget *widget, gpointer data){
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
  
    /* Creation d un GtkHSeparator */
-   pSeparator = gtk_hseparator_new();
+    pSeparator = gtk_hseparator_new();
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pSeparator, TRUE, FALSE, 0);
  
-    pLabel = gtk_label_new("etiquettes de sortie :");
+    pLabel = gtk_label_new("etiquette de sortie :");
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new();
+    pEntry = gtk_entry_new(); 
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
  
     /* Creation du deuxieme GtkFrame */
@@ -173,23 +180,32 @@ void creation(GtkWidget *widget, gpointer data){
     /* Creation et insertion d une boite pour le deuxieme GtkFrame */
     pVBoxFrame = gtk_vbox_new(TRUE, 0);
     gtk_container_add(GTK_CONTAINER(pFrame), pVBoxFrame);
+    
+    pLabel = gtk_label_new("nom repertoire :");
+    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
+    pEntry = gtk_entry_new();
+    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
+    
+    //definir la taille max des images qu'il devra analyser 
+     sUtf8 = g_locale_to_utf8("taille max :", -1, NULL, NULL, NULL);
+    pLabel = gtk_label_new(sUtf8);
+    g_free(sUtf8);
+    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
+    pEntry = gtk_entry_new();
+    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
+  //afficher les bouton dans la même frame 
+    gtk_box_pack_start(GTK_BOX(pVBox), pHBox, FALSE, FALSE, 2);
  
-    /*Creation et insertion d une boite pour le troisieme GtkFrame */
-    pVBoxFrame = gtk_vbox_new(TRUE, 0);
-    gtk_container_add(GTK_CONTAINER(pFrame), pVBoxFrame);
-    gtk_box_pack_start(GTK_BOX(pVBox), pHBox, FALSE, TRUE, 2);
- 
- 
-    /*gtk_container_add(GTK_CONTAINER(pWindow), pVBox);
-    gtk_box_pack_start(GTK_BOX(pHBox), pLabel, FALSE, FALSE, 2); */
+   //gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
     pButton[0] = gtk_button_new_with_label("Creer");
     pButton[1] = gtk_button_new_with_label("Retour");
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[0], TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[1], TRUE, TRUE, 0);
     //g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(page_principale), NULL);
     g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(retourAccueille), data);
-
-      
+    
+     //g_signal_connect(G_OBJECT(pEntry), "activate", G_CALLBACK(activate_entry), (GtkWidget*) pLabel);
+    /* g_signal_connect(G_OBJECT(pButton[0]), "clicked", G_CALLBACK(creation_RN), (GtkWidget*) pLabel);*/
     gtk_widget_show_all(data);
 }
 
