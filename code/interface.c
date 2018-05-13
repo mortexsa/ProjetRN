@@ -36,14 +36,15 @@ void retourAccueille(GtkWidget *widget, gpointer data){
 
 void selectReseau(GtkWidget *widget, gpointer data){
     INFO_RN *info = (INFO_RN*) data;
-    
-    GtkWidget *pWindow = gtk_widget_get_parent(widget);
-    GtkWidget *Vbox;
+    GtkWidget *pWidget = gtk_widget_get_parent(widget);
     GtkWidget *label;
-    viderContainer(pWindow);
+    viderContainer(pWidget);
+    char tab[200];
+    strcpy(tab, "Nom du Reseau de Neurone :  ");
+    label = gtk_label_new(strcat(tab,info->nom));
+    gtk_box_pack_start(GTK_BOX(pWidget), label, FALSE, FALSE, 0);
 
-
-
+    gtk_widget_show_all(pWidget);
 }
 
 // //delete evenement 
@@ -124,10 +125,10 @@ void creation(GtkWidget *widget, gpointer data){
     // pWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     
 
-    // /* On ajoute un espace de 5 sur les bords de la fenetre */
-    // //gtk_container_set_border_width(GTK_CONTAINER(pWindow), 5);
-    // gtk_window_set_title(GTK_WINDOW(pWindow), "Creation Reseaux de neurones ");
-    //gtk_window_set_default_size(GTK_WINDOW(data), 500, 400);
+    //   On ajoute un espace de 5 sur les bords de la fenetre */
+    //   gtk_container_set_border_width(GTK_CONTAINER(pWindow), 5);
+    //   gtk_window_set_title(GTK_WINDOW(pWindow), "Creation Reseaux de neurones ");
+    //   gtk_window_set_default_size(GTK_WINDOW(data), 500, 400);
     
  
  //pour mes boutons 
