@@ -34,6 +34,18 @@ void retourAccueille(GtkWidget *widget, gpointer data){
     page_principale(data);
 }
 
+void selectReseau(GtkWidget *widget, gpointer data){
+    INFO_RN *info = (INFO_RN*) data;
+    
+    GtkWidget *pWindow = gtk_widget_get_parent(widget);
+    GtkWidget *Vbox;
+    GtkWidget *label;
+    viderContainer(pWindow);
+
+
+
+}
+
 // //delete evenement 
 
 // /*static gboolean delet_event(GtkWidget *window, Gtkgpointer data){
@@ -47,7 +59,7 @@ void page_principale(GtkWidget *Window){
 	GtkWidget **button;
 	button = malloc((taille+2)*sizeof(GtkWidget*));
 	GtkWidget *label;
-	
+	int tmp = -1;
 	
 	gtk_window_set_default_size(GTK_WINDOW(Window), 640, 400); //donner les dimmenssion de la fenetre 
 	
@@ -66,6 +78,7 @@ void page_principale(GtkWidget *Window){
 	for(int i=0;i<taille;i++){
     button[i] = gtk_button_new_with_label(info[i].nom);
     gtk_box_pack_start(GTK_BOX(Vbox), button[i], FALSE, TRUE, 2);
+    g_signal_connect(G_OBJECT(button[i]), "clicked", G_CALLBACK(selectReseau),&info[i]);
     }
 	
 	 
