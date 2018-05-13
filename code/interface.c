@@ -1,8 +1,7 @@
 
 #include "interface.h"
 
-#include <stdlib.h>
-#include <gtk/gtk.h>
+
 
 int nombreReseau(){
 	int i=0;
@@ -18,11 +17,8 @@ int nombreReseau(){
     return i;
 }
 
-
-void creation(GtkWidget *widget, gpointer data){
-
-    //pour suprimer l'ancienne page
-    GList *children = gtk_container_get_children(GTK_CONTAINER(data));
+void viderContainer(GtkWidget *data){
+     GList *children = gtk_container_get_children(GTK_CONTAINER(data));
 
     while (children) {
         gtk_widget_destroy(children->data);
@@ -30,6 +26,72 @@ void creation(GtkWidget *widget, gpointer data){
     }
 
     g_list_free(children);
+}
+
+void retourAccueille(GtkWidget *widget, gpointer data){
+    //pour suprimer l'ancienne page
+    viderContainer(data);
+    page_principale(data);
+}
+
+// //delete evenement 
+
+// /*static gboolean delet_event(GtkWidget *window, Gtkgpointer data){
+// 	}*/
+	
+void page_principale(GtkWidget *Window){	
+	int taille=nombreReseau();
+	INFO_RN* info=ChargerInfo();
+	GtkWidget *Vbox;
+	GtkWidget *Hbox;
+	GtkWidget **button;
+	button = malloc((taille+2)*sizeof(GtkWidget*));
+	GtkWidget *label;
+	
+	
+	gtk_window_set_default_size(GTK_WINDOW(Window), 640, 400); //donner les dimmenssion de la fenetre 
+	
+	g_signal_connect(G_OBJECT(Window), "destroy", G_CALLBACK(gtk_main_quit), NULL); //pour pouvoir fermer la fenetre avec exit 
+	
+	
+	Vbox = gtk_vbox_new(FALSE, 0);
+	Hbox = gtk_hbox_new(FALSE, 0);
+	
+	label = gtk_label_new("Reseaux de neurones");
+	
+	gtk_container_add(GTK_CONTAINER(Window), Vbox);
+	
+	gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
+	
+	for(int i=0;i<taille;i++){
+    button[i] = gtk_button_new_with_label(info[i].nom);
+    gtk_box_pack_start(GTK_BOX(Vbox), button[i], FALSE, TRUE, 2);
+    }
+	
+	 
+	gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
+
+    button[taille] = gtk_button_new_with_label("Creer");
+
+    button[taille+1] = gtk_button_new_with_label("Quitter");
+
+    gtk_box_pack_start(GTK_BOX(Hbox), button[taille], TRUE, TRUE, 2);
+
+    gtk_box_pack_start(GTK_BOX(Hbox), button[taille+1], TRUE, TRUE, 2);
+	 
+	gtk_widget_show_all(Window); //afin d'afficher tout dans la fenetre 
+  
+    g_signal_connect(G_OBJECT(button[taille+1]), "clicked", G_CALLBACK(gtk_main_quit), NULL);
+
+    g_signal_connect(G_OBJECT(button[taille]), "clicked", G_CALLBACK(creation),Window); 
+    
+    
+	}
+
+void creation(GtkWidget *widget, gpointer data){
+
+    //pour suprimer l'ancienne page
+    viderContainer(data);
 
     //GtkWidget *pWindow;
     GtkWidget *pVBox;
@@ -42,7 +104,7 @@ void creation(GtkWidget *widget, gpointer data){
     
 //pour les boutons    
     GtkWidget *pHBox;
- 	GtkWidget *pButton[2];
+    GtkWidget *pButton[2];
     
     //destroyed(window,data);
      
@@ -99,13 +161,6 @@ void creation(GtkWidget *widget, gpointer data){
     pVBoxFrame = gtk_vbox_new(TRUE, 0);
     gtk_container_add(GTK_CONTAINER(pFrame), pVBoxFrame);
  
-    
-    /* Creation du troisieme GtkFrame */
-    sUtf8 = g_locale_to_utf8("choix format fichier ;", -1, NULL, NULL, NULL);
-    pFrame = gtk_frame_new(sUtf8);
-    g_free(sUtf8);
-    gtk_box_pack_start(GTK_BOX(pVBox), pFrame, TRUE, FALSE, 0);
- 
     /*Creation et insertion d une boite pour le troisieme GtkFrame */
     pVBoxFrame = gtk_vbox_new(TRUE, 0);
     gtk_container_add(GTK_CONTAINER(pFrame), pVBoxFrame);
@@ -119,68 +174,12 @@ void creation(GtkWidget *widget, gpointer data){
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[0], TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[1], TRUE, TRUE, 0);
     //g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(page_principale), NULL);
-    g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(retourAccueille), data);
 
       
     gtk_widget_show_all(data);
 }
 
-
-
-// //delete evenement 
-
-// /*static gboolean delet_event(GtkWidget *window, Gtkgpointer data){
-// 	}*/
-	
-void page_principale(GtkWidget *Window){	
-	int taille=nombreReseau();
-	INFO_RN* info=ChargerInfo();
-	GtkWidget *Vbox;
-	GtkWidget *Hbox;
-	GtkWidget **button;
-	button = malloc((taille+2)*sizeof(GtkWidget*));
-	GtkWidget *label;
-	
-	
-	gtk_window_set_default_size(GTK_WINDOW(Window), 640, 400); //donner les dimmenssion de la fenetre 
-	
-	g_signal_connect(G_OBJECT(Window), "destroy", G_CALLBACK(gtk_main_quit), NULL); //pour pouvoir fermer la fenetre avec exit 
-	
-	
-	Vbox = gtk_vbox_new(FALSE, 0);
-	Hbox = gtk_hbox_new(FALSE, 0);
-	
-	label = gtk_label_new("Reseaux de neurones");
-	
-	gtk_container_add(GTK_CONTAINER(Window), Vbox);
-	
-	gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
-	
-	for(int i=0;i<taille;i++){
-    button[i] = gtk_button_new_with_label(info[i].nom);
-    gtk_box_pack_start(GTK_BOX(Vbox), button[i], FALSE, TRUE, 2);
-    }
-	
-	 
-	gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
-
-    button[taille] = gtk_button_new_with_label("Creer");
-
-    button[taille+1] = gtk_button_new_with_label("Quitter");
-
-    gtk_box_pack_start(GTK_BOX(Hbox), button[taille], TRUE, TRUE, 2);
-
-    gtk_box_pack_start(GTK_BOX(Hbox), button[taille+1], TRUE, TRUE, 2);
-	 
-	gtk_widget_show_all(Window); //afin d'afficher tout dans la fenetre 
-  
-    g_signal_connect(G_OBJECT(button[taille+1]), "clicked", G_CALLBACK(gtk_main_quit), NULL);
-
-    g_signal_connect(G_OBJECT(button[taille]), "clicked", G_CALLBACK(creation),Window); 
-    
-    
-	}
-	
 void afficherInterface(){
     GtkWidget *Window;
     Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);//creation de la fenetre graphique par defaut elle aura une taille 200*200pixel
