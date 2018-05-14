@@ -119,19 +119,9 @@ void creation(GtkWidget *widget, gpointer data){
 //pour les boutons    
     GtkWidget *pHBox;
     GtkWidget *pButton[2];
+    GtkWidget *bouton_explorer;
+   
     
-    //destroyed(window,data);
-     
-    // pWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    
-
-    //   On ajoute un espace de 5 sur les bords de la fenetre */
-    //   gtk_container_set_border_width(GTK_CONTAINER(pWindow), 5);
-    //   gtk_window_set_title(GTK_WINDOW(pWindow), "Creation Reseaux de neurones ");
-    //   gtk_window_set_default_size(GTK_WINDOW(data), 500, 400);
-    
- 
- //pour mes boutons 
     pHBox = gtk_hbox_new(FALSE, 0);
     pVBox = gtk_vbox_new(TRUE, 0);
     gtk_container_add(GTK_CONTAINER(data), pVBox);
@@ -183,12 +173,13 @@ void creation(GtkWidget *widget, gpointer data){
     gtk_container_add(GTK_CONTAINER(pFrame), pVBoxFrame);
     
     pLabel = gtk_label_new("nom repertoire :");
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new();
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
+    bouton_explorer=gtk_button_new_with_label("Explorer repertoire ...");
+    //on met le bouton Explorer dans la frame
+    gtk_box_pack_start(GTK_BOX(pHBox),bouton_explorer, TRUE, FALSE, 0);
+    g_signal_connect(G_OBJECT(bouton_explorer), "clicked", G_CALLBACK(creer_folder_selection), data);
     
     //definir la taille max des images qu'il devra analyser 
-     sUtf8 = g_locale_to_utf8("taille max :", -1, NULL, NULL, NULL);
+     sUtf8 = g_locale_to_utf8("taille max des images du repertoire:", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
@@ -209,6 +200,63 @@ void creation(GtkWidget *widget, gpointer data){
     /* g_signal_connect(G_OBJECT(pButton[0]), "clicked", G_CALLBACK(creation_RN), (GtkWidget*) pLabel);*/
     gtk_widget_show_all(data);
 }
+/*afin de selectionner un repertoire au choix*/
+void
+creer_folder_selection (GtkButton * button, gpointer data)
+{   
+	gchar* chemin;
+	GtkWidget *pDialog;
+    GtkWidget *msgError;
+     
+    GtkWidget *pParent;
+        
+     //cast en GTK_WIDGET 
+    pParent = GTK_WIDGET(data);   
+    GtkWidget *pFileSelection;
+     
+    /* Creation de la fenetre de selection */
+        pFileSelection = gtk_file_chooser_dialog_new("selectionnez un repertoire...",
+    GTK_WINDOW(pParent),
+    //GTK_FILE_CHOOSER_ACTION_OPEN
+    GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
+    NULL);
+    
+    /*pour afficher toutes les fenetres*/
+    gtk_widget_show(pFileSelection);
+    /* On limite les actions a cette fenetre */
+        gtk_window_set_modal(GTK_WINDOW(pFileSelection), TRUE);   
+        
+        
+        /* Affichage fenetre */
+        switch(gtk_dialog_run(GTK_DIALOG(pFileSelection)))
+        {
+          case GTK_RESPONSE_OK:
+            /* Recuperation du chemin */
+            chemin = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(pFileSelection));
+            pDialog = gtk_message_dialog_new(GTK_WINDOW(pFileSelection),
+                GTK_DIALOG_MODAL,
+                GTK_MESSAGE_INFO,
+                GTK_BUTTONS_OK,
+                "Chemin du repertoire choisi :\n%s", chemin);
+                
+            gtk_dialog_run(GTK_DIALOG(pDialog));
+            gtk_widget_destroy(pDialog);break;
+            			  
+		default : break;
+}
+   //g_free(chemin); j'ai un probleme avec ce free
+   gtk_widget_destroy(pFileSelection);
+   }
+
+void quitter(GtkWidget* widget)
+{
+    // destruction de win et de tout ce qu'il contient
+    gtk_widget_destroy(widget);
+    gtk_main_quit();
+}
+
 
 void afficherInterface(){
     GtkWidget *Window;

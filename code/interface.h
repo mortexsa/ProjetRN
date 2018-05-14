@@ -24,6 +24,7 @@ void viderContainer(GtkWidget *data);
 void retourAccueille(GtkWidget *widget, gpointer data);
 void selectReseau(GtkWidget *widget, gpointer data);
 void page_principale(GtkWidget *Window);
+void creer_folder_selection (GtkButton * button, gpointer data);
 void creation(GtkWidget *widget, gpointer data);
 void afficherInterface();
 #endif
