@@ -19,11 +19,23 @@
 
 #include <gtk/gtk.h>
 
+typedef struct INFO_FENETRE
+{
+	INFO_RN *info;
+	GtkWidget *Window;
+	int nombreReseau;
+	int reseauSelectionner;
+} INFO_FENETRE;
+
+
 int nombreReseau();
 void viderContainer(GtkWidget *data);
 void retourAccueille(GtkWidget *widget, gpointer data);
 void selectReseau(GtkWidget *widget, gpointer data);
-void page_principale(GtkWidget *Window);
+void traitement(GtkWidget *widget, gpointer data);
+void page_principale(INFO_FENETRE *fenetre);
+void creer_folder_selection (GtkButton * button, gpointer data);
 void creation(GtkWidget *widget, gpointer data);
+void quitter(GtkWidget* widget);
 void afficherInterface();
 #endif
