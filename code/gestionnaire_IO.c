@@ -336,7 +336,7 @@ INFO_RN* ChargerInfo()
 		{
 
 			fscanf(verif,"%s\n",tmp);
-			printf("%s\n", tmp);
+			//printf("%s\n", tmp);
 			res[i].nom = malloc(strlen(tmp)*sizeof(char));
 			strcpy(res[i].nom,tmp);
 			
