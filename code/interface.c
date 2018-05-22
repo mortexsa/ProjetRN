@@ -215,12 +215,12 @@ void page_principale(INFO_FENETRE *fenetre){
 void creation(GtkWidget *widget, gpointer data){
 
   //pour suprimer l'ancienne page
-<<<<<<< HEAD
-    viderContainer(data);
-=======
+
+    //viderContainer(data);
+
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
     viderContainer(fenetre->Window);
->>>>>>> 2e3fc7f984bb0529153160b304ac3c1e88d54c6c
+
 
     //GtkWidget *pWindow;
     GtkWidget *pVBox;
@@ -291,11 +291,9 @@ void creation(GtkWidget *widget, gpointer data){
     bouton_explorer=gtk_button_new_with_label("Explorer repertoire ...");
     //on met le bouton Explorer dans la frame
     gtk_box_pack_start(GTK_BOX(pHBox),bouton_explorer, TRUE, FALSE, 0);
-<<<<<<< HEAD
-    g_signal_connect(G_OBJECT(bouton_explorer), "clicked", G_CALLBACK(creer_folder_selection), data);
-=======
+
     g_signal_connect(G_OBJECT(bouton_explorer), "clicked", G_CALLBACK(creer_folder_selection), fenetre->Window);
->>>>>>> 2e3fc7f984bb0529153160b304ac3c1e88d54c6c
+
     
     //definir la taille max des images qu'il devra analyser 
      sUtf8 = g_locale_to_utf8("taille max des images du repertoire:", -1, NULL, NULL, NULL);
@@ -312,14 +310,9 @@ void creation(GtkWidget *widget, gpointer data){
     pButton[1] = gtk_button_new_with_label("Retour");
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[0], TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[1], TRUE, TRUE, 0);
-    //g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(page_principale), NULL);
-<<<<<<< HEAD
-    g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(retourAccueille), data);
-    
-     //g_signal_connect(G_OBJECT(pEntry), "activate", G_CALLBACK(activate_entry), (GtkWidget*) pLabel);
-    /* g_signal_connect(G_OBJECT(pButton[0]), "clicked", G_CALLBACK(creation_RN), (GtkWidget*) pLabel);*/
+   
     gtk_widget_show_all(data);
-=======
+
     g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(retourAccueille), fenetre);
     
      //g_signal_connect(G_OBJECT(pEntry), "activate", G_CALLBACK(activate_entry), (GtkWidget*) pLabel);
@@ -327,62 +320,7 @@ void creation(GtkWidget *widget, gpointer data){
     gtk_widget_show_all(fenetre->Window);
 }
 
-/*afin de selectionner un repertoire au choix*/
-void creer_folder_selection (GtkButton * button, gpointer data)
-{   
-    gchar* chemin;
-    GtkWidget *pDialog;
-    GtkWidget *msgError;
-     
-    GtkWidget *pParent;
-        
-     //cast en GTK_WIDGET 
-    pParent = GTK_WIDGET(data);   
-    GtkWidget *pFileSelection;
-     
-    /* Creation de la fenetre de selection */
-        pFileSelection = gtk_file_chooser_dialog_new("selectionnez un repertoire...",
-    GTK_WINDOW(pParent),
-    //GTK_FILE_CHOOSER_ACTION_OPEN
-    GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
-    NULL);
-    
-    /*pour afficher toutes les fenetres*/
-    gtk_widget_show(pFileSelection);
-    /* On limite les actions a cette fenetre */
-        gtk_window_set_modal(GTK_WINDOW(pFileSelection), TRUE);   
-        
-        
-        /* Affichage fenetre */
-        switch(gtk_dialog_run(GTK_DIALOG(pFileSelection)))
-        {
-            case GTK_RESPONSE_OK:
-                /* Recuperation du chemin */
-                chemin = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(pFileSelection));
-                pDialog = gtk_message_dialog_new(GTK_WINDOW(pFileSelection),
-                    GTK_DIALOG_MODAL,
-                    GTK_MESSAGE_INFO,
-                    GTK_BUTTONS_OK,
-                    "Chemin du repertoire choisi :\n%s", chemin);
-                    
-                gtk_dialog_run(GTK_DIALOG(pDialog));
-                gtk_widget_destroy(pDialog);break;
-                          
-            default : break;
-        }
-   //g_free(chemin); j'ai un probleme avec ce free
-   gtk_widget_destroy(pFileSelection);
-}
 
-void quitter(GtkWidget* widget)
-{
-    // destruction de win et de tout ce qu'il contient
-    gtk_widget_destroy(widget);
-    gtk_main_quit();
->>>>>>> 2e3fc7f984bb0529153160b304ac3c1e88d54c6c
-}
 /*afin de selectionner un repertoire au choix*/
 void
 creer_folder_selection (GtkButton * button, gpointer data)
