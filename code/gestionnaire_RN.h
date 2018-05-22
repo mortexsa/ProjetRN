@@ -4,10 +4,10 @@
 #include "Structures.h"
 
 
-void MultiplicationMatriceVecteur(type**, type*, type*, int, int);
-void AdditionVecteurVecteur(type*, type*, type*, int);
-void SigmoideV(type*, type*, int);
-type Sigmoide(type);
+void MultiplicationMatriceVecteur(float**, float*, float*, int, int);
+void AdditionVecteurVecteur(float*, float*, float*, int);
+void SigmoideV(float*, float*, int);
+float Sigmoide(float);
 RN* initialisation(INFO_RN);
 void Remplissage(RN rn); 
 void Ajout_couche_Fin(RN* rn, int taille);

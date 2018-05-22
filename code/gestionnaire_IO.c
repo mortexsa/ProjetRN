@@ -371,40 +371,42 @@ INFO_RN* ChargerInfo()
 {
 	char path[268],tmp[268];
 	FILE* verif;
-	int i;
+	int i = 0;
 	DIR* rep = opendir("../sav");
 	if (rep == NULL)
         exit(1);
     struct dirent* fichier = NULL;
-    
     while((fichier = readdir(rep))&&(fichier->d_type == DT_DIR))
     {
 		sprintf(path,"../sav/%s/INFO",fichier->d_name);
 		if((verif = fopen(path,"r")))
 		{
 			i++;
+
 			fclose(verif);
 		}
 	}
 	
     if (closedir(rep) == -1)
         exit(-1);
-    
     INFO_RN* res = malloc(i*sizeof(INFO_RN));
-    
     rep = opendir("../sav");
 	if (rep == NULL)
         exit(1);
     
     i=0;
+
     while((fichier = readdir(rep))&&(fichier->d_type == DT_DIR))
     {
+
 		sprintf(path,"../sav/%s/INFO",fichier->d_name);
-		printf("%s\n",path);
+		//printf("%s\n",path);
 		verif = fopen(path,"r");
 		if(verif)
 		{
+
 			fscanf(verif,"%s\n",tmp);
+			//printf("%s\n", tmp);
 			res[i].nom = malloc(strlen(tmp)*sizeof(char));
 			strcpy(res[i].nom,tmp);
 			
@@ -421,7 +423,7 @@ INFO_RN* ChargerInfo()
 	
     if(closedir(rep) == -1)
 		exit(-1);
-        
+    
 	return res;
 }
 
@@ -449,11 +451,11 @@ RN* ChargerRN(INFO_RN info)
 		
 		Ajout_couche_Fin(rn,t[1]);
 		
-		fread(rn->couche_fin->B,sizeof(type),t[1],fichier);
+		fread(rn->couche_fin->B,sizeof(float),t[1],fichier);
 		
 		for(j=0;j<t[1];j++)
 		{
-			fread(rn->couche_fin->W[j],sizeof(type),t[0],fichier);
+			fread(rn->couche_fin->W[j],sizeof(float),t[0],fichier);
 		}
 		
 		fclose(fichier);
@@ -535,11 +537,11 @@ void SaveRN(RN rn)
 			
 			//printf("%s\n%d %d\n",path2,temp[0],temp[1]);
 			
-			fwrite(tmp->B,sizeof(type),temp[1],fichier);
+			fwrite(tmp->B,sizeof(float),temp[1],fichier);
 			
 			for(m=0;m<temp[1];m++)
 			{
-				fwrite(tmp->W[m],sizeof(type),temp[0],fichier);
+				fwrite(tmp->W[m],sizeof(float),temp[0],fichier);
 			}
 			
 			fclose(fichier);

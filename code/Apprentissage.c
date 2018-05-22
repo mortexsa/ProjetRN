@@ -86,7 +86,7 @@ void BackProp(RN* rn, Image* im,char* sortie_att, float eta)
 	}
 }
 
-void ModifPoids(type** W, type** DELTA, int W_w, int W_h, float eta)
+void ModifPoids(float** W, float** DELTA, int W_w, int W_h, float eta)
 {
 	int i,j;
 	
@@ -99,7 +99,7 @@ void ModifPoids(type** W, type** DELTA, int W_w, int W_h, float eta)
 	}
 }
 
-void ModifBiais(type* B, type* DELTA, int taille, float eta)
+void ModifBiais(float* B, float* DELTA, int taille, float eta)
 {
 	int i;
 	
@@ -114,7 +114,7 @@ void ModifBiais(type* B, type* DELTA, int taille, float eta)
  * B -> B - rate*DELTA(l)
  */
 
-void SigmoidePrimeZ(type* in, type** out, int taille)
+void SigmoidePrimeZ(float* in, float** out, int taille)
 {
 	int i;
 	
@@ -124,7 +124,7 @@ void SigmoidePrimeZ(type* in, type** out, int taille)
 	}
 }
 
-void MultiplicationMatricielleTransposeeTM(type** in_M, type* in_V, type* out, int taille_M1,int taille_M3) // = (in_M1)T * in_M2
+void MultiplicationMatricielleTransposeeTM(float** in_M, float* in_V, float* out, int taille_M1,int taille_M3) // = (in_M1)T * in_M2
 {
 	int i,k; 
 	
@@ -139,7 +139,7 @@ void MultiplicationMatricielleTransposeeTM(type** in_M, type* in_V, type* out, i
 	}
 }
 
-void MultiplicationMatricielleTransposeeMT(type* in_M1, type* in_M2, type** out, int taille_M1,int taille_M2) // = in_M1 * (in_M2)T
+void MultiplicationMatricielleTransposeeMT(float* in_M1, float* in_M2, float** out, int taille_M1,int taille_M2) // = in_M1 * (in_M2)T
 {
 	int i,j; 
 	
@@ -152,7 +152,7 @@ void MultiplicationMatricielleTransposeeMT(type* in_M1, type* in_M2, type** out,
 	}
 }
 
-void Hadamard(type** in_a, type* in_b, type* out, int taille)
+void Hadamard(float** in_a, float* in_b, float* out, int taille)
 {
 	int i;
 	

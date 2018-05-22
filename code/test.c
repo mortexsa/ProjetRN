@@ -9,7 +9,9 @@
 #define WHT   "\x1B[8;47m"
 #define BLK   "\x1B[8;40m"
 #define RESET "\x1B[0m"
+#include <gtk/gtk.h>
 
+/*
 int main()
 {
 	srand(time(NULL));
@@ -27,6 +29,7 @@ int main()
 	
 	//test_BackProp();
 }
+*/
 
 void test_chargerMNIST(char* path)
 {	
@@ -46,8 +49,19 @@ void test_chargerMNIST(char* path)
 		}
 		printf("\n");
 	}
+}
+
+int main(int argc, char **argv)
+{ 
+	//printf("oui je marche parfaitement ! soumsoum t'inquiete pas et le nbr des sous reseaux sont :%d!\n",nombreReseau());
 	
-	DelImage(im);
+ 	gtk_init(&argc,&argv);//initialise la bibilo , toujours appeler en debut de programme 
+
+ 	afficherInterface();
+
+ 	gtk_main();//appeler dans toutes les fct gtk , cette fct attends le clique de la souris ou toucher le clavier 
+	
+	return 0;
 }
 
 void test_ChargerEtiquetteMNIST(char* path)
