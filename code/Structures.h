@@ -38,6 +38,7 @@ struct INFO_RN
 	char** etiquettes;
 	char* nom;
 	char* date;
+	char* repertoire;
 	int reussite;
 	int echec;
 };

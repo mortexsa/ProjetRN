@@ -123,8 +123,13 @@ void selectReseau(GtkWidget *widget, gpointer data){
     
     strcpy(tab, "Pourcentage de reussite :  ");
     char b[100];
-    sprintf(b,"%d", fenetre->info[fenetre->reseauSelectionner].reussite);
-    label = gtk_label_new(strcat(tab,b));    
+    int pourcentageReussite = 0;
+    if(fenetre->info[fenetre->reseauSelectionner].reussite != 0){
+    	pourcentageReussite = ((double)fenetre->info[fenetre->reseauSelectionner].reussite / (fenetre->info[fenetre->reseauSelectionner].reussite + fenetre->info[fenetre->reseauSelectionner].echec)) * 100;
+    }
+    sprintf(b,"%d", pourcentageReussite);
+    strcat(tab,b);
+    label = gtk_label_new(strcat(tab," %"));    
     gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
 
     strcpy(tab, "Date de creation :  ");
