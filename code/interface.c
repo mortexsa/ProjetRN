@@ -1,6 +1,6 @@
 
 #include "interface.h"
-
+#define Cmax 5
 
 
 int nombreReseau(){
@@ -243,7 +243,7 @@ void creation(GtkWidget *widget, gpointer data){
     gtk_container_add(GTK_CONTAINER(fenetre->Window), pVBox);
  
     /* Creation du premier GtkFrame */
-    pFrame = gtk_frame_new("parametres du Reseau :");
+    pFrame = gtk_frame_new("paramètres du Reseau :");
     gtk_box_pack_start(GTK_BOX(pVBox), pFrame, TRUE, FALSE, 0);
     
     /* Creation et insertion d une boite pour le premier GtkFrame */
@@ -251,23 +251,23 @@ void creation(GtkWidget *widget, gpointer data){
     gtk_container_add(GTK_CONTAINER(pFrame), pVBoxFrame);
  
     /* Creation et insertion des elements contenus dans le premier GtkFrame */
-    pLabel = gtk_label_new("Nom du Reseau de neurones :");
+    pLabel = gtk_label_new("Nom du Réseau de neurones :");
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new(); //pour que l'utilisateur peut saisir une entrée
+    pEntry = gtk_entry_new_with_max_length(30);//pour que l'utilisateur peut saisir une entrée
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
     
     sUtf8 = g_locale_to_utf8("nombre de couches cachées :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new();
+    pEntry = gtk_entry_new_with_max_length(8);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
  
     sUtf8 = g_locale_to_utf8("nombre de neurones cachés :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new();
+    pEntry = gtk_entry_new_with_max_length(8);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
  
    /* Creation d un GtkHSeparator */
@@ -276,7 +276,7 @@ void creation(GtkWidget *widget, gpointer data){
  
     pLabel = gtk_label_new("etiquette de sortie :");
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new(); 
+    pEntry = gtk_entry_new_with_max_length(30);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
  
     /* Creation du deuxieme GtkFrame */
@@ -294,13 +294,23 @@ void creation(GtkWidget *widget, gpointer data){
     gtk_box_pack_start(GTK_BOX(pHBox),bouton_explorer, TRUE, FALSE, 0);
     g_signal_connect(G_OBJECT(bouton_explorer), "clicked", G_CALLBACK(creer_folder_selection), fenetre->Window);
     
-    //definir la taille max des images qu'il devra analyser 
-     sUtf8 = g_locale_to_utf8("taille max des images du repertoire:", -1, NULL, NULL, NULL);
+    /*definir la taille max des images qu'il devra analyser pour connaitre le nbr de neurones en entrées
+      definir la hauteur*/
+     sUtf8 = g_locale_to_utf8("Hauteur max des images du repertoire:", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new();
+    pEntry = gtk_entry_new_with_max_length(Cmax);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
+    
+    //definir la largeur des images
+    sUtf8 = g_locale_to_utf8("Largeur max des images du repertoire:", -1, NULL, NULL, NULL);
+    pLabel = gtk_label_new(sUtf8);
+    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
+    pEntry = gtk_entry_new_with_max_length(Cmax); //j'ai limité à 30 on verra si on voudra modifier
+    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0); 
+    
+    
   //afficher les bouton dans la même frame 
     gtk_box_pack_start(GTK_BOX(pVBox), pHBox, FALSE, FALSE, 2);
  
