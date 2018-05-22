@@ -39,6 +39,8 @@ struct INFO_RN
 	char* nom;
 	char* date;
 	char* repertoire;
+	int w; //width = largeur
+	int h; //height = hauteur
 	int reussite;
 	int echec;
 };

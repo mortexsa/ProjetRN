@@ -37,6 +37,7 @@ void retourAccueille(GtkWidget *widget, gpointer data){
 
 void traitement(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Traitement d'images");
     viderContainer(fenetre->Window);
     
     GtkWidget *Vbox;
@@ -75,6 +76,7 @@ void traitement(GtkWidget *widget, gpointer data){
 void selectReseau(GtkWidget *widget, gpointer data){
 
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Tableau de bord");
     char titre[256];
     strcpy(titre,gtk_button_get_label((GtkButton *)widget));
     
@@ -123,11 +125,11 @@ void selectReseau(GtkWidget *widget, gpointer data){
     
     strcpy(tab, "Pourcentage de reussite :  ");
     char b[100];
-    int pourcentageReussite = 0;
+    double pourcentageReussite = 0;
     if(fenetre->info[fenetre->reseauSelectionner].reussite != 0){
     	pourcentageReussite = ((double)fenetre->info[fenetre->reseauSelectionner].reussite / (fenetre->info[fenetre->reseauSelectionner].reussite + fenetre->info[fenetre->reseauSelectionner].echec)) * 100;
     }
-    sprintf(b,"%d", pourcentageReussite);
+    sprintf(b,"%.3f", pourcentageReussite);
     strcat(tab,b);
     label = gtk_label_new(strcat(tab," %"));    
     gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
@@ -163,7 +165,8 @@ void selectReseau(GtkWidget *widget, gpointer data){
 // /*static gboolean delet_event(GtkWidget *window, Gtkgpointer data){
 // 	}*/
 	
-void page_principale(INFO_FENETRE *fenetre){	
+void page_principale(INFO_FENETRE *fenetre){
+	gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Accueil");	
 	fenetre->info = ChargerInfo();
     fenetre->nombreReseau = nombreReseau();
     fenetre->reseauSelectionner = -1;
@@ -221,6 +224,7 @@ void creation(GtkWidget *widget, gpointer data){
 
   //pour suprimer l'ancienne page
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Creation d'un reseau");
     viderContainer(fenetre->Window);
 
     //GtkWidget *pWindow;
