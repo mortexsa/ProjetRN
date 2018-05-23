@@ -49,7 +49,7 @@ typedef struct INFO_RN INFO_RN;
 
 struct RN
 {
-	INFO_RN info;
+	INFO_RN* info;
 	Liste_Couche couche_deb;
 	Liste_Couche couche_fin;
 };

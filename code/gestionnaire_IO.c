@@ -478,7 +478,7 @@ RN* ChargerRN(INFO_RN info)
 	while(fgets(path, 1024, fichier))
 		i++;
 	i-=6;
-	rn->info.etiquettes = malloc(i*sizeof(char*));
+	rn->info->etiquettes = malloc(i*sizeof(char*));
 	fseek(fichier, 0, SEEK_SET);
 	
 	i=0;
@@ -486,8 +486,8 @@ RN* ChargerRN(INFO_RN info)
 	{
 		if(i>=6)
 		{
-			rn->info.etiquettes[i-6] = malloc(strlen(path)*sizeof(char));
-			strcpy(rn->info.etiquettes[i-6],path);
+			rn->info->etiquettes[i-6] = malloc(strlen(path)*sizeof(char));
+			strcpy(rn->info->etiquettes[i-6],path);
 		}
 		i++;
 	}
@@ -506,7 +506,7 @@ void SaveRN(RN rn)
 	closedir(rep);
 	
 	char path[100];
-	sprintf(path,"../sav/%s_%s",rn.info.date,rn.info.nom);
+	sprintf(path,"../sav/%s_%s",rn.info->date,rn.info->nom);
 	
 	if((rep = opendir(path)) == NULL)
 	{
@@ -561,10 +561,10 @@ void SaveRN(RN rn)
 		exit(-1);
 	}
 	
-	fprintf(fichier,"%s\n%s\n%s\n%d\n%d\n%d\n%d\n",rn.info.nom,rn.info.date,rn.info.repertoire,rn.info.w,rn.info.h,rn.info.reussite,rn.info.echec);
+	fprintf(fichier,"%s\n%s\n%s\n%d\n%d\n%d\n%d\n",rn.info->nom,rn.info->date,rn.info->repertoire,rn.info->w,rn.info->h,rn.info->reussite,rn.info->echec);
 	
 	for(i=0;i<rn.couche_fin->taille;i++)
-		fprintf(fichier,"%s\n",rn.info.etiquettes[i]);
+		fprintf(fichier,"%s\n",rn.info->etiquettes[i]);
 	
 	fclose(fichier);
 }
