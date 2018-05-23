@@ -86,6 +86,8 @@ void traitement(GtkWidget *widget, gpointer data){
 
 void resultatTraitement(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    RN *rn = ChargerRN(fenetre->info[fenetre->reseauSelectionner]);
+    Image * image;
     char resultat[200];
     strcpy(resultat,fenetre->chemin);
     char *parse = strtok(resultat,".");
@@ -93,7 +95,13 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
         strcpy(resultat,parse);
         parse = strtok(NULL, ".");
     }
-    printf("youhou : %s\n", resultat);
+    //regarde rn ne prend pas en compte cette merde de info
+    printf("merde %s\n", rn->info[0].date);
+    if(strcmp(resultat,"bmp") == 0){
+        //Image * ChargerBmp()
+    }
+
+
 }
 
 void selectReseau(GtkWidget *widget, gpointer data){
