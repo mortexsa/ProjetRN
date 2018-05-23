@@ -276,87 +276,72 @@ void creation(GtkWidget *widget, gpointer data){
     GtkWidget *bouton_explorer;
    
     
-    pHBox = gtk_hbox_new(FALSE, 0);
-    pVBox = gtk_vbox_new(TRUE, 0);
+    pHBox = gtk_hbox_new(TRUE, 0);
+    pVBox = gtk_vbox_new(FALSE, 0);
     gtk_container_add(GTK_CONTAINER(fenetre->Window), pVBox);
- 
-    /* Creation du premier GtkFrame */
-    pFrame = gtk_frame_new("paramètres du Reseau :");
-    gtk_box_pack_start(GTK_BOX(pVBox), pFrame, TRUE, FALSE, 0);
-    
-    /* Creation et insertion d une boite pour le premier GtkFrame */
-    pVBoxFrame = gtk_vbox_new(TRUE, 0);
-    gtk_container_add(GTK_CONTAINER(pFrame), pVBoxFrame);
  
     /* Creation et insertion des elements contenus dans le premier GtkFrame */
     pLabel = gtk_label_new("Nom du Réseau de neurones :");
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 2);
     pEntry = gtk_entry_new_with_max_length(30);//pour que l'utilisateur peut saisir une entrée
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry, TRUE, FALSE, 2);
     
     sUtf8 = g_locale_to_utf8("nombre de couches cachées :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 2);
     pEntry = gtk_entry_new_with_max_length(8);
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry, TRUE, FALSE, 2);
  
     sUtf8 = g_locale_to_utf8("nombre de neurones cachés :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 2);
     pEntry = gtk_entry_new_with_max_length(8);
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry, TRUE, FALSE, 2);
  
-   /* Creation d un GtkHSeparator */
-    pSeparator = gtk_hseparator_new();
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pSeparator, TRUE, FALSE, 0);
+   // /* Creation d un GtkHSeparator */
+   //  pSeparator = gtk_hseparator_new();
+   //  gtk_box_pack_start(GTK_BOX(pVBox), pSeparator, TRUE, FALSE, 0);
  
     pLabel = gtk_label_new("etiquette de sortie :");
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 2);
     pEntry = gtk_entry_new_with_max_length(30);
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry, TRUE, FALSE, 2);
  
-    /* Creation du deuxieme GtkFrame */
-    pFrame = gtk_frame_new("Choix repertoire :");
-    gtk_box_pack_start(GTK_BOX(pVBox), pFrame, TRUE, FALSE, 0);
-    
- 
-    /* Creation et insertion d une boite pour le deuxieme GtkFrame */
-    pVBoxFrame = gtk_vbox_new(TRUE, 0);
-    gtk_container_add(GTK_CONTAINER(pFrame), pVBoxFrame);
     
     pLabel = gtk_label_new("nom repertoire :");
     bouton_explorer=gtk_button_new_with_label("Explorer repertoire ...");
+    
     //on met le bouton Explorer dans la frame
-    gtk_box_pack_start(GTK_BOX(pHBox),bouton_explorer, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pHBox),bouton_explorer, TRUE, FALSE, 3);
     g_signal_connect(G_OBJECT(bouton_explorer), "clicked", G_CALLBACK(creer_folder_selection), fenetre->Window);
     
     /*definir la taille max des images qu'il devra analyser pour connaitre le nbr de neurones en entrées
       definir la hauteur*/
-     sUtf8 = g_locale_to_utf8("Hauteur max des images du repertoire:", -1, NULL, NULL, NULL);
+     sUtf8 = g_locale_to_utf8("Hauteur des images :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 0);
     pEntry = gtk_entry_new_with_max_length(Cmax);
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry, TRUE, FALSE, 0);
     
     //definir la largeur des images
-    sUtf8 = g_locale_to_utf8("Largeur max des images du repertoire:", -1, NULL, NULL, NULL);
+    sUtf8 = g_locale_to_utf8("Largeur des images :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 0);
     pEntry = gtk_entry_new_with_max_length(Cmax); //j'ai limité à 30 on verra si on voudra modifier
-    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0); 
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry, TRUE, FALSE, 0); 
     
     
   //afficher les bouton dans la même frame 
-    gtk_box_pack_start(GTK_BOX(pVBox), pHBox, FALSE, FALSE, 2);
+    gtk_box_pack_start(GTK_BOX(pVBox), pHBox, TRUE, TRUE, 20);
  
    //gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
     pButton[0] = gtk_button_new_with_label("Creer");
     pButton[1] = gtk_button_new_with_label("Retour");
-    gtk_box_pack_start(GTK_BOX(pHBox), pButton[0], TRUE, TRUE, 0);
-    gtk_box_pack_start(GTK_BOX(pHBox), pButton[1], TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(pHBox), pButton[0], FALSE, TRUE, 3);
+    gtk_box_pack_start(GTK_BOX(pHBox), pButton[1], FALSE, TRUE, 3);
     //g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(page_principale), NULL);
     g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(retourAccueille), fenetre);
     
