@@ -68,9 +68,9 @@ void traitement(GtkWidget *widget, gpointer data){
     gtk_box_pack_start(GTK_BOX(Hbox), button[2], TRUE, TRUE, 2);
 
     gtk_widget_show_all(fenetre->Window);
-
+    //printf("merde : %s\n", fenetre->chemin);
     g_signal_connect(G_OBJECT(button[1]), "clicked", G_CALLBACK(selectReseau), fenetre);
-    g_signal_connect(G_OBJECT(button[0]), "clicked", G_CALLBACK(creer_file_selection), NULL);
+    g_signal_connect(G_OBJECT(button[0]), "clicked", G_CALLBACK(creer_file_selection), fenetre);
 
 }
 
@@ -357,45 +357,46 @@ void creer_folder_selection (GtkButton * button, gpointer data)
     /*pour afficher toutes les fenetres*/
     gtk_widget_show(pFileSelection);
     /* On limite les actions a cette fenetre */
-        gtk_window_set_modal(GTK_WINDOW(pFileSelection), TRUE);   
-        
-        
-        /* Affichage fenetre */
-        switch(gtk_dialog_run(GTK_DIALOG(pFileSelection)))
-        {
-            case GTK_RESPONSE_OK:
-                /* Recuperation du chemin */
-                chemin = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(pFileSelection));
-                pDialog = gtk_message_dialog_new(GTK_WINDOW(pFileSelection),
-                    GTK_DIALOG_MODAL,
-                    GTK_MESSAGE_INFO,
-                    GTK_BUTTONS_OK,
-                    "Chemin du repertoire choisi :\n%s", chemin);
-                    
-                gtk_dialog_run(GTK_DIALOG(pDialog));
-                gtk_widget_destroy(pDialog);break;
-                          
-            default : break;
-        }
+    gtk_window_set_modal(GTK_WINDOW(pFileSelection), TRUE);   
+    
+    
+    /* Affichage fenetre */
+    switch(gtk_dialog_run(GTK_DIALOG(pFileSelection)))
+    {
+        case GTK_RESPONSE_OK:
+            /* Recuperation du chemin */
+            chemin = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(pFileSelection));
+            pDialog = gtk_message_dialog_new(GTK_WINDOW(pFileSelection),
+                GTK_DIALOG_MODAL,
+                GTK_MESSAGE_INFO,
+                GTK_BUTTONS_OK,
+                "Chemin du repertoire choisi :\n%s", chemin);
+                
+            gtk_dialog_run(GTK_DIALOG(pDialog));
+            gtk_widget_destroy(pDialog);break;
+                      
+        default : break;
+    }
    //g_free(chemin); j'ai un probleme avec ce free
    gtk_widget_destroy(pFileSelection);
 }
 
 //pour pouvoir selectionner un fichier 
-void creer_file_selection()
-{
-    GtkWidget *selection;
-     
-    selection = gtk_file_selection_new( g_locale_to_utf8( "Sélectionnez un fichier", -1, NULL, NULL, NULL) );
-    gtk_widget_show(selection);
-     
-    //On interdit l'utilisation des autres fenêtres.
-    gtk_window_set_modal(GTK_WINDOW(selection), TRUE);
-     
-    g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(selection)->ok_button), "clicked", G_CALLBACK(recuperer_chemin), selection );
-     
-    g_signal_connect_swapped(G_OBJECT(GTK_FILE_SELECTION(selection)->cancel_button), "clicked", G_CALLBACK(gtk_widget_destroy), selection);
+void creer_file_selection(GtkWidget *widget, gpointer data) {
+    INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
+    GtkWidget *p_dialog = NULL;
+    p_dialog = gtk_file_chooser_dialog_new ("Ouvrir un fichier",NULL,GTK_FILE_CHOOSER_ACTION_OPEN,GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,NULL);
+    gtk_window_set_modal(GTK_WINDOW(fenetre->Window), FALSE);
+    gtk_widget_show(p_dialog);
+    if (gtk_dialog_run (GTK_DIALOG (p_dialog)) == GTK_RESPONSE_ACCEPT){
+        gchar *file_name = NULL;
+        file_name = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (p_dialog));
+        fenetre->chemin = malloc(sizeof(strlen(file_name+2)));
+    }
+
+    gtk_widget_destroy (p_dialog);
 }
+
 
 //recuperation du chemin du fichier 
 void recuperer_chemin(GtkWidget *bouton, GtkWidget *file_selection)

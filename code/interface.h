@@ -25,6 +25,7 @@ typedef struct INFO_FENETRE
 	GtkWidget *Window;
 	int nombreReseau;
 	int reseauSelectionner;
+	char *chemin;
 } INFO_FENETRE;
 
 
