@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage[latin1]{inputenc}    
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\usepackage{geometry}
+\geometry{hmargin=3.45cm,vmargin=3cm}
+\usepackage{color}
+\definecolor{myblue}{rgb}{0.15, 0.15, 0.8}
+
+\begin{document}
+
+\newpage
+\title{Compte rendu final\\Sujet 10 : Réseau de Neurones}
+\author{Thibaut \bsc{Pepin}\\Soumia \bsc{Rezgui}\\Isaac \bsc{Szulek}\\Severine \bsc{Selaquet}\\Anthony \bsc{Montigne}\\Arezki \bsc{Slimani}}
+\maketitle
+
+\newpage
+
+\small{\tableofcontents}
+\newpage
+
+\section{Présentation}
+	\subsection{Introduction}
+			Nous souhaitons analyser des images, un problème compliqué qui a besoin de prendre en entrée une image et dont le but est d'essayer de deviner ce que représente cette image. Pour cela il nous faut une structure qui sera capable de prendre beaucoup de données en entrée et de capturer des relations complexes entres les entrées et les sorties, c'est là qu'interviennent les réseaux de neurones artificiels.
+		\subsubsection{Définition}
+			Les réseaux de neurones artificiels sont des modèles inspirés du fonctionnement du cerveau animal. Ces modèles prennent en compte quelques grands principes :
+			\begin{itemize}
+				\item \emph{parallélisme} : les neurones sont des entités réalisant une fonction très simples, mais fortement interconnectés ce qui rend le traitement massivement parallèle.
+				\item \emph{poids synaptiques} : les connections entre neurones ont des poids variables, ce qui rend les neurones plus ou moins influents sur d'autres neurones.
+				\item \emph{apprentissage} : ces coefficients synaptiques sont modifiables lors de l'apprentissage pour réaliser au réseau la fonction désirée.
+			\end{itemize}
+			\paragraph{Types Réseaux de neurones :}
+				\begin{enumerate}
+					\item \emph{Le perceptron monocouche :} \\Dans cette première version le perceptron était alors mono-couche et n'avait qu'une seule sortie à laquelle toutes les entrées sont connectées. Ce type de réseaux de neurones étaient limités et ne permettaient pas de résoudre des problèmes non-linéaires et des problèmes complexes.
+					\item \emph{Perceptron multicouches (MLP):} \\Les MLP (multi-layer perceptron), ou réseaux à couches, forment la très grande majorité des réseaux. Ils sont intemporels (réseaux statiques et non dynamiques).
+				\end{enumerate}
+		\subsubsection{Structure}
+			Les neurones sont organisés en couches : chaque neurone est connecté aux neurones de la couche suivante, et y propage sa sortie (ces réseaux sont d'ailleurs qualifiés de feedforward (faire avancer)). La première couche du réseau est appelée couche d'entrée, c'est par cette couche que sont transmise les donnée. La dernière couche est appelée couche de sortie et c'est là qu'est récupérée la solution. Chaque neurone de cette couche possède une 'étiquette', il s'agira de la solution dans le cas où l'activation de ce neurone est la plus forte. Chaque liaison entre neurone se voit associer un poids nécessaire au calcul de la solution. Les neurones compris entre la couche d'entrée et de sortie sont appelées couches cachées.
+		\subsubsection{Applications}
+			Les applications des réseaux MLP sont très diverses et étendues. Elles vont de la reconnaissance de motifs, à la modélisation en passant par l'apprentissage de comportements ou de jeux (alphago ..).
+		\subsubsection{Type D'apprentissage}
+			On appelle apprentissage des réseaux de neurones la procédure qui consiste à raffiner les paramètres des neurones du réseau afin que celui-ci remplisse aux mieux la tâche qui lui est affectée. Le but de l'apprentissage est de permettre au réseau de neurone de généraliser à partir des exemple rencontrés lors de l'apprentissage.
+Nous distinguons deux types d'apprentissages :
+			\begin{itemize}
+				\item \emph{Supervisé : }on fournit au réseau le couple (entrée, sortie attendue) et on modifie les poids en fonction de l'erreur entre la sortie désirée et la sortie obtenue.\\ \emph{Exemple : }utile aux chercheurs et aux ingénieurs qui disposent d'un ensemble de variables mesurées et d'un ensemble de mesure relative à un processus quelconque (physique, chimique, économique,financier...), du coup le but est d'établir un modèle du processus étudié à partir des mesures disponibles.
+				\item \emph{Non Supervisé : }le réseau doit détecter des points communs aux exemples présentés, et modifier les poids afin de fournir la même sortie pour des entrées aux caractéristiques proches.\\ \emph{Exemple : }utiles aux applications qui permettent de retrouver des informations dont on sait qu'elles doivent être présentes dans les données mais on ne sait pas comment les extraire.
+			\end{itemize}
+			\emph{Pour conclure sur le choix de l'apprentissage : }il n'existe pas vraiment de méthode d'apprentissage supérieur à une autre, ce choix s'effectue principalement en fonction des type de données à la disposition de l'utilisateur et du but recherché.
+		\subsubsection{Limites des Réseaux de Neurones}
+			Les réseaux de neurones ne fournissent pas les explications concernant leurs résultats ce qui limite l'analyse des phénomènes existants. Ils peuvent être assimilés à une boîte noire qui donne une réponse quand on lui fournit les données mais qui ne délivre pas de justifications simple à analyser, ça se résume à un pouvoir explicatif limité.
+			Les réseaux de neurones sont donc une alternative qui peut être très efficace pour les problèmes que les algorithmes classiques ne peuvent résoudre. Un de leurs grands avantages est leurs capacités à généraliser.
+
+	\subsection{But du Projet}
+		Afin de réaliser une l'analyse d'image sur de grands ensemble de données, il nous a été demandé de créer une application permettant de facilement créer et d'utiliser un réseau de neurone à l'aide d'une interface graphique. Pour permettre d'utiliser efficacement les données à la disposition de l'entreprise nécessaire à l'apprentissage du réseau de neurone (qui sont un couple de données d'entrées et de résultats attendus) nous allons mettre en place un réseau de neurone de type MLP utilisant l'apprentissage supervisé.
+
+
+
+
+\end{document}
