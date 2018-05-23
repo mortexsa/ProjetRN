@@ -1,6 +1,6 @@
 
 #include "interface.h"
-
+#define Cmax 5
 
 
 int nombreReseau(){
@@ -37,6 +37,7 @@ void retourAccueille(GtkWidget *widget, gpointer data){
 
 void traitement(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Traitement d'images");
     viderContainer(fenetre->Window);
     
     GtkWidget *Vbox;
@@ -67,14 +68,16 @@ void traitement(GtkWidget *widget, gpointer data){
     gtk_box_pack_start(GTK_BOX(Hbox), button[2], TRUE, TRUE, 2);
 
     gtk_widget_show_all(fenetre->Window);
-
+    //printf("merde : %s\n", fenetre->chemin);
     g_signal_connect(G_OBJECT(button[1]), "clicked", G_CALLBACK(selectReseau), fenetre);
+    g_signal_connect(G_OBJECT(button[0]), "clicked", G_CALLBACK(creer_file_selection), fenetre);
 
 }
 
 void selectReseau(GtkWidget *widget, gpointer data){
 
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Tableau de bord");
     char titre[256];
     strcpy(titre,gtk_button_get_label((GtkButton *)widget));
     
@@ -122,9 +125,14 @@ void selectReseau(GtkWidget *widget, gpointer data){
     gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
     
     strcpy(tab, "Pourcentage de reussite :  ");
-    char b[5];
-    sprintf(b,"%d", fenetre->info[fenetre->reseauSelectionner].reussite);
-    label = gtk_label_new(strcat(tab,b));    
+    char b[100];
+    double pourcentageReussite = 0;
+    if(fenetre->info[fenetre->reseauSelectionner].reussite != 0){
+    	pourcentageReussite = ((double)fenetre->info[fenetre->reseauSelectionner].reussite / (fenetre->info[fenetre->reseauSelectionner].reussite + fenetre->info[fenetre->reseauSelectionner].echec)) * 100;
+    }
+    sprintf(b,"%.3f", pourcentageReussite);
+    strcat(tab,b);
+    label = gtk_label_new(strcat(tab," %"));    
     gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
 
     strcpy(tab, "Date de creation :  ");
@@ -158,7 +166,8 @@ void selectReseau(GtkWidget *widget, gpointer data){
 // /*static gboolean delet_event(GtkWidget *window, Gtkgpointer data){
 // 	}*/
 	
-void page_principale(INFO_FENETRE *fenetre){	
+void page_principale(INFO_FENETRE *fenetre){
+	gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Accueil");	
 	fenetre->info = ChargerInfo();
     fenetre->nombreReseau = nombreReseau();
     fenetre->reseauSelectionner = -1;
@@ -219,6 +228,7 @@ void creation(GtkWidget *widget, gpointer data){
     //viderContainer(data);
 
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Creation d'un reseau");
     viderContainer(fenetre->Window);
 
 
@@ -242,7 +252,7 @@ void creation(GtkWidget *widget, gpointer data){
     gtk_container_add(GTK_CONTAINER(fenetre->Window), pVBox);
  
     /* Creation du premier GtkFrame */
-    pFrame = gtk_frame_new("parametres du Reseau :");
+    pFrame = gtk_frame_new("paramètres du Reseau :");
     gtk_box_pack_start(GTK_BOX(pVBox), pFrame, TRUE, FALSE, 0);
     
     /* Creation et insertion d une boite pour le premier GtkFrame */
@@ -250,23 +260,23 @@ void creation(GtkWidget *widget, gpointer data){
     gtk_container_add(GTK_CONTAINER(pFrame), pVBoxFrame);
  
     /* Creation et insertion des elements contenus dans le premier GtkFrame */
-    pLabel = gtk_label_new("Nom du Reseau de neurones :");
+    pLabel = gtk_label_new("Nom du Réseau de neurones :");
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new(); //pour que l'utilisateur peut saisir une entrée
+    pEntry = gtk_entry_new_with_max_length(30);//pour que l'utilisateur peut saisir une entrée
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
     
     sUtf8 = g_locale_to_utf8("nombre de couches cachées :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new();
+    pEntry = gtk_entry_new_with_max_length(8);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
  
     sUtf8 = g_locale_to_utf8("nombre de neurones cachés :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new();
+    pEntry = gtk_entry_new_with_max_length(8);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
  
    /* Creation d un GtkHSeparator */
@@ -275,7 +285,7 @@ void creation(GtkWidget *widget, gpointer data){
  
     pLabel = gtk_label_new("etiquette de sortie :");
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new(); 
+    pEntry = gtk_entry_new_with_max_length(30);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
  
     /* Creation du deuxieme GtkFrame */
@@ -295,13 +305,23 @@ void creation(GtkWidget *widget, gpointer data){
     g_signal_connect(G_OBJECT(bouton_explorer), "clicked", G_CALLBACK(creer_folder_selection), fenetre->Window);
 
     
-    //definir la taille max des images qu'il devra analyser 
-     sUtf8 = g_locale_to_utf8("taille max des images du repertoire:", -1, NULL, NULL, NULL);
+    /*definir la taille max des images qu'il devra analyser pour connaitre le nbr de neurones en entrées
+      definir la hauteur*/
+     sUtf8 = g_locale_to_utf8("Hauteur max des images du repertoire:", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new();
+    pEntry = gtk_entry_new_with_max_length(Cmax);
     gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0);
+    
+    //definir la largeur des images
+    sUtf8 = g_locale_to_utf8("Largeur max des images du repertoire:", -1, NULL, NULL, NULL);
+    pLabel = gtk_label_new(sUtf8);
+    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pLabel, TRUE, FALSE, 0);
+    pEntry = gtk_entry_new_with_max_length(Cmax); //j'ai limité à 30 on verra si on voudra modifier
+    gtk_box_pack_start(GTK_BOX(pVBoxFrame), pEntry, TRUE, FALSE, 0); 
+    
+    
   //afficher les bouton dans la même frame 
     gtk_box_pack_start(GTK_BOX(pVBox), pHBox, FALSE, FALSE, 2);
  
@@ -347,6 +367,7 @@ creer_folder_selection (GtkButton * button, gpointer data)
     /*pour afficher toutes les fenetres*/
     gtk_widget_show(pFileSelection);
     /* On limite les actions a cette fenetre */
+<<<<<<< HEAD
         gtk_window_set_modal(GTK_WINDOW(pFileSelection), TRUE);   
         
         
@@ -354,6 +375,15 @@ creer_folder_selection (GtkButton * button, gpointer data)
         switch(gtk_dialog_run(GTK_DIALOG(pFileSelection)))
         {
           case GTK_RESPONSE_OK:
+=======
+    gtk_window_set_modal(GTK_WINDOW(pFileSelection), TRUE);   
+    
+    
+    /* Affichage fenetre */
+    switch(gtk_dialog_run(GTK_DIALOG(pFileSelection)))
+    {
+        case GTK_RESPONSE_OK:
+>>>>>>> ea7f223cb358e47224ba3c6f1f2357f2f1cf5b8e
             /* Recuperation du chemin */
             chemin = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(pFileSelection));
             pDialog = gtk_message_dialog_new(GTK_WINDOW(pFileSelection),
@@ -364,12 +394,53 @@ creer_folder_selection (GtkButton * button, gpointer data)
                 
             gtk_dialog_run(GTK_DIALOG(pDialog));
             gtk_widget_destroy(pDialog);break;
+<<<<<<< HEAD
             			  
 		default : break;
 }
+=======
+                      
+        default : break;
+    }
+>>>>>>> ea7f223cb358e47224ba3c6f1f2357f2f1cf5b8e
    //g_free(chemin); j'ai un probleme avec ce free
    gtk_widget_destroy(pFileSelection);
    }
+
+//pour pouvoir selectionner un fichier 
+void creer_file_selection(GtkWidget *widget, gpointer data) {
+    INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
+    GtkWidget *p_dialog = NULL;
+    p_dialog = gtk_file_chooser_dialog_new ("Ouvrir un fichier",NULL,GTK_FILE_CHOOSER_ACTION_OPEN,GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,NULL);
+    gtk_window_set_modal(GTK_WINDOW(fenetre->Window), FALSE);
+    gtk_widget_show(p_dialog);
+    if (gtk_dialog_run (GTK_DIALOG (p_dialog)) == GTK_RESPONSE_ACCEPT){
+        gchar *file_name = NULL;
+        file_name = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (p_dialog));
+        fenetre->chemin = malloc(sizeof(strlen(file_name+2)));
+    }
+
+    gtk_widget_destroy (p_dialog);
+}
+
+
+//recuperation du chemin du fichier 
+void recuperer_chemin(GtkWidget *bouton, GtkWidget *file_selection)
+{
+    const gchar* chemin;
+    GtkWidget *dialog;
+    chemin = gtk_file_selection_get_filename(GTK_FILE_SELECTION (file_selection) );
+     
+    dialog = gtk_message_dialog_new(GTK_WINDOW(file_selection),
+    GTK_DIALOG_MODAL,
+    GTK_MESSAGE_INFO,
+    GTK_BUTTONS_OK,
+    "Vous avez choisi :\n%s", chemin);
+     
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    gtk_widget_destroy(file_selection);
+}
 
 void quitter(GtkWidget* widget)
 {

@@ -10,6 +10,9 @@
 #include <sys/dir.h>
 #include <errno.h>
 #include <sys/stat.h>
+#include <stdint.h>
+#include <inttypes.h>
+#include <unistd.h>
 
 #include "gestionnaire_IO.h"
 
@@ -121,7 +124,7 @@ Image* ChargerBmp(const char* fichier, int w_max, int h_max)
 		remove(fichier);
 		return NULL;
 	} // pas de palette supportée, cependant, a bpp 24, il n'y a pas de palette.
-	if(head.imhead.height>h_max || head.imhead.width>w_max)
+	if(head.imhead.height != h_max || head.imhead.width != w_max)
 	{
 		fclose(F);
 		remove(fichier);
@@ -188,38 +191,44 @@ int Sauver(Image* I,const char* fichier)
 
 Image* ChargerMnist(const char* path, int w_max, int h_max)
 {
-	debug
-	int t[3];
+	unsigned int t[4];
 	
 	FILE* fichier = fopen(path,"rb+");
 	if(!fichier)
-		exit(-1);
-	
-	debug
-	
-	fread(t,sizeof(int),4,fichier);
-	
-	debug
-	
-	if(t[2]>h_max || t[3]>w_max)
 	{
+		debug
+		exit(-1);
+	}
+	
+	fread(t,4,4,fichier);
+	
+	int k;
+	for(k=0;k<4;k++)
+	{
+		t[k] = ((t[k]&0xFF)<<24) + ((t[k]&0xFF00)<<8) + ((t[k]&0xFF0000)>>8) + (t[k]>>24);
+	}
+
+	
+	//printf("%u\n%u\n%u\n%u\n",t[0],t[1],t[2],t[3]);
+	if(t[2] != h_max || t[3] != w_max)
+	{
+		debug
 		fclose(fichier);
 		remove(path);
 		return NULL;
 	}
-	
-	debug
-	
+		
 	Image* im = NouvelleImage(t[3],t[2]);
 	
-	fseek(fichier,t[1]-1+4*sizeof(int),SEEK_SET);
+	fseek(fichier,t[1]*t[2]*t[3]-t[2]*t[3]+4*4,SEEK_SET);
 	
 	unsigned char tmp[t[3]*t[2]];
 	fread(tmp,1,t[3]*t[2],fichier);
 	
 	t[1]--;
-	fseek(fichier,sizeof(int),SEEK_SET);
-	fwrite(&(t[1]),sizeof(int),1,fichier);
+	t[1] = ((t[1]&0xFF)<<24) + ((t[1]&0xFF00)<<8) + ((t[1]&0xFF0000)>>8) + (t[1]>>24);
+	fseek(fichier,4,SEEK_SET);
+	fwrite(&t[1],4,1,fichier);
 	
 	fclose(fichier);
 	
@@ -238,9 +247,45 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 	return im;
 }
 
-char* ChargerEtiquetteMNIST(const char* fichier)
+char* ChargerEtiquetteMNIST(const char* path)
 {
+	unsigned int t[2];
 	
+	FILE* fichier = fopen(path,"rb+");
+	if(!fichier)
+	{
+		printf("%d\n",errno);
+		debug
+		exit(-1);
+	}
+	
+	fread(t,4,2,fichier);
+	
+	int k;
+	for(k=0;k<2;k++)
+	{
+		t[k] = ((t[k]&0xFF)<<24) + ((t[k]&0xFF00)<<8) + ((t[k]&0xFF0000)>>8) + (t[k]>>24);
+	}
+	
+	//printf("%u\n%u\n",t[0],t[1]);
+		
+	char* c = malloc(sizeof(char)*2);
+	fseek(fichier,t[1]-1+4*2,SEEK_SET);
+	fread(c,1,1,fichier);
+	*c += 48;
+	c[1] = '\0';
+	
+	t[1]--;
+	t[1] = ((t[1]&0xFF)<<24) + ((t[1]&0xFF00)<<8) + ((t[1]&0xFF0000)>>8) + (t[1]>>24);
+	fseek(fichier,4,SEEK_SET);
+	fwrite(&t[1],4,1,fichier);
+	
+	fclose(fichier);
+	
+	if(t[1] == 0)
+		remove(path);
+	
+	return c;
 }
 
 App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
@@ -261,11 +306,18 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 		if(!fichier)
 			return NULL;
 		
+		//~ printf("%s\n",fichier->d_name);
+		
 		sprintf(path,"%s/%s",repertoire_app,fichier->d_name);
-		if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen(".idx3-ubyte")]),".idx3-ubyte") == 0)
+		//~ printf("%s\n",path);
+		
+		if(strcmp(fichier->d_name,".") == 0 || strcmp(fichier->d_name,"..") == 0);
+		else if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen("-idx3-ubyte")]),"-idx3-ubyte") == 0)
 		{
-			strncpy(path2,path,sizeof(char)*(strlen(fichier->d_name) - strlen(".idx3-ubyte")));
-			strcat(path2,".idx3-ubyte");
+			sprintf(path2,"%s",path);
+			sprintf(&path2[strlen(path) - strlen("-idx3-ubyte")],"-idx1-ubyte");
+			//~ printf("%s\n",path2);
+			
 			if((couple->etiquette = ChargerEtiquetteMNIST(path2)))
 			{
 				couple->image = ChargerMnist(path, w_max, h_max);
@@ -276,9 +328,26 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 				remove(path2);
 			}
 		}
+		else if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen("-idx1-ubyte")]),"-idx1-ubyte") == 0)
+		{
+			sprintf(path2,"%s",path);
+			sprintf(&path2[strlen(path) - strlen("-idx1-ubyte")],"-idx3-ubyte");
+			//~ printf("%s\n",path2);
+			
+			debug
+			if((couple->etiquette = ChargerEtiquetteMNIST(path)))
+			{
+				couple->image = ChargerMnist(path2, w_max, h_max);
+			}
+			else
+			{
+				remove(path);
+				remove(path2);
+			}
+		}
 		else if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen(".bmp")]),".bmp") == 0)
 		{
-			if(couple->image = ChargerBmp(path, w_max, h_max))
+			if((couple->image = ChargerBmp(path, w_max, h_max)))
 			{
 				couple->etiquette = malloc(sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp") + 1));
 				strncpy(couple->etiquette,fichier->d_name,sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp")));
@@ -293,6 +362,7 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 			remove(path);
 		}
 	}
+	closedir(rep);
 	
 	return couple;
 }
@@ -344,7 +414,11 @@ INFO_RN* ChargerInfo()
 			res[i].date = malloc(strlen(tmp)*sizeof(char));
 			strcpy(res[i].date,tmp);
 			
-			fscanf(verif,"%d\n%d\n",&(res[i].reussite),&(res[i].echec));
+			fscanf(verif,"%s\n",tmp);
+			res[i].repertoire = malloc(strlen(tmp)*sizeof(char));
+			strcpy(res[i].repertoire,tmp);
+			
+			fscanf(verif,"%d\n%d\n%d\n%d\n",&(res[i].w),&(res[i].h),&(res[i].reussite),&(res[i].echec));
 			
 			fclose(verif);
 			i++;
@@ -359,7 +433,7 @@ INFO_RN* ChargerInfo()
 
 RN* ChargerRN(INFO_RN info)
 {
-	RN* rn = initialisation(info);
+	RN* rn = initialisation(&info);
 	char path[100];
 	int i = 1,j;
 	sprintf(path,"../sav/%s_%s/C%d.rn",info.date,info.nom,i);
@@ -403,17 +477,17 @@ RN* ChargerRN(INFO_RN info)
 	i=0;
 	while(fgets(path, 1024, fichier))
 		i++;
-	i-=4;
-	rn->info.etiquettes = malloc(i*sizeof(char*));
+	i-=6;
+	rn->info->etiquettes = malloc(i*sizeof(char*));
 	fseek(fichier, 0, SEEK_SET);
 	
 	i=0;
 	while(fgets(path, 1024, fichier))
 	{
-		if(i>=4)
+		if(i>=6)
 		{
-			rn->info.etiquettes[i-4] = malloc(strlen(path)*sizeof(char));
-			strcpy(rn->info.etiquettes[i-4],path);
+			rn->info->etiquettes[i-6] = malloc(strlen(path)*sizeof(char));
+			strcpy(rn->info->etiquettes[i-6],path);
 		}
 		i++;
 	}
@@ -424,18 +498,21 @@ RN* ChargerRN(INFO_RN info)
 
 void SaveRN(RN rn)
 {
-	if(opendir("../sav") == NULL)
+	DIR* rep;
+	if((rep = opendir("../sav")) == NULL)
 	{
 		mkdir("../sav",S_IRWXU);
 	}
+	closedir(rep);
 	
 	char path[100];
-	sprintf(path,"../sav/%s_%s",rn.info.date,rn.info.nom);
+	sprintf(path,"../sav/%s_%s",rn.info->date,rn.info->nom);
 	
-	if(opendir(path) == NULL)
+	if((rep = opendir(path)) == NULL)
 	{
 		mkdir(path,S_IRWXU);
 	}
+	closedir(rep);
 	
 	//printf("%s\n",path);
 	
@@ -450,9 +527,11 @@ void SaveRN(RN rn)
 		while(tmp)
 		{
 			sprintf(path2,"%s/C%d.rn",path,i);
-			
+			printf("%s\n",path2);
 			if((fichier = fopen(path2,"wb+")) == NULL)
 			{
+				printf("%d\n",errno);
+				debug
 				exit(-1);
 			}
 			
@@ -477,9 +556,15 @@ void SaveRN(RN rn)
 	
 	sprintf(path2,"%s/INFO",path);
 	if((fichier = fopen(path2,"w+")) == NULL)
+	{
+		debug
 		exit(-1);
-	fprintf(fichier,"%s\n%s\n%d\n%d\n",rn.info.nom,rn.info.date,rn.info.reussite,rn.info.echec);
+	}
+	
+	fprintf(fichier,"%s\n%s\n%s\n%d\n%d\n%d\n%d\n",rn.info->nom,rn.info->date,rn.info->repertoire,rn.info->w,rn.info->h,rn.info->reussite,rn.info->echec);
+	
 	for(i=0;i<rn.couche_fin->taille;i++)
-		fprintf(fichier,"%s\n",rn.info.etiquettes[i]);
+		fprintf(fichier,"%s\n",rn.info->etiquettes[i]);
+	
 	fclose(fichier);
 }
