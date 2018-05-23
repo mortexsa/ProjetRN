@@ -53,20 +53,13 @@ float Sigmoide(float in)
 }
 
 /*initialisation des champs du reseau de neurones*/
-RN* initialisation(INFO_RN info)
+RN* initialisation(INFO_RN* info)
 {
 	RN* rn = malloc(sizeof(RN));
 	rn->couche_deb=NULL;
 	rn->couche_fin=NULL;
 	
-	//remplissage de la structure
-	//rn->info.etiquettes = info.etiquettes;
-	rn->info.nom = malloc(sizeof(char)*strlen(info.nom));
-	rn->info.date = malloc(sizeof(char)*strlen(info.date));
-	strcpy(rn->info.nom,info.nom);
-	strcpy(rn->info.date,info.date);
-	rn->info.reussite = info.reussite;
-	rn->info.echec = info.echec;	
+	rn->info = info;
 	
 	return rn;	
 }
@@ -197,8 +190,8 @@ char** Reconnaissance(RN rn)
 			id1 = i;
 		}
 	}
-	top[0] = malloc(sizeof(char)*strlen(rn.info.etiquettes[id1]));
-	strcpy(top[0],rn.info.etiquettes[id1]);
+	top[0] = malloc(sizeof(char)*strlen(rn.info->etiquettes[id1]));
+	strcpy(top[0],rn.info->etiquettes[id1]);
 	
 	while(id2 == id1) id2++;
 	for(i=0;i<rn.couche_fin->taille;i++)
@@ -208,8 +201,8 @@ char** Reconnaissance(RN rn)
 			id2 = i;
 		}
 	}
-	top[1] = malloc(sizeof(char)*strlen(rn.info.etiquettes[id2]));
-	strcpy(top[1],rn.info.etiquettes[id2]);
+	top[1] = malloc(sizeof(char)*strlen(rn.info->etiquettes[id2]));
+	strcpy(top[1],rn.info->etiquettes[id2]);
 	
 	while(id3 == id1 || id3 == id2) id3++;
 	for(i=0;i<rn.couche_fin->taille;i++)
@@ -220,8 +213,8 @@ char** Reconnaissance(RN rn)
 		}
 	}
 	
-	top[2] = malloc(sizeof(char)*strlen(rn.info.etiquettes[id3]));
-	strcpy(top[2],rn.info.etiquettes[id3]);
+	top[2] = malloc(sizeof(char)*strlen(rn.info->etiquettes[id3]));
+	strcpy(top[2],rn.info->etiquettes[id3]);
 			
 	return top;
 	
@@ -232,11 +225,11 @@ void libererRN(RN* rn)
 	int i;
 	for(i=0;i<rn->couche_fin->taille;i++)
 	{
-		free(rn->info.etiquettes[i]);
+		free(rn->info->etiquettes[i]);
 	}
-	free(rn->info.etiquettes);
-	free(rn->info.date);
-	free(rn->info.nom);
+	free(rn->info->etiquettes);
+	free(rn->info->date);
+	free(rn->info->nom);
 	
 	COUCHE* tmp = rn->couche_deb;
 	free(tmp->A);

@@ -102,35 +102,35 @@ void test_Apprentissage(char* path)
 	rn->couche_deb=NULL;
 	rn->couche_fin=NULL;
 	
-	rn->info.nom = malloc(sizeof(char)*10);
-	rn->info.date = malloc(sizeof(char)*20);
-	strcpy(rn->info.nom,"MNIST");
-	strcpy(rn->info.date,"2018-05-08");
-	rn->info.reussite = 0;
-	rn->info.echec = 0;
+	rn->info->nom = malloc(sizeof(char)*10);
+	rn->info->date = malloc(sizeof(char)*20);
+	strcpy(rn->info->nom,"MNIST");
+	strcpy(rn->info->date,"2018-05-08");
+	rn->info->reussite = 0;
+	rn->info->echec = 0;
 	
-	rn->info.etiquettes = malloc(sizeof(char*)*10);
+	rn->info->etiquettes = malloc(sizeof(char*)*10);
 	
-	rn->info.etiquettes[0] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[0],"0\0");
-	rn->info.etiquettes[1] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[1],"1\0");
-	rn->info.etiquettes[2] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[2],"2\0");
-	rn->info.etiquettes[3] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[3],"3\0");
-	rn->info.etiquettes[4] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[4],"4\0");
-	rn->info.etiquettes[5] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[5],"5\0");
-	rn->info.etiquettes[6] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[6],"6\0");
-	rn->info.etiquettes[7] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[7],"7\0");
-	rn->info.etiquettes[8] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[8],"8\0");
-	rn->info.etiquettes[9] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[9],"9\0");
+	rn->info->etiquettes[0] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[0],"0\0");
+	rn->info->etiquettes[1] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[1],"1\0");
+	rn->info->etiquettes[2] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[2],"2\0");
+	rn->info->etiquettes[3] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[3],"3\0");
+	rn->info->etiquettes[4] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[4],"4\0");
+	rn->info->etiquettes[5] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[5],"5\0");
+	rn->info->etiquettes[6] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[6],"6\0");
+	rn->info->etiquettes[7] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[7],"7\0");
+	rn->info->etiquettes[8] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[8],"8\0");
+	rn->info->etiquettes[9] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[9],"9\0");
 
 	AjoutPremiereCouche(rn, 2352);
 	
@@ -171,7 +171,7 @@ void test_Apprentissage(char* path)
 	{
 		BackProp(rn,app->image,app->etiquette,0.5);
 		
-		po = (float) rn->info.reussite / (rn->info.echec + rn->info.reussite);
+		po = (float) rn->info->reussite / (rn->info->echec + rn->info->reussite);
 		po *= 100;
 		printf("%d : %f%c\n",i,po,'%');
 		
@@ -319,25 +319,25 @@ void test_BackProp()
 	rn->couche_deb=NULL;
 	rn->couche_fin=NULL;
 	
-	rn->info.nom = malloc(sizeof(char)*10);
-	rn->info.date = malloc(sizeof(char)*20);
-	strcpy(rn->info.nom,"MNIST");
-	strcpy(rn->info.date,"2018-05-08");
-	rn->info.reussite = 0;
-	rn->info.echec = 0;
+	rn->info->nom = malloc(sizeof(char)*10);
+	rn->info->date = malloc(sizeof(char)*20);
+	strcpy(rn->info->nom,"MNIST");
+	strcpy(rn->info->date,"2018-05-08");
+	rn->info->reussite = 0;
+	rn->info->echec = 0;
 	
-	rn->info.etiquettes = malloc(sizeof(char*)*10);
+	rn->info->etiquettes = malloc(sizeof(char*)*10);
 	
-	rn->info.etiquettes[0] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[0],"0\0");
-	rn->info.etiquettes[1] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[1],"1\0");
-	rn->info.etiquettes[2] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[2],"2\0");
-	rn->info.etiquettes[3] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[3],"3\0");
-	rn->info.etiquettes[4] = malloc(sizeof(char)*5);
-	strcpy(rn->info.etiquettes[4],"4\0");
+	rn->info->etiquettes[0] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[0],"0\0");
+	rn->info->etiquettes[1] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[1],"1\0");
+	rn->info->etiquettes[2] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[2],"2\0");
+	rn->info->etiquettes[3] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[3],"3\0");
+	rn->info->etiquettes[4] = malloc(sizeof(char)*5);
+	strcpy(rn->info->etiquettes[4],"4\0");
 
 	AjoutPremiereCouche(rn, 5);
 	Ajout_couche_Fin(rn, 5);
