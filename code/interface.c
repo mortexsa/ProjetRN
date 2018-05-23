@@ -37,6 +37,7 @@ void retourAccueille(GtkWidget *widget, gpointer data){
 
 void traitement(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Traitement d'images");
     viderContainer(fenetre->Window);
     
     GtkWidget *Vbox;
@@ -69,12 +70,14 @@ void traitement(GtkWidget *widget, gpointer data){
     gtk_widget_show_all(fenetre->Window);
 
     g_signal_connect(G_OBJECT(button[1]), "clicked", G_CALLBACK(selectReseau), fenetre);
+    g_signal_connect(G_OBJECT(button[0]), "clicked", G_CALLBACK(creer_file_selection), NULL);
 
 }
 
 void selectReseau(GtkWidget *widget, gpointer data){
 
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Tableau de bord");
     char titre[256];
     strcpy(titre,gtk_button_get_label((GtkButton *)widget));
     
@@ -123,11 +126,11 @@ void selectReseau(GtkWidget *widget, gpointer data){
     
     strcpy(tab, "Pourcentage de reussite :  ");
     char b[100];
-    int pourcentageReussite = 0;
+    double pourcentageReussite = 0;
     if(fenetre->info[fenetre->reseauSelectionner].reussite != 0){
     	pourcentageReussite = ((double)fenetre->info[fenetre->reseauSelectionner].reussite / (fenetre->info[fenetre->reseauSelectionner].reussite + fenetre->info[fenetre->reseauSelectionner].echec)) * 100;
     }
-    sprintf(b,"%d", pourcentageReussite);
+    sprintf(b,"%.3f", pourcentageReussite);
     strcat(tab,b);
     label = gtk_label_new(strcat(tab," %"));    
     gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
@@ -163,7 +166,8 @@ void selectReseau(GtkWidget *widget, gpointer data){
 // /*static gboolean delet_event(GtkWidget *window, Gtkgpointer data){
 // 	}*/
 	
-void page_principale(INFO_FENETRE *fenetre){	
+void page_principale(INFO_FENETRE *fenetre){
+	gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Accueil");	
 	fenetre->info = ChargerInfo();
     fenetre->nombreReseau = nombreReseau();
     fenetre->reseauSelectionner = -1;
@@ -221,6 +225,7 @@ void creation(GtkWidget *widget, gpointer data){
 
   //pour suprimer l'ancienne page
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Creation d'un reseau");
     viderContainer(fenetre->Window);
 
     //GtkWidget *pWindow;
@@ -374,6 +379,40 @@ void creer_folder_selection (GtkButton * button, gpointer data)
         }
    //g_free(chemin); j'ai un probleme avec ce free
    gtk_widget_destroy(pFileSelection);
+}
+
+//pour pouvoir selectionner un fichier 
+void creer_file_selection()
+{
+    GtkWidget *selection;
+     
+    selection = gtk_file_selection_new( g_locale_to_utf8( "Sélectionnez un fichier", -1, NULL, NULL, NULL) );
+    gtk_widget_show(selection);
+     
+    //On interdit l'utilisation des autres fenêtres.
+    gtk_window_set_modal(GTK_WINDOW(selection), TRUE);
+     
+    g_signal_connect(G_OBJECT(GTK_FILE_SELECTION(selection)->ok_button), "clicked", G_CALLBACK(recuperer_chemin), selection );
+     
+    g_signal_connect_swapped(G_OBJECT(GTK_FILE_SELECTION(selection)->cancel_button), "clicked", G_CALLBACK(gtk_widget_destroy), selection);
+}
+
+//recuperation du chemin du fichier 
+void recuperer_chemin(GtkWidget *bouton, GtkWidget *file_selection)
+{
+    const gchar* chemin;
+    GtkWidget *dialog;
+    chemin = gtk_file_selection_get_filename(GTK_FILE_SELECTION (file_selection) );
+     
+    dialog = gtk_message_dialog_new(GTK_WINDOW(file_selection),
+    GTK_DIALOG_MODAL,
+    GTK_MESSAGE_INFO,
+    GTK_BUTTONS_OK,
+    "Vous avez choisi :\n%s", chemin);
+     
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    gtk_widget_destroy(file_selection);
 }
 
 void quitter(GtkWidget* widget)
