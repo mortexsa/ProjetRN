@@ -386,12 +386,18 @@ void creer_file_selection(GtkWidget *widget, gpointer data) {
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
     GtkWidget *p_dialog = NULL;
     p_dialog = gtk_file_chooser_dialog_new ("Ouvrir un fichier",NULL,GTK_FILE_CHOOSER_ACTION_OPEN,GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,NULL);
-    gtk_window_set_modal(GTK_WINDOW(fenetre->Window), FALSE);
+    gtk_widget_hide(fenetre->Window);
+    //gtk_window_set_accept_focus(GTK_WINDOW(fenetre->Window), FALSE);
+    gtk_window_set_modal(GTK_WINDOW(fenetre->Window),FALSE);
     gtk_widget_show(p_dialog);
     if (gtk_dialog_run (GTK_DIALOG (p_dialog)) == GTK_RESPONSE_ACCEPT){
         gchar *file_name = NULL;
         file_name = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (p_dialog));
         fenetre->chemin = malloc(sizeof(strlen(file_name+2)));
+        gtk_widget_show_all(fenetre->Window);
+    }
+    else{
+        gtk_widget_show_all(fenetre->Window);
     }
 
     gtk_widget_destroy (p_dialog);
