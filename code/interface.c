@@ -263,10 +263,7 @@ void creation(GtkWidget *widget, gpointer data){
 
     //GtkWidget *pWindow;
     GtkWidget *pVBox;
-    GtkWidget *pFrame;
-    GtkWidget *pVBoxFrame;
-    GtkWidget *pSeparator;
-    GtkWidget *pEntry;
+    GtkWidget *pEntry[6];
     GtkWidget *pLabel;
     gchar *sUtf8;
     
@@ -275,7 +272,6 @@ void creation(GtkWidget *widget, gpointer data){
     GtkWidget *pButton[2];
     GtkWidget *bouton_explorer;
    
-    
     pHBox = gtk_hbox_new(TRUE, 0);
     pVBox = gtk_vbox_new(FALSE, 0);
     gtk_container_add(GTK_CONTAINER(fenetre->Window), pVBox);
@@ -283,22 +279,22 @@ void creation(GtkWidget *widget, gpointer data){
     /* Creation et insertion des elements contenus dans le premier GtkFrame */
     pLabel = gtk_label_new("Nom du Réseau de neurones :");
     gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 2);
-    pEntry = gtk_entry_new_with_max_length(30);//pour que l'utilisateur peut saisir une entrée
-    gtk_box_pack_start(GTK_BOX(pVBox), pEntry, TRUE, FALSE, 2);
+    pEntry[0] = gtk_entry_new_with_max_length(30);//pour que l'utilisateur peut saisir une entrée
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry[0], TRUE, FALSE, 2);
     
     sUtf8 = g_locale_to_utf8("nombre de couches cachées :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 2);
-    pEntry = gtk_entry_new_with_max_length(8);
-    gtk_box_pack_start(GTK_BOX(pVBox), pEntry, TRUE, FALSE, 2);
+    pEntry[1] = gtk_entry_new_with_max_length(8);
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry[1], TRUE, FALSE, 2);
  
     sUtf8 = g_locale_to_utf8("nombre de neurones cachés :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 2);
-    pEntry = gtk_entry_new_with_max_length(8);
-    gtk_box_pack_start(GTK_BOX(pVBox), pEntry, TRUE, FALSE, 2);
+    pEntry[2] = gtk_entry_new_with_max_length(8);
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry[2], TRUE, FALSE, 2);
  
    // /* Creation d un GtkHSeparator */
    //  pSeparator = gtk_hseparator_new();
@@ -306,8 +302,8 @@ void creation(GtkWidget *widget, gpointer data){
  
     pLabel = gtk_label_new("etiquette de sortie :");
     gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 2);
-    pEntry = gtk_entry_new_with_max_length(30);
-    gtk_box_pack_start(GTK_BOX(pVBox), pEntry, TRUE, FALSE, 2);
+    pEntry[3] = gtk_entry_new_with_max_length(200);
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry[3], TRUE, FALSE, 2);
  
     
     pLabel = gtk_label_new("nom repertoire :");
@@ -323,15 +319,15 @@ void creation(GtkWidget *widget, gpointer data){
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new_with_max_length(Cmax);
-    gtk_box_pack_start(GTK_BOX(pVBox), pEntry, TRUE, FALSE, 0);
+    pEntry[4] = gtk_entry_new_with_max_length(Cmax);
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry[4], TRUE, FALSE, 0);
     
     //definir la largeur des images
     sUtf8 = g_locale_to_utf8("Largeur des images :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 0);
-    pEntry = gtk_entry_new_with_max_length(Cmax); //j'ai limité à 30 on verra si on voudra modifier
-    gtk_box_pack_start(GTK_BOX(pVBox), pEntry, TRUE, FALSE, 0); 
+    pEntry[5] = gtk_entry_new_with_max_length(Cmax); //j'ai limité à 30 on verra si on voudra modifier
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry[5], TRUE, FALSE, 0); 
     
     
   //afficher les bouton dans la même frame 
@@ -345,9 +341,29 @@ void creation(GtkWidget *widget, gpointer data){
     //g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(page_principale), NULL);
     g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(retourAccueille), fenetre);
     
-     //g_signal_connect(G_OBJECT(pEntry), "activate", G_CALLBACK(activate_entry), (GtkWidget*) pLabel);
-    /* g_signal_connect(G_OBJECT(pButton[0]), "clicked", G_CALLBACK(creation_RN), (GtkWidget*) pLabel);*/
+    g_signal_connect(G_OBJECT(pButton[0]), "clicked", G_CALLBACK(creationRN), fenetre);
     gtk_widget_show_all(fenetre->Window);
+}
+
+void creationRN(GtkWidget *widget, gpointer data){
+    INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
+    GList *pList = gtk_container_get_children(GTK_CONTAINER(fenetre->Window));
+    pList = gtk_container_get_children(GTK_CONTAINER(pList->data));
+    
+    pList = g_list_next(pList);
+    if(strlen(gtk_entry_get_text(pList->data))){
+        //ici on stock et on test si elle son rempli a chaque fois 
+        
+    }
+    // if( == 0){
+    //     printf("tfouu");
+    // }
+    // else{
+    //     printf("merde%stfou\n", gtk_entry_get_text(pList->data));
+    // }
+    
+
+    g_list_free(pList);
 }
 
 /*afin de selectionner un repertoire au choix*/

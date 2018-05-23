@@ -40,6 +40,7 @@ void creer_file_selection();
 void recuperer_chemin(GtkWidget *bouton, GtkWidget *file_selection);
 void creer_folder_selection (GtkButton * button, gpointer data);
 void creation(GtkWidget *widget, gpointer data);
+void creationRN(GtkWidget *widget, gpointer data);
 void quitter(GtkWidget* widget);
 void afficherInterface();
 #endif
