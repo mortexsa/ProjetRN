@@ -15,7 +15,7 @@ void DelImage(Image*);
 
 
 
-char* ChargerEtiquetteMNIST(const char* fichier);
+char* ChargerEtiquetteMNIST(const char* path);
 
 App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max);
 

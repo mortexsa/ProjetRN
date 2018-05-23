@@ -53,20 +53,13 @@ float Sigmoide(float in)
 }
 
 /*initialisation des champs du reseau de neurones*/
-RN* initialisation(INFO_RN info)
+RN* initialisation(INFO_RN* info)
 {
 	RN* rn = malloc(sizeof(RN));
 	rn->couche_deb=NULL;
 	rn->couche_fin=NULL;
 	
-	//remplissage de la structure
-	//rn->info.etiquettes = info.etiquettes;
-	rn->info.nom = malloc(sizeof(char)*strlen(info.nom));
-	rn->info.date = malloc(sizeof(char)*strlen(info.date));
-	strcpy(rn->info.nom,info.nom);
-	strcpy(rn->info.date,info.date);
-	rn->info.reussite = info.reussite;
-	rn->info.echec = info.echec;	
+	rn->info = info;
 	
 	return rn;	
 }
@@ -86,11 +79,11 @@ void Remplissage(RN rn)
 		{
 		for(i=0;i<tmp->taille;i++) //taille_M1 nbr de lignes de la 1ere matrice
 		{
-			tmp->B[i] = rand();
+			tmp->B[i] = (float) (rand()%201 - 100)/100;
 		
 			for(j=0;j<tmp->prec->taille;j++)  // taille_M2 nbr de colonnes de la seconde matrice
 			{
-				tmp->W[i][j]= rand(); //attricution de poids aleatoires
+				tmp->W[i][j]= (float) (rand()%201 - 100)/100; //attricution de poids aleatoires
 			} 
 		}
 		tmp=tmp->suiv;
@@ -149,7 +142,7 @@ void Propagation(Image* im, RN rn)
 	float act;
 	
 	//insertion activation
-	for(int i=0;i<tmp->taille;i++)
+	for(int i=0;i<im->w*im->h;i++)
 		{
 			act=(float)im->dat[i].r/255;
 			rn.couche_deb->A[3*i] = act;
@@ -157,8 +150,16 @@ void Propagation(Image* im, RN rn)
 			rn.couche_deb->A[3*i+1] = act;
 			act=(float)im->dat[i].b/255;
 			rn.couche_deb->A[3*i+2] = act;
+			
+			/*if(rn.couche_deb->A[3*i] > 0)
+				printf("\x1B[8;47m \x1B[0m");
+			else
+				printf("\x1B[8;40m \x1B[0m");
+			
+			if(i%im->w == 0)
+				printf("\n");*/
 		}	
-
+	//printf("\n");
 	tmp = tmp->suiv;
 	
 	while(tmp != NULL)
@@ -166,50 +167,54 @@ void Propagation(Image* im, RN rn)
 		MultiplicationMatriceVecteur(tmp->W,tmp->prec->A,tmp->A,tmp->taille,tmp->prec->taille);
 		AdditionVecteurVecteur(tmp->B,tmp->A,tmp->A,tmp->taille);
 		SigmoideV(tmp->A,tmp->A,tmp->taille);
-		Reconnaissance(rn);
 		
-	tmp=tmp->suiv;}	
+		tmp=tmp->suiv;
+	}	
 }
 
 
 char** Reconnaissance(RN rn)
 {
 	
-	char** top= malloc(sizeof(char*)*3);
+	char** top = malloc(sizeof(char*)*3);
 	int i;
-	int id1=0;
-	int id2=0;
-	int id3=0;
+	int id1 = 0;
+	int id2 = 0;
+	int id3 = 0;
 	
 	for(i=0;i<rn.couche_fin->taille;i++)
 	{
+		//printf("%f\n",rn.couche_fin->A[i]);
 		if(rn.couche_fin->A[i]>rn.couche_fin->A[id1])				
 		{
 			id1 = i;
 		}
 	}
-	top[0] = malloc(sizeof(char)*strlen(rn.info.etiquettes[id1]));
-	strcpy(top[0],rn.info.etiquettes[id1]);
+	top[0] = malloc(sizeof(char)*strlen(rn.info->etiquettes[id1]));
+	strcpy(top[0],rn.info->etiquettes[id1]);
 	
+	while(id2 == id1) id2++;
 	for(i=0;i<rn.couche_fin->taille;i++)
 	{
-		if(id2 != id1 && rn.couche_fin->A[i]>rn.couche_fin->A[id2])				
+		if(i != id1 && rn.couche_fin->A[i]>rn.couche_fin->A[id2])				
 		{
 			id2 = i;
 		}
 	}
-	top[1] = malloc(sizeof(char)*strlen(rn.info.etiquettes[id2]));
-	strcpy(top[1],rn.info.etiquettes[id2]);
+	top[1] = malloc(sizeof(char)*strlen(rn.info->etiquettes[id2]));
+	strcpy(top[1],rn.info->etiquettes[id2]);
 	
+	while(id3 == id1 || id3 == id2) id3++;
 	for(i=0;i<rn.couche_fin->taille;i++)
 	{
-		if(id3 != id1 && id3 != id1 && rn.couche_fin->A[i]>rn.couche_fin->A[id3])				
+		if(i != id1 && i != id2 && rn.couche_fin->A[i]>rn.couche_fin->A[id3])				
 		{
 			id3 = i;
 		}
 	}
-	top[2] = malloc(sizeof(char)*strlen(rn.info.etiquettes[id3]));
-	strcpy(top[2],rn.info.etiquettes[id3]);
+	
+	top[2] = malloc(sizeof(char)*strlen(rn.info->etiquettes[id3]));
+	strcpy(top[2],rn.info->etiquettes[id3]);
 			
 	return top;
 	
@@ -220,11 +225,11 @@ void libererRN(RN* rn)
 	int i;
 	for(i=0;i<rn->couche_fin->taille;i++)
 	{
-		free(rn->info.etiquettes[i]);
+		free(rn->info->etiquettes[i]);
 	}
-	free(rn->info.etiquettes);
-	free(rn->info.date);
-	free(rn->info.nom);
+	free(rn->info->etiquettes);
+	free(rn->info->date);
+	free(rn->info->nom);
 	
 	COUCHE* tmp = rn->couche_deb;
 	free(tmp->A);
@@ -243,10 +248,10 @@ void libererRN(RN* rn)
 		free(tmp->DELTA);
 		free(tmp->A);
 		free(tmp->B);
-		
 		tmp = tmp->suiv;
-		free(tmp->prec);
+		if(tmp)
+			free(tmp->prec);
 	}
-	
+	free(rn->couche_fin);
 }
 

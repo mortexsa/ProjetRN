@@ -1,6 +1,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "Apprentissage.h"
 
@@ -9,7 +10,7 @@ void fct_cout(RN rn ,char* eti)
 {	
 	for(int i=0;i<rn.couche_fin->taille;i++)
 	{
-		rn.couche_fin->DELTA[i] = (rn.couche_fin->A[i] - (((strcmp(eti,rn.info.etiquettes[i]))==0)?1:0));	
+		rn.couche_fin->DELTA[i] = (rn.couche_fin->A[i] - (((strcmp(eti,rn.info->etiquettes[i]))==0)?1:0));	
 	}
 }
 	
@@ -18,39 +19,74 @@ void BackProp(RN* rn, Image* im,char* sortie_att, float eta)
 	COUCHE* tmp = rn->couche_fin;
 	
 	Propagation(im, *rn);
-	char** sortie_calc = Reconnaissance(*rn);
 	
+	//int i;
+	
+	char** sortie_calc = Reconnaissance(*rn);
 	if(strcmp(sortie_calc[0],sortie_att)==0)
-		rn->info.reussite++;
+		rn->info->reussite++;
 	else
-		rn->info.echec++;
+		rn->info->echec++;
+		
+	/*for(i=0;i<im->w*im->h;i++)
+	{
+		if(i%im->w == 0)
+			printf("\n");
+		if(im->dat[i].r > 0.5)
+			printf(" ");
+		else
+			printf("#");
+	}
+	printf("\n%s %s %s   %s\n",sortie_calc[0],sortie_calc[1],sortie_calc[2],sortie_att);*/
+	
+	
+	//printf("%s\n",sortie_att);
+	//printf("%s %s %s\n",sortie_calc[0],sortie_calc[1],sortie_calc[2]);
+	
+	free(sortie_calc[0]);
+	free(sortie_calc[1]);
+	free(sortie_calc[2]);
+	free(sortie_calc);
 	
 	fct_cout(*rn, sortie_att);
 	
 	SigmoidePrimeZ(tmp->A,tmp->DELTA_M,tmp->taille);
 	Hadamard(tmp->DELTA_M,tmp->DELTA,tmp->DELTA,tmp->taille);
 	//l'erreur locale de la derniere couche est mtn calculée
-		
+	
+	tmp = tmp->prec;
+	
 	while(tmp->prec != NULL)
 	{
-		tmp = tmp->prec;
-		
 		//on propage l'erreur
 		SigmoidePrimeZ(tmp->A,tmp->DELTA_M,tmp->taille);
 		MultiplicationMatricielleTransposeeTM(tmp->suiv->W,tmp->suiv->DELTA,tmp->DELTA,tmp->taille,tmp->suiv->taille);
 		Hadamard(tmp->DELTA_M,tmp->DELTA,tmp->DELTA,tmp->taille);
 		
-		//on en profite pour calculer la matrice de modif des poids DELTA_M puis apporter ces modifications aux poids et aux biais
+		/*//on en profite pour calculer la matrice de modif des poids DELTA_M puis apporter ces modifications aux poids et aux biais
 		if(tmp->prec != NULL)
 		{
 			MultiplicationMatricielleTransposeeMT(tmp->DELTA,tmp->prec->A,tmp->DELTA_M,tmp->taille,tmp->prec->taille);
 			ModifPoids(tmp->W,tmp->DELTA_M,tmp->prec->taille,tmp->taille,eta);
 			ModifBiais(tmp->B,tmp->DELTA,tmp->taille,eta);
-		}
+		}*/
+		
+		tmp = tmp->prec;
+	}
+	
+	//on calcule la matrice de modif des poids DELTA_M puis on apporte ces modifications aux poids et aux biais
+	tmp = tmp->suiv;
+	while(tmp)
+	{
+		MultiplicationMatricielleTransposeeMT(tmp->DELTA,tmp->prec->A,tmp->DELTA_M,tmp->taille,tmp->prec->taille);
+		ModifPoids(tmp->W,tmp->DELTA_M,tmp->prec->taille,tmp->taille,eta);
+		ModifBiais(tmp->B,tmp->DELTA,tmp->taille,eta);
+		
+		tmp = tmp->suiv;
 	}
 }
 
-void ModifPoids(float** W, float** DELTA, int W_w, int W_h, int eta)
+void ModifPoids(float** W, float** DELTA, int W_w, int W_h, float eta)
 {
 	int i,j;
 	
@@ -63,7 +99,7 @@ void ModifPoids(float** W, float** DELTA, int W_w, int W_h, int eta)
 	}
 }
 
-void ModifBiais(float* B, float* DELTA, int taille, int eta)
+void ModifBiais(float* B, float* DELTA, int taille, float eta)
 {
 	int i;
 	
@@ -124,4 +160,11 @@ void Hadamard(float** in_a, float* in_b, float* out, int taille)
 	{
 		out[i] = in_a[i][0]*in_b[i];
 	}
+}
+
+void DelApp(App* app)
+{
+	DelImage(app->image);
+	free(app->etiquette);
+	free(app);
 }
