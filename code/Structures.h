@@ -41,6 +41,7 @@ struct INFO_RN
 	char* repertoire;
 	int reussite;
 	int echec;
+	int w,h;
 };
 typedef struct INFO_RN INFO_RN;
 

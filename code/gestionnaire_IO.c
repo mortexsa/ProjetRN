@@ -124,7 +124,7 @@ Image* ChargerBmp(const char* fichier, int w_max, int h_max)
 		remove(fichier);
 		return NULL;
 	} // pas de palette supportée, cependant, a bpp 24, il n'y a pas de palette.
-	if(head.imhead.height>h_max || head.imhead.width>w_max)
+	if(head.imhead.height != h_max || head.imhead.width != w_max)
 	{
 		fclose(F);
 		remove(fichier);
@@ -210,7 +210,7 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 
 	
 	//printf("%u\n%u\n%u\n%u\n",t[0],t[1],t[2],t[3]);
-	if(t[2]>h_max || t[3]>w_max)
+	if(t[2] != h_max || t[3] != w_max)
 	{
 		debug
 		fclose(fichier);
@@ -414,7 +414,11 @@ INFO_RN* ChargerInfo()
 			res[i].date = malloc(strlen(tmp)*sizeof(char));
 			strcpy(res[i].date,tmp);
 			
-			fscanf(verif,"%d\n%d\n",&(res[i].reussite),&(res[i].echec));
+			fscanf(verif,"%s\n",tmp);
+			res[i].repertoire = malloc(strlen(tmp)*sizeof(char));
+			strcpy(res[i].repertoire,tmp);
+			
+			fscanf(verif,"%d\n%d\n%d\n%d\n",&(res[i].w),&(res[i].h),&(res[i].reussite),&(res[i].echec));
 			
 			fclose(verif);
 			i++;
@@ -473,17 +477,17 @@ RN* ChargerRN(INFO_RN info)
 	i=0;
 	while(fgets(path, 1024, fichier))
 		i++;
-	i-=4;
+	i-=6;
 	rn->info.etiquettes = malloc(i*sizeof(char*));
 	fseek(fichier, 0, SEEK_SET);
 	
 	i=0;
 	while(fgets(path, 1024, fichier))
 	{
-		if(i>=4)
+		if(i>=6)
 		{
-			rn->info.etiquettes[i-4] = malloc(strlen(path)*sizeof(char));
-			strcpy(rn->info.etiquettes[i-4],path);
+			rn->info.etiquettes[i-6] = malloc(strlen(path)*sizeof(char));
+			strcpy(rn->info.etiquettes[i-6],path);
 		}
 		i++;
 	}
@@ -557,7 +561,7 @@ void SaveRN(RN rn)
 		exit(-1);
 	}
 	
-	fprintf(fichier,"%s\n%s\n%d\n%d\n",rn.info.nom,rn.info.date,rn.info.reussite,rn.info.echec);
+	fprintf(fichier,"%s\n%s\n%s\n%d\n%d\n%d\n%d\n",rn.info.nom,rn.info.date,rn.info.repertoire,rn.info.w,rn.info.h,rn.info.reussite,rn.info.echec);
 	
 	for(i=0;i<rn.couche_fin->taille;i++)
 		fprintf(fichier,"%s\n",rn.info.etiquettes[i]);
