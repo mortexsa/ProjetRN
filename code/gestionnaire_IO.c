@@ -433,7 +433,7 @@ INFO_RN* ChargerInfo()
 
 RN* ChargerRN(INFO_RN info)
 {
-	RN* rn = initialisation(info);
+	RN* rn = initialisation(&info);
 	char path[100];
 	int i = 1,j;
 	sprintf(path,"../sav/%s_%s/C%d.rn",info.date,info.nom,i);
