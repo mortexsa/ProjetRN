@@ -37,6 +37,7 @@ void retourAccueille(GtkWidget *widget, gpointer data){
 
 void traitement(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    
     gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Traitement d'images");
     viderContainer(fenetre->Window);
     
@@ -52,15 +53,25 @@ void traitement(GtkWidget *widget, gpointer data){
     char tab[200];
     strcpy(tab, "Lancer un traitement d'images sur le Reseau: ");
     
-    
+    char resultat[200];
     label = gtk_label_new(strcat(tab,fenetre->info[fenetre->reseauSelectionner].nom));
     gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
+    strcpy(tab,"Choisissez un fichier");
+    if(fenetre->chemin[0] != 0){
+        strcpy(resultat,fenetre->chemin);
+        char *parse = strtok(resultat,"/");
+        while(parse != NULL){
+            strcpy(resultat,parse);
+            parse = strtok(NULL, "/");
+        }
+        strcpy(tab,"Fichier Choisi : ");
+        strcat(tab,resultat);
+    }
 
-    button[0] = gtk_button_new_with_label("Choisir le fichier");
-    gtk_box_pack_start(GTK_BOX(Vbox), button[0], FALSE, TRUE, 2);
+    button[0] = gtk_button_new_with_label(tab);
+    gtk_box_pack_start(GTK_BOX(Vbox), button[0], FALSE, TRUE, 20);
 
     gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
-    
     button[1] = gtk_button_new_with_label("Retour");
     button[2] = gtk_button_new_with_label("Lancer");
 
@@ -68,10 +79,21 @@ void traitement(GtkWidget *widget, gpointer data){
     gtk_box_pack_start(GTK_BOX(Hbox), button[2], TRUE, TRUE, 2);
 
     gtk_widget_show_all(fenetre->Window);
-    //printf("merde : %s\n", fenetre->chemin);
     g_signal_connect(G_OBJECT(button[1]), "clicked", G_CALLBACK(selectReseau), fenetre);
     g_signal_connect(G_OBJECT(button[0]), "clicked", G_CALLBACK(creer_file_selection), fenetre);
+    g_signal_connect(G_OBJECT(button[2]), "clicked", G_CALLBACK(resultatTraitement), fenetre);
+}
 
+void resultatTraitement(GtkWidget *widget, gpointer data){
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    char resultat[200];
+    strcpy(resultat,fenetre->chemin);
+    char *parse = strtok(resultat,".");
+    while(parse != NULL){
+        strcpy(resultat,parse);
+        parse = strtok(NULL, ".");
+    }
+    printf("youhou : %s\n", resultat);
 }
 
 void selectReseau(GtkWidget *widget, gpointer data){
@@ -80,8 +102,11 @@ void selectReseau(GtkWidget *widget, gpointer data){
     gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Tableau de bord");
     char titre[256];
     strcpy(titre,gtk_button_get_label((GtkButton *)widget));
-    
-    
+    if(fenetre->chemin[0] != 0){
+        for(int w = 0;w<200;w++){
+            fenetre->chemin[w] = 0;
+        }
+    }
     GtkWidget *label;
     GtkWidget *button[4];
     GtkWidget *Vbox;
@@ -385,22 +410,21 @@ void creer_folder_selection (GtkButton * button, gpointer data)
 void creer_file_selection(GtkWidget *widget, gpointer data) {
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
     GtkWidget *p_dialog = NULL;
-    p_dialog = gtk_file_chooser_dialog_new ("Ouvrir un fichier",NULL,GTK_FILE_CHOOSER_ACTION_OPEN,GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,NULL);
     gtk_widget_hide(fenetre->Window);
+    p_dialog = gtk_file_chooser_dialog_new ("Ouvrir un fichier",NULL,GTK_FILE_CHOOSER_ACTION_OPEN,GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,NULL);
     //gtk_window_set_accept_focus(GTK_WINDOW(fenetre->Window), FALSE);
-    gtk_window_set_modal(GTK_WINDOW(fenetre->Window),FALSE);
+    //gtk_window_set_modal(GTK_WINDOW(fenetre->Window),FALSE);
     gtk_widget_show(p_dialog);
     if (gtk_dialog_run (GTK_DIALOG (p_dialog)) == GTK_RESPONSE_ACCEPT){
-        gchar *file_name = NULL;
+        char *file_name = NULL;
         file_name = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (p_dialog));
-        fenetre->chemin = malloc(sizeof(strlen(file_name+2)));
-        gtk_widget_show_all(fenetre->Window);
+        //fenetre->chemin = malloc(sizeof(strlen(file_name+2)));
+        strcpy(fenetre->chemin,file_name);
+    
     }
-    else{
-        gtk_widget_show_all(fenetre->Window);
-    }
-
+    gtk_widget_show_all(fenetre->Window);
     gtk_widget_destroy (p_dialog);
+    traitement(NULL,fenetre);
 }
 
 
@@ -431,6 +455,8 @@ void quitter(GtkWidget* widget)
 
 void afficherInterface(){
     INFO_FENETRE *fenetre = malloc(sizeof(INFO_FENETRE));
+    for(int i = 0; i<200; i++)
+        fenetre->chemin[i] = 0;
     fenetre->Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);//creation de la fenetre graphique par defaut elle aura une taille 200*200pixel
     
     page_principale(fenetre);

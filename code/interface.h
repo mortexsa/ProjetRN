@@ -25,7 +25,7 @@ typedef struct INFO_FENETRE
 	GtkWidget *Window;
 	int nombreReseau;
 	int reseauSelectionner;
-	char *chemin;
+	char chemin[200];
 } INFO_FENETRE;
 
 
@@ -34,6 +34,7 @@ void viderContainer(GtkWidget *data);
 void retourAccueille(GtkWidget *widget, gpointer data);
 void selectReseau(GtkWidget *widget, gpointer data);
 void traitement(GtkWidget *widget, gpointer data);
+void resultatTraitement(GtkWidget *widget, gpointer data);
 void page_principale(INFO_FENETRE *fenetre);
 void creer_file_selection();
 void recuperer_chemin(GtkWidget *bouton, GtkWidget *file_selection);
