@@ -103,31 +103,31 @@ Image* ChargerBmp(const char* fichier, int w_max, int h_max)
 	if (head.signature[0]!='B' || head.signature[1]!='M')
 	{
 		fclose(F);
-		remove(fichier);
+		//remove(fichier);
 		return NULL;
 	}  // mauvaise signature, ou BMP non supporté.
 	if (head.imhead.bpp!=24)
 	{
 		fclose(F);
-		remove(fichier);
+		//remove(fichier);
 		return NULL;
 	}  // supporte que le 24 bits pour l'instant
 	if (head.imhead.compression!=0)
 	{
 		fclose(F);
-		remove(fichier);
+		//remove(fichier);
 		return NULL;
 	}  // rarrissime, je ne sais même pas si un logiciel écrit/lit des BMP compressés. 
 	if (head.imhead.cpalette!=0 || head.imhead.cIpalette!=0)
 	{
 		fclose(F);
-		remove(fichier);
+		//remove(fichier);
 		return NULL;
 	} // pas de palette supportée, cependant, a bpp 24, il n'y a pas de palette.
 	if(head.imhead.height != h_max || head.imhead.width != w_max)
 	{
 		fclose(F);
-		remove(fichier);
+		//remove(fichier);
 		return NULL;
 	}
 	I = NouvelleImage(head.imhead.width,head.imhead.height);
@@ -214,7 +214,7 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 	{
 		debug
 		fclose(fichier);
-		remove(path);
+		//remove(path);
 		return NULL;
 	}
 		
@@ -233,7 +233,7 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 	fclose(fichier);
 	
 	if(t[1] == 0)
-		remove(path);
+		//remove(path);
 	
 	
 	int i;
