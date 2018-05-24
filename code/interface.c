@@ -86,7 +86,9 @@ void traitement(GtkWidget *widget, gpointer data){
 
 void resultatTraitement(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
-    RN *rn = ChargerRN(fenetre->info[fenetre->reseauSelectionner]);
+    INFO_RN *k=fenetre->info;	
+ 	RN *rn =initialisation(k);
+ 	
     Image * image;
     char resultat[200];
     strcpy(resultat,fenetre->chemin);
@@ -96,10 +98,13 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
         parse = strtok(NULL, ".");
     }
     //regarde rn ne prend pas en compte cette merde de info
-    printf("merde %s\n", rn->info[0].date);
+    //printf("merde yew %s\n", rn[fenetre->reseauSelectionner].info->nom);
+   printf("merde yew %s\n", rn->info->nom);
     if(strcmp(resultat,"bmp") == 0){
-        //Image * ChargerBmp()
-    }
+        image = ChargerBmp(fenetre->chemin,rn[fenetre->reseauSelectionner].info->w, rn[fenetre->reseauSelectionner].info->w);
+        Propagation(image,rn[fenetre->reseauSelectionner]);
+        //char** Reconnaissance(rnrn[fenetre->reseauSelectionner])
+        }
 
 
 }
