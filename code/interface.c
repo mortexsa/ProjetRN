@@ -94,6 +94,7 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
     GtkWidget *label;
     GtkWidget *Vbox;
     GtkWidget *Hbox;
+    GtkWidget *pbutton[2];
  	INFO_RN *k=fenetre->info;	  
 	//~ RN *rn1 =initialisation(k); 
 	//~ RN *rn= ChargerRN(k); //charger RN
@@ -148,13 +149,16 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
     gtk_box_pack_start(GTK_BOX(Vbox), label, TRUE, FALSE, 2);
     
     
-    
- 
-  
+    gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
+    pbutton[0] = gtk_button_new_with_label("Ok");
+    gtk_box_pack_start(GTK_BOX(Hbox), pbutton[0], TRUE, TRUE, 2); 
+     pbutton[1] = gtk_button_new_with_label("quitter");
+    gtk_box_pack_start(GTK_BOX(Hbox), pbutton[1], TRUE, TRUE, 2); 
  
     /* Affichage de la fenêtré et de tout ce qu'il contient */
     gtk_widget_show_all(fenetre->Window);  
-    
+ g_signal_connect(G_OBJECT(pbutton[0]), "clicked", G_CALLBACK(traitement), fenetre);  
+ g_signal_connect(G_OBJECT(pbutton[1]), "clicked", G_CALLBACK(gtk_main_quit), fenetre); 
     
 
 }
