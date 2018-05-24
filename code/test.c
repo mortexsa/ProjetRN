@@ -11,16 +11,16 @@
 #define RESET "\x1B[0m"
 #include <gtk/gtk.h>
 
-/*
-int main()
+
+int main(int argc, char** argv)
 {
 	srand(time(NULL));
-	//test_chargerMNIST("/home/user/Bureau/App/train-images-idx3-ubyte");
+	test_chargerMNIST("/home/user/Bureau/App/train-images-idx3-ubyte");
 	//test_ChargerEtiquetteMNIST("/home/user/Bureau/App/train-labels-idx1-ubyte");
 	
 	//test_ChargementCoupleAttIn("/home/user/Bureau/App");
 	
-	test_Apprentissage("/home/user/Bureau/App");
+	//test_Apprentissage("/home/user/Bureau/App");
 	
 	//test_MultiplicationMatricielleTransposeeTM();
 	//test_MultiplicationMatricielleTransposeeMT();
@@ -28,8 +28,16 @@ int main()
 	//test_Propagation();
 	
 	//test_BackProp();
+	
+	//printf("oui je marche parfaitement ! soumsoum t'inquiete pas et le nbr des sous reseaux sont :%d!\n",nombreReseau());
+	
+ 	gtk_init(&argc,&argv);//initialise la bibilo , toujours appeler en debut de programme 
+
+ 	afficherInterface();
+
+ 	gtk_main();//appeler dans toutes les fct gtk , cette fct attends le clique de la souris ou toucher le clavier 
 }
-*/
+
 
 void test_chargerMNIST(char* path)
 {	
@@ -49,19 +57,6 @@ void test_chargerMNIST(char* path)
 		}
 		printf("\n");
 	}
-}
-
-int main(int argc, char **argv)
-{ 
-	//printf("oui je marche parfaitement ! soumsoum t'inquiete pas et le nbr des sous reseaux sont :%d!\n",nombreReseau());
-	
- 	gtk_init(&argc,&argv);//initialise la bibilo , toujours appeler en debut de programme 
-
- 	afficherInterface();
-
- 	gtk_main();//appeler dans toutes les fct gtk , cette fct attends le clique de la souris ou toucher le clavier 
-	
-	return 0;
 }
 
 void test_ChargerEtiquetteMNIST(char* path)

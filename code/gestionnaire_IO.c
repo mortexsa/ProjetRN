@@ -150,6 +150,24 @@ Image* ChargerBmp(const char* fichier, int w_max, int h_max)
 		fread(&bgrpix,1,pitch,F);
 	}
 	fclose(F);
+	
+	
+	
+	for(int y=0;y<I->h;y++)
+	{
+		for(int x=0;x<I->w;x++)
+		{
+			if(I->dat[y*(I->w)+x].r > 0)
+				printf("\x1B[8;40m \x1B[0m");
+			else
+				printf("\x1B[8;47m \x1B[0m");
+				
+		}
+		printf("\n");
+	}
+	
+	
+	
 	return I;
 }
 
