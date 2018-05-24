@@ -211,7 +211,9 @@ int Sauver(Image* I,const char* fichier)
 	fclose(F);
 	return 0;
 }
-
+#define WHT   "\x1B[8;47m"
+#define BLK   "\x1B[8;40m"
+#define RESET "\x1B[0m"
 Image* ChargerMnist(const char* path, int w_max, int h_max)
 {
 	unsigned int t[4];
@@ -266,7 +268,18 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 		im->dat[i].g = tmp[i];
 		im->dat[i].b = tmp[i];
 	}
-	
+	int j;
+    for(i=0;i<im->h;i++)
+    {
+        for(j=0;j<im->w;j++)
+        {
+            if(im->dat[i*im->w+j].r > 0)
+                printf(WHT "1" RESET);
+            else
+                printf(BLK "0" RESET);
+        }
+        printf("\n");
+    }
 	return im;
 }
 

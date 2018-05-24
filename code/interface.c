@@ -93,8 +93,7 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
         strcpy(resultat,parse);
         parse = strtok(NULL, ".");
     }
-
-    if(strcmp(resultat,"bmp") == 0){
+    if(strcmp(resultat,"bmp") == 0 || strcmp(resultat,"idx3-ubyte") == 0){
 
         gtk_window_set_title(GTK_WINDOW(fenetre->Window), "TOP 3 des Resultats ");
         viderContainer(fenetre->Window);
@@ -112,7 +111,13 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
     	char** rec;
         Image * image;
         //~ image = ChargerBmp(fenetre->chemin,rn[fenetre->reseauSelectionner].info->w, rn[fenetre->reseauSelectionner].info->h);
-        image = ChargerBmp(fenetre->chemin,rn->info->w, rn->info->h);
+        if(strcmp(resultat,"bmp") == 0){
+            image = ChargerBmp(fenetre->chemin,rn->info->w, rn->info->h);            
+        }
+        else{
+            image = ChargerMnist(fenetre->chemin,rn->info->w, rn->info->h);
+        }
+
         if(image == NULL) printf("HAHAHAHAHAHAHAHAHAHHAAH\n");
         Propagation(image,*rn);
     	
