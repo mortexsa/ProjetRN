@@ -34,6 +34,9 @@ test.o: test.h test.c interface.h
 	gcc -c -o test.o test.c `pkg-config --cflags --libs gtk+-2.0` -Wall
 	
 
+neurone.o: neurone.c interface.h
+	gcc -c -o neurone.o neurone.c -Wall
+	
 
 clear:
 	clear

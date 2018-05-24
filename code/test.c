@@ -46,11 +46,11 @@ void test_chargerMNIST(char* path)
 	if(!im) exit(-1);
 	
 	int i, j;
-	for(i=0;i<28;i++)
+	for(i=0;i<im->h;i++)
 	{
-		for(j=0;j<28;j++)
+		for(j=0;j<im->w;j++)
 		{
-			if(im->dat[i*28+j].r > 0)
+			if(im->dat[i*im->w+j].r > 0)
 				printf(WHT "1" RESET);
 			else
 				printf(BLK "0" RESET);
