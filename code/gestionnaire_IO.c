@@ -237,8 +237,8 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 	
 	fclose(fichier);
 	
-	//if(t[1] == 0)
-		//remove(path);
+	if(t[1] == 0)
+		remove(path);
 	
 	
 	int i;
