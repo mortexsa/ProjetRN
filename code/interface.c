@@ -88,12 +88,16 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
     
  	INFO_RN *k=fenetre->info;	  
-	RN *rn1 =initialisation(k); 
-	RN *rn= ChargerRN(k); //charger RN
+	//~ RN *rn1 =initialisation(k); 
+	//~ RN *rn= ChargerRN(k); //charger RN
+	RN *rn = initialisation(k); 
+	rn = ChargerRN(k); //charger RN
 	
- 	char** rec=malloc(sizeof(char*)*3);
- 	for(int i=0;i<3;i++){
-		rec[i]=malloc(sizeof(char));}
+	
+	char** rec;
+ 	//~ char** rec=malloc(sizeof(char*)*3);
+ 	//~ for(int i=0;i<3;i++){
+		//~ rec[i]=malloc(sizeof(char));}
  	
     Image * image;
     char resultat[200];
@@ -103,18 +107,23 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
         strcpy(resultat,parse);
         parse = strtok(NULL, ".");
     }
-    //regarde rn ne prend pas en compte cette merde de info
-   
-   //je le recupere parfaitement 
+    
    printf("yew %s\n", fenetre->chemin);
  
-    if(strcmp(resultat,"bmp") == 0){
-        image = ChargerBmp(fenetre->chemin,rn[fenetre->reseauSelectionner].info->w, rn[fenetre->reseauSelectionner].info->h);
-        Propagation(image,rn[fenetre->reseauSelectionner]);}
-        rec=Reconnaissance(rn[fenetre->reseauSelectionner]);
-        
- for(int j=0;j<3;j++){
-	 sprintf("le res est :%s",rec[j]);}
+    if(strcmp(resultat,"bmp") == 0)
+    {
+        //~ image = ChargerBmp(fenetre->chemin,rn[fenetre->reseauSelectionner].info->w, rn[fenetre->reseauSelectionner].info->h);
+        image = ChargerBmp(fenetre->chemin,rn->info->w, rn->info->h);
+        if(image == NULL) printf("HAHAHAHAHAHAHAHAHAHHAAH\n");
+        Propagation(image,*rn);
+	}
+	
+	//~ rec = Reconnaissance(rn[fenetre->reseauSelectionner]);
+	rec = Reconnaissance(*rn);
+	
+ for(int j=0;j<3;j++)
+	 //~ sprintf("le res est :%s\n",rec[j]);//???
+	 printf("le res est :%s",rec[j]);
 
 }
 

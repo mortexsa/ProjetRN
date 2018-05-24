@@ -102,30 +102,35 @@ Image* ChargerBmp(const char* fichier, int w_max, int h_max)
 	fread(&head,sizeof(struct BMPHead),1,F);
 	if (head.signature[0]!='B' || head.signature[1]!='M')
 	{
+		debug
 		fclose(F);
 		//remove(fichier);
 		return NULL;
 	}  // mauvaise signature, ou BMP non supporté.
 	if (head.imhead.bpp!=24)
 	{
+		debug
 		fclose(F);
 		//remove(fichier);
 		return NULL;
 	}  // supporte que le 24 bits pour l'instant
 	if (head.imhead.compression!=0)
 	{
+		debug
 		fclose(F);
 		//remove(fichier);
 		return NULL;
 	}  // rarrissime, je ne sais même pas si un logiciel écrit/lit des BMP compressés. 
 	if (head.imhead.cpalette!=0 || head.imhead.cIpalette!=0)
 	{
+		debug
 		fclose(F);
 		//remove(fichier);
 		return NULL;
 	} // pas de palette supportée, cependant, a bpp 24, il n'y a pas de palette.
 	if(head.imhead.height != h_max || head.imhead.width != w_max)
 	{
+		debug
 		fclose(F);
 		//remove(fichier);
 		return NULL;
