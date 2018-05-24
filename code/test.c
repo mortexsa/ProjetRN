@@ -15,8 +15,10 @@
 int main(int argc, char** argv)
 {
 	srand(time(NULL));
-	test_chargerMNIST("/home/user/Bureau/App/train-images-idx3-ubyte");
+	//test_chargerMNIST("/home/user/Bureau/App/train-images-idx3-ubyte");
 	//test_ChargerEtiquetteMNIST("/home/user/Bureau/App/train-labels-idx1-ubyte");
+	
+	//test_reconnaissance("/home/user/Bureau/App/train-images-idx3-ubyte");
 	
 	//test_ChargementCoupleAttIn("/home/user/Bureau/App");
 	
@@ -32,12 +34,43 @@ int main(int argc, char** argv)
 	//printf("oui je marche parfaitement ! soumsoum t'inquiete pas et le nbr des sous reseaux sont :%d!\n",nombreReseau());
 	
  	gtk_init(&argc,&argv);//initialise la bibilo , toujours appeler en debut de programme 
-
  	afficherInterface();
-
  	gtk_main();//appeler dans toutes les fct gtk , cette fct attends le clique de la souris ou toucher le clavier 
 }
 
+void test_reconnaissance(char* path)
+{
+	INFO_RN* info = malloc(sizeof(INFO_RN));
+	info->nom = malloc(sizeof(char)*10);
+	info->date = malloc(sizeof(char)*20);
+	strcpy(info->nom,"MNIST");
+	strcpy(info->date,"2018-05-08");
+	info->reussite = 0;
+	info->echec = 0;
+	
+	RN* rn = initialisation(info);
+	rn = ChargerRN(info);
+	
+	Image* im = ChargerMnist(path,28,28);
+	
+	int i, j;
+	for(i=0;i<im->h;i++)
+	{
+		for(j=0;j<im->w;j++)
+		{
+			if(im->dat[i*im->w+j].r > 0)
+				printf(WHT "1" RESET);
+			else
+				printf(BLK "0" RESET);
+		}
+		printf("\n");
+	}
+	
+	Propagation(im,*rn);
+	char** res = Reconnaissance(*rn);
+	
+	printf("%s\n%s\n%s\n",res[0],res[1],res[2]);
+}
 
 void test_chargerMNIST(char* path)
 {	
