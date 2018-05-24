@@ -45,7 +45,7 @@ void traitement(GtkWidget *widget, gpointer data){
     GtkWidget *Hbox;
     GtkWidget *button[3];
     GtkWidget *label;
-
+    
     Vbox = gtk_vbox_new(FALSE, 0);
     Hbox = gtk_hbox_new(FALSE, 0);
     gtk_container_add(GTK_CONTAINER(fenetre->Window), Vbox);
@@ -87,11 +87,19 @@ void traitement(GtkWidget *widget, gpointer data){
 void resultatTraitement(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
     
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "TOP 3 des Resultats ");
+    viderContainer(fenetre->Window);
+    
+    GtkWidget* pLabel;
+    GtkWidget *label;
+    GtkWidget *Vbox;
+    GtkWidget *Hbox;
  	INFO_RN *k=fenetre->info;	  
 	//~ RN *rn1 =initialisation(k); 
 	//~ RN *rn= ChargerRN(k); //charger RN
 	RN *rn = initialisation(k); 
 	rn = ChargerRN(k); //charger RN
+	
 	
 	char** rec;
  	//~ char** rec=malloc(sizeof(char*)*3);
@@ -119,10 +127,35 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
 	
 	//~ rec = Reconnaissance(rn[fenetre->reseauSelectionner]);
 	rec = Reconnaissance(*rn);
+	int j=0;
+	Vbox = gtk_vbox_new(FALSE, 0);
+	Hbox = gtk_hbox_new(FALSE, 0);
+
+    gtk_container_add(GTK_CONTAINER(fenetre->Window), Vbox);
+	strcpy(resultat,"resultat 1: ");
+    strcat(resultat,rec[0]);
+	label = gtk_label_new(resultat);	
+	gtk_box_pack_start(GTK_BOX(Vbox), label, TRUE, FALSE, 2);
 	
- for(int j=0;j<3;j++)
-	 //~ sprintf("le res est :%s\n",rec[j]);//???
-	 printf("le res est :%s",rec[j]);
+    strcpy(resultat,"resultat 2: ");
+    strcat(resultat,rec[1]);
+    label = gtk_label_new(resultat);    
+    gtk_box_pack_start(GTK_BOX(Vbox), label, TRUE, FALSE, 2);
+
+    strcpy(resultat,"resultat 3: ");
+    strcat(resultat,rec[2]);
+    label = gtk_label_new(resultat);    
+    gtk_box_pack_start(GTK_BOX(Vbox), label, TRUE, FALSE, 2);
+    
+    
+    
+ 
+  
+ 
+    /* Affichage de la fenêtré et de tout ce qu'il contient */
+    gtk_widget_show_all(fenetre->Window);  
+    
+    
 
 }
 
