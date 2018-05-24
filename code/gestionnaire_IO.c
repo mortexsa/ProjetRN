@@ -482,17 +482,17 @@ RN* ChargerRN(INFO_RN *info)
 	i=0;
 	while(fgets(path, 1024, fichier))
 		i++;
-	i-=6;
+	i-=7;
 	rn->info->etiquettes = malloc(i*sizeof(char*));
 	fseek(fichier, 0, SEEK_SET);
 	
 	i=0;
 	while(fgets(path, 1024, fichier))
 	{
-		if(i>=6)
+		if(i>=7)
 		{
-			rn->info->etiquettes[i-6] = malloc(strlen(path)*sizeof(char));
-			strcpy(rn->info->etiquettes[i-6],path);
+			rn->info->etiquettes[i-7] = malloc(strlen(path)*sizeof(char));
+			strcpy(rn->info->etiquettes[i-7],path);
 		}
 		i++;
 	}

@@ -93,7 +93,6 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
 	RN *rn = initialisation(k); 
 	rn = ChargerRN(k); //charger RN
 	
-	
 	char** rec;
  	//~ char** rec=malloc(sizeof(char*)*3);
  	//~ for(int i=0;i<3;i++){
