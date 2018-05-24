@@ -15,7 +15,7 @@
 int main(int argc, char** argv)
 {
 	srand(time(NULL));
-	test_chargerMNIST("/home/user/Bureau/App/train-images-idx3-ubyte");
+	//test_chargerMNIST("/home/user/Bureau/App/train-images-idx3-ubyte");
 	//test_ChargerEtiquetteMNIST("/home/user/Bureau/App/train-labels-idx1-ubyte");
 	
 	//test_ChargementCoupleAttIn("/home/user/Bureau/App");
