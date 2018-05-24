@@ -364,7 +364,7 @@ void creation(GtkWidget *widget, gpointer data){
     
     //on met le bouton Explorer dans la frame
     gtk_box_pack_start(GTK_BOX(pHBox),bouton_explorer, TRUE, FALSE, 3);
-    g_signal_connect(G_OBJECT(bouton_explorer), "clicked", G_CALLBACK(creer_folder_selection), fenetre->Window);
+    g_signal_connect(G_OBJECT(bouton_explorer), "clicked", G_CALLBACK(creer_folder_selection), fenetre);
     
     /*definir la taille max des images qu'il devra analyser pour connaitre le nbr de neurones en entrées
       definir la hauteur*/
@@ -401,39 +401,39 @@ void creation(GtkWidget *widget, gpointer data){
 void creationRN(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
     GList *pList = gtk_container_get_children(GTK_CONTAINER(fenetre->Window));
+    GList *pCopie = NULL;
     pList = gtk_container_get_children(GTK_CONTAINER(pList->data));
-    
+    int i = 0;
     pList = g_list_next(pList);
-    if(strlen(gtk_entry_get_text(pList->data))){
-        //ici on stock et on test si elle son rempli a chaque fois 
-        
+    while(strlen(gtk_entry_get_text(pList->data)) && i<6){
+        pCopie = g_list_append(pCopie,pList->data);
+        printf("gtk : %s\n", gtk_widget_get_name(pList->data));
+        if(i<5){
+            pList = g_list_next(pList);
+            pList = g_list_next(pList);
+        }
+        i++;
     }
-    // if( == 0){
-    //     printf("tfouu");
-    // }
-    // else{
-    //     printf("merde%stfou\n", gtk_entry_get_text(pList->data));
-    // }
-    
+
+    if(g_list_length(pCopie) == 6 && fenetre->chemin[0] != 0){
+        printf("niquel\n");
+    }
 
     g_list_free(pList);
+    g_list_free(pCopie);
 }
 
 /*afin de selectionner un repertoire au choix*/
 void creer_folder_selection (GtkButton * button, gpointer data)
 {   
-    gchar* chemin;
-    GtkWidget *pDialog;
-     
-    GtkWidget *pParent;
+    INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
+    GtkWidget *pFileSelection = NULL;
+    gtk_widget_hide(fenetre->Window);
         
-     //cast en GTK_WIDGET 
-    pParent = GTK_WIDGET(data);   
-    GtkWidget *pFileSelection;
      
     /* Creation de la fenetre de selection */
-        pFileSelection = gtk_file_chooser_dialog_new("selectionnez un repertoire...",
-    GTK_WINDOW(pParent),
+    pFileSelection = gtk_file_chooser_dialog_new("selectionnez un repertoire...",
+    NULL,
     //GTK_FILE_CHOOSER_ACTION_OPEN
     GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -445,24 +445,20 @@ void creer_folder_selection (GtkButton * button, gpointer data)
     /* On limite les actions a cette fenetre */
     gtk_window_set_modal(GTK_WINDOW(pFileSelection), TRUE);   
     
-    
+    char *file_name = NULL;
     /* Affichage fenetre */
     switch(gtk_dialog_run(GTK_DIALOG(pFileSelection)))
     {
         case GTK_RESPONSE_OK:
             /* Recuperation du chemin */
-            chemin = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(pFileSelection));
-            pDialog = gtk_message_dialog_new(GTK_WINDOW(pFileSelection),
-                GTK_DIALOG_MODAL,
-                GTK_MESSAGE_INFO,
-                GTK_BUTTONS_OK,
-                "Chemin du repertoire choisi :\n%s", chemin);
-                
-            gtk_dialog_run(GTK_DIALOG(pDialog));
-            gtk_widget_destroy(pDialog);break;
+            file_name = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (pFileSelection));
+            //fenetre->chemin = malloc(sizeof(strlen(file_name+2)));
+            strcpy(fenetre->chemin,file_name);
+            break;
                       
         default : break;
     }
+    gtk_widget_show_all(fenetre->Window);
    //g_free(chemin); j'ai un probleme avec ce free
    gtk_widget_destroy(pFileSelection);
 }
