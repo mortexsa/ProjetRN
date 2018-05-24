@@ -431,12 +431,12 @@ INFO_RN* ChargerInfo()
 	return res;
 }
 
-RN* ChargerRN(INFO_RN info)
+RN* ChargerRN(INFO_RN *info)
 {
-	RN* rn = initialisation(&info);
+	RN* rn = initialisation(info);
 	char path[100];
 	int i = 1,j;
-	sprintf(path,"../sav/%s_%s/C%d.rn",info.date,info.nom,i);
+	sprintf(path,"../sav/%s_%s/C%d.rn",info->date,info->nom,i);
 	FILE* fichier = fopen(path,"rb");	
 	if(!fichier)
 		exit(-1);
@@ -465,11 +465,11 @@ RN* ChargerRN(INFO_RN info)
 		fclose(fichier);
 		
 		i++;
-		sprintf(path,"../sav/%s_%s/C%d.rn",info.date,info.nom,i);
+		sprintf(path,"../sav/%s_%s/C%d.rn",info->date,info->nom,i);
 		fichier = fopen(path,"r");
 	}
 	
-	sprintf(path,"../sav/%s_%s/INFO",info.date,info.nom);
+	sprintf(path,"../sav/%s_%s/INFO",info->date,info->nom);
 	fichier = fopen(path,"rb");
 	if(!fichier)
 		exit(-1);

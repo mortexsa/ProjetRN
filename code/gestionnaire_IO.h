@@ -21,7 +21,7 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max);
 
 INFO_RN* ChargerInfo();
 
-RN* ChargerRN(INFO_RN info);
+RN* ChargerRN(INFO_RN *info);
 void SaveRN(RN);
 
 #endif
