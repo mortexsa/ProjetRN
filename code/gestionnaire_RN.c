@@ -1,3 +1,14 @@
+/**
+ * \file gestionnaire_RN.c
+ * \brief Code de la partie propagation ainsi que toutes les fonctions necessaire a celle ci.
+ * \author PEPIN Thibaut
+ * \author REZGUI Soumia
+ * \author SLIMANI Arezki
+ * \author SELAQUET Severine
+ * \author SZULEK Isaac
+ * \author MONTIGNET Anthony
+ */
+
 #include <math.h>
 #include "gestionnaire_RN.h"
 #include <string.h>

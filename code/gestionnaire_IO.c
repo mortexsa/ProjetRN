@@ -1,3 +1,14 @@
+/**
+ * \file gestionnaire_IO.c
+ * \brief Code des fonctions de lecture et d'écriture dans des fichiers
+ * \author PEPIN Thibaut
+ * \author REZGUI Soumia
+ * \author SLIMANI Arezki
+ * \author SELAQUET Severine
+ * \author SZULEK Isaac
+ * \author MONTIGNET Anthony
+ */
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>

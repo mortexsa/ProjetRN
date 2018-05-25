@@ -1,3 +1,14 @@
+/**
+ * \file Structures.h
+ * \brief Code contenant les structures utilisées dans le programme.
+ * \author PEPIN Thibaut
+ * \author REZGUI Soumia
+ * \author SLIMANI Arezki
+ * \author SELAQUET Severine
+ * \author SZULEK Isaac
+ * \author MONTIGNET Anthony
+ */
+
 #ifndef STRUCT_H
 #define STRUCT_H
 
