@@ -34,6 +34,7 @@ void viderContainer(GtkWidget *data);
 void retourAccueille(GtkWidget *widget, gpointer data);
 void selectReseau(GtkWidget *widget, gpointer data);
 void traitement(GtkWidget *widget, gpointer data);
+void matrice(GtkWidget *widget, gpointer data);
 void resultatTraitement(GtkWidget *widget, gpointer data);
 void page_principale(INFO_FENETRE *fenetre);
 void creer_file_selection();
