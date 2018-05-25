@@ -30,7 +30,14 @@
 
 #define debug printf("line : %d in function : %s in file %s\n",__LINE__,__func__,__FILE__);
 
-
+/**
+ * \fn Image* NouvelleImage(int w,int h)
+ * \brief alloue la mémoire nécessaire pour stocker une image avec sa hauteur et largeur passées en parametres
+ * 
+ * \param w largeur de l'image
+ * \param h Hauteur de l'image
+ * \return renvoie l'adresse de l'image créée
+ */
 Image* NouvelleImage(int w,int h)
 {
 	Image* I = malloc(sizeof(Image));
@@ -40,6 +47,15 @@ Image* NouvelleImage(int w,int h)
 	return I;
 }
 
+
+
+/**
+ * \fn Image* CopieImage(Images* I)
+ * \brief créé une copie de l'image passée en parametre
+ * 
+ * \param I l'image à copier
+ * \return renvoie l'adresse de l'image copiée
+ */
 Image* CopieImage(Image* I)
 {
 	Image* res;
@@ -50,6 +66,12 @@ Image* CopieImage(Image* I)
 	return res;
 }
 
+/**
+ * \fn void DelImage(Images* I)
+ * \brief libère la mémoire d'une variable de type Image
+ * 
+ * \param I l'image à supprimer
+ */
 void DelImage(Image* I)
 {
 	if (I)
@@ -59,12 +81,30 @@ void DelImage(Image* I)
 	}
 }
 
+/**
+ * \fn void SetPixel(Images* I, int i, int j, Pixel p)
+ * \brief modifie le pixel aux coordonnées i*j de l'image passée en paramètre afin de correspondre au pixel p
+ * 
+ * \param I l'image à analyser
+ * \param i,j coordonnées de l'image
+ * \param p pixel correspondant
+ * 
+ */
 void SetPixel(Image* I,int i,int j,Pixel p)
 {
 	assert(I && i>=0 && i<I->w && j>=0 && j<I->h);
 	I->dat[I->w*j+i] = p;
 }
 
+/**
+ * \fn Pixel SetPixel(Images* I, int i, int j)
+ * \brief obtenir le pixel aux coordonnées i*j de l'image passée en paramètre afin de correspondre au pixel p
+ * 
+ * \param I l'image à analyser
+ * \param i,j coordonnées
+ * \return renvoie le pixel de l'image 
+ * 
+ */
 Pixel GetPixel(Image* I,int i,int j)
 {
 	assert(I && i>=0 && i<I->w && j>=0 && j<I->h);
@@ -172,26 +212,16 @@ Image* ChargerBmp(const char* fichier, int w_max, int h_max)
 	}
 	fclose(F);
 	
-	
-	
-	/*for(int y=0;y<I->h;y++)
-	{
-		for(int x=0;x<I->w;x++)
-		{
-			if(I->dat[y*(I->w)+x].r > 0)
-				printf("\x1B[8;47m""1""\x1B[0m");
-			else
-				printf("\x1B[8;40m""0""\x1B[0m");
-				
-		}
-		printf("\n");
-	}*/
-	
-	
-	
 	return I;
 }
-
+/**
+ * \fn int Sauver(Image* I, const char* fichier)
+ * \brief enregistrement de l'image passée en paramètre dans le fichier passé en paramètre au format bmp.
+ * 
+ * \param fichier Chemin absolue de l'endroit ou on va enregistrer l'image''.
+ * \param  I l'image à enregistrer
+ * \return int pour savoir si l'enregistrement c'est fait ou pas.
+ */
 int Sauver(Image* I,const char* fichier)
 {
 	struct BMPHead head;
@@ -232,9 +262,15 @@ int Sauver(Image* I,const char* fichier)
 	fclose(F);
 	return 0;
 }
-// #define WHT   "\x1B[8;47m"
-// #define BLK   "\x1B[8;40m"
-// #define RESET "\x1B[0m"
+
+/**
+ * \fn Image* ChargerMnist(const char* path, int, int)
+ * \brief lecture d'image de format Mnist non compressé et l'enregistre dans la structure Image, elle supprime le fichier de mauvais format.
+ * \param path Chemin absolue de l'image à charger.
+ * \param w_max largeur maximale de l'image
+ * \param w_max largeur maximale de l'image
+ * \return Image la structure qui stock le contenu d'une image.
+ */
 Image* ChargerMnist(const char* path, int w_max, int h_max)
 {
 	unsigned int t[4];
@@ -289,21 +325,16 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 		im->dat[i].g = tmp[i];
 		im->dat[i].b = tmp[i];
 	}
-	// int j;
- //    for(i=0;i<im->h;i++)
- //    {
- //        for(j=0;j<im->w;j++)
- //        {
- //            if(im->dat[i*im->w+j].r > 0)
- //                printf(WHT "1" RESET);
- //            else
- //                printf(BLK "0" RESET);
- //        }
- //        printf("\n");
- //    }
+
 	return im;
 }
 
+/**
+ * \fn char* ChargerEtiquetteMNIST(const char* path)
+ * \brief recuperer l'ettiquette du fichier passé e parametres, supprimser celui ci s'il contient plus d'images.
+ * \param path Chemin absolue de l'etiquette à charger.
+ * \return l'etiquette recupérée du fichier
+ */
 char* ChargerEtiquetteMNIST(const char* path)
 {
 	unsigned int t[2];
@@ -345,6 +376,12 @@ char* ChargerEtiquetteMNIST(const char* path)
 	return c;
 }
 
+/**
+ * \fn App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
+ * \brief rechercher dans le répertoire le premier couple donnée image et étiquette présent tout en supprimant tout fichier au mauvais format ou non reconnu
+ * \param repertoire_app chemin absolue du repertoire de données
+ * \return la structure app renvoie le couple image etiquette
+ */
 App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 {
 	App* couple = malloc(sizeof(App));
@@ -407,12 +444,6 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 			if((couple->image = ChargerBmp(path, w_max, h_max)))
 			{
 				couple->etiquette = malloc(sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp") + 1));
-				for(int i=0;i<strlen(fichier->d_name) - strlen(".bmp");i++)
-					if(couple->etiquette[i] == '%')
-					{
-						couple->etiquette[i] = '\0';
-						break;
-					}
 				strncpy(couple->etiquette,fichier->d_name,sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp")));
 			}
 			else
@@ -430,6 +461,11 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 	return couple;
 }
 
+/**
+ * \fn INFO_RN* ChargerInfo()
+ * \brief récupère les structures INFO_RN de tous les réseaux de neurones enrigistrés dans le repertoire ../sav/ et le retourne sous forme de tableau
+ * \return renvoie l'adresse du tableau contenant tous les information sur les reseaux de neurones
+ */
 INFO_RN* ChargerInfo()
 {
 	char path[268],tmp[268];
@@ -494,6 +530,12 @@ INFO_RN* ChargerInfo()
 	return res;
 }
 
+/**
+ * \fn RN* ChargerRN(INFO_RN *info)
+ * \brief initialise et remplit un réseau de neurones dont les informations sont à l'emplacement passé en paramètres
+ * \param info information sur le reseau de neurones choisi par l'utilisateur
+ * \return renvoie l'adresse du reseau de neurone chargé
+ */
 RN* ChargerRN(INFO_RN *info)
 {
 	RN* rn = initialisation(info);
@@ -550,6 +592,7 @@ RN* ChargerRN(INFO_RN *info)
 		if(i>=7)
 		{
 			path[strlen(path)-1] = '\0';
+			printf("%s\n",path);
 			rn->info->etiquettes[i-7] = malloc(strlen(path)*sizeof(char));
 			strcpy(rn->info->etiquettes[i-7],path);
 		}
@@ -560,6 +603,11 @@ RN* ChargerRN(INFO_RN *info)
 	return rn;
 }
 
+/**
+ * \fn void SaveRN(RN rn) 
+ * \brief va créer ou modifier tous les fichers nécessaires afin de sauvegarder le réseau de neurones passé en paramètre.
+ * \param rn le reseau de neurone à recuperer
+ */
 void SaveRN(RN rn)
 {
 	DIR* rep;
@@ -577,7 +625,9 @@ void SaveRN(RN rn)
 		mkdir(path,S_IRWXU);
 	}
 	closedir(rep);
-		
+	
+	//printf("%s\n",path);
+	
 	FILE* fichier = NULL;
 	COUCHE* tmp = rn.couche_deb->suiv;
 	char path2[100];
@@ -589,6 +639,7 @@ void SaveRN(RN rn)
 		while(tmp)
 		{
 			sprintf(path2,"%s/C%d.rn",path,i);
+			printf("%s\n",path2);
 			if((fichier = fopen(path2,"wb+")) == NULL)
 			{
 				printf("%d\n",errno);
@@ -600,6 +651,7 @@ void SaveRN(RN rn)
 			temp[1] = tmp->taille;
 			fwrite(temp,sizeof(int),2,fichier);
 			
+			//printf("%s\n%d %d\n",path2,temp[0],temp[1]);
 			
 			fwrite(tmp->B,sizeof(float),temp[1],fichier);
 			
