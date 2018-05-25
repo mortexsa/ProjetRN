@@ -445,9 +445,9 @@ void creationRN(GtkWidget *widget, gpointer data){
         int nbrCouche = 0;
         int nbrNeurones = 0;
         INFO_RN *newinfo = malloc(sizeof(INFO_RN));
-        newinfo->nom = malloc(sizeof(char)*(strlen(gtk_entry_get_text(GTK_ENTRY(pList->data)))+2));
+        newinfo->nom = malloc(sizeof(char)*(strlen(gtk_entry_get_text(GTK_ENTRY(pList->data)))+10));
         strcpy(newinfo->nom,gtk_entry_get_text(GTK_ENTRY(pCopie->data)));
-        newinfo->repertoire = malloc(sizeof(char)*(strlen(fenetre->chemin)+2));
+        newinfo->repertoire = malloc(sizeof(char)*(strlen(fenetre->chemin)+10));
         strcpy(newinfo->repertoire,fenetre->chemin);
         if(fenetre->chemin[0] != 0){
             for(int w = 0;w<200;w++){
@@ -459,7 +459,7 @@ void creationRN(GtkWidget *widget, gpointer data){
         pCopie = g_list_next(pCopie);
         nbrNeurones = gtk_spin_button_get_value_as_int(pCopie->data);
         pCopie = g_list_next(pCopie);
-        char *resultat = malloc(sizeof(char)*(strlen(gtk_entry_get_text(GTK_ENTRY(pList->data)))+2));
+        char *resultat = malloc(sizeof(char)*(strlen(gtk_entry_get_text(GTK_ENTRY(pList->data)))+10));
         strcpy(resultat,gtk_entry_get_text(GTK_ENTRY(pCopie->data)));
         char *parse = strtok(resultat,"//");
         int compteur = 0;
@@ -473,7 +473,7 @@ void creationRN(GtkWidget *widget, gpointer data){
         parse = strtok(resultat,"//");
         while(parse != NULL){
             if(strlen(parse) != 0){
-                newinfo->etiquettes[i] = malloc(sizeof(char)*(strlen(parse)+2));
+                newinfo->etiquettes[i] = malloc(sizeof(char)*(strlen(parse)+10));
                 strcpy(newinfo->etiquettes[i],parse);
             }
             parse = strtok(NULL, "//");
@@ -489,7 +489,7 @@ void creationRN(GtkWidget *widget, gpointer data){
         struct tm * t; 
         timestamp = time(NULL); 
         t = localtime(&timestamp); 
-        newinfo->date = malloc(sizeof(char)*12);
+        newinfo->date = malloc(sizeof(char)*20);
         
         sprintf(resultat,"%04u", 1900 + t->tm_year);
         strcpy(newinfo->date,resultat);
@@ -501,7 +501,7 @@ void creationRN(GtkWidget *widget, gpointer data){
         strcat(newinfo->date,resultat);
 
         RN *rn = initialisation(newinfo);
-        AjoutPremiereCouche(rn, newinfo->h*newinfo->w);
+        AjoutPremiereCouche(rn, newinfo->h*newinfo->w*compteur);
         for(i=0;i<nbrCouche;i++){
             Ajout_couche_Fin(rn, nbrNeurones);
         }
