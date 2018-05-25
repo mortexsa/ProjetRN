@@ -16,6 +16,16 @@
 #include <stdio.h>
 #include <time.h>
 
+
+/**
+ * \fn void MultiplicationMatriceVecteur(float** in_M, float* in_V, float* out, int taille_M1,int taille_M3)
+ * \brief multiplie une matrice avec un vecteur
+ * \param in_M matrice de l'opération
+ * \param in_V vecteur de l'opération
+ * \param out vecteur ou est stocké le résultat
+ * \param taille_M1 hauteur de la matrice
+ * \param taille_M3 largeur de la matrice
+ */
 void MultiplicationMatriceVecteur(float** in_M, float* in_V, float* out, int taille_M1,int taille_M3)
 {
 	int i,k; 
@@ -31,10 +41,14 @@ void MultiplicationMatriceVecteur(float** in_M, float* in_V, float* out, int tai
 	}
 }
 
-/*in_V1 vecteur d'activation (l-1*w)
- * in_V2 vecteur des biais de la couche l
- * activation de l
- * */
+/**
+ * \fn void AdditionVecteurVecteur(float* in_V1, float* in_V2, float* out ,int taille)
+ * \brief additionne deux vecteur
+ * \param in_V1 premier vecteur de l'opération
+ * \param in_V2 deuxieme vecteur de l'opération
+ * \param out vecteur ou est stocké le résultat
+ * \param taille taille des vecteurs
+ */
 void AdditionVecteurVecteur(float* in_V1, float* in_V2, float* out ,int taille)
 {
 	int i; 	
@@ -44,8 +58,13 @@ void AdditionVecteurVecteur(float* in_V1, float* in_V2, float* out ,int taille)
 	}
 }
 
-/*sigmoide appliquée sur un vecteur 
- * AJ=σ(AJ-1*W+b)*/
+/**
+ * \fn void SigmoideV(float* in_V, float* out, int taille)
+ * \brief calcule le résulta de la fonction sigmoide sur chacun des éléments du vecteur d'entrée
+ * \param in_V vecteur contenant les valeurs
+ * \param out vecteur ou est stocké le résultat
+ * \param taille taille du vecteur d'entrée
+ */
 void SigmoideV(float* in_V, float* out, int taille)
 {
 	int i; 
@@ -56,14 +75,24 @@ void SigmoideV(float* in_V, float* out, int taille)
 	}
 }
 
-/*calcul de la sigmoide sur un float*/
+/**
+ * \fn float Sigmoide(float in)
+ * \brief passe un nombre dans la fonction sigmoide
+ * \param in nombre a passer dans la sigmoide
+ * \return valeur de retour de la fonction sigmoide
+ */
 float Sigmoide(float in)
 {   
 	float expo = (float)exp(-in);
 	return 1/(1+expo);
 }
 
-/*initialisation des champs du reseau de neurones*/
+/**
+ * \fn RN* initialisation(INFO_RN* info)
+ * \brief initialise un réseau de neurone a partir d'une structure INFO_RN
+ * \param info structure contenant diverse information sur le réseau de neurone a initialiser
+ * \return le réseau de neurone initialisé
+ */
 RN* initialisation(INFO_RN* info)
 {
 	RN* rn = malloc(sizeof(RN));
@@ -75,8 +104,11 @@ RN* initialisation(INFO_RN* info)
 	return rn;	
 }
 
-
-//mettre des val aleatoire dans W et B
+/**
+ * \fn void Remplissage(RN rn) 
+ * \brief met des valeurs aléatoire dans les poids et les biais du réseau de neurone
+ * \param rn réseau de neurone a remplir
+ */
 void Remplissage(RN rn) 
 {
 	srand(time(NULL));
@@ -105,7 +137,12 @@ void Remplissage(RN rn)
 	exit(1);}*/
 }
 
-/*ajouter une couche à la fin */
+/**
+ * \fn void Ajout_couche_Fin(RN* rn, int taille)
+ * \brief ajoute une couche au réseau de neurone
+ * \param rn réseau ou rajouter une couche
+ * \param taille nombre de neurones de la couche a rajouter
+ */
 void Ajout_couche_Fin(RN* rn, int taille)
 {
 	COUCHE* new = malloc(sizeof(COUCHE));
@@ -130,6 +167,12 @@ void Ajout_couche_Fin(RN* rn, int taille)
 	}
 }
 
+/**
+ * \fn void AjoutPremiereCouche(RN* rn, int taille)
+ * \brief ajoute la premiere couche d'un réseau de neurone
+ * \param rn réseau ou rajouter la couche
+ * \param taille nombre de neurones de la couche a rajouter
+ */
 void AjoutPremiereCouche(RN* rn, int taille)
 { 
 	COUCHE* new = malloc(sizeof(COUCHE));
@@ -146,7 +189,12 @@ void AjoutPremiereCouche(RN* rn, int taille)
 	new->DELTA_M = NULL;
 }
 
-/*propagation de l'image application de AJ=σ(AJ-1*W+b)*/
+/**
+ * \fn void Propagation(Image* im, RN rn)
+ * \brief effectue l'algorithme de propagation
+ * \param im l'information a propager dans le réseau de neurone
+ * \param rn réseau ou effectuer la ropagation
+ */
 void Propagation(Image* im, RN rn)
 {
 	COUCHE* tmp = rn.couche_deb;
@@ -183,7 +231,12 @@ void Propagation(Image* im, RN rn)
 	}	
 }
 
-
+/**
+ * \fn char** Reconnaissance(RN rn)
+ * \brief trouve les trois neurone de la couche de fin ayant la plus grande activation et renvois leur étiquette.
+ * \param rn réseau ous'effectue l'analyse de la couche de fin
+ * \return un tableau de trois chaine de caractères contenant les étiquette des trois neurone de la couche de fin ayant la plus grande activation.
+ */
 char** Reconnaissance(RN rn)
 {
 	
@@ -231,6 +284,11 @@ char** Reconnaissance(RN rn)
 	
 }
 
+/**
+ * \fn void libererRN(RN* rn)
+ * \brief libere la mémoire occupée par un réseau de neurone
+ * \param rn réseau de neurone a liberer
+ */
 void libererRN(RN* rn)
 {
 	int i;
