@@ -5,6 +5,7 @@ Le but de l'application est de permettre créer et utiliser des réseaux de neur
 
 ## Compilation
 GTK2 est necessaire a la compilation du projet, le package a installer est libgtk2.0-dev.   
+   
 La compilation s'effectue simplement en utilisant le Makefile fourni :   
 
 > make   
