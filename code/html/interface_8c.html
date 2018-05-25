@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>ProjetRn: Référence du fichier interface.h</title>
+<title>ProjetRn: Référence du fichier interface.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -38,7 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Page&#160;principale</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
       <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -61,7 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
-      <li><a href="globals.html"><span>Membres&#160;de&#160;fichier</span></a></li>
+      <li><a href="globals.html"><span>Variables&#160;globale</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -81,115 +81,76 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Définitions de type</a> &#124;
 <a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
-<div class="title">Référence du fichier interface.h</div>  </div>
+<div class="title">Référence du fichier interface.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Interface du programme.  
 <a href="#details">Plus de détails...</a></p>
-<div class="textblock"><code>#include &quot;gestionnaire_RN.h&quot;</code><br />
-<code>#include &quot;Apprentissage.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="gestionnaire__IO_8h_source.html">gestionnaire_IO.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Structures_8h_source.html">Structures.h</a>&quot;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;assert.h&gt;</code><br />
-<code>#include &lt;time.h&gt;</code><br />
-<code>#include &lt;pthread.h&gt;</code><br />
-<code>#include &lt;sys/types.h&gt;</code><br />
-<code>#include &lt;dirent.h&gt;</code><br />
-<code>#include &lt;sys/dir.h&gt;</code><br />
-<code>#include &lt;errno.h&gt;</code><br />
-<code>#include &lt;sys/stat.h&gt;</code><br />
-<code>#include &lt;gtk/gtk.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;interface.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Graphe des dépendances par inclusion de interface.h:</div>
+Graphe des dépendances par inclusion de interface.c:</div>
 <div class="dyncontent">
-<div class="center"><img src="interface_8h__incl.png" border="0" usemap="#interface_8h" alt=""/></div>
-<map name="interface_8h" id="interface_8h">
-<area shape="rect" id="node2" href="gestionnaire__RN_8h_source.html" title="gestionnaire_RN.h" alt="" coords="38,229,169,256"/>
-<area shape="rect" id="node3" href="Structures_8h.html" title="Code contenant les structures utilisées dans le programme. " alt="" coords="57,304,150,331"/>
-<area shape="rect" id="node4" href="Apprentissage_8h_source.html" title="Apprentissage.h" alt="" coords="90,80,206,107"/>
-<area shape="rect" id="node5" href="gestionnaire__IO_8h.html" title="Gestionnaire d&#39;entrées sorties. " alt="" coords="143,155,267,181"/>
+<div class="center"><img src="interface_8c__incl.png" border="0" usemap="#interface_8c" alt=""/></div>
+<map name="interface_8c" id="interface_8c">
+<area shape="rect" id="node2" href="interface_8h_source.html" title="interface.h" alt="" coords="582,80,665,107"/>
+<area shape="rect" id="node3" href="gestionnaire__RN_8h_source.html" title="gestionnaire_RN.h" alt="" coords="38,304,169,331"/>
+<area shape="rect" id="node4" href="Structures_8h.html" title="Code contenant les structures utilisées dans le programme. " alt="" coords="57,379,150,405"/>
+<area shape="rect" id="node5" href="Apprentissage_8h_source.html" title="Apprentissage.h" alt="" coords="90,155,206,181"/>
+<area shape="rect" id="node6" href="gestionnaire__IO_8h.html" title="Gestionnaire d&#39;entrées sorties. " alt="" coords="143,229,267,256"/>
 </map>
 </div>
-</div><div class="textblock"><div class="dynheader">
-Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
-<div class="dyncontent">
-<div class="center"><img src="interface_8h__dep__incl.png" border="0" usemap="#interface_8hdep" alt=""/></div>
-<map name="interface_8hdep" id="interface_8hdep">
-<area shape="rect" id="node2" href="neurone_8h_source.html" title="neurone.h" alt="" coords="5,80,84,107"/>
-<area shape="rect" id="node3" href="test_8h_source.html" title="test.h" alt="" coords="108,80,163,107"/>
-</map>
-</div>
-</div>
-<p><a href="interface_8h_source.html">Aller au code source de ce fichier.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structINFO__FENETRE.html">INFO_FENETRE</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Information circulant entre les fonctions.  <a href="structINFO__FENETRE.html#details">Plus de détails...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Définitions de type</h2></td></tr>
-<tr class="memitem:aead7bcd5aa775cd161b684815cef6e5a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aead7bcd5aa775cd161b684815cef6e5a"></a>
-typedef struct <a class="el" href="structINFO__FENETRE.html">INFO_FENETRE</a>&#160;</td><td class="memItemRight" valign="bottom"><b>INFO_FENETRE</b></td></tr>
-<tr class="separator:aead7bcd5aa775cd161b684815cef6e5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a1157bf477c8e67641948cb31de95754e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a1157bf477c8e67641948cb31de95754e">nombreReseau</a> ()</td></tr>
+<tr class="memitem:a1157bf477c8e67641948cb31de95754e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#a1157bf477c8e67641948cb31de95754e">nombreReseau</a> ()</td></tr>
 <tr class="memdesc:a1157bf477c8e67641948cb31de95754e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nombre de Réseaux de neurones existant.  <a href="#a1157bf477c8e67641948cb31de95754e">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a1157bf477c8e67641948cb31de95754e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08aaf6738ef116b20809fd4c3af451ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a08aaf6738ef116b20809fd4c3af451ea">viderContainer</a> (GtkWidget *data)</td></tr>
+<tr class="memitem:a08aaf6738ef116b20809fd4c3af451ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#a08aaf6738ef116b20809fd4c3af451ea">viderContainer</a> (GtkWidget *data)</td></tr>
 <tr class="memdesc:a08aaf6738ef116b20809fd4c3af451ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vider le contenu de la fenetre.  <a href="#a08aaf6738ef116b20809fd4c3af451ea">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a08aaf6738ef116b20809fd4c3af451ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab377f1cf5a8abbe888b67875fe00e732"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#ab377f1cf5a8abbe888b67875fe00e732">retourAccueille</a> (GtkWidget *widget, gpointer data)</td></tr>
+<tr class="memitem:ab377f1cf5a8abbe888b67875fe00e732"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#ab377f1cf5a8abbe888b67875fe00e732">retourAccueille</a> (GtkWidget *widget, gpointer data)</td></tr>
 <tr class="memdesc:ab377f1cf5a8abbe888b67875fe00e732"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourner a la page d'accueille.  <a href="#ab377f1cf5a8abbe888b67875fe00e732">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ab377f1cf5a8abbe888b67875fe00e732"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4aaaee29e9c54955715a9de0be73563d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a4aaaee29e9c54955715a9de0be73563d">selectReseau</a> (GtkWidget *widget, gpointer data)</td></tr>
+<tr class="memitem:a4aaaee29e9c54955715a9de0be73563d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#a4aaaee29e9c54955715a9de0be73563d">selectReseau</a> (GtkWidget *widget, gpointer data)</td></tr>
 <tr class="memdesc:a4aaaee29e9c54955715a9de0be73563d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selection d'un reseau de neurone.  <a href="#a4aaaee29e9c54955715a9de0be73563d">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a4aaaee29e9c54955715a9de0be73563d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed9f60cdb4aaeaf5500cd93cce7a1b6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#aed9f60cdb4aaeaf5500cd93cce7a1b6d">traitement</a> (GtkWidget *widget, gpointer data)</td></tr>
+<tr class="memitem:aed9f60cdb4aaeaf5500cd93cce7a1b6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#aed9f60cdb4aaeaf5500cd93cce7a1b6d">traitement</a> (GtkWidget *widget, gpointer data)</td></tr>
 <tr class="memdesc:aed9f60cdb4aaeaf5500cd93cce7a1b6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lance le traitement d'une image.  <a href="#aed9f60cdb4aaeaf5500cd93cce7a1b6d">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aed9f60cdb4aaeaf5500cd93cce7a1b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af336de7bd25d6d5909517f909a171b37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#af336de7bd25d6d5909517f909a171b37">lancerApprentissage</a> (GtkWidget *widget, gpointer data)</td></tr>
-<tr class="memdesc:af336de7bd25d6d5909517f909a171b37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lancer l'apprentissage du réseau de neurones.  <a href="#af336de7bd25d6d5909517f909a171b37">Plus de détails...</a><br /></td></tr>
-<tr class="separator:af336de7bd25d6d5909517f909a171b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92b101b532f98164c1f609dec68afe00"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a92b101b532f98164c1f609dec68afe00">fctThreadApp</a> (void *arg)</td></tr>
-<tr class="memdesc:a92b101b532f98164c1f609dec68afe00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction appeler par le thread qui fait l'apprentissage du reseau de neurone.  <a href="#a92b101b532f98164c1f609dec68afe00">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a92b101b532f98164c1f609dec68afe00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0a8eb01de87316e3486addd8b177515"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#ae0a8eb01de87316e3486addd8b177515">matrice</a> (GtkWidget *widget, gpointer data)</td></tr>
-<tr class="memdesc:ae0a8eb01de87316e3486addd8b177515"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affichage de la matrice des poid du reseau de neurones.  <a href="#ae0a8eb01de87316e3486addd8b177515">Plus de détails...</a><br /></td></tr>
-<tr class="separator:ae0a8eb01de87316e3486addd8b177515"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af05673f8ea4045e8dc3eacdbf80f3eb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#af05673f8ea4045e8dc3eacdbf80f3eb6">resultatTraitement</a> (GtkWidget *widget, gpointer data)</td></tr>
+<tr class="memitem:af05673f8ea4045e8dc3eacdbf80f3eb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#af05673f8ea4045e8dc3eacdbf80f3eb6">resultatTraitement</a> (GtkWidget *widget, gpointer data)</td></tr>
 <tr class="memdesc:af05673f8ea4045e8dc3eacdbf80f3eb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le résultat du traitement d'une image.  <a href="#af05673f8ea4045e8dc3eacdbf80f3eb6">Plus de détails...</a><br /></td></tr>
 <tr class="separator:af05673f8ea4045e8dc3eacdbf80f3eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab697526e222972bbbee4f4429daf38cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#ab697526e222972bbbee4f4429daf38cc">page_principale</a> (<a class="el" href="structINFO__FENETRE.html">INFO_FENETRE</a> *fenetre)</td></tr>
+<tr class="memitem:af336de7bd25d6d5909517f909a171b37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#af336de7bd25d6d5909517f909a171b37">lancerApprentissage</a> (GtkWidget *widget, gpointer data)</td></tr>
+<tr class="memdesc:af336de7bd25d6d5909517f909a171b37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lancer l'apprentissage du réseau de neurones.  <a href="#af336de7bd25d6d5909517f909a171b37">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af336de7bd25d6d5909517f909a171b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0de5bb9dcc064b6064f98d838dbf8cfc"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#a0de5bb9dcc064b6064f98d838dbf8cfc">fctThreadApp</a> (void *arg)</td></tr>
+<tr class="memdesc:a0de5bb9dcc064b6064f98d838dbf8cfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction appeler par le thread qui fait l'apprentissage du reseau de neurone.  <a href="#a0de5bb9dcc064b6064f98d838dbf8cfc">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a0de5bb9dcc064b6064f98d838dbf8cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0a8eb01de87316e3486addd8b177515"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#ae0a8eb01de87316e3486addd8b177515">matrice</a> (GtkWidget *widget, gpointer data)</td></tr>
+<tr class="memdesc:ae0a8eb01de87316e3486addd8b177515"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affichage de la matrice des poid du reseau de neurones.  <a href="#ae0a8eb01de87316e3486addd8b177515">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae0a8eb01de87316e3486addd8b177515"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab697526e222972bbbee4f4429daf38cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#ab697526e222972bbbee4f4429daf38cc">page_principale</a> (<a class="el" href="structINFO__FENETRE.html">INFO_FENETRE</a> *fenetre)</td></tr>
 <tr class="memdesc:ab697526e222972bbbee4f4429daf38cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Page d'accueille du programme.  <a href="#ab697526e222972bbbee4f4429daf38cc">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ab697526e222972bbbee4f4429daf38cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7658136cafa28ec67a73274f310a7b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#aa7658136cafa28ec67a73274f310a7b4">creer_file_selection</a> ()</td></tr>
-<tr class="memdesc:aa7658136cafa28ec67a73274f310a7b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selection d'un fichier a analyser dans traitement.  <a href="#aa7658136cafa28ec67a73274f310a7b4">Plus de détails...</a><br /></td></tr>
-<tr class="separator:aa7658136cafa28ec67a73274f310a7b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb7db74660ad3d28b2b68874d30d9316"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#aeb7db74660ad3d28b2b68874d30d9316">creer_folder_selection</a> (GtkButton *button, gpointer data)</td></tr>
-<tr class="memdesc:aeb7db74660ad3d28b2b68874d30d9316"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selection du dossier ou ce trouverons les données pour l'apprentissage.  <a href="#aeb7db74660ad3d28b2b68874d30d9316">Plus de détails...</a><br /></td></tr>
-<tr class="separator:aeb7db74660ad3d28b2b68874d30d9316"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15cf03bc8aef74929090ec43f9dcd1d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a15cf03bc8aef74929090ec43f9dcd1d6">creation</a> (GtkWidget *widget, gpointer data)</td></tr>
+<tr class="memitem:a15cf03bc8aef74929090ec43f9dcd1d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#a15cf03bc8aef74929090ec43f9dcd1d6">creation</a> (GtkWidget *widget, gpointer data)</td></tr>
 <tr class="memdesc:a15cf03bc8aef74929090ec43f9dcd1d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface de creation d'un reseau de neurones.  <a href="#a15cf03bc8aef74929090ec43f9dcd1d6">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a15cf03bc8aef74929090ec43f9dcd1d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb7b9f7924beb4a920220bb2d9a13245"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb7b9f7924beb4a920220bb2d9a13245"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>creationRN</b> (GtkWidget *widget, gpointer data)</td></tr>
 <tr class="separator:afb7b9f7924beb4a920220bb2d9a13245"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea683c3c50c9b394b3145ffa90bac3a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#aea683c3c50c9b394b3145ffa90bac3a5">quitter</a> (GtkWidget *widget, gpointer data)</td></tr>
+<tr class="memitem:a7407da4bcc79f7f2fd1036ef29df115a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7407da4bcc79f7f2fd1036ef29df115a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>creer_file_selection</b> (GtkWidget *widget, gpointer data)</td></tr>
+<tr class="separator:a7407da4bcc79f7f2fd1036ef29df115a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb7db74660ad3d28b2b68874d30d9316"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#aeb7db74660ad3d28b2b68874d30d9316">creer_folder_selection</a> (GtkButton *button, gpointer data)</td></tr>
+<tr class="memdesc:aeb7db74660ad3d28b2b68874d30d9316"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selection du dossier ou ce trouverons les données pour l'apprentissage.  <a href="#aeb7db74660ad3d28b2b68874d30d9316">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aeb7db74660ad3d28b2b68874d30d9316"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea683c3c50c9b394b3145ffa90bac3a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#aea683c3c50c9b394b3145ffa90bac3a5">quitter</a> (GtkWidget *widget, gpointer data)</td></tr>
 <tr class="memdesc:aea683c3c50c9b394b3145ffa90bac3a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lorsque l'on quitte la fenetre.  <a href="#aea683c3c50c9b394b3145ffa90bac3a5">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aea683c3c50c9b394b3145ffa90bac3a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a892c9f29f308cd1e9db0ec363ebc2861"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a892c9f29f308cd1e9db0ec363ebc2861">afficherInterface</a> ()</td></tr>
+<tr class="memitem:a892c9f29f308cd1e9db0ec363ebc2861"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8c.html#a892c9f29f308cd1e9db0ec363ebc2861">afficherInterface</a> ()</td></tr>
 <tr class="memdesc:a892c9f29f308cd1e9db0ec363ebc2861"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contenant toute l'interface et les fonction.  <a href="#a892c9f29f308cd1e9db0ec363ebc2861">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a892c9f29f308cd1e9db0ec363ebc2861"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -261,23 +222,6 @@ MONTIGNET Anthony</dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="aa7658136cafa28ec67a73274f310a7b4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void creer_file_selection </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Selection d'un fichier a analyser dans traitement. </p>
-
-</div>
-</div>
 <a class="anchor" id="aeb7db74660ad3d28b2b68874d30d9316"></a>
 <div class="memitem">
 <div class="memproto">
@@ -313,12 +257,12 @@ MONTIGNET Anthony</dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a92b101b532f98164c1f609dec68afe00"></a>
+<a class="anchor" id="a0de5bb9dcc064b6064f98d838dbf8cfc"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void* fctThreadApp </td>
+          <td class="memname">void * fctThreadApp </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>arg</em></td><td>)</td>

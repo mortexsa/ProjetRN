@@ -38,7 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Page&#160;principale</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
       <li><a href="files.html"><span>Fichiers</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -60,9 +60,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="annotated.html"><span>Liste&#160;des&#160;classes</span></a></li>
-      <li><a href="classes.html"><span>Index&#160;des&#160;classes</span></a></li>
-      <li><a href="functions.html"><span>Membres&#160;de&#160;classe</span></a></li>
+      <li><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
+      <li><a href="classes.html"><span>Index&#160;des&#160;structures&#160;de&#160;données</span></a></li>
+      <li><a href="functions.html"><span>Champs&#160;de&#160;donnée</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -82,31 +82,62 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Attributs publics</a> &#124;
-<a href="structApprentissage-members.html">Liste de tous les membres</a>  </div>
+<a href="#pub-attribs">Champs de données</a>  </div>
   <div class="headertitle">
 <div class="title">Référence de la structure Apprentissage</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>regroupe un couple données d'entré et sortie attendue necessaire lors de l'apprentissage  
+ <a href="structApprentissage.html#details">Plus de détails...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Structures_8h_source.html">Structures.h</a>&gt;</code></p>
 <div class="dynheader">
 Graphe de collaboration de Apprentissage:</div>
 <div class="dyncontent">
 <div class="center"><img src="structApprentissage__coll__graph.png" border="0" usemap="#Apprentissage_coll__map" alt="Collaboration graph"/></div>
 <map name="Apprentissage_coll__map" id="Apprentissage_coll__map">
-<area shape="rect" id="node2" href="structImage.html" title="Image" alt="" coords="29,95,87,121"/>
-<area shape="rect" id="node3" href="structPixel.html" title="Pixel" alt="" coords="33,5,83,32"/>
+<area shape="rect" id="node2" href="structImage.html" title="contient chaque pixel deffinissant une image ainsi que la taille de celle ci " alt="" coords="29,95,87,121"/>
+<area shape="rect" id="node3" href="structPixel.html" title="definie les composantes rgb d&#39;un pixel " alt="" coords="33,5,83,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Attributs publics</h2></td></tr>
-<tr class="memitem:af3defb9d6e44f5ca0fe145113cec1943"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af3defb9d6e44f5ca0fe145113cec1943"></a>
-<a class="el" href="structImage.html">Image</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>image</b></td></tr>
+Champs de données</h2></td></tr>
+<tr class="memitem:af3defb9d6e44f5ca0fe145113cec1943"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structImage.html">Image</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structApprentissage.html#af3defb9d6e44f5ca0fe145113cec1943">image</a></td></tr>
 <tr class="separator:af3defb9d6e44f5ca0fe145113cec1943"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1668167b1678d621bb9b88573f55be7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af1668167b1678d621bb9b88573f55be7"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>etiquette</b></td></tr>
+<tr class="memitem:af1668167b1678d621bb9b88573f55be7"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structApprentissage.html#af1668167b1678d621bb9b88573f55be7">etiquette</a></td></tr>
 <tr class="separator:af1668167b1678d621bb9b88573f55be7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>regroupe un couple données d'entré et sortie attendue necessaire lors de l'apprentissage </p>
+</div><h2 class="groupheader">Documentation des champs</h2>
+<a class="anchor" id="af1668167b1678d621bb9b88573f55be7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* Apprentissage::etiquette</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>étiquette correspondant a l'image </p>
+
+</div>
+</div>
+<a class="anchor" id="af3defb9d6e44f5ca0fe145113cec1943"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structImage.html">Image</a>* Apprentissage::image</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>image correspondant a l'étiquette </p>
+
+</div>
+</div>
 <hr/>La documentation de cette structure a été générée à partir du fichier suivant :<ul>
 <li><a class="el" href="Structures_8h_source.html">Structures.h</a></li>
 </ul>

@@ -38,7 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Page&#160;principale</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
       <li><a href="files.html"><span>Fichiers</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -60,9 +60,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="annotated.html"><span>Liste&#160;des&#160;classes</span></a></li>
-      <li><a href="classes.html"><span>Index&#160;des&#160;classes</span></a></li>
-      <li><a href="functions.html"><span>Membres&#160;de&#160;classe</span></a></li>
+      <li><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
+      <li><a href="classes.html"><span>Index&#160;des&#160;structures&#160;de&#160;données</span></a></li>
+      <li><a href="functions.html"><span>Champs&#160;de&#160;donnée</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -82,33 +82,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Attributs publics</a> &#124;
-<a href="structImage-members.html">Liste de tous les membres</a>  </div>
+<a href="#pub-attribs">Champs de données</a>  </div>
   <div class="headertitle">
 <div class="title">Référence de la structure Image</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>contient chaque pixel deffinissant une image ainsi que la taille de celle ci  
+ <a href="structImage.html#details">Plus de détails...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Structures_8h_source.html">Structures.h</a>&gt;</code></p>
 <div class="dynheader">
 Graphe de collaboration de Image:</div>
 <div class="dyncontent">
 <div class="center"><img src="structImage__coll__graph.png" border="0" usemap="#Image_coll__map" alt="Collaboration graph"/></div>
 <map name="Image_coll__map" id="Image_coll__map">
-<area shape="rect" id="node2" href="structPixel.html" title="Pixel" alt="" coords="9,5,60,32"/>
+<area shape="rect" id="node2" href="structPixel.html" title="definie les composantes rgb d&#39;un pixel " alt="" coords="9,5,60,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Attributs publics</h2></td></tr>
+Champs de données</h2></td></tr>
 <tr class="memitem:a5a1c5528c889b0438bc2dc0c0ee94dbe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a1c5528c889b0438bc2dc0c0ee94dbe"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>w</b></td></tr>
 <tr class="separator:a5a1c5528c889b0438bc2dc0c0ee94dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aead13dbc461159381773fff06824e651"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aead13dbc461159381773fff06824e651"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>h</b></td></tr>
+<tr class="memitem:aead13dbc461159381773fff06824e651"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structImage.html#aead13dbc461159381773fff06824e651">h</a></td></tr>
 <tr class="separator:aead13dbc461159381773fff06824e651"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc032a260e391b03f825917716eb07b7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc032a260e391b03f825917716eb07b7"></a>
-<a class="el" href="structPixel.html">Pixel</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>dat</b></td></tr>
+<tr class="memitem:abc032a260e391b03f825917716eb07b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPixel.html">Pixel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structImage.html#abc032a260e391b03f825917716eb07b7">dat</a></td></tr>
 <tr class="separator:abc032a260e391b03f825917716eb07b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>contient chaque pixel deffinissant une image ainsi que la taille de celle ci </p>
+</div><h2 class="groupheader">Documentation des champs</h2>
+<a class="anchor" id="abc032a260e391b03f825917716eb07b7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPixel.html">Pixel</a>* Image::dat</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>tableau contenant les pixels </p>
+
+</div>
+</div>
+<a class="anchor" id="aead13dbc461159381773fff06824e651"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Image::h</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>taille de l'image </p>
+
+</div>
+</div>
 <hr/>La documentation de cette structure a été générée à partir du fichier suivant :<ul>
 <li><a class="el" href="Structures_8h_source.html">Structures.h</a></li>
 </ul>

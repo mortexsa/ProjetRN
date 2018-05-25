@@ -573,9 +573,7 @@ void SaveRN(RN rn)
 		mkdir(path,S_IRWXU);
 	}
 	closedir(rep);
-	
-	//printf("%s\n",path);
-	
+		
 	FILE* fichier = NULL;
 	COUCHE* tmp = rn.couche_deb->suiv;
 	char path2[100];
@@ -587,7 +585,6 @@ void SaveRN(RN rn)
 		while(tmp)
 		{
 			sprintf(path2,"%s/C%d.rn",path,i);
-			printf("%s\n",path2);
 			if((fichier = fopen(path2,"wb+")) == NULL)
 			{
 				printf("%d\n",errno);
@@ -599,7 +596,6 @@ void SaveRN(RN rn)
 			temp[1] = tmp->taille;
 			fwrite(temp,sizeof(int),2,fichier);
 			
-			//printf("%s\n%d %d\n",path2,temp[0],temp[1]);
 			
 			fwrite(tmp->B,sizeof(float),temp[1],fichier);
 			

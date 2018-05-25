@@ -1,8 +1,8 @@
 <map id="gestionnaire_IO.h" name="gestionnaire_IO.h">
 <area shape="rect" id="node2" href="$Apprentissage_8h_source.html" title="Apprentissage.h" alt="" coords="33,80,149,107"/>
-<area shape="rect" id="node4" href="$interface_8h.html" title="Interface du programme. " alt="" coords="146,155,229,181"/>
-<area shape="rect" id="node7" href="$gestionnaire__IO_8c.html" title="Code des fonctions de lecture et d&#39;écriture dans des fichiers. " alt="" coords="225,80,349,107"/>
+<area shape="rect" id="node4" href="$interface_8h_source.html" title="interface.h" alt="" coords="146,155,229,181"/>
 <area shape="rect" id="node3" href="$Apprentissage_8c.html" title="Code de la partie propagation&#45;inverse ainsi que toutes les fonctions necessaire a celle ci..." alt="" coords="5,155,121,181"/>
-<area shape="rect" id="node5" href="$neurone_8h_source.html" title="neurone.h" alt="" coords="103,229,181,256"/>
-<area shape="rect" id="node6" href="$test_8h_source.html" title="test.h" alt="" coords="205,229,260,256"/>
+<area shape="rect" id="node5" href="$interface_8c.html" title="Interface du programme. " alt="" coords="41,229,123,256"/>
+<area shape="rect" id="node6" href="$neurone_8h_source.html" title="neurone.h" alt="" coords="148,229,227,256"/>
+<area shape="rect" id="node7" href="$test_8h_source.html" title="test.h" alt="" coords="251,229,305,256"/>
 </map>

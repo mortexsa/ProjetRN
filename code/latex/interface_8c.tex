@@ -1,88 +1,54 @@
-\hypertarget{interface_8h}{}\section{Référence du fichier interface.\+h}
-\label{interface_8h}\index{interface.\+h@{interface.\+h}}
+\hypertarget{interface_8c}{}\section{Référence du fichier interface.\+c}
+\label{interface_8c}\index{interface.\+c@{interface.\+c}}
 
 
 Interface du programme.  
 
 
-{\ttfamily \#include \char`\"{}gestionnaire\+\_\+\+R\+N.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}Apprentissage.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}gestionnaire\+\_\+\+I\+O.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}Structures.\+h\char`\"{}}\\*
-{\ttfamily \#include $<$stdio.\+h$>$}\\*
-{\ttfamily \#include $<$stdlib.\+h$>$}\\*
-{\ttfamily \#include $<$string.\+h$>$}\\*
-{\ttfamily \#include $<$assert.\+h$>$}\\*
-{\ttfamily \#include $<$time.\+h$>$}\\*
-{\ttfamily \#include $<$pthread.\+h$>$}\\*
-{\ttfamily \#include $<$sys/types.\+h$>$}\\*
-{\ttfamily \#include $<$dirent.\+h$>$}\\*
-{\ttfamily \#include $<$sys/dir.\+h$>$}\\*
-{\ttfamily \#include $<$errno.\+h$>$}\\*
-{\ttfamily \#include $<$sys/stat.\+h$>$}\\*
-{\ttfamily \#include $<$gtk/gtk.\+h$>$}\\*
-Graphe des dépendances par inclusion de interface.\+h\+:
-\nopagebreak
+{\ttfamily \#include \char`\"{}interface.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de interface.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{interface_8h__incl}
+\includegraphics[width=350pt]{interface_8c__incl}
 \end{center}
 \end{figure}
-Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=198pt]{interface_8h__dep__incl}
-\end{center}
-\end{figure}
-\subsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE}
-\begin{DoxyCompactList}\small\item\em Information circulant entre les fonctions. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Définitions de type}
-\begin{DoxyCompactItemize}
-\item 
-typedef struct \hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE} {\bfseries I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE}\hypertarget{interface_8h_aead7bcd5aa775cd161b684815cef6e5a}{}\label{interface_8h_aead7bcd5aa775cd161b684815cef6e5a}
-
-\end{DoxyCompactItemize}
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{interface_8h_a1157bf477c8e67641948cb31de95754e}{nombre\+Reseau} ()
+int \hyperlink{interface_8c_a1157bf477c8e67641948cb31de95754e}{nombre\+Reseau} ()
 \begin{DoxyCompactList}\small\item\em Nombre de Réseaux de neurones existant. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_a08aaf6738ef116b20809fd4c3af451ea}{vider\+Container} (Gtk\+Widget $\ast$data)
+void \hyperlink{interface_8c_a08aaf6738ef116b20809fd4c3af451ea}{vider\+Container} (Gtk\+Widget $\ast$data)
 \begin{DoxyCompactList}\small\item\em Vider le contenu de la fenetre. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_ab377f1cf5a8abbe888b67875fe00e732}{retour\+Accueille} (Gtk\+Widget $\ast$widget, gpointer data)
+void \hyperlink{interface_8c_ab377f1cf5a8abbe888b67875fe00e732}{retour\+Accueille} (Gtk\+Widget $\ast$widget, gpointer data)
 \begin{DoxyCompactList}\small\item\em Retourner a la page d\textquotesingle{}accueille. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_a4aaaee29e9c54955715a9de0be73563d}{select\+Reseau} (Gtk\+Widget $\ast$widget, gpointer data)
+void \hyperlink{interface_8c_a4aaaee29e9c54955715a9de0be73563d}{select\+Reseau} (Gtk\+Widget $\ast$widget, gpointer data)
 \begin{DoxyCompactList}\small\item\em Selection d\textquotesingle{}un reseau de neurone. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_aed9f60cdb4aaeaf5500cd93cce7a1b6d}{traitement} (Gtk\+Widget $\ast$widget, gpointer data)
+void \hyperlink{interface_8c_aed9f60cdb4aaeaf5500cd93cce7a1b6d}{traitement} (Gtk\+Widget $\ast$widget, gpointer data)
 \begin{DoxyCompactList}\small\item\em Lance le traitement d\textquotesingle{}une image. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_af336de7bd25d6d5909517f909a171b37}{lancer\+Apprentissage} (Gtk\+Widget $\ast$widget, gpointer data)
-\begin{DoxyCompactList}\small\item\em Lancer l\textquotesingle{}apprentissage du réseau de neurones. \end{DoxyCompactList}\item 
-void $\ast$ \hyperlink{interface_8h_a92b101b532f98164c1f609dec68afe00}{fct\+Thread\+App} (void $\ast$arg)
-\begin{DoxyCompactList}\small\item\em Fonction appeler par le thread qui fait l\textquotesingle{}apprentissage du reseau de neurone. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_ae0a8eb01de87316e3486addd8b177515}{matrice} (Gtk\+Widget $\ast$widget, gpointer data)
-\begin{DoxyCompactList}\small\item\em Affichage de la matrice des poid du reseau de neurones. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_af05673f8ea4045e8dc3eacdbf80f3eb6}{resultat\+Traitement} (Gtk\+Widget $\ast$widget, gpointer data)
+void \hyperlink{interface_8c_af05673f8ea4045e8dc3eacdbf80f3eb6}{resultat\+Traitement} (Gtk\+Widget $\ast$widget, gpointer data)
 \begin{DoxyCompactList}\small\item\em Affiche le résultat du traitement d\textquotesingle{}une image. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_ab697526e222972bbbee4f4429daf38cc}{page\+\_\+principale} (\hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE} $\ast$fenetre)
+void \hyperlink{interface_8c_af336de7bd25d6d5909517f909a171b37}{lancer\+Apprentissage} (Gtk\+Widget $\ast$widget, gpointer data)
+\begin{DoxyCompactList}\small\item\em Lancer l\textquotesingle{}apprentissage du réseau de neurones. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{interface_8c_a0de5bb9dcc064b6064f98d838dbf8cfc}{fct\+Thread\+App} (void $\ast$arg)
+\begin{DoxyCompactList}\small\item\em Fonction appeler par le thread qui fait l\textquotesingle{}apprentissage du reseau de neurone. \end{DoxyCompactList}\item 
+void \hyperlink{interface_8c_ae0a8eb01de87316e3486addd8b177515}{matrice} (Gtk\+Widget $\ast$widget, gpointer data)
+\begin{DoxyCompactList}\small\item\em Affichage de la matrice des poid du reseau de neurones. \end{DoxyCompactList}\item 
+void \hyperlink{interface_8c_ab697526e222972bbbee4f4429daf38cc}{page\+\_\+principale} (\hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE} $\ast$fenetre)
 \begin{DoxyCompactList}\small\item\em Page d\textquotesingle{}accueille du programme. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_aa7658136cafa28ec67a73274f310a7b4}{creer\+\_\+file\+\_\+selection} ()
-\begin{DoxyCompactList}\small\item\em Selection d\textquotesingle{}un fichier a analyser dans traitement. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_aeb7db74660ad3d28b2b68874d30d9316}{creer\+\_\+folder\+\_\+selection} (Gtk\+Button $\ast$button, gpointer data)
-\begin{DoxyCompactList}\small\item\em Selection du dossier ou ce trouverons les données pour l\textquotesingle{}apprentissage. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_a15cf03bc8aef74929090ec43f9dcd1d6}{creation} (Gtk\+Widget $\ast$widget, gpointer data)
+void \hyperlink{interface_8c_a15cf03bc8aef74929090ec43f9dcd1d6}{creation} (Gtk\+Widget $\ast$widget, gpointer data)
 \begin{DoxyCompactList}\small\item\em Interface de creation d\textquotesingle{}un reseau de neurones. \end{DoxyCompactList}\item 
-void {\bfseries creation\+RN} (Gtk\+Widget $\ast$widget, gpointer data)\hypertarget{interface_8h_afb7b9f7924beb4a920220bb2d9a13245}{}\label{interface_8h_afb7b9f7924beb4a920220bb2d9a13245}
+void {\bfseries creation\+RN} (Gtk\+Widget $\ast$widget, gpointer data)\hypertarget{interface_8c_afb7b9f7924beb4a920220bb2d9a13245}{}\label{interface_8c_afb7b9f7924beb4a920220bb2d9a13245}
 
 \item 
-void \hyperlink{interface_8h_aea683c3c50c9b394b3145ffa90bac3a5}{quitter} (Gtk\+Widget $\ast$widget, gpointer data)
+void {\bfseries creer\+\_\+file\+\_\+selection} (Gtk\+Widget $\ast$widget, gpointer data)\hypertarget{interface_8c_a7407da4bcc79f7f2fd1036ef29df115a}{}\label{interface_8c_a7407da4bcc79f7f2fd1036ef29df115a}
+
+\item 
+void \hyperlink{interface_8c_aeb7db74660ad3d28b2b68874d30d9316}{creer\+\_\+folder\+\_\+selection} (Gtk\+Button $\ast$button, gpointer data)
+\begin{DoxyCompactList}\small\item\em Selection du dossier ou ce trouverons les données pour l\textquotesingle{}apprentissage. \end{DoxyCompactList}\item 
+void \hyperlink{interface_8c_aea683c3c50c9b394b3145ffa90bac3a5}{quitter} (Gtk\+Widget $\ast$widget, gpointer data)
 \begin{DoxyCompactList}\small\item\em Lorsque l\textquotesingle{}on quitte la fenetre. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_a892c9f29f308cd1e9db0ec363ebc2861}{afficher\+Interface} ()
+void \hyperlink{interface_8c_a892c9f29f308cd1e9db0ec363ebc2861}{afficher\+Interface} ()
 \begin{DoxyCompactList}\small\item\em Contenant toute l\textquotesingle{}interface et les fonction. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -105,25 +71,25 @@ M\+O\+N\+T\+I\+G\+N\+ET Anthony
 Interface du programme de reconnaissance d\textquotesingle{}image. 
 
 \subsection{Documentation des fonctions}
-\index{interface.\+h@{interface.\+h}!afficher\+Interface@{afficher\+Interface}}
-\index{afficher\+Interface@{afficher\+Interface}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!afficher\+Interface@{afficher\+Interface}}
+\index{afficher\+Interface@{afficher\+Interface}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{afficher\+Interface()}{afficherInterface()}}]{\setlength{\rightskip}{0pt plus 5cm}void afficher\+Interface (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_a892c9f29f308cd1e9db0ec363ebc2861}{}\label{interface_8h_a892c9f29f308cd1e9db0ec363ebc2861}
+)}\hypertarget{interface_8c_a892c9f29f308cd1e9db0ec363ebc2861}{}\label{interface_8c_a892c9f29f308cd1e9db0ec363ebc2861}
 
 
 Contenant toute l\textquotesingle{}interface et les fonction. 
 
-\index{interface.\+h@{interface.\+h}!creation@{creation}}
-\index{creation@{creation}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!creation@{creation}}
+\index{creation@{creation}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{creation(\+Gtk\+Widget $\ast$widget, gpointer data)}{creation(GtkWidget *widget, gpointer data)}}]{\setlength{\rightskip}{0pt plus 5cm}void creation (
 \begin{DoxyParamCaption}
 \item[{Gtk\+Widget $\ast$}]{widget, }
 \item[{gpointer}]{data}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_a15cf03bc8aef74929090ec43f9dcd1d6}{}\label{interface_8h_a15cf03bc8aef74929090ec43f9dcd1d6}
+)}\hypertarget{interface_8c_a15cf03bc8aef74929090ec43f9dcd1d6}{}\label{interface_8c_a15cf03bc8aef74929090ec43f9dcd1d6}
 
 
 Interface de creation d\textquotesingle{}un reseau de neurones. 
@@ -137,25 +103,14 @@ Recuperation des données et sauvegarde du réseau de neurones.
 {\em data} & Pour le passage de la structure \hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE}. \\
 \hline
 \end{DoxyParams}
-\index{interface.\+h@{interface.\+h}!creer\+\_\+file\+\_\+selection@{creer\+\_\+file\+\_\+selection}}
-\index{creer\+\_\+file\+\_\+selection@{creer\+\_\+file\+\_\+selection}!interface.\+h@{interface.\+h}}
-\subsubsection[{\texorpdfstring{creer\+\_\+file\+\_\+selection()}{creer_file_selection()}}]{\setlength{\rightskip}{0pt plus 5cm}void creer\+\_\+file\+\_\+selection (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{interface_8h_aa7658136cafa28ec67a73274f310a7b4}{}\label{interface_8h_aa7658136cafa28ec67a73274f310a7b4}
-
-
-Selection d\textquotesingle{}un fichier a analyser dans traitement. 
-
-\index{interface.\+h@{interface.\+h}!creer\+\_\+folder\+\_\+selection@{creer\+\_\+folder\+\_\+selection}}
-\index{creer\+\_\+folder\+\_\+selection@{creer\+\_\+folder\+\_\+selection}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!creer\+\_\+folder\+\_\+selection@{creer\+\_\+folder\+\_\+selection}}
+\index{creer\+\_\+folder\+\_\+selection@{creer\+\_\+folder\+\_\+selection}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{creer\+\_\+folder\+\_\+selection(\+Gtk\+Button $\ast$button, gpointer data)}{creer_folder_selection(GtkButton *button, gpointer data)}}]{\setlength{\rightskip}{0pt plus 5cm}void creer\+\_\+folder\+\_\+selection (
 \begin{DoxyParamCaption}
 \item[{Gtk\+Button $\ast$}]{button, }
 \item[{gpointer}]{data}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_aeb7db74660ad3d28b2b68874d30d9316}{}\label{interface_8h_aeb7db74660ad3d28b2b68874d30d9316}
+)}\hypertarget{interface_8c_aeb7db74660ad3d28b2b68874d30d9316}{}\label{interface_8c_aeb7db74660ad3d28b2b68874d30d9316}
 
 
 Selection du dossier ou ce trouverons les données pour l\textquotesingle{}apprentissage. 
@@ -167,13 +122,13 @@ Selection du dossier ou ce trouverons les données pour l\textquotesingle{}appre
 {\em data} & Pour le passage de la structure \hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE}. \\
 \hline
 \end{DoxyParams}
-\index{interface.\+h@{interface.\+h}!fct\+Thread\+App@{fct\+Thread\+App}}
-\index{fct\+Thread\+App@{fct\+Thread\+App}!interface.\+h@{interface.\+h}}
-\subsubsection[{\texorpdfstring{fct\+Thread\+App(void $\ast$arg)}{fctThreadApp(void *arg)}}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ fct\+Thread\+App (
+\index{interface.\+c@{interface.\+c}!fct\+Thread\+App@{fct\+Thread\+App}}
+\index{fct\+Thread\+App@{fct\+Thread\+App}!interface.\+c@{interface.\+c}}
+\subsubsection[{\texorpdfstring{fct\+Thread\+App(void $\ast$arg)}{fctThreadApp(void *arg)}}]{\setlength{\rightskip}{0pt plus 5cm}void $\ast$ fct\+Thread\+App (
 \begin{DoxyParamCaption}
 \item[{void $\ast$}]{arg}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_a92b101b532f98164c1f609dec68afe00}{}\label{interface_8h_a92b101b532f98164c1f609dec68afe00}
+)}\hypertarget{interface_8c_a0de5bb9dcc064b6064f98d838dbf8cfc}{}\label{interface_8c_a0de5bb9dcc064b6064f98d838dbf8cfc}
 
 
 Fonction appeler par le thread qui fait l\textquotesingle{}apprentissage du reseau de neurone. 
@@ -183,14 +138,14 @@ Fonction appeler par le thread qui fait l\textquotesingle{}apprentissage du rese
 {\em arg} & Pour le passage de la structure \hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE}. \\
 \hline
 \end{DoxyParams}
-\index{interface.\+h@{interface.\+h}!lancer\+Apprentissage@{lancer\+Apprentissage}}
-\index{lancer\+Apprentissage@{lancer\+Apprentissage}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!lancer\+Apprentissage@{lancer\+Apprentissage}}
+\index{lancer\+Apprentissage@{lancer\+Apprentissage}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{lancer\+Apprentissage(\+Gtk\+Widget $\ast$widget, gpointer data)}{lancerApprentissage(GtkWidget *widget, gpointer data)}}]{\setlength{\rightskip}{0pt plus 5cm}void lancer\+Apprentissage (
 \begin{DoxyParamCaption}
 \item[{Gtk\+Widget $\ast$}]{widget, }
 \item[{gpointer}]{data}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_af336de7bd25d6d5909517f909a171b37}{}\label{interface_8h_af336de7bd25d6d5909517f909a171b37}
+)}\hypertarget{interface_8c_af336de7bd25d6d5909517f909a171b37}{}\label{interface_8c_af336de7bd25d6d5909517f909a171b37}
 
 
 Lancer l\textquotesingle{}apprentissage du réseau de neurones. 
@@ -202,14 +157,14 @@ Lancer l\textquotesingle{}apprentissage du réseau de neurones.
 {\em data} & Pour le passage de la structure \hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE}. \\
 \hline
 \end{DoxyParams}
-\index{interface.\+h@{interface.\+h}!matrice@{matrice}}
-\index{matrice@{matrice}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!matrice@{matrice}}
+\index{matrice@{matrice}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{matrice(\+Gtk\+Widget $\ast$widget, gpointer data)}{matrice(GtkWidget *widget, gpointer data)}}]{\setlength{\rightskip}{0pt plus 5cm}void matrice (
 \begin{DoxyParamCaption}
 \item[{Gtk\+Widget $\ast$}]{widget, }
 \item[{gpointer}]{data}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_ae0a8eb01de87316e3486addd8b177515}{}\label{interface_8h_ae0a8eb01de87316e3486addd8b177515}
+)}\hypertarget{interface_8c_ae0a8eb01de87316e3486addd8b177515}{}\label{interface_8c_ae0a8eb01de87316e3486addd8b177515}
 
 
 Affichage de la matrice des poid du reseau de neurones. 
@@ -221,13 +176,13 @@ Affichage de la matrice des poid du reseau de neurones.
 {\em data} & Pour le passage de la structure \hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE}. \\
 \hline
 \end{DoxyParams}
-\index{interface.\+h@{interface.\+h}!nombre\+Reseau@{nombre\+Reseau}}
-\index{nombre\+Reseau@{nombre\+Reseau}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!nombre\+Reseau@{nombre\+Reseau}}
+\index{nombre\+Reseau@{nombre\+Reseau}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{nombre\+Reseau()}{nombreReseau()}}]{\setlength{\rightskip}{0pt plus 5cm}int nombre\+Reseau (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_a1157bf477c8e67641948cb31de95754e}{}\label{interface_8h_a1157bf477c8e67641948cb31de95754e}
+)}\hypertarget{interface_8c_a1157bf477c8e67641948cb31de95754e}{}\label{interface_8c_a1157bf477c8e67641948cb31de95754e}
 
 
 Nombre de Réseaux de neurones existant. 
@@ -235,13 +190,13 @@ Nombre de Réseaux de neurones existant.
 \begin{DoxyReturn}{Renvoie}
 int nombre de Réseau. 
 \end{DoxyReturn}
-\index{interface.\+h@{interface.\+h}!page\+\_\+principale@{page\+\_\+principale}}
-\index{page\+\_\+principale@{page\+\_\+principale}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!page\+\_\+principale@{page\+\_\+principale}}
+\index{page\+\_\+principale@{page\+\_\+principale}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{page\+\_\+principale(\+I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+R\+E $\ast$fenetre)}{page_principale(INFO_FENETRE *fenetre)}}]{\setlength{\rightskip}{0pt plus 5cm}void page\+\_\+principale (
 \begin{DoxyParamCaption}
 \item[{{\bf I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE} $\ast$}]{fenetre}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_ab697526e222972bbbee4f4429daf38cc}{}\label{interface_8h_ab697526e222972bbbee4f4429daf38cc}
+)}\hypertarget{interface_8c_ab697526e222972bbbee4f4429daf38cc}{}\label{interface_8c_ab697526e222972bbbee4f4429daf38cc}
 
 
 Page d\textquotesingle{}accueille du programme. 
@@ -251,14 +206,14 @@ Page d\textquotesingle{}accueille du programme.
 {\em fenetre} & La fenetre qu\textquotesingle{}on affichera dans l\textquotesingle{}accueille. \\
 \hline
 \end{DoxyParams}
-\index{interface.\+h@{interface.\+h}!quitter@{quitter}}
-\index{quitter@{quitter}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!quitter@{quitter}}
+\index{quitter@{quitter}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{quitter(\+Gtk\+Widget $\ast$widget, gpointer data)}{quitter(GtkWidget *widget, gpointer data)}}]{\setlength{\rightskip}{0pt plus 5cm}void quitter (
 \begin{DoxyParamCaption}
 \item[{Gtk\+Widget $\ast$}]{widget, }
 \item[{gpointer}]{data}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_aea683c3c50c9b394b3145ffa90bac3a5}{}\label{interface_8h_aea683c3c50c9b394b3145ffa90bac3a5}
+)}\hypertarget{interface_8c_aea683c3c50c9b394b3145ffa90bac3a5}{}\label{interface_8c_aea683c3c50c9b394b3145ffa90bac3a5}
 
 
 Lorsque l\textquotesingle{}on quitte la fenetre. 
@@ -270,14 +225,14 @@ Lorsque l\textquotesingle{}on quitte la fenetre.
 {\em data} & Pour le passage de la structure \hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE}. \\
 \hline
 \end{DoxyParams}
-\index{interface.\+h@{interface.\+h}!resultat\+Traitement@{resultat\+Traitement}}
-\index{resultat\+Traitement@{resultat\+Traitement}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!resultat\+Traitement@{resultat\+Traitement}}
+\index{resultat\+Traitement@{resultat\+Traitement}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{resultat\+Traitement(\+Gtk\+Widget $\ast$widget, gpointer data)}{resultatTraitement(GtkWidget *widget, gpointer data)}}]{\setlength{\rightskip}{0pt plus 5cm}void resultat\+Traitement (
 \begin{DoxyParamCaption}
 \item[{Gtk\+Widget $\ast$}]{widget, }
 \item[{gpointer}]{data}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_af05673f8ea4045e8dc3eacdbf80f3eb6}{}\label{interface_8h_af05673f8ea4045e8dc3eacdbf80f3eb6}
+)}\hypertarget{interface_8c_af05673f8ea4045e8dc3eacdbf80f3eb6}{}\label{interface_8c_af05673f8ea4045e8dc3eacdbf80f3eb6}
 
 
 Affiche le résultat du traitement d\textquotesingle{}une image. 
@@ -289,14 +244,14 @@ Affiche le résultat du traitement d\textquotesingle{}une image.
 {\em data} & Pour le passage de la structure \hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE}. \\
 \hline
 \end{DoxyParams}
-\index{interface.\+h@{interface.\+h}!retour\+Accueille@{retour\+Accueille}}
-\index{retour\+Accueille@{retour\+Accueille}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!retour\+Accueille@{retour\+Accueille}}
+\index{retour\+Accueille@{retour\+Accueille}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{retour\+Accueille(\+Gtk\+Widget $\ast$widget, gpointer data)}{retourAccueille(GtkWidget *widget, gpointer data)}}]{\setlength{\rightskip}{0pt plus 5cm}void retour\+Accueille (
 \begin{DoxyParamCaption}
 \item[{Gtk\+Widget $\ast$}]{widget, }
 \item[{gpointer}]{data}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_ab377f1cf5a8abbe888b67875fe00e732}{}\label{interface_8h_ab377f1cf5a8abbe888b67875fe00e732}
+)}\hypertarget{interface_8c_ab377f1cf5a8abbe888b67875fe00e732}{}\label{interface_8c_ab377f1cf5a8abbe888b67875fe00e732}
 
 
 Retourner a la page d\textquotesingle{}accueille. 
@@ -308,14 +263,14 @@ Retourner a la page d\textquotesingle{}accueille.
 {\em data} & Pour le passage de la structure \hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE}. \\
 \hline
 \end{DoxyParams}
-\index{interface.\+h@{interface.\+h}!select\+Reseau@{select\+Reseau}}
-\index{select\+Reseau@{select\+Reseau}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!select\+Reseau@{select\+Reseau}}
+\index{select\+Reseau@{select\+Reseau}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{select\+Reseau(\+Gtk\+Widget $\ast$widget, gpointer data)}{selectReseau(GtkWidget *widget, gpointer data)}}]{\setlength{\rightskip}{0pt plus 5cm}void select\+Reseau (
 \begin{DoxyParamCaption}
 \item[{Gtk\+Widget $\ast$}]{widget, }
 \item[{gpointer}]{data}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_a4aaaee29e9c54955715a9de0be73563d}{}\label{interface_8h_a4aaaee29e9c54955715a9de0be73563d}
+)}\hypertarget{interface_8c_a4aaaee29e9c54955715a9de0be73563d}{}\label{interface_8c_a4aaaee29e9c54955715a9de0be73563d}
 
 
 Selection d\textquotesingle{}un reseau de neurone. 
@@ -327,14 +282,14 @@ Selection d\textquotesingle{}un reseau de neurone.
 {\em data} & Pour le passage de la structure \hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE}. \\
 \hline
 \end{DoxyParams}
-\index{interface.\+h@{interface.\+h}!traitement@{traitement}}
-\index{traitement@{traitement}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!traitement@{traitement}}
+\index{traitement@{traitement}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{traitement(\+Gtk\+Widget $\ast$widget, gpointer data)}{traitement(GtkWidget *widget, gpointer data)}}]{\setlength{\rightskip}{0pt plus 5cm}void traitement (
 \begin{DoxyParamCaption}
 \item[{Gtk\+Widget $\ast$}]{widget, }
 \item[{gpointer}]{data}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_aed9f60cdb4aaeaf5500cd93cce7a1b6d}{}\label{interface_8h_aed9f60cdb4aaeaf5500cd93cce7a1b6d}
+)}\hypertarget{interface_8c_aed9f60cdb4aaeaf5500cd93cce7a1b6d}{}\label{interface_8c_aed9f60cdb4aaeaf5500cd93cce7a1b6d}
 
 
 Lance le traitement d\textquotesingle{}une image. 
@@ -346,13 +301,13 @@ Lance le traitement d\textquotesingle{}une image.
 {\em data} & Pour le passage de la structure \hyperlink{structINFO__FENETRE}{I\+N\+F\+O\+\_\+\+F\+E\+N\+E\+T\+RE}. \\
 \hline
 \end{DoxyParams}
-\index{interface.\+h@{interface.\+h}!vider\+Container@{vider\+Container}}
-\index{vider\+Container@{vider\+Container}!interface.\+h@{interface.\+h}}
+\index{interface.\+c@{interface.\+c}!vider\+Container@{vider\+Container}}
+\index{vider\+Container@{vider\+Container}!interface.\+c@{interface.\+c}}
 \subsubsection[{\texorpdfstring{vider\+Container(\+Gtk\+Widget $\ast$data)}{viderContainer(GtkWidget *data)}}]{\setlength{\rightskip}{0pt plus 5cm}void vider\+Container (
 \begin{DoxyParamCaption}
 \item[{Gtk\+Widget $\ast$}]{data}
 \end{DoxyParamCaption}
-)}\hypertarget{interface_8h_a08aaf6738ef116b20809fd4c3af451ea}{}\label{interface_8h_a08aaf6738ef116b20809fd4c3af451ea}
+)}\hypertarget{interface_8c_a08aaf6738ef116b20809fd4c3af451ea}{}\label{interface_8c_a08aaf6738ef116b20809fd4c3af451ea}
 
 
 Vider le contenu de la fenetre. 

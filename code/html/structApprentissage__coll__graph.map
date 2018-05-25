@@ -1,4 +1,4 @@
 <map id="Apprentissage" name="Apprentissage">
-<area shape="rect" id="node2" href="$structImage.html" title="Image" alt="" coords="29,95,87,121"/>
-<area shape="rect" id="node3" href="$structPixel.html" title="Pixel" alt="" coords="33,5,83,32"/>
+<area shape="rect" id="node2" href="$structImage.html" title="contient chaque pixel deffinissant une image ainsi que la taille de celle ci " alt="" coords="29,95,87,121"/>
+<area shape="rect" id="node3" href="$structPixel.html" title="definie les composantes rgb d&#39;un pixel " alt="" coords="33,5,83,32"/>
 </map>

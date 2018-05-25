@@ -38,7 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Page&#160;principale</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
       <li><a href="files.html"><span>Fichiers</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -60,9 +60,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="annotated.html"><span>Liste&#160;des&#160;classes</span></a></li>
-      <li><a href="classes.html"><span>Index&#160;des&#160;classes</span></a></li>
-      <li><a href="functions.html"><span>Membres&#160;de&#160;classe</span></a></li>
+      <li><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
+      <li><a href="classes.html"><span>Index&#160;des&#160;structures&#160;de&#160;données</span></a></li>
+      <li><a href="functions.html"><span>Champs&#160;de&#160;donnée</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -82,34 +82,77 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Attributs publics</a> &#124;
-<a href="structRN-members.html">Liste de tous les membres</a>  </div>
+<a href="#pub-attribs">Champs de données</a>  </div>
   <div class="headertitle">
 <div class="title">Référence de la structure RN</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>defini un réseau de neurones  
+ <a href="structRN.html#details">Plus de détails...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Structures_8h_source.html">Structures.h</a>&gt;</code></p>
 <div class="dynheader">
 Graphe de collaboration de RN:</div>
 <div class="dyncontent">
 <div class="center"><img src="structRN__coll__graph.png" border="0" usemap="#RN_coll__map" alt="Collaboration graph"/></div>
 <map name="RN_coll__map" id="RN_coll__map">
-<area shape="rect" id="node2" href="structINFO__RN.html" title="INFO_RN" alt="" coords="5,7,87,33"/>
-<area shape="rect" id="node3" href="structCOUCHE.html" title="COUCHE" alt="" coords="111,7,192,33"/>
+<area shape="rect" id="node2" href="structINFO__RN.html" title="contient les information concernant un réseau de neurones " alt="" coords="5,7,87,33"/>
+<area shape="rect" id="node3" href="structCOUCHE.html" title="decrit une couche d&#39;un réseau de neurone " alt="" coords="111,7,192,33"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Attributs publics</h2></td></tr>
-<tr class="memitem:a6e638d06aa8ad842d9b7e866f8a0e749"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6e638d06aa8ad842d9b7e866f8a0e749"></a>
-<a class="el" href="structINFO__RN.html">INFO_RN</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>info</b></td></tr>
+Champs de données</h2></td></tr>
+<tr class="memitem:a6e638d06aa8ad842d9b7e866f8a0e749"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structINFO__RN.html">INFO_RN</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRN.html#a6e638d06aa8ad842d9b7e866f8a0e749">info</a></td></tr>
 <tr class="separator:a6e638d06aa8ad842d9b7e866f8a0e749"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7819ca58c5af68054e17881d5189edb2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7819ca58c5af68054e17881d5189edb2"></a>
-<a class="el" href="structCOUCHE.html">Liste_Couche</a>&#160;</td><td class="memItemRight" valign="bottom"><b>couche_deb</b></td></tr>
+<tr class="memitem:a7819ca58c5af68054e17881d5189edb2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCOUCHE.html">Liste_Couche</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRN.html#a7819ca58c5af68054e17881d5189edb2">couche_deb</a></td></tr>
 <tr class="separator:a7819ca58c5af68054e17881d5189edb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a587292a48a2d40ee63c00b1e0162e9e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a587292a48a2d40ee63c00b1e0162e9e2"></a>
-<a class="el" href="structCOUCHE.html">Liste_Couche</a>&#160;</td><td class="memItemRight" valign="bottom"><b>couche_fin</b></td></tr>
+<tr class="memitem:a587292a48a2d40ee63c00b1e0162e9e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCOUCHE.html">Liste_Couche</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRN.html#a587292a48a2d40ee63c00b1e0162e9e2">couche_fin</a></td></tr>
 <tr class="separator:a587292a48a2d40ee63c00b1e0162e9e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>defini un réseau de neurones </p>
+</div><h2 class="groupheader">Documentation des champs</h2>
+<a class="anchor" id="a7819ca58c5af68054e17881d5189edb2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structCOUCHE.html">Liste_Couche</a> RN::couche_deb</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>pointeur vers la premiere couche du réseau de neurone </p>
+
+</div>
+</div>
+<a class="anchor" id="a587292a48a2d40ee63c00b1e0162e9e2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structCOUCHE.html">Liste_Couche</a> RN::couche_fin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>pointeur vers la derniere couche du réseau de neurone </p>
+
+</div>
+</div>
+<a class="anchor" id="a6e638d06aa8ad842d9b7e866f8a0e749"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structINFO__RN.html">INFO_RN</a>* RN::info</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>information du réseau de neurones </p>
+
+</div>
+</div>
 <hr/>La documentation de cette structure a été générée à partir du fichier suivant :<ul>
 <li><a class="el" href="Structures_8h_source.html">Structures.h</a></li>
 </ul>

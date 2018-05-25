@@ -1,4 +1,4 @@
 <map id="RN" name="RN">
-<area shape="rect" id="node2" href="$structINFO__RN.html" title="INFO_RN" alt="" coords="5,7,87,33"/>
-<area shape="rect" id="node3" href="$structCOUCHE.html" title="COUCHE" alt="" coords="111,7,192,33"/>
+<area shape="rect" id="node2" href="$structINFO__RN.html" title="contient les information concernant un réseau de neurones " alt="" coords="5,7,87,33"/>
+<area shape="rect" id="node3" href="$structCOUCHE.html" title="decrit une couche d&#39;un réseau de neurone " alt="" coords="111,7,192,33"/>
 </map>
