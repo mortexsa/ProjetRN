@@ -370,7 +370,7 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 			sprintf(&path2[strlen(path) - strlen(".idx1-ubyte")],".idx3-ubyte");
 			//~ printf("%s\n",path2);
 			
-			debug
+			//debug
 			if((couple->etiquette = ChargerEtiquetteMNIST(path)))
 			{
 				couple->image = ChargerMnist(path2, w_max, h_max);
