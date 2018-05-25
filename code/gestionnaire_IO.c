@@ -397,6 +397,12 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 			if((couple->image = ChargerBmp(path, w_max, h_max)))
 			{
 				couple->etiquette = malloc(sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp") + 1));
+				for(int i=0;i<strlen(fichier->d_name) - strlen(".bmp");i++)
+					if(couple->etiquette[i] == '%')
+					{
+						couple->etiquette[i] = '\0';
+						break;
+					}
 				strncpy(couple->etiquette,fichier->d_name,sizeof(char)*(strlen(fichier->d_name) - strlen(".bmp")));
 			}
 			else
