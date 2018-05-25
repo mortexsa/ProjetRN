@@ -1,0 +1,135 @@
+\hypertarget{gestionnaire__IO_8c}{}\section{Référence du fichier gestionnaire\+\_\+\+I\+O.\+c}
+\label{gestionnaire__IO_8c}\index{gestionnaire\+\_\+\+I\+O.\+c@{gestionnaire\+\_\+\+I\+O.\+c}}
+
+
+Code des fonctions de lecture et d\textquotesingle{}écriture dans des fichiers.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$assert.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$dirent.\+h$>$}\\*
+{\ttfamily \#include $<$sys/dir.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include $<$sys/stat.\+h$>$}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$inttypes.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}gestionnaire\+\_\+\+I\+O.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de gestionnaire\+\_\+\+I\+O.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gestionnaire__IO_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structBMPImHead}{B\+M\+P\+Im\+Head}
+\item 
+struct \hyperlink{structBMPHead}{B\+M\+P\+Head}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries \+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS}\hypertarget{gestionnaire__IO_8c_af08ec37a8c99d747fb60fa15bc28678b}{}\label{gestionnaire__IO_8c_af08ec37a8c99d747fb60fa15bc28678b}
+
+\item 
+\#define {\bfseries debug}~printf(\char`\"{}line \+: \%d in function \+: \%s in file \%s\textbackslash{}n\char`\"{},\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,\+\_\+\+\_\+func\+\_\+\+\_\+,\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+);\hypertarget{gestionnaire__IO_8c_a322565ccf348d13e4d3de13af771e5fc}{}\label{gestionnaire__IO_8c_a322565ccf348d13e4d3de13af771e5fc}
+
+\end{DoxyCompactItemize}
+\subsection*{Définitions de type}
+\begin{DoxyCompactItemize}
+\item 
+typedef int {\bfseries int32}\hypertarget{gestionnaire__IO_8c_a56f1a81c92849566ae864511088eb7e8}{}\label{gestionnaire__IO_8c_a56f1a81c92849566ae864511088eb7e8}
+
+\item 
+typedef short {\bfseries int16}\hypertarget{gestionnaire__IO_8c_a4355d16fcf9f644c9ac84293f0b1801f}{}\label{gestionnaire__IO_8c_a4355d16fcf9f644c9ac84293f0b1801f}
+
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structImage}{Image} $\ast$ {\bfseries Nouvelle\+Image} (int w, int h)\hypertarget{gestionnaire__IO_8c_ac91839d8b84692804f4b60afe1bb216f}{}\label{gestionnaire__IO_8c_ac91839d8b84692804f4b60afe1bb216f}
+
+\item 
+\hyperlink{structImage}{Image} $\ast$ {\bfseries Copie\+Image} (\hyperlink{structImage}{Image} $\ast$I)\hypertarget{gestionnaire__IO_8c_ad36403c11915b551d750b94d617af620}{}\label{gestionnaire__IO_8c_ad36403c11915b551d750b94d617af620}
+
+\item 
+void {\bfseries Del\+Image} (\hyperlink{structImage}{Image} $\ast$I)\hypertarget{gestionnaire__IO_8c_a05735abfbf6d85ac173e89bea1bf8292}{}\label{gestionnaire__IO_8c_a05735abfbf6d85ac173e89bea1bf8292}
+
+\item 
+void {\bfseries Set\+Pixel} (\hyperlink{structImage}{Image} $\ast$I, int i, int j, \hyperlink{structPixel}{Pixel} p)\hypertarget{gestionnaire__IO_8c_a5e175e9510f61a53471ec283ee2c8e56}{}\label{gestionnaire__IO_8c_a5e175e9510f61a53471ec283ee2c8e56}
+
+\item 
+\hyperlink{structPixel}{Pixel} {\bfseries Get\+Pixel} (\hyperlink{structImage}{Image} $\ast$I, int i, int j)\hypertarget{gestionnaire__IO_8c_a45c2e01712f3b36fdc1becde80c8356f}{}\label{gestionnaire__IO_8c_a45c2e01712f3b36fdc1becde80c8356f}
+
+\item 
+\hyperlink{structImage}{Image} $\ast$ \hyperlink{gestionnaire__IO_8c_a736f28efdaaa51977fd9045eb5b92f91}{Charger\+Bmp} (const char $\ast$fichier, int w\+\_\+max, int h\+\_\+max)
+\begin{DoxyCompactList}\small\item\em On lis une image de format bmp et on l\textquotesingle{}enregistre dans la structure \hyperlink{structImage}{Image}. \end{DoxyCompactList}\item 
+int {\bfseries Sauver} (\hyperlink{structImage}{Image} $\ast$I, const char $\ast$fichier)\hypertarget{gestionnaire__IO_8c_afea85431922f70840e9d0801f2f57542}{}\label{gestionnaire__IO_8c_afea85431922f70840e9d0801f2f57542}
+
+\item 
+\hyperlink{structImage}{Image} $\ast$ {\bfseries Charger\+Mnist} (const char $\ast$path, int w\+\_\+max, int h\+\_\+max)\hypertarget{gestionnaire__IO_8c_a87f6d34e630e1b4d6053be54b2511f03}{}\label{gestionnaire__IO_8c_a87f6d34e630e1b4d6053be54b2511f03}
+
+\item 
+char $\ast$ {\bfseries Charger\+Etiquette\+M\+N\+I\+ST} (const char $\ast$path)\hypertarget{gestionnaire__IO_8c_ad75487d79bfcd9c86941964341b27ed4}{}\label{gestionnaire__IO_8c_ad75487d79bfcd9c86941964341b27ed4}
+
+\item 
+\hyperlink{structApprentissage}{App} $\ast$ {\bfseries Chargement\+Couple\+Att\+In} (char $\ast$repertoire\+\_\+app, int w\+\_\+max, int h\+\_\+max)\hypertarget{gestionnaire__IO_8c_af173f0494a794123f2c65871af91ef8b}{}\label{gestionnaire__IO_8c_af173f0494a794123f2c65871af91ef8b}
+
+\item 
+\hyperlink{structINFO__RN}{I\+N\+F\+O\+\_\+\+RN} $\ast$ {\bfseries Charger\+Info} ()\hypertarget{gestionnaire__IO_8c_a343472a40d9ee1ed25bb7caf22be1b8f}{}\label{gestionnaire__IO_8c_a343472a40d9ee1ed25bb7caf22be1b8f}
+
+\item 
+\hyperlink{structRN}{RN} $\ast$ {\bfseries Charger\+RN} (\hyperlink{structINFO__RN}{I\+N\+F\+O\+\_\+\+RN} $\ast$info)\hypertarget{gestionnaire__IO_8c_af2e5b9ad00cab116ec82a35aa1e1c7f0}{}\label{gestionnaire__IO_8c_af2e5b9ad00cab116ec82a35aa1e1c7f0}
+
+\item 
+void {\bfseries Save\+RN} (\hyperlink{structRN}{RN} rn)\hypertarget{gestionnaire__IO_8c_a31712d225439b4d860c5770ceb6ddbc9}{}\label{gestionnaire__IO_8c_a31712d225439b4d860c5770ceb6ddbc9}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Code des fonctions de lecture et d\textquotesingle{}écriture dans des fichiers. 
+
+\begin{DoxyAuthor}{Auteur}
+P\+E\+P\+IN Thibaut 
+
+R\+E\+Z\+G\+UI Soumia 
+
+S\+L\+I\+M\+A\+NI Arezki 
+
+S\+E\+L\+A\+Q\+U\+ET Severine 
+
+S\+Z\+U\+L\+EK Isaac 
+
+M\+O\+N\+T\+I\+G\+N\+ET Anthony 
+\end{DoxyAuthor}
+
+
+\subsection{Documentation des fonctions}
+\index{gestionnaire\+\_\+\+I\+O.\+c@{gestionnaire\+\_\+\+I\+O.\+c}!Charger\+Bmp@{Charger\+Bmp}}
+\index{Charger\+Bmp@{Charger\+Bmp}!gestionnaire\+\_\+\+I\+O.\+c@{gestionnaire\+\_\+\+I\+O.\+c}}
+\subsubsection[{\texorpdfstring{Charger\+Bmp(const char $\ast$fichier, int w\+\_\+max, int h\+\_\+max)}{ChargerBmp(const char *fichier, int w_max, int h_max)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Image} $\ast$ Charger\+Bmp (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{fichier, }
+\item[{int}]{w\+\_\+max, }
+\item[{int}]{h\+\_\+max}
+\end{DoxyParamCaption}
+)}\hypertarget{gestionnaire__IO_8c_a736f28efdaaa51977fd9045eb5b92f91}{}\label{gestionnaire__IO_8c_a736f28efdaaa51977fd9045eb5b92f91}
+
+
+On lis une image de format bmp et on l\textquotesingle{}enregistre dans la structure \hyperlink{structImage}{Image}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em fichier} & Chemin absolue de l\textquotesingle{}image à charger. \\
+\hline
+{\em } & \\
+\hline
+\end{DoxyParams}

@@ -1,9 +1,0 @@
-<map id="Apprentissage.h" name="Apprentissage.h">
-<area shape="rect" id="node2" href="$_apprentissage_8c.html" title="Apprentissage.c" alt="" coords="5,80,121,107"/>
-<area shape="rect" id="node3" href="$interface_8h.html" title="Interface du programme. " alt="" coords="146,80,229,107"/>
-<area shape="rect" id="node4" href="$interface_8c.html" title="interface.c" alt="" coords="41,155,123,181"/>
-<area shape="rect" id="node5" href="$neurone_8h.html" title="neurone.h" alt="" coords="148,155,227,181"/>
-<area shape="rect" id="node7" href="$test_8h.html" title="test.h" alt="" coords="251,155,305,181"/>
-<area shape="rect" id="node6" href="$neurone_8c.html" title="neurone.c" alt="" coords="148,229,227,256"/>
-<area shape="rect" id="node8" href="$test_8c.html" title="test.c" alt="" coords="251,229,305,256"/>
-</map>

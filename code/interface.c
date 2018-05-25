@@ -1,6 +1,25 @@
+/**
+ * \file interface.c
+ * \brief Interface du programme.
+ * \author PEPIN Thibaut
+ * \author REZGUI Soumia
+ * \author SLIMANI Arezki
+ * \author SELAQUET Severine
+ * \author SZULEK Isaac
+ * \author MONTIGNET Anthony
+ *
+ * Interface du programme de reconnaissance d'image.
+ *
+ */
 
 #include "interface.h"
 
+/**
+ * \fn int nombreReseau()
+ * \brief Nombre de Réseaux de neurones existant.
+ *
+ * \return int nombre de Réseau.
+ */
 int nombreReseau(){
 	int i=0;
 	DIR* rep = opendir("../sav");
@@ -15,6 +34,12 @@ int nombreReseau(){
     return i;
 }
 
+/**
+ * \fn void viderContainer(GtkWidget *data)
+ * \brief Vider le contenu de la fenetre.
+ *
+ * \param data Pour le passage de la structure INFO_FENETRE.
+ */
 void viderContainer(GtkWidget *data){
      GList *children = gtk_container_get_children(GTK_CONTAINER(data));
 
@@ -26,6 +51,13 @@ void viderContainer(GtkWidget *data){
     g_list_free(children);
 }
 
+/**
+ * \fn void retourAccueille(GtkWidget *widget, gpointer data)
+ * \brief Retourner a la page d'accueille.
+ *
+ * \param widget Le widget qui est associer a la fonction.
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
 void retourAccueille(GtkWidget *widget, gpointer data){
     //pour suprimer l'ancienne page
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
@@ -38,6 +70,128 @@ void retourAccueille(GtkWidget *widget, gpointer data){
     page_principale(fenetre);
 }
 
+/**
+ * \fn void selectReseau(GtkWidget *widget, gpointer data)
+ * \brief Selection d'un reseau de neurone.
+ *
+ * \param widget Le widget qui est associer a la fonction.
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
+void selectReseau(GtkWidget *widget, gpointer data){
+
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Tableau de bord");
+    
+    if(fenetre->chemin[0] != 0){
+        for(int w = 0;w<200;w++){
+            fenetre->chemin[w] = 0;
+        }
+    }
+    GtkWidget *label;
+    GtkWidget *button[3];
+    GtkWidget *toggleBtn;
+    GtkWidget *Vbox;
+    GtkWidget *Hbox;
+    Vbox = gtk_vbox_new(FALSE, 0);
+    Hbox = gtk_hbox_new(FALSE, 0);
+    if(fenetre->reseauSelectionner == -1){
+        char titre[256];
+        strcpy(titre,gtk_button_get_label((GtkButton *)widget));
+        int i = 16;
+        int j = 0;
+        char name[50] = {0};
+        char date[20] = {0};
+        while(titre[i] != '\n'){
+            name[j] = titre[i];
+            i++;
+            j++;
+        }
+        i += 20;
+        j = 0;
+        while(titre[i] != '\0'){
+            date[j] = titre[i];
+            i++;
+            j++;
+        }
+        for(i=0;i<fenetre->nombreReseau;i++){
+            if(strcmp(fenetre->info[i].nom,name) == 0){
+                if(strcmp(fenetre->info[i].date,date) == 0){
+                   fenetre->reseauSelectionner = i; 
+                }
+            }
+        }
+    }
+    else if(fenetre->reseauSelectionner == -2){
+        char titre[256];
+        strcpy(titre,gtk_label_get_text((GtkLabel *)widget));
+        char *parse = strtok(titre,"/");
+        strcpy(titre,parse);
+        parse = strtok(NULL, "/");
+        for(int i=0;i<fenetre->nombreReseau;i++){
+            if(strcmp(fenetre->info[i].nom,titre) == 0){
+                if(strcmp(fenetre->info[i].date,parse) == 0){
+                   fenetre->reseauSelectionner = i; 
+                }
+            }
+        }
+    }
+    Hbox = gtk_hbox_new(FALSE, 0);
+    char tab[200];
+    strcpy(tab, "Nom du Reseau de Neurone :  ");
+    viderContainer(fenetre->Window);
+    
+    gtk_container_add(GTK_CONTAINER(fenetre->Window), Vbox);
+    
+    label = gtk_label_new(strcat(tab,fenetre->info[fenetre->reseauSelectionner].nom));
+    gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
+    
+    strcpy(tab, "Pourcentage de reussite :  ");
+    char b[100];
+    double pourcentageReussite = 0;
+
+    if(fenetre->info[fenetre->reseauSelectionner].reussite != 0){
+        pourcentageReussite = ((double)fenetre->info[fenetre->reseauSelectionner].reussite / (fenetre->info[fenetre->reseauSelectionner].reussite + fenetre->info[fenetre->reseauSelectionner].echec)) * 100;
+    }
+    sprintf(b,"%.3f", pourcentageReussite);
+    strcat(tab,b);
+    label = gtk_label_new(strcat(tab," %"));    
+    gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
+
+    strcpy(tab, "Date de creation :  ");
+    label = gtk_label_new(strcat(tab,fenetre->info[fenetre->reseauSelectionner].date));    
+    gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
+    
+    button[0] = gtk_button_new_with_label("Afficher la matrice des poids");
+    gtk_box_pack_start(GTK_BOX(Vbox), button[0], FALSE, TRUE, 2);
+
+
+    gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
+    
+    button[1] = gtk_button_new_with_label("Retour");
+    button[2] = gtk_button_new_with_label("Traitement");
+    toggleBtn = gtk_toggle_button_new_with_label("Apprentissage");
+    
+    gtk_box_pack_start(GTK_BOX(Hbox), button[1], TRUE, TRUE, 2);
+    gtk_box_pack_start(GTK_BOX(Hbox), button[2], TRUE, TRUE, 2);
+    gtk_box_pack_start(GTK_BOX(Hbox), toggleBtn, TRUE, TRUE, 2);
+
+    gtk_widget_show_all(fenetre->Window);
+
+    g_signal_connect(G_OBJECT(button[1]), "clicked", G_CALLBACK(retourAccueille), fenetre);
+    g_signal_connect(G_OBJECT(button[2]), "clicked", G_CALLBACK(traitement), fenetre);
+    g_signal_connect(G_OBJECT(toggleBtn), "toggled", G_CALLBACK(lancerApprentissage), fenetre);
+    printf("%d\n", gtk_toggle_button_get_active ((GtkToggleButton *)toggleBtn));
+    g_signal_connect(G_OBJECT(button[0]), "clicked", G_CALLBACK(matrice), fenetre);
+    
+}
+
+/**
+ * \fn void traitement(GtkWidget *widget, gpointer data)
+ * \brief Lance le traitement d'une image.
+ *
+ * \param widget Le widget qui est associer a la fonction.
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
 void traitement(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
     
@@ -87,6 +241,13 @@ void traitement(GtkWidget *widget, gpointer data){
     g_signal_connect(G_OBJECT(button[2]), "clicked", G_CALLBACK(resultatTraitement), fenetre);
 }
 
+/**
+ * \fn void resultatTraitement(GtkWidget *widget, gpointer data)
+ * \brief Affiche le résultat du traitement d'une image.
+ *
+ * \param widget Le widget qui est associer a la fonction.
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
 void resultatTraitement(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
     char resultat[200];
@@ -161,114 +322,14 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
     }
 }
 
-void selectReseau(GtkWidget *widget, gpointer data){
 
-    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
-    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Tableau de bord");
-    
-    if(fenetre->chemin[0] != 0){
-        for(int w = 0;w<200;w++){
-            fenetre->chemin[w] = 0;
-        }
-    }
-    GtkWidget *label;
-    GtkWidget *button[3];
-    GtkWidget *toggleBtn;
-    GtkWidget *Vbox;
-    GtkWidget *Hbox;
-    Vbox = gtk_vbox_new(FALSE, 0);
-    Hbox = gtk_hbox_new(FALSE, 0);
-    if(fenetre->reseauSelectionner == -1){
-        char titre[256];
-        strcpy(titre,gtk_button_get_label((GtkButton *)widget));
-        int i = 16;
-        int j = 0;
-        char name[50] = {0};
-        char date[20] = {0};
-        while(titre[i] != '\n'){
-            name[j] = titre[i];
-            i++;
-            j++;
-        }
-        i += 20;
-        j = 0;
-        while(titre[i] != '\0'){
-            date[j] = titre[i];
-            i++;
-            j++;
-        }
-        for(i=0;i<fenetre->nombreReseau;i++){
-            if(strcmp(fenetre->info[i].nom,name) == 0){
-                if(strcmp(fenetre->info[i].date,date) == 0){
-                   fenetre->reseauSelectionner = i; 
-                }
-            }
-        }
-    }
-    else if(fenetre->reseauSelectionner == -2){
-        char titre[256];
-        strcpy(titre,gtk_label_get_text((GtkLabel *)widget));
-        char *parse = strtok(titre,"/");
-        strcpy(titre,parse);
-        parse = strtok(NULL, "/");
-        for(int i=0;i<fenetre->nombreReseau;i++){
-            if(strcmp(fenetre->info[i].nom,titre) == 0){
-                if(strcmp(fenetre->info[i].date,parse) == 0){
-                   fenetre->reseauSelectionner = i; 
-                }
-            }
-        }
-    }
-    Hbox = gtk_hbox_new(FALSE, 0);
-    char tab[200];
-    strcpy(tab, "Nom du Reseau de Neurone :  ");
-    viderContainer(fenetre->Window);
-    
-    gtk_container_add(GTK_CONTAINER(fenetre->Window), Vbox);
-    
-    label = gtk_label_new(strcat(tab,fenetre->info[fenetre->reseauSelectionner].nom));
-    gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
-    
-    strcpy(tab, "Pourcentage de reussite :  ");
-    char b[100];
-    double pourcentageReussite = 0;
-
-    if(fenetre->info[fenetre->reseauSelectionner].reussite != 0){
-    	pourcentageReussite = ((double)fenetre->info[fenetre->reseauSelectionner].reussite / (fenetre->info[fenetre->reseauSelectionner].reussite + fenetre->info[fenetre->reseauSelectionner].echec)) * 100;
-    }
-    sprintf(b,"%.3f", pourcentageReussite);
-    strcat(tab,b);
-    label = gtk_label_new(strcat(tab," %"));    
-    gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
-
-    strcpy(tab, "Date de creation :  ");
-    label = gtk_label_new(strcat(tab,fenetre->info[fenetre->reseauSelectionner].date));    
-    gtk_box_pack_start(GTK_BOX(Vbox), label, FALSE, FALSE, 0);
-    
-    button[0] = gtk_button_new_with_label("Afficher la matrice des poids");
-    gtk_box_pack_start(GTK_BOX(Vbox), button[0], FALSE, TRUE, 2);
-
-
-    gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
-    
-    button[1] = gtk_button_new_with_label("Retour");
-    button[2] = gtk_button_new_with_label("Traitement");
-    toggleBtn = gtk_toggle_button_new_with_label("Apprentissage");
-    
-    gtk_box_pack_start(GTK_BOX(Hbox), button[1], TRUE, TRUE, 2);
-    gtk_box_pack_start(GTK_BOX(Hbox), button[2], TRUE, TRUE, 2);
-    gtk_box_pack_start(GTK_BOX(Hbox), toggleBtn, TRUE, TRUE, 2);
-
-    gtk_widget_show_all(fenetre->Window);
-
-    g_signal_connect(G_OBJECT(button[1]), "clicked", G_CALLBACK(retourAccueille), fenetre);
-    g_signal_connect(G_OBJECT(button[2]), "clicked", G_CALLBACK(traitement), fenetre);
-    g_signal_connect(G_OBJECT(toggleBtn), "toggled", G_CALLBACK(lancerApprentissage), fenetre);
-    printf("%d\n", gtk_toggle_button_get_active ((GtkToggleButton *)toggleBtn));
-    g_signal_connect(G_OBJECT(button[0]), "clicked", G_CALLBACK(matrice), fenetre);
-    
-}
-
+/**
+ * \fn void lancerApprentissage(GtkWidget *widget, gpointer data)
+ * \brief Lancer l'apprentissage du réseau de neurones.
+ *
+ * \param widget Le widget qui est associer a la fonction.
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
 void lancerApprentissage(GtkWidget *widget, gpointer data){
     //printf("premier : %d\n", gtk_toggle_button_get_active ((GtkToggleButton *)widget));
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
@@ -287,6 +348,12 @@ void lancerApprentissage(GtkWidget *widget, gpointer data){
     // printf("%s\n", gtk_button_get_label(GTK_BUTTON(widget)));
 }
 
+/**
+ * \fn void* fctThreadApp(void* arg)
+ * \brief Fonction appeler par le thread qui fait l'apprentissage du reseau de neurone.
+ *
+ * \param arg Pour le passage de la structure INFO_FENETRE. 
+ */
 void* fctThreadApp(void* arg)
 {
     INFO_FENETRE *fenetre = (INFO_FENETRE *) arg;
@@ -316,11 +383,60 @@ void* fctThreadApp(void* arg)
     return NULL;
 }
 
-// //delete evenement 
+/**
+ * \fn void matrice(GtkWidget *widget, gpointer data)
+ * \brief Affichage de la matrice des poid du reseau de neurones.
+ *
+ * \param widget Le widget qui est associer a la fonction.
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
+void matrice(GtkWidget *widget, gpointer data){
+    
+    GtkWidget *table;
+    GtkWidget *Vbox;
+    //GtkWidget *label;
+    
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Affichage de matrice");
+    viderContainer(fenetre->Window);
+    
+    Vbox = gtk_vbox_new(FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(fenetre->Window), Vbox);
+    
+    RN* rn = ChargerRN(fenetre->info);
+    COUCHE* tmp = rn->couche_deb->suiv;
+    int i;
+    int j;
+    
+    GtkWidget *cell;
+    gchar *text;
+    
+    
+    table = gtk_table_new (rn->info->h, rn->info->w, TRUE); //tableau
+    
+    gtk_box_pack_start(GTK_BOX(Vbox), table, TRUE,TRUE,0);
+    for( i=0;i<rn->info->h; i++){
+        for(j=0; j<rn->info->w; j++){
+            
+            text = g_strdup_printf("%f", tmp->W[i][j]); //création d'une chaine contenant la valeur de la cellule
+            printf("%f ",tmp->W[i][j]);
+            cell = gtk_label_new(text); 
+            gtk_table_attach (GTK_TABLE (table), cell, j, j+1, i, i+1, GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0); //ajout de la cellule au tableau
+                
+        }
+        printf("\n");
+    }
+    
+    g_free (text);
+}
 
-// /*static gboolean delet_event(GtkWidget *window, Gtkgpointer data){
-// 	}*/
-	
+/**
+ * \fn void page_principale(INFO_FENETRE *fenetre)
+ * \brief Page d'accueille du programme
+ *
+ * \param fenetre La fenetre qu'on affichera dans l'accueille. 
+ */
 void page_principale(INFO_FENETRE *fenetre){
 	gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Accueil");	
 	fenetre->info = ChargerInfo();
@@ -376,6 +492,13 @@ void page_principale(INFO_FENETRE *fenetre){
     
 	}
 
+/**
+ * \fn void creation(GtkWidget *widget, gpointer data)
+ * \brief Interface de creation d'un reseau de neurones.
+ *
+ * \param widget Le widget qui est associer a la fonction.
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
 void creation(GtkWidget *widget, gpointer data){
 
   //pour suprimer l'ancienne page
@@ -455,18 +578,23 @@ void creation(GtkWidget *widget, gpointer data){
   //afficher les bouton dans la même frame 
     gtk_box_pack_start(GTK_BOX(pVBox), pHBox, TRUE, TRUE, 20);
  
-   //gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
     pButton[0] = gtk_button_new_with_label("Creer");
     pButton[1] = gtk_button_new_with_label("Retour");
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[0], FALSE, TRUE, 3);
     gtk_box_pack_start(GTK_BOX(pHBox), pButton[1], FALSE, TRUE, 3);
-    //g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(page_principale), NULL);
     g_signal_connect(G_OBJECT(pButton[1]), "clicked", G_CALLBACK(retourAccueille), fenetre);
     
     g_signal_connect(G_OBJECT(pButton[0]), "clicked", G_CALLBACK(creationRN), fenetre);
     gtk_widget_show_all(fenetre->Window);
 }
 
+/**
+ * \fn void creation(GtkWidget *widget, gpointer data)
+ * \brief Recuperation des données et sauvegarde du réseau de neurones.
+ *
+ * \param widget Le widget qui est associer a la fonction.
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
 void creationRN(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
     GtkWidget *label;
@@ -573,47 +701,11 @@ void creationRN(GtkWidget *widget, gpointer data){
     g_list_free(pCopie);
 }
 
-/*afin de selectionner un repertoire au choix*/
-void creer_folder_selection (GtkButton * button, gpointer data)
-{   
-    INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
-    GtkWidget *pFileSelection = NULL;
-    gtk_widget_hide(fenetre->Window);
-        
-     
-    /* Creation de la fenetre de selection */
-    pFileSelection = gtk_file_chooser_dialog_new("selectionnez un repertoire...",
-    NULL,
-    //GTK_FILE_CHOOSER_ACTION_OPEN
-    GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
-    NULL);
-    
-    /*pour afficher toutes les fenetres*/
-    gtk_widget_show(pFileSelection);
-    /* On limite les actions a cette fenetre */
-    gtk_window_set_modal(GTK_WINDOW(pFileSelection), TRUE);   
-    
-    char *file_name = NULL;
-    /* Affichage fenetre */
-    switch(gtk_dialog_run(GTK_DIALOG(pFileSelection)))
-    {
-        case GTK_RESPONSE_OK:
-            /* Recuperation du chemin */
-            file_name = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (pFileSelection));
-            //fenetre->chemin = malloc(sizeof(strlen(file_name+2)));
-            strcpy(fenetre->chemin,file_name);
-            break;
-                      
-        default : break;
-    }
-    gtk_widget_show_all(fenetre->Window);
-   //g_free(chemin); j'ai un probleme avec ce free
-   gtk_widget_destroy(pFileSelection);
-}
-
-//pour pouvoir selectionner un fichier 
+/**
+ * \fn void creer_file_selection()
+ * \brief Selection d'un fichier a analyser dans traitement.
+ *
+ */
 void creer_file_selection(GtkWidget *widget, gpointer data) {
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
     GtkWidget *p_dialog = NULL;
@@ -654,6 +746,57 @@ void creer_file_selection(GtkWidget *widget, gpointer data) {
     traitement(NULL,fenetre);
 }
 
+/**
+ * \fn void creer_folder_selection (GtkButton * button, gpointer data)
+ * \brief Selection du dossier ou ce trouverons les données pour l'apprentissage.
+ *
+ * \param widget Le widget qui est associer a la fonction.
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
+void creer_folder_selection (GtkButton * button, gpointer data)
+{   
+    INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
+    GtkWidget *pFileSelection = NULL;
+    gtk_widget_hide(fenetre->Window);
+        
+     
+    /* Creation de la fenetre de selection */
+    pFileSelection = gtk_file_chooser_dialog_new("selectionnez un repertoire...",
+    NULL,
+    //GTK_FILE_CHOOSER_ACTION_OPEN
+    GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
+    NULL);
+    
+    /*pour afficher toutes les fenetres*/
+    gtk_widget_show(pFileSelection);
+    /* On limite les actions a cette fenetre */
+    gtk_window_set_modal(GTK_WINDOW(pFileSelection), TRUE);   
+    
+    char *file_name = NULL;
+    /* Affichage fenetre */
+    switch(gtk_dialog_run(GTK_DIALOG(pFileSelection)))
+    {
+        case GTK_RESPONSE_OK:
+            /* Recuperation du chemin */
+            file_name = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (pFileSelection));
+            strcpy(fenetre->chemin,file_name);
+            break;
+                      
+        default : break;
+    }
+    gtk_widget_show_all(fenetre->Window);
+   gtk_widget_destroy(pFileSelection);
+}
+
+/**
+ * \fn void quitter(GtkWidget *widget, gpointer data)
+ * \brief Lorsque l'on quitte la fenetre.
+ *
+ * \param widget Le widget qui est associer a la fonction.
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
 void quitter(GtkWidget *widget, gpointer data)
 {
     // destruction de win et de tout ce qu'il contient
@@ -661,6 +804,11 @@ void quitter(GtkWidget *widget, gpointer data)
     gtk_main_quit();
 }
 
+/**
+ * \fn void afficherInterface()
+ * \brief Contenant toute l'interface et les fonction
+ *
+ */
 void afficherInterface(){
     INFO_FENETRE *fenetre = malloc(sizeof(INFO_FENETRE));
     for(int i = 0; i<200; i++)
@@ -670,43 +818,3 @@ void afficherInterface(){
     page_principale(fenetre);
 }
 
-void matrice(GtkWidget *widget, gpointer data){
-	
-	GtkWidget *table;
-	GtkWidget *Vbox;
-	//GtkWidget *label;
-	
-    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
-    
-    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Affichage de matrice");
-    viderContainer(fenetre->Window);
-    
-    Vbox = gtk_vbox_new(FALSE, 0);
-    gtk_container_add(GTK_CONTAINER(fenetre->Window), Vbox);
-    
-    RN* rn = ChargerRN(fenetre->info);
-    COUCHE* tmp = rn->couche_deb->suiv;
-	int i;
-	int j;
-	
-	GtkWidget *cell;
-	gchar *text;
-	
-	
-	table = gtk_table_new (rn->info->h, rn->info->w, TRUE); //tableau
-	
-	gtk_box_pack_start(GTK_BOX(Vbox), table, TRUE,TRUE,0);
-	for( i=0;i<rn->info->h; i++){
-		for(j=0; j<rn->info->w; j++){
-			
-			text = g_strdup_printf("%f", tmp->W[i][j]); //création d'une chaine contenant la valeur de la cellule
-			printf("%f ",tmp->W[i][j]);
-			cell = gtk_label_new(text); 
-			gtk_table_attach (GTK_TABLE (table), cell, j, j+1, i, i+1, GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0); //ajout de la cellule au tableau
-				
-		}
-		printf("\n");
-	}
-	
-	g_free (text);
-}

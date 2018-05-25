@@ -1,0 +1,107 @@
+\hypertarget{gestionnaire__IO_8h}{}\section{Référence du fichier gestionnaire\+\_\+\+I\+O.\+h}
+\label{gestionnaire__IO_8h}\index{gestionnaire\+\_\+\+I\+O.\+h@{gestionnaire\+\_\+\+I\+O.\+h}}
+
+
+Gestionnaire d\textquotesingle{}entrées sorties.  
+
+
+{\ttfamily \#include \char`\"{}Structures.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}gestionnaire\+\_\+\+R\+N.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de gestionnaire\+\_\+\+I\+O.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{gestionnaire__IO_8h__incl}
+\end{center}
+\end{figure}
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{gestionnaire__IO_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structImage}{Image} $\ast$ \hyperlink{gestionnaire__IO_8h_a219dfd2654f71f643db4d1a5c4c967e4}{Charger\+Bmp} (const char $\ast$fichier, int, int)
+\begin{DoxyCompactList}\small\item\em On lis une image de format bmp et on l\textquotesingle{}enregistre dans la structure \hyperlink{structImage}{Image}. \end{DoxyCompactList}\item 
+\hyperlink{structImage}{Image} $\ast$ {\bfseries Charger\+Mnist} (const char $\ast$fichier, int, int)\hypertarget{gestionnaire__IO_8h_a1b66f77536ba38756233bc9d1ce332bc}{}\label{gestionnaire__IO_8h_a1b66f77536ba38756233bc9d1ce332bc}
+
+\item 
+int {\bfseries Sauver} (\hyperlink{structImage}{Image} $\ast$, const char $\ast$fichier)\hypertarget{gestionnaire__IO_8h_af9f311b71088ee8e148cedea26b57446}{}\label{gestionnaire__IO_8h_af9f311b71088ee8e148cedea26b57446}
+
+\item 
+\hyperlink{structImage}{Image} $\ast$ {\bfseries Nouvelle\+Image} (int w, int h)\hypertarget{gestionnaire__IO_8h_ac91839d8b84692804f4b60afe1bb216f}{}\label{gestionnaire__IO_8h_ac91839d8b84692804f4b60afe1bb216f}
+
+\item 
+\hyperlink{structImage}{Image} $\ast$ {\bfseries Copie\+Image} (\hyperlink{structImage}{Image} $\ast$)\hypertarget{gestionnaire__IO_8h_ae24d063d2a54338c50361d9637471403}{}\label{gestionnaire__IO_8h_ae24d063d2a54338c50361d9637471403}
+
+\item 
+void {\bfseries Set\+Pixel} (\hyperlink{structImage}{Image} $\ast$, int i, int j, \hyperlink{structPixel}{Pixel} p)\hypertarget{gestionnaire__IO_8h_ab1f4e65d86624d222de7abd901eccf53}{}\label{gestionnaire__IO_8h_ab1f4e65d86624d222de7abd901eccf53}
+
+\item 
+\hyperlink{structPixel}{Pixel} {\bfseries Get\+Pixel} (\hyperlink{structImage}{Image} $\ast$, int i, int j)\hypertarget{gestionnaire__IO_8h_a74daa7c07ebad562a56512b70cd99773}{}\label{gestionnaire__IO_8h_a74daa7c07ebad562a56512b70cd99773}
+
+\item 
+void {\bfseries Del\+Image} (\hyperlink{structImage}{Image} $\ast$)\hypertarget{gestionnaire__IO_8h_a30120c639290b6ab167c09ee75f23b5a}{}\label{gestionnaire__IO_8h_a30120c639290b6ab167c09ee75f23b5a}
+
+\item 
+char $\ast$ {\bfseries Charger\+Etiquette\+M\+N\+I\+ST} (const char $\ast$path)\hypertarget{gestionnaire__IO_8h_ad75487d79bfcd9c86941964341b27ed4}{}\label{gestionnaire__IO_8h_ad75487d79bfcd9c86941964341b27ed4}
+
+\item 
+\hyperlink{structApprentissage}{App} $\ast$ {\bfseries Chargement\+Couple\+Att\+In} (char $\ast$repertoire\+\_\+app, int w\+\_\+max, int h\+\_\+max)\hypertarget{gestionnaire__IO_8h_af173f0494a794123f2c65871af91ef8b}{}\label{gestionnaire__IO_8h_af173f0494a794123f2c65871af91ef8b}
+
+\item 
+\hyperlink{structINFO__RN}{I\+N\+F\+O\+\_\+\+RN} $\ast$ {\bfseries Charger\+Info} ()\hypertarget{gestionnaire__IO_8h_a343472a40d9ee1ed25bb7caf22be1b8f}{}\label{gestionnaire__IO_8h_a343472a40d9ee1ed25bb7caf22be1b8f}
+
+\item 
+\hyperlink{structRN}{RN} $\ast$ {\bfseries Charger\+RN} (\hyperlink{structINFO__RN}{I\+N\+F\+O\+\_\+\+RN} $\ast$info)\hypertarget{gestionnaire__IO_8h_af2e5b9ad00cab116ec82a35aa1e1c7f0}{}\label{gestionnaire__IO_8h_af2e5b9ad00cab116ec82a35aa1e1c7f0}
+
+\item 
+void {\bfseries Save\+RN} (\hyperlink{structRN}{RN})\hypertarget{gestionnaire__IO_8h_a6a8ff4d9f4c8307e35f700bd10cda07f}{}\label{gestionnaire__IO_8h_a6a8ff4d9f4c8307e35f700bd10cda07f}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Gestionnaire d\textquotesingle{}entrées sorties. 
+
+\begin{DoxyAuthor}{Auteur}
+P\+E\+P\+IN Thibaut 
+
+R\+E\+Z\+G\+UI Soumia 
+
+S\+L\+I\+M\+A\+NI Arezki 
+
+S\+E\+L\+A\+Q\+U\+ET Severine 
+
+S\+Z\+U\+L\+EK Isaac 
+
+M\+O\+N\+T\+I\+G\+N\+ET Anthony
+\end{DoxyAuthor}
+Ce module s\textquotesingle{}occupe de lire , charger et sauvegarder les données. 
+
+\subsection{Documentation des fonctions}
+\index{gestionnaire\+\_\+\+I\+O.\+h@{gestionnaire\+\_\+\+I\+O.\+h}!Charger\+Bmp@{Charger\+Bmp}}
+\index{Charger\+Bmp@{Charger\+Bmp}!gestionnaire\+\_\+\+I\+O.\+h@{gestionnaire\+\_\+\+I\+O.\+h}}
+\subsubsection[{\texorpdfstring{Charger\+Bmp(const char $\ast$fichier, int, int)}{ChargerBmp(const char *fichier, int, int)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Image}$\ast$ Charger\+Bmp (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{fichier, }
+\item[{int}]{w\+\_\+max, }
+\item[{int}]{h\+\_\+max}
+\end{DoxyParamCaption}
+)}\hypertarget{gestionnaire__IO_8h_a219dfd2654f71f643db4d1a5c4c967e4}{}\label{gestionnaire__IO_8h_a219dfd2654f71f643db4d1a5c4c967e4}
+
+
+On lis une image de format bmp et on l\textquotesingle{}enregistre dans la structure \hyperlink{structImage}{Image}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em fichier} & Chemin absolue de l\textquotesingle{}image à charger. \\
+\hline
+{\em } & \\
+\hline
+\end{DoxyParams}
