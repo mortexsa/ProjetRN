@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>ProjetRn:  Fichier source de gestionnaire_IO.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">ProjetRn
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Variables&#160;globale</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">gestionnaire_IO.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="gestionnaire___i_o_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef GESTIONNAIRE_H</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define GESTIONNAIRE_H</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_structures_8h.html">Structures.h</a>&quot;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="gestionnaire___r_n_8h.html">gestionnaire_RN.h</a>&quot;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<a class="code" href="struct_image.html">Image</a>* <a class="code" href="gestionnaire___i_o_8h.html#a219dfd2654f71f643db4d1a5c4c967e4">ChargerBmp</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* fichier, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>);</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<a class="code" href="struct_image.html">Image</a>* <a class="code" href="gestionnaire___i_o_8h.html#a1b66f77536ba38756233bc9d1ce332bc">ChargerMnist</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* fichier, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>);</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">int</span> <a class="code" href="gestionnaire___i_o_8h.html#af9f311b71088ee8e148cedea26b57446">Sauver</a>(<a class="code" href="struct_image.html">Image</a>*,<span class="keyword">const</span> <span class="keywordtype">char</span>* fichier);</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<a class="code" href="struct_image.html">Image</a>* <a class="code" href="gestionnaire___i_o_8h.html#ac91839d8b84692804f4b60afe1bb216f">NouvelleImage</a>(<span class="keywordtype">int</span> w,<span class="keywordtype">int</span> h);</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<a class="code" href="struct_image.html">Image</a>* <a class="code" href="gestionnaire___i_o_8h.html#ae24d063d2a54338c50361d9637471403">CopieImage</a>(<a class="code" href="struct_image.html">Image</a>*);</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestionnaire___i_o_8h.html#ab1f4e65d86624d222de7abd901eccf53">SetPixel</a>(<a class="code" href="struct_image.html">Image</a>*,<span class="keywordtype">int</span> i,<span class="keywordtype">int</span> j,<a class="code" href="struct_pixel.html">Pixel</a> p);</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<a class="code" href="struct_pixel.html">Pixel</a> <a class="code" href="gestionnaire___i_o_8h.html#a74daa7c07ebad562a56512b70cd99773">GetPixel</a>(<a class="code" href="struct_image.html">Image</a>*,<span class="keywordtype">int</span> i,<span class="keywordtype">int</span> j);</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestionnaire___i_o_8h.html#a30120c639290b6ab167c09ee75f23b5a">DelImage</a>(<a class="code" href="struct_image.html">Image</a>*);</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="gestionnaire___i_o_8h.html#ad75487d79bfcd9c86941964341b27ed4">ChargerEtiquetteMNIST</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* path);</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<a class="code" href="struct_apprentissage.html">App</a>* <a class="code" href="gestionnaire___i_o_8h.html#af173f0494a794123f2c65871af91ef8b">ChargementCoupleAttIn</a>(<span class="keywordtype">char</span>* repertoire_app, <span class="keywordtype">int</span> w_max, <span class="keywordtype">int</span> h_max);</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<a class="code" href="struct_i_n_f_o___r_n.html">INFO_RN</a>* <a class="code" href="gestionnaire___i_o_8h.html#a343472a40d9ee1ed25bb7caf22be1b8f">ChargerInfo</a>();</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<a class="code" href="struct_r_n.html">RN</a>* <a class="code" href="gestionnaire___i_o_8h.html#af2e5b9ad00cab116ec82a35aa1e1c7f0">ChargerRN</a>(<a class="code" href="struct_i_n_f_o___r_n.html">INFO_RN</a> *info);</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestionnaire___i_o_8h.html#a6a8ff4d9f4c8307e35f700bd10cda07f">SaveRN</a>(<a class="code" href="struct_r_n.html">RN</a>);</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="gestionnaire___i_o_8h_html_ad75487d79bfcd9c86941964341b27ed4"><div class="ttname"><a href="gestionnaire___i_o_8h.html#ad75487d79bfcd9c86941964341b27ed4">ChargerEtiquetteMNIST</a></div><div class="ttdeci">char * ChargerEtiquetteMNIST(const char *path)</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:286</div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html_ab1f4e65d86624d222de7abd901eccf53"><div class="ttname"><a href="gestionnaire___i_o_8h.html#ab1f4e65d86624d222de7abd901eccf53">SetPixel</a></div><div class="ttdeci">void SetPixel(Image *, int i, int j, Pixel p)</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:49</div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html_a6a8ff4d9f4c8307e35f700bd10cda07f"><div class="ttname"><a href="gestionnaire___i_o_8h.html#a6a8ff4d9f4c8307e35f700bd10cda07f">SaveRN</a></div><div class="ttdeci">void SaveRN(RN)</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:537</div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html_af173f0494a794123f2c65871af91ef8b"><div class="ttname"><a href="gestionnaire___i_o_8h.html#af173f0494a794123f2c65871af91ef8b">ChargementCoupleAttIn</a></div><div class="ttdeci">App * ChargementCoupleAttIn(char *repertoire_app, int w_max, int h_max)</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:327</div></div>
+<div class="ttc" id="struct_image_html"><div class="ttname"><a href="struct_image.html">Image</a></div><div class="ttdef"><b>Definition:</b> Structures.h:13</div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html_ae24d063d2a54338c50361d9637471403"><div class="ttname"><a href="gestionnaire___i_o_8h.html#ae24d063d2a54338c50361d9637471403">CopieImage</a></div><div class="ttdeci">Image * CopieImage(Image *)</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:30</div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html_a219dfd2654f71f643db4d1a5c4c967e4"><div class="ttname"><a href="gestionnaire___i_o_8h.html#a219dfd2654f71f643db4d1a5c4c967e4">ChargerBmp</a></div><div class="ttdeci">Image * ChargerBmp(const char *fichier, int, int)</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:91</div></div>
+<div class="ttc" id="struct_pixel_html"><div class="ttname"><a href="struct_pixel.html">Pixel</a></div><div class="ttdef"><b>Definition:</b> Structures.h:8</div></div>
+<div class="ttc" id="gestionnaire___r_n_8h_html"><div class="ttname"><a href="gestionnaire___r_n_8h.html">gestionnaire_RN.h</a></div></div>
+<div class="ttc" id="struct_apprentissage_html"><div class="ttname"><a href="struct_apprentissage.html">Apprentissage</a></div><div class="ttdef"><b>Definition:</b> Structures.h:56</div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html_a74daa7c07ebad562a56512b70cd99773"><div class="ttname"><a href="gestionnaire___i_o_8h.html#a74daa7c07ebad562a56512b70cd99773">GetPixel</a></div><div class="ttdeci">Pixel GetPixel(Image *, int i, int j)</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:55</div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html_ac91839d8b84692804f4b60afe1bb216f"><div class="ttname"><a href="gestionnaire___i_o_8h.html#ac91839d8b84692804f4b60afe1bb216f">NouvelleImage</a></div><div class="ttdeci">Image * NouvelleImage(int w, int h)</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:21</div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html_a343472a40d9ee1ed25bb7caf22be1b8f"><div class="ttname"><a href="gestionnaire___i_o_8h.html#a343472a40d9ee1ed25bb7caf22be1b8f">ChargerInfo</a></div><div class="ttdeci">INFO_RN * ChargerInfo()</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:406</div></div>
+<div class="ttc" id="struct_r_n_html"><div class="ttname"><a href="struct_r_n.html">RN</a></div><div class="ttdef"><b>Definition:</b> Structures.h:48</div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html_a1b66f77536ba38756233bc9d1ce332bc"><div class="ttname"><a href="gestionnaire___i_o_8h.html#a1b66f77536ba38756233bc9d1ce332bc">ChargerMnist</a></div><div class="ttdeci">Image * ChargerMnist(const char *fichier, int, int)</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:217</div></div>
+<div class="ttc" id="struct_i_n_f_o___r_n_html"><div class="ttname"><a href="struct_i_n_f_o___r_n.html">INFO_RN</a></div><div class="ttdef"><b>Definition:</b> Structures.h:36</div></div>
+<div class="ttc" id="_structures_8h_html"><div class="ttname"><a href="_structures_8h.html">Structures.h</a></div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html_a30120c639290b6ab167c09ee75f23b5a"><div class="ttname"><a href="gestionnaire___i_o_8h.html#a30120c639290b6ab167c09ee75f23b5a">DelImage</a></div><div class="ttdeci">void DelImage(Image *)</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:40</div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html_af9f311b71088ee8e148cedea26b57446"><div class="ttname"><a href="gestionnaire___i_o_8h.html#af9f311b71088ee8e148cedea26b57446">Sauver</a></div><div class="ttdeci">int Sauver(Image *, const char *fichier)</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:174</div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html_af2e5b9ad00cab116ec82a35aa1e1c7f0"><div class="ttname"><a href="gestionnaire___i_o_8h.html#af2e5b9ad00cab116ec82a35aa1e1c7f0">ChargerRN</a></div><div class="ttdeci">RN * ChargerRN(INFO_RN *info)</div><div class="ttdef"><b>Definition:</b> gestionnaire_IO.c:470</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

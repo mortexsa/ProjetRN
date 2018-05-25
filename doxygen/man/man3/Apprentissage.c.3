@@ -1,0 +1,73 @@
+.TH "Apprentissage.c" 3 "Vendredi 25 Mai 2018" "ProjetRn" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Apprentissage.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <string\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include 'Apprentissage\&.h'\fP
+.br
+
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "void \fBfct_cout\fP (\fBRN\fP rn, char *eti)"
+.br
+.ti -1c
+.RI "void \fBBackProp\fP (\fBRN\fP *rn, \fBImage\fP *im, char *sortie_att, float eta)"
+.br
+.ti -1c
+.RI "void \fBModifPoids\fP (float **W, float **DELTA, int W_w, int W_h, float eta)"
+.br
+.ti -1c
+.RI "void \fBModifBiais\fP (float *B, float *DELTA, int taille, float eta)"
+.br
+.ti -1c
+.RI "void \fBSigmoidePrimeZ\fP (float *in, float **out, int taille)"
+.br
+.ti -1c
+.RI "void \fBMultiplicationMatricielleTransposeeTM\fP (float **in_M, float *in_V, float *out, int taille_M1, int taille_M3)"
+.br
+.ti -1c
+.RI "void \fBMultiplicationMatricielleTransposeeMT\fP (float *in_M1, float *in_M2, float **out, int taille_M1, int taille_M2)"
+.br
+.ti -1c
+.RI "void \fBHadamard\fP (float **in_a, float *in_b, float *out, int taille)"
+.br
+.ti -1c
+.RI "void \fBDelApp\fP (\fBApp\fP *app)"
+.br
+.in -1c
+.SH "Documentation des fonctions"
+.PP 
+.SS "void BackProp (\fBRN\fP * rn, \fBImage\fP * im, char * sortie_att, float eta)"
+
+.SS "void DelApp (\fBApp\fP * app)"
+
+.SS "void fct_cout (\fBRN\fP rn, char * eti)"
+
+.SS "void Hadamard (float ** in_a, float * in_b, float * out, int taille)"
+
+.SS "void ModifBiais (float * B, float * DELTA, int taille, float eta)"
+
+.SS "void ModifPoids (float ** W, float ** DELTA, int W_w, int W_h, float eta)"
+
+.SS "void MultiplicationMatricielleTransposeeMT (float * in_M1, float * in_M2, float ** out, int taille_M1, int taille_M2)"
+
+.SS "void MultiplicationMatricielleTransposeeTM (float ** in_M, float * in_V, float * out, int taille_M1, int taille_M3)"
+
+.SS "void SigmoidePrimeZ (float * in, float ** out, int taille)"
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour ProjetRn à partir du code source\&.

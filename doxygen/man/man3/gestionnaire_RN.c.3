@@ -1,0 +1,85 @@
+.TH "gestionnaire_RN.c" 3 "Vendredi 25 Mai 2018" "ProjetRn" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gestionnaire_RN.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <math\&.h>\fP
+.br
+\fC#include 'gestionnaire_RN\&.h'\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "void \fBMultiplicationMatriceVecteur\fP (float **in_M, float *in_V, float *out, int taille_M1, int taille_M3)"
+.br
+.ti -1c
+.RI "void \fBAdditionVecteurVecteur\fP (float *in_V1, float *in_V2, float *out, int taille)"
+.br
+.ti -1c
+.RI "void \fBSigmoideV\fP (float *in_V, float *out, int taille)"
+.br
+.ti -1c
+.RI "float \fBSigmoide\fP (float in)"
+.br
+.ti -1c
+.RI "\fBRN\fP * \fBinitialisation\fP (\fBINFO_RN\fP *info)"
+.br
+.ti -1c
+.RI "void \fBRemplissage\fP (\fBRN\fP rn)"
+.br
+.ti -1c
+.RI "void \fBAjout_couche_Fin\fP (\fBRN\fP *rn, int taille)"
+.br
+.ti -1c
+.RI "void \fBAjoutPremiereCouche\fP (\fBRN\fP *rn, int taille)"
+.br
+.ti -1c
+.RI "void \fBPropagation\fP (\fBImage\fP *im, \fBRN\fP rn)"
+.br
+.ti -1c
+.RI "char ** \fBReconnaissance\fP (\fBRN\fP rn)"
+.br
+.ti -1c
+.RI "void \fBlibererRN\fP (\fBRN\fP *rn)"
+.br
+.in -1c
+.SH "Documentation des fonctions"
+.PP 
+.SS "void AdditionVecteurVecteur (float * in_V1, float * in_V2, float * out, int taille)"
+
+.SS "void Ajout_couche_Fin (\fBRN\fP * rn, int taille)"
+
+.SS "void AjoutPremiereCouche (\fBRN\fP * rn, int taille)"
+
+.SS "\fBRN\fP* initialisation (\fBINFO_RN\fP * info)"
+
+.SS "void libererRN (\fBRN\fP * rn)"
+
+.SS "void MultiplicationMatriceVecteur (float ** in_M, float * in_V, float * out, int taille_M1, int taille_M3)"
+
+.SS "void Propagation (\fBImage\fP * im, \fBRN\fP rn)"
+
+.SS "char** Reconnaissance (\fBRN\fP rn)"
+
+.SS "void Remplissage (\fBRN\fP rn)"
+
+.SS "float Sigmoide (float in)"
+
+.SS "void SigmoideV (float * in_V, float * out, int taille)"
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour ProjetRn à partir du code source\&.

@@ -1,0 +1,56 @@
+.TH "INFO_FENETRE" 3 "Vendredi 25 Mai 2018" "ProjetRn" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+INFO_FENETRE \- Information circulant entre les fonctions\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <interface\&.h>\fP
+.SS "Champs de données"
+
+.in +1c
+.ti -1c
+.RI "\fBINFO_RN\fP * \fBinfo\fP"
+.br
+.ti -1c
+.RI "GtkWidget * \fBWindow\fP"
+.br
+.ti -1c
+.RI "int \fBnombreReseau\fP"
+.br
+.ti -1c
+.RI "int \fBreseauSelectionner\fP"
+.br
+.ti -1c
+.RI "char \fBchemin\fP [200]"
+.br
+.ti -1c
+.RI "int \fBetatBoutton\fP"
+.br
+.in -1c
+.SH "Description détaillée"
+.PP 
+Information circulant entre les fonctions\&. 
+
+\fBINFO_FENETRE\fP est un objet de transmission des informations entre les differentes fonction et fenetres\&. 
+.SH "Documentation des champs"
+.PP 
+.SS "char chemin[200]"
+Chemin des fichier ou dossier à enregistrer 
+.SS "int etatBoutton"
+Etat du boutton \fBApprentissage\fP du réseau de neurones 
+.SS "\fBINFO_RN\fP* info"
+Structure contenant tout les Réseaux de neurone existant\&. 
+.SS "int nombreReseau"
+Nombre de Réseaux de neurones\&. 
+.SS "int reseauSelectionner"
+Réseau sélectionner 
+.SS "GtkWidget* Window"
+Fenetre principal qu'on modifie dans les fonctions\&. 
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour ProjetRn à partir du code source\&.
