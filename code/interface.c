@@ -174,7 +174,8 @@ void selectReseau(GtkWidget *widget, gpointer data){
         }
     }
     GtkWidget *label;
-    GtkWidget *button[4];
+    GtkWidget *button[3];
+    GtkWidget *toggleBtn;
     GtkWidget *Vbox;
     GtkWidget *Hbox;
     Vbox = gtk_vbox_new(FALSE, 0);
@@ -254,18 +255,30 @@ void selectReseau(GtkWidget *widget, gpointer data){
     
     button[1] = gtk_button_new_with_label("Retour");
     button[2] = gtk_button_new_with_label("Traitement");
-    button[3] = gtk_button_new_with_label("Apprentissage");
+    toggleBtn = gtk_toggle_button_new_with_label("Apprentissage");
     
     gtk_box_pack_start(GTK_BOX(Hbox), button[1], TRUE, TRUE, 2);
     gtk_box_pack_start(GTK_BOX(Hbox), button[2], TRUE, TRUE, 2);
-    gtk_box_pack_start(GTK_BOX(Hbox), button[3], TRUE, TRUE, 2);
+    gtk_box_pack_start(GTK_BOX(Hbox), toggleBtn, TRUE, TRUE, 2);
 
     gtk_widget_show_all(fenetre->Window);
 
     g_signal_connect(G_OBJECT(button[1]), "clicked", G_CALLBACK(retourAccueille), fenetre);
     g_signal_connect(G_OBJECT(button[2]), "clicked", G_CALLBACK(traitement), fenetre);
-
+    g_signal_connect(G_OBJECT(toggleBtn), "toggled", G_CALLBACK(lancerApprentissage), fenetre);
+    printf("%d\n", gtk_toggle_button_get_active ((GtkToggleButton *)toggleBtn));
     
+}
+
+void lancerApprentissage(GtkWidget *widget, gpointer data){
+    printf("premier : %d\n", gtk_toggle_button_get_active ((GtkToggleButton *)widget));
+    if(gtk_toggle_button_get_active ((GtkToggleButton *)widget)){
+        while(1){
+            printf("-\n");
+        }
+    }
+    // gtk_button_set_label(GTK_BUTTON(widget), "stop");
+    // printf("%s\n", gtk_button_get_label(GTK_BUTTON(widget)));
 }
 
 // //delete evenement 
@@ -569,18 +582,38 @@ void creer_folder_selection (GtkButton * button, gpointer data)
 void creer_file_selection(GtkWidget *widget, gpointer data) {
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
     GtkWidget *p_dialog = NULL;
+    GtkWidget *avertissement;
     gtk_widget_hide(fenetre->Window);
     p_dialog = gtk_file_chooser_dialog_new ("Ouvrir un fichier",NULL,GTK_FILE_CHOOSER_ACTION_OPEN,GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,NULL);
     //gtk_window_set_accept_focus(GTK_WINDOW(fenetre->Window), FALSE);
     //gtk_window_set_modal(GTK_WINDOW(fenetre->Window),FALSE);
     gtk_widget_show(p_dialog);
-    if (gtk_dialog_run (GTK_DIALOG (p_dialog)) == GTK_RESPONSE_ACCEPT){
-        char *file_name = NULL;
-        file_name = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (p_dialog));
-        //fenetre->chemin = malloc(sizeof(strlen(file_name+2)));
-        strcpy(fenetre->chemin,file_name);
-    
+    while(1){
+        if (gtk_dialog_run (GTK_DIALOG (p_dialog)) == GTK_RESPONSE_ACCEPT){
+            char *file_name = NULL;
+            file_name = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (p_dialog));
+            DIR *dir;
+            dir = opendir(file_name);
+            if(dir == NULL){
+                strcpy(fenetre->chemin,file_name);
+                break;
+            }
+            else{
+                closedir(dir);
+                avertissement = gtk_message_dialog_new(GTK_WINDOW(fenetre->Window),
+                    GTK_DIALOG_MODAL,
+                    GTK_MESSAGE_INFO,
+                    GTK_BUTTONS_OK,
+                    "Veuillez selectionner un Fichier !!");
+                gtk_dialog_run(GTK_DIALOG(avertissement));
+                gtk_widget_destroy(avertissement);
+            }
+        }
+        else {
+            break;
+        }
     }
+    
     gtk_widget_show_all(fenetre->Window);
     gtk_widget_destroy (p_dialog);
     traitement(NULL,fenetre);
