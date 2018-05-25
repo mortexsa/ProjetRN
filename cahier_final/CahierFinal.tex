@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage[latin1]{inputenc}    
+\usepackage[utf8]{inputenc}    
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage{graphicx}
@@ -58,13 +58,13 @@ Nous distinguons deux types d'apprentissage :
 \section{Fonctionnalités}
 \subsection{Interface}
 			\begin{center} 
-				\includegraphics[height=244, width=400]{croquis.PNG}
+				\includegraphics[height=244, width=400]{interface.png}
 			\end{center}
 
 \section{Explications de l'architecture :}
 \subsection{Organigramme :}
 			\begin{center} 
-				\includegraphics[height=244, width=400]{liens.PNG}
+				\includegraphics[height=244, width=400]{organigramme.png}
 			\end{center}
 	\paragraph{Connections entre les modules :}
 			\begin{enumerate}
@@ -144,7 +144,7 @@ Lors de l'apprentissage du réseau, l'objectif est de faire varier les paramètr
 Cependant un autre paramètre entre en jeux : le taux d'apprentissage. Avant d'appliquer l'inverse du gradient aux paramètres , celui-ci est multiplié par le taux  d'apprentissage. 
 Pour faire fonctionner la descente de gradient correctement, nous devons choisir un taux d'apprentissage suffisamment petit afin que $\Delta$C ne soit pas positif mais suffisamment petit afin de ne pas ralentir le processus d'apprentissage.
 				\begin{center} 
-				\includegraphics[height=244, width=400]{graphe.PNG}
+				\includegraphics[height=244, width=400]{courbe.png}
 				\end{center}
 			\item Descente de gradient stochastique :
 			Afin d'améliorer les performances de l'application, il serait possible d'opter pour la version stochastique de la descente de gradient où la rétro-propagation est effectuée sur la moyenne de l'erreur de plusieurs images et non plus sur l'erreur de chaque image.
