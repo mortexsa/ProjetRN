@@ -9,7 +9,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include <time.h> 
+#include <time.h>
+#include <pthread.h>
 //#include "01_09_02_bmp.h"
 
 #include <sys/types.h>
@@ -28,6 +29,7 @@ typedef struct INFO_FENETRE
 	int nombreReseau;
 	int reseauSelectionner;
 	char chemin[200];
+	int etatBoutton;
 } INFO_FENETRE;
 
 int nombreReseau();
@@ -36,6 +38,8 @@ void retourAccueille(GtkWidget *widget, gpointer data);
 void selectReseau(GtkWidget *widget, gpointer data);
 void traitement(GtkWidget *widget, gpointer data);
 void lancerApprentissage(GtkWidget *widget, gpointer data);
+void* fctThreadApp(void* arg);
+void matrice(GtkWidget *widget, gpointer data);
 void resultatTraitement(GtkWidget *widget, gpointer data);
 void page_principale(INFO_FENETRE *fenetre);
 void creer_file_selection();

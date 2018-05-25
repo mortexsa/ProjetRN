@@ -211,9 +211,9 @@ int Sauver(Image* I,const char* fichier)
 	fclose(F);
 	return 0;
 }
-#define WHT   "\x1B[8;47m"
-#define BLK   "\x1B[8;40m"
-#define RESET "\x1B[0m"
+// #define WHT   "\x1B[8;47m"
+// #define BLK   "\x1B[8;40m"
+// #define RESET "\x1B[0m"
 Image* ChargerMnist(const char* path, int w_max, int h_max)
 {
 	unsigned int t[4];
@@ -268,18 +268,18 @@ Image* ChargerMnist(const char* path, int w_max, int h_max)
 		im->dat[i].g = tmp[i];
 		im->dat[i].b = tmp[i];
 	}
-	int j;
-    for(i=0;i<im->h;i++)
-    {
-        for(j=0;j<im->w;j++)
-        {
-            if(im->dat[i*im->w+j].r > 0)
-                printf(WHT "1" RESET);
-            else
-                printf(BLK "0" RESET);
-        }
-        printf("\n");
-    }
+	// int j;
+ //    for(i=0;i<im->h;i++)
+ //    {
+ //        for(j=0;j<im->w;j++)
+ //        {
+ //            if(im->dat[i*im->w+j].r > 0)
+ //                printf(WHT "1" RESET);
+ //            else
+ //                printf(BLK "0" RESET);
+ //        }
+ //        printf("\n");
+ //    }
 	return im;
 }
 
@@ -348,10 +348,10 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 		//~ printf("%s\n",path);
 		
 		if(strcmp(fichier->d_name,".") == 0 || strcmp(fichier->d_name,"..") == 0);
-		else if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen("-idx3-ubyte")]),"-idx3-ubyte") == 0)
+		else if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen(".idx3-ubyte")]),".idx3-ubyte") == 0)
 		{
 			sprintf(path2,"%s",path);
-			sprintf(&path2[strlen(path) - strlen("-idx3-ubyte")],"-idx1-ubyte");
+			sprintf(&path2[strlen(path) - strlen(".idx3-ubyte")],".idx1-ubyte");
 			//~ printf("%s\n",path2);
 			
 			if((couple->etiquette = ChargerEtiquetteMNIST(path2)))
@@ -364,10 +364,10 @@ App* ChargementCoupleAttIn(char* repertoire_app, int w_max, int h_max)
 				remove(path2);
 			}
 		}
-		else if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen("-idx1-ubyte")]),"-idx1-ubyte") == 0)
+		else if(strcmp(&(fichier->d_name[strlen(fichier->d_name) - strlen(".idx1-ubyte")]),".idx1-ubyte") == 0)
 		{
 			sprintf(path2,"%s",path);
-			sprintf(&path2[strlen(path) - strlen("-idx1-ubyte")],"-idx3-ubyte");
+			sprintf(&path2[strlen(path) - strlen(".idx1-ubyte")],".idx3-ubyte");
 			//~ printf("%s\n",path2);
 			
 			debug
@@ -522,6 +522,8 @@ RN* ChargerRN(INFO_RN *info)
 	{
 		if(i>=7)
 		{
+			path[strlen(path)-1] = '\0';
+			printf("%s\n",path);
 			rn->info->etiquettes[i-7] = malloc(strlen(path)*sizeof(char));
 			strcpy(rn->info->etiquettes[i-7],path);
 		}

@@ -107,7 +107,7 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
         GtkWidget *Vbox;
         GtkWidget *Hbox;
         GtkWidget *pbutton[2];
-     	INFO_RN *k=fenetre->info;	  
+     	INFO_RN *k=&(fenetre->info[fenetre->reseauSelectionner]);	  
     	//~ RN *rn1 =initialisation(k); 
     	//~ RN *rn= ChargerRN(k); //charger RN
     	RN *rn = initialisation(k); 
@@ -267,18 +267,55 @@ void selectReseau(GtkWidget *widget, gpointer data){
     g_signal_connect(G_OBJECT(button[2]), "clicked", G_CALLBACK(traitement), fenetre);
     g_signal_connect(G_OBJECT(toggleBtn), "toggled", G_CALLBACK(lancerApprentissage), fenetre);
     printf("%d\n", gtk_toggle_button_get_active ((GtkToggleButton *)toggleBtn));
+    g_signal_connect(G_OBJECT(button[0]), "clicked", G_CALLBACK(matrice), fenetre);
     
 }
 
 void lancerApprentissage(GtkWidget *widget, gpointer data){
-    printf("premier : %d\n", gtk_toggle_button_get_active ((GtkToggleButton *)widget));
+    //printf("premier : %d\n", gtk_toggle_button_get_active ((GtkToggleButton *)widget));
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+
+    static pthread_t pid;
     if(gtk_toggle_button_get_active ((GtkToggleButton *)widget)){
-        while(1){
-            printf("-\n");
-        }
+        fenetre->etatBoutton = 1;
+        pthread_create(&pid, NULL, fctThreadApp,fenetre);
+    }
+    else
+    {
+        fenetre->etatBoutton = 0;
+        pthread_join(pid, NULL);
     }
     // gtk_button_set_label(GTK_BUTTON(widget), "stop");
     // printf("%s\n", gtk_button_get_label(GTK_BUTTON(widget)));
+}
+
+void* fctThreadApp(void* arg)
+{
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) arg;
+
+    RN* rn = ChargerRN(&(fenetre->info[fenetre->reseauSelectionner]));
+
+    // for(int i=0;i<10;i++)
+    //     printf("%c\n",rn->info->etiquettes[i]);
+
+    int i = 0;
+    App* app;
+    
+    while((fenetre->etatBoutton)&&(app = ChargementCoupleAttIn(rn->info->repertoire,rn->info->w,rn->info->h)))
+    {
+        BackProp(rn,app->image,app->etiquette,0.5);
+        //printf("%d\n",i);
+        i++;
+        if(!(i%10000))
+            SaveRN(*rn);
+        
+        DelApp(app);
+    }
+    
+    SaveRN(*rn);
+    libererRN(rn);
+
+    return NULL;
 }
 
 // //delete evenement 
@@ -652,4 +689,45 @@ void afficherInterface(){
     fenetre->Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);//creation de la fenetre graphique par defaut elle aura une taille 200*200pixel
     
     page_principale(fenetre);
+}
+
+void matrice(GtkWidget *widget, gpointer data){
+	
+	GtkWidget *table;
+	GtkWidget *Vbox;
+	//GtkWidget *label;
+	
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Affichage de matrice");
+    viderContainer(fenetre->Window);
+    
+    Vbox = gtk_vbox_new(FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(fenetre->Window), Vbox);
+    
+    RN* rn = ChargerRN(fenetre->info);
+    COUCHE* tmp = rn->couche_deb->suiv;
+	int i;
+	int j;
+	
+	GtkWidget *cell;
+	gchar *text;
+	
+	
+	table = gtk_table_new (rn->info->h, rn->info->w, TRUE); //tableau
+	
+	gtk_box_pack_start(GTK_BOX(Vbox), table, TRUE,TRUE,0);
+	for( i=0;i<rn->info->h; i++){
+		for(j=0; j<rn->info->w; j++){
+			
+			text = g_strdup_printf("%f", tmp->W[i][j]); //création d'une chaine contenant la valeur de la cellule
+			printf("%f ",tmp->W[i][j]);
+			cell = gtk_label_new(text); 
+			gtk_table_attach (GTK_TABLE (table), cell, j, j+1, i, i+1, GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0); //ajout de la cellule au tableau
+				
+		}
+		printf("\n");
+	}
+	
+	g_free (text);
 }
