@@ -16,7 +16,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-//#include "01_09_02_bmp.h"
 
 #include <sys/types.h>
 #include <dirent.h>
