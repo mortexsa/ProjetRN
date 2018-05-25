@@ -15,11 +15,12 @@ compilera le programme et créera un exécutable.
 ## Utilisation
 > make run  
    
-permettra de lancer l'executable  
+permettra de lancer l'executable.  
+
 
 > make clean
 
-permettra d'éffacer les executable
+permettra d'éffacer les executable.
 
 Pour plus de détails, consulter le manuel d'utilisation.  
 
