@@ -1,14 +1,16 @@
 /**
- * \file gestionnaire_IO.c
- * \brief Code des fonctions de lecture et d'écriture dans des fichiers
+ * \file gestionnaire_IO.h
+ * \brief Gestionnaire d'entrées sorties.
  * \author PEPIN Thibaut
  * \author REZGUI Soumia
  * \author SLIMANI Arezki
  * \author SELAQUET Severine
  * \author SZULEK Isaac
  * \author MONTIGNET Anthony
+ *
+ * Ce module s'occupe de lire , charger et sauvegarder les données.
+ *
  */
-
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,6 +30,7 @@
 #include "gestionnaire_IO.h"
 
 #define debug printf("line : %d in function : %s in file %s\n",__LINE__,__func__,__FILE__);
+
 
 Image* NouvelleImage(int w,int h)
 {
@@ -99,6 +102,14 @@ struct BMPHead
 	struct BMPImHead imhead;
 };
 
+/**
+ * \fn Image* ChargerBmp(const char* fichier, int, int)
+ * \brief On lis une image de format bmp et on l'enregistre dans la structure Image.
+ * 
+ * \param fichier Chemin absolue de l'image à charger.
+ * \param 
+ * \return Image la structure qui stock le contenu d'une image.
+ */
 Image* ChargerBmp(const char* fichier, int w_max, int h_max)
 {
 	struct BMPHead head;

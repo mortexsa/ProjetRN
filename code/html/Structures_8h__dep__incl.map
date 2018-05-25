@@ -1,0 +1,11 @@
+<map id="Structures.h" name="Structures.h">
+<area shape="rect" id="node2" href="$gestionnaire__RN_8h_source.html" title="gestionnaire_RN.h" alt="" coords="73,80,203,107"/>
+<area shape="rect" id="node5" href="$interface_8h.html" title="Interface du programme. " alt="" coords="230,304,313,331"/>
+<area shape="rect" id="node8" href="$gestionnaire__IO_8h.html" title="Gestionnaire d&#39;entrées sorties. " alt="" coords="227,155,351,181"/>
+<area shape="rect" id="node3" href="$Apprentissage_8h_source.html" title="Apprentissage.h" alt="" coords="29,229,145,256"/>
+<area shape="rect" id="node10" href="$gestionnaire__RN_8c.html" title="Code de la partie propagation ainsi que toutes les fonctions necessaire a celle ci. " alt="" coords="73,155,203,181"/>
+<area shape="rect" id="node4" href="$Apprentissage_8c.html" title="Code de la partie propagation&#45;inverse ainsi que toutes les fonctions necessaire a celle ci..." alt="" coords="29,304,145,331"/>
+<area shape="rect" id="node6" href="$neurone_8h_source.html" title="neurone.h" alt="" coords="187,379,265,405"/>
+<area shape="rect" id="node7" href="$test_8h_source.html" title="test.h" alt="" coords="289,379,344,405"/>
+<area shape="rect" id="node9" href="$gestionnaire__IO_8c.html" title="Code des fonctions de lecture et d&#39;écriture dans des fichiers. " alt="" coords="169,229,293,256"/>
+</map>
