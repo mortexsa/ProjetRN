@@ -8,17 +8,15 @@
 \contentsline {subsubsection}{\numberline {1.1.4}Type D'apprentissage}{3}
 \contentsline {subsubsection}{\numberline {1.1.5}Limites des R\IeC {\'e}seaux de Neurones}{4}
 \contentsline {subsection}{\numberline {1.2}But du Projet}{4}
-\contentsline {section}{\numberline {2}Fonctionnalit\IeC {\'e}s}{4}
-\contentsline {subsection}{\numberline {2.1}Interface}{4}
-\contentsline {section}{\numberline {3}Explications de l'architecture :}{5}
-\contentsline {subsection}{\numberline {3.1}Organigramme :}{5}
-\contentsline {paragraph}{Connections entre les modules :}{5}
-\contentsline {section}{\numberline {4}Choix du langage :}{5}
-\contentsline {section}{\numberline {5}Description du fonctionnement global de l'application :}{6}
-\contentsline {section}{\numberline {6}Description des points d\IeC {\'e}licats de la programmation :}{6}
-\contentsline {section}{\numberline {7}Tableau des co\IeC {\^u}ts et estimation :}{6}
-\contentsline {section}{\numberline {8}Conclusion technique et perspective :}{7}
-\contentsline {subsection}{\numberline {8.1}Axes d'am\IeC {\'e}lioration :}{7}
-\contentsline {subsection}{\numberline {8.2}Probl\IeC {\`e}mes rencontr\IeC {\'e}s :}{8}
-\contentsline {section}{\numberline {9}Conclusion organisation interne :}{8}
-\contentsline {section}{\numberline {10}Conclusion du rapport :}{8}
+\contentsline {section}{\numberline {2}Explications de l'architecture :}{4}
+\contentsline {subsection}{\numberline {2.1}Organigramme :}{4}
+\contentsline {paragraph}{Connections entre les modules :}{4}
+\contentsline {section}{\numberline {3}Choix du langage :}{5}
+\contentsline {section}{\numberline {4}Description du fonctionnement global de l'application :}{5}
+\contentsline {section}{\numberline {5}Description des points d\IeC {\'e}licats de la programmation :}{5}
+\contentsline {section}{\numberline {6}Tableau des co\IeC {\^u}ts et estimation :}{6}
+\contentsline {section}{\numberline {7}Conclusion technique et perspective :}{6}
+\contentsline {subsection}{\numberline {7.1}Axes d'am\IeC {\'e}lioration :}{6}
+\contentsline {subsection}{\numberline {7.2}Probl\IeC {\`e}mes rencontr\IeC {\'e}s :}{7}
+\contentsline {section}{\numberline {8}Conclusion organisation interne :}{8}
+\contentsline {section}{\numberline {9}Conclusion du rapport :}{8}
