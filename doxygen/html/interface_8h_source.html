@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>ProjetRn:  Fichier source de interface.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">ProjetRn
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Variables&#160;globale</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">interface.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="interface_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#ifndef INTER_H</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define INTER_H</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="gestionnaire___r_n_8h.html">gestionnaire_RN.h</a>&quot;</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_apprentissage_8h.html">Apprentissage.h</a>&quot;</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="gestionnaire___i_o_8h.html">gestionnaire_IO.h</a>&quot;</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_structures_8h.html">Structures.h</a>&quot;</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;pthread.h&gt;</span></div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;sys/types.h&gt;</span></div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;dirent.h&gt;</span></div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;sys/dir.h&gt;</span></div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;errno.h&gt;</span></div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;sys/stat.h&gt;</span></div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;gtk/gtk.h&gt;</span></div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div><div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="struct_i_n_f_o___f_e_n_e_t_r_e.html">   43</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_i_n_f_o___f_e_n_e_t_r_e.html">INFO_FENETRE</a></div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div><div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a8d0c3c6902898fa9352c8fb9319e2b0b">   45</a></span>&#160;    <a class="code" href="struct_i_n_f_o___r_n.html">INFO_RN</a> *<a class="code" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a8d0c3c6902898fa9352c8fb9319e2b0b">info</a>; </div><div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a602b0f8454121e50d6678f9dfee6f077">   46</a></span>&#160;    GtkWidget *<a class="code" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a602b0f8454121e50d6678f9dfee6f077">Window</a>; </div><div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a7b564aae81778ac950a17f42c1a27cef">   47</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a7b564aae81778ac950a17f42c1a27cef">nombreReseau</a>;   </div><div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a269f690cb2281bacecdc6feabb617c98">   48</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a269f690cb2281bacecdc6feabb617c98">reseauSelectionner</a>; </div><div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#ad7e01b53739572065778932e6fa8ee83">   49</a></span>&#160;    <span class="keywordtype">char</span> <a class="code" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#ad7e01b53739572065778932e6fa8ee83">chemin</a>[200]; </div><div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#af28dec3f60bf4e9baf150f4f98b30b0c">   50</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#af28dec3f60bf4e9baf150f4f98b30b0c">etatBoutton</a>; </div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;} <a class="code" href="interface_8h.html#aead7bcd5aa775cd161b684815cef6e5a">INFO_FENETRE</a>;</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">int</span> <a class="code" href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a7b564aae81778ac950a17f42c1a27cef">nombreReseau</a>();</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#a08aaf6738ef116b20809fd4c3af451ea">viderContainer</a>(GtkWidget *data);</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#ab377f1cf5a8abbe888b67875fe00e732">retourAccueille</a>(GtkWidget *widget, gpointer data);</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#a4aaaee29e9c54955715a9de0be73563d">selectReseau</a>(GtkWidget *widget, gpointer data);</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#aed9f60cdb4aaeaf5500cd93cce7a1b6d">traitement</a>(GtkWidget *widget, gpointer data);</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#af336de7bd25d6d5909517f909a171b37">lancerApprentissage</a>(GtkWidget *widget, gpointer data);</div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keywordtype">void</span>* <a class="code" href="interface_8h.html#a92b101b532f98164c1f609dec68afe00">fctThreadApp</a>(<span class="keywordtype">void</span>* arg);</div><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#ae0a8eb01de87316e3486addd8b177515">matrice</a>(GtkWidget *widget, gpointer data);</div><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div><div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#af05673f8ea4045e8dc3eacdbf80f3eb6">resultatTraitement</a>(GtkWidget *widget, gpointer data);</div><div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div><div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#ab697526e222972bbbee4f4429daf38cc">page_principale</a>(<a class="code" href="struct_i_n_f_o___f_e_n_e_t_r_e.html">INFO_FENETRE</a> *fenetre);</div><div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div><div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#aa7658136cafa28ec67a73274f310a7b4">creer_file_selection</a>();</div><div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div><div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#aeb7db74660ad3d28b2b68874d30d9316">creer_folder_selection</a> (GtkButton * button, gpointer data);</div><div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div><div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#a15cf03bc8aef74929090ec43f9dcd1d6">creation</a>(GtkWidget *widget, gpointer data);</div><div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div><div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#afb7b9f7924beb4a920220bb2d9a13245">creationRN</a>(GtkWidget *widget, gpointer data);</div><div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div><div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#aea683c3c50c9b394b3145ffa90bac3a5">quitter</a>(GtkWidget *widget, gpointer data);</div><div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div><div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="keywordtype">void</span> <a class="code" href="interface_8h.html#a892c9f29f308cd1e9db0ec363ebc2861">afficherInterface</a>();</div><div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="interface_8h_html_afb7b9f7924beb4a920220bb2d9a13245"><div class="ttname"><a href="interface_8h.html#afb7b9f7924beb4a920220bb2d9a13245">creationRN</a></div><div class="ttdeci">void creationRN(GtkWidget *widget, gpointer data)</div><div class="ttdef"><b>Definition:</b> interface.c:470</div></div>
+<div class="ttc" id="struct_i_n_f_o___f_e_n_e_t_r_e_html"><div class="ttname"><a href="struct_i_n_f_o___f_e_n_e_t_r_e.html">INFO_FENETRE</a></div><div class="ttdoc">Information circulant entre les fonctions. </div><div class="ttdef"><b>Definition:</b> interface.h:43</div></div>
+<div class="ttc" id="interface_8h_html_aead7bcd5aa775cd161b684815cef6e5a"><div class="ttname"><a href="interface_8h.html#aead7bcd5aa775cd161b684815cef6e5a">INFO_FENETRE</a></div><div class="ttdeci">struct INFO_FENETRE INFO_FENETRE</div></div>
+<div class="ttc" id="interface_8h_html_aea683c3c50c9b394b3145ffa90bac3a5"><div class="ttname"><a href="interface_8h.html#aea683c3c50c9b394b3145ffa90bac3a5">quitter</a></div><div class="ttdeci">void quitter(GtkWidget *widget, gpointer data)</div><div class="ttdoc">Lorsque l&amp;#39;on quitte la fenetre. </div><div class="ttdef"><b>Definition:</b> interface.c:657</div></div>
+<div class="ttc" id="interface_8h_html_a4aaaee29e9c54955715a9de0be73563d"><div class="ttname"><a href="interface_8h.html#a4aaaee29e9c54955715a9de0be73563d">selectReseau</a></div><div class="ttdeci">void selectReseau(GtkWidget *widget, gpointer data)</div><div class="ttdoc">Selection d&amp;#39;un reseau de neurone. </div><div class="ttdef"><b>Definition:</b> interface.c:164</div></div>
+<div class="ttc" id="interface_8h_html_aa7658136cafa28ec67a73274f310a7b4"><div class="ttname"><a href="interface_8h.html#aa7658136cafa28ec67a73274f310a7b4">creer_file_selection</a></div><div class="ttdeci">void creer_file_selection()</div><div class="ttdoc">Selection d&amp;#39;un fichier a analyser dans traitement. </div></div>
+<div class="ttc" id="struct_i_n_f_o___f_e_n_e_t_r_e_html_a269f690cb2281bacecdc6feabb617c98"><div class="ttname"><a href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a269f690cb2281bacecdc6feabb617c98">INFO_FENETRE::reseauSelectionner</a></div><div class="ttdeci">int reseauSelectionner</div><div class="ttdef"><b>Definition:</b> interface.h:48</div></div>
+<div class="ttc" id="interface_8h_html_a92b101b532f98164c1f609dec68afe00"><div class="ttname"><a href="interface_8h.html#a92b101b532f98164c1f609dec68afe00">fctThreadApp</a></div><div class="ttdeci">void * fctThreadApp(void *arg)</div><div class="ttdoc">Fonction appeler par le thread qui fait l&amp;#39;apprentissage du reseau de neurone. </div><div class="ttdef"><b>Definition:</b> interface.c:290</div></div>
+<div class="ttc" id="_apprentissage_8h_html"><div class="ttname"><a href="_apprentissage_8h.html">Apprentissage.h</a></div></div>
+<div class="ttc" id="interface_8h_html_a08aaf6738ef116b20809fd4c3af451ea"><div class="ttname"><a href="interface_8h.html#a08aaf6738ef116b20809fd4c3af451ea">viderContainer</a></div><div class="ttdeci">void viderContainer(GtkWidget *data)</div><div class="ttdoc">Vider le contenu de la fenetre. </div><div class="ttdef"><b>Definition:</b> interface.c:18</div></div>
+<div class="ttc" id="interface_8h_html_af05673f8ea4045e8dc3eacdbf80f3eb6"><div class="ttname"><a href="interface_8h.html#af05673f8ea4045e8dc3eacdbf80f3eb6">resultatTraitement</a></div><div class="ttdeci">void resultatTraitement(GtkWidget *widget, gpointer data)</div><div class="ttdoc">Affiche le résultat du traitement d&amp;#39;une image. </div><div class="ttdef"><b>Definition:</b> interface.c:90</div></div>
+<div class="ttc" id="gestionnaire___r_n_8h_html"><div class="ttname"><a href="gestionnaire___r_n_8h.html">gestionnaire_RN.h</a></div></div>
+<div class="ttc" id="gestionnaire___i_o_8h_html"><div class="ttname"><a href="gestionnaire___i_o_8h.html">gestionnaire_IO.h</a></div></div>
+<div class="ttc" id="interface_8h_html_a892c9f29f308cd1e9db0ec363ebc2861"><div class="ttname"><a href="interface_8h.html#a892c9f29f308cd1e9db0ec363ebc2861">afficherInterface</a></div><div class="ttdeci">void afficherInterface()</div><div class="ttdoc">Contenant toute l&amp;#39;interface et les fonction. </div><div class="ttdef"><b>Definition:</b> interface.c:664</div></div>
+<div class="ttc" id="interface_8h_html_ab377f1cf5a8abbe888b67875fe00e732"><div class="ttname"><a href="interface_8h.html#ab377f1cf5a8abbe888b67875fe00e732">retourAccueille</a></div><div class="ttdeci">void retourAccueille(GtkWidget *widget, gpointer data)</div><div class="ttdoc">Retourner a la page d&amp;#39;accueille. </div><div class="ttdef"><b>Definition:</b> interface.c:29</div></div>
+<div class="ttc" id="struct_i_n_f_o___f_e_n_e_t_r_e_html_ad7e01b53739572065778932e6fa8ee83"><div class="ttname"><a href="struct_i_n_f_o___f_e_n_e_t_r_e.html#ad7e01b53739572065778932e6fa8ee83">INFO_FENETRE::chemin</a></div><div class="ttdeci">char chemin[200]</div><div class="ttdef"><b>Definition:</b> interface.h:49</div></div>
+<div class="ttc" id="struct_i_n_f_o___f_e_n_e_t_r_e_html_a8d0c3c6902898fa9352c8fb9319e2b0b"><div class="ttname"><a href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a8d0c3c6902898fa9352c8fb9319e2b0b">INFO_FENETRE::info</a></div><div class="ttdeci">INFO_RN * info</div><div class="ttdef"><b>Definition:</b> interface.h:45</div></div>
+<div class="ttc" id="struct_i_n_f_o___f_e_n_e_t_r_e_html_a7b564aae81778ac950a17f42c1a27cef"><div class="ttname"><a href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a7b564aae81778ac950a17f42c1a27cef">INFO_FENETRE::nombreReseau</a></div><div class="ttdeci">int nombreReseau</div><div class="ttdef"><b>Definition:</b> interface.h:47</div></div>
+<div class="ttc" id="interface_8h_html_a15cf03bc8aef74929090ec43f9dcd1d6"><div class="ttname"><a href="interface_8h.html#a15cf03bc8aef74929090ec43f9dcd1d6">creation</a></div><div class="ttdeci">void creation(GtkWidget *widget, gpointer data)</div><div class="ttdoc">Interface de creation d&amp;#39;un reseau de neurones. </div><div class="ttdef"><b>Definition:</b> interface.c:379</div></div>
+<div class="ttc" id="struct_i_n_f_o___r_n_html"><div class="ttname"><a href="struct_i_n_f_o___r_n.html">INFO_RN</a></div><div class="ttdef"><b>Definition:</b> Structures.h:36</div></div>
+<div class="ttc" id="interface_8h_html_aed9f60cdb4aaeaf5500cd93cce7a1b6d"><div class="ttname"><a href="interface_8h.html#aed9f60cdb4aaeaf5500cd93cce7a1b6d">traitement</a></div><div class="ttdeci">void traitement(GtkWidget *widget, gpointer data)</div><div class="ttdoc">Lance le traitement d&amp;#39;une image. </div><div class="ttdef"><b>Definition:</b> interface.c:41</div></div>
+<div class="ttc" id="interface_8h_html_ae0a8eb01de87316e3486addd8b177515"><div class="ttname"><a href="interface_8h.html#ae0a8eb01de87316e3486addd8b177515">matrice</a></div><div class="ttdeci">void matrice(GtkWidget *widget, gpointer data)</div><div class="ttdoc">Affichage de la matrice des poid du reseau de neurones. </div><div class="ttdef"><b>Definition:</b> interface.c:673</div></div>
+<div class="ttc" id="interface_8h_html_aeb7db74660ad3d28b2b68874d30d9316"><div class="ttname"><a href="interface_8h.html#aeb7db74660ad3d28b2b68874d30d9316">creer_folder_selection</a></div><div class="ttdeci">void creer_folder_selection(GtkButton *button, gpointer data)</div><div class="ttdoc">Selection du dossier ou ce trouverons les données pour l&amp;#39;apprentissage. </div><div class="ttdef"><b>Definition:</b> interface.c:577</div></div>
+<div class="ttc" id="_structures_8h_html"><div class="ttname"><a href="_structures_8h.html">Structures.h</a></div></div>
+<div class="ttc" id="interface_8h_html_ab697526e222972bbbee4f4429daf38cc"><div class="ttname"><a href="interface_8h.html#ab697526e222972bbbee4f4429daf38cc">page_principale</a></div><div class="ttdeci">void page_principale(INFO_FENETRE *fenetre)</div><div class="ttdoc">Page d&amp;#39;accueille du programme. </div><div class="ttdef"><b>Definition:</b> interface.c:324</div></div>
+<div class="ttc" id="struct_i_n_f_o___f_e_n_e_t_r_e_html_af28dec3f60bf4e9baf150f4f98b30b0c"><div class="ttname"><a href="struct_i_n_f_o___f_e_n_e_t_r_e.html#af28dec3f60bf4e9baf150f4f98b30b0c">INFO_FENETRE::etatBoutton</a></div><div class="ttdeci">int etatBoutton</div><div class="ttdef"><b>Definition:</b> interface.h:50</div></div>
+<div class="ttc" id="struct_i_n_f_o___f_e_n_e_t_r_e_html_a602b0f8454121e50d6678f9dfee6f077"><div class="ttname"><a href="struct_i_n_f_o___f_e_n_e_t_r_e.html#a602b0f8454121e50d6678f9dfee6f077">INFO_FENETRE::Window</a></div><div class="ttdeci">GtkWidget * Window</div><div class="ttdef"><b>Definition:</b> interface.h:46</div></div>
+<div class="ttc" id="interface_8h_html_af336de7bd25d6d5909517f909a171b37"><div class="ttname"><a href="interface_8h.html#af336de7bd25d6d5909517f909a171b37">lancerApprentissage</a></div><div class="ttdeci">void lancerApprentissage(GtkWidget *widget, gpointer data)</div><div class="ttdoc">Lancer l&amp;#39;apprentissage du réseau de neurones. </div><div class="ttdef"><b>Definition:</b> interface.c:272</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

@@ -1,0 +1,326 @@
+.TH "interface.h" 3 "Vendredi 25 Mai 2018" "ProjetRn" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+interface.h \- Interface du programme\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'gestionnaire_RN\&.h'\fP
+.br
+\fC#include 'Apprentissage\&.h'\fP
+.br
+\fC#include 'gestionnaire_IO\&.h'\fP
+.br
+\fC#include 'Structures\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <assert\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include <pthread\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <dirent\&.h>\fP
+.br
+\fC#include <sys/dir\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <gtk/gtk\&.h>\fP
+.br
+
+.SS "Structures de données"
+
+.in +1c
+.ti -1c
+.RI "struct \fBINFO_FENETRE\fP"
+.br
+.RI "\fIInformation circulant entre les fonctions\&. \fP"
+.in -1c
+.SS "Définitions de type"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBINFO_FENETRE\fP \fBINFO_FENETRE\fP"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "int \fBnombreReseau\fP ()"
+.br
+.RI "\fINombre de Réseaux de neurones existant\&. \fP"
+.ti -1c
+.RI "void \fBviderContainer\fP (GtkWidget *data)"
+.br
+.RI "\fIVider le contenu de la fenetre\&. \fP"
+.ti -1c
+.RI "void \fBretourAccueille\fP (GtkWidget *widget, gpointer data)"
+.br
+.RI "\fIRetourner a la page d'accueille\&. \fP"
+.ti -1c
+.RI "void \fBselectReseau\fP (GtkWidget *widget, gpointer data)"
+.br
+.RI "\fISelection d'un reseau de neurone\&. \fP"
+.ti -1c
+.RI "void \fBtraitement\fP (GtkWidget *widget, gpointer data)"
+.br
+.RI "\fILance le traitement d'une image\&. \fP"
+.ti -1c
+.RI "void \fBlancerApprentissage\fP (GtkWidget *widget, gpointer data)"
+.br
+.RI "\fILancer l'apprentissage du réseau de neurones\&. \fP"
+.ti -1c
+.RI "void * \fBfctThreadApp\fP (void *arg)"
+.br
+.RI "\fIFonction appeler par le thread qui fait l'apprentissage du reseau de neurone\&. \fP"
+.ti -1c
+.RI "void \fBmatrice\fP (GtkWidget *widget, gpointer data)"
+.br
+.RI "\fIAffichage de la matrice des poid du reseau de neurones\&. \fP"
+.ti -1c
+.RI "void \fBresultatTraitement\fP (GtkWidget *widget, gpointer data)"
+.br
+.RI "\fIAffiche le résultat du traitement d'une image\&. \fP"
+.ti -1c
+.RI "void \fBpage_principale\fP (\fBINFO_FENETRE\fP *fenetre)"
+.br
+.RI "\fIPage d'accueille du programme\&. \fP"
+.ti -1c
+.RI "void \fBcreer_file_selection\fP ()"
+.br
+.RI "\fISelection d'un fichier a analyser dans traitement\&. \fP"
+.ti -1c
+.RI "void \fBcreer_folder_selection\fP (GtkButton *button, gpointer data)"
+.br
+.RI "\fISelection du dossier ou ce trouverons les données pour l'apprentissage\&. \fP"
+.ti -1c
+.RI "void \fBcreation\fP (GtkWidget *widget, gpointer data)"
+.br
+.RI "\fIInterface de creation d'un reseau de neurones\&. \fP"
+.ti -1c
+.RI "void \fBcreationRN\fP (GtkWidget *widget, gpointer data)"
+.br
+.ti -1c
+.RI "void \fBquitter\fP (GtkWidget *widget, gpointer data)"
+.br
+.RI "\fILorsque l'on quitte la fenetre\&. \fP"
+.ti -1c
+.RI "void \fBafficherInterface\fP ()"
+.br
+.RI "\fIContenant toute l'interface et les fonction\&. \fP"
+.in -1c
+.SH "Description détaillée"
+.PP 
+Interface du programme\&. 
+
+
+.PP
+\fBAuteur:\fP
+.RS 4
+PEPIN Thibaut 
+.PP
+REZGUI Soumia 
+.PP
+SLIMANI Arezki 
+.PP
+SELAQUET Severine 
+.PP
+SZULEK Isaac 
+.PP
+MONTIGNET Anthony
+.RE
+.PP
+Interface du programme de reconnaissance d'image\&. 
+.SH "Documentation des définitions de type"
+.PP 
+.SS "typedef struct \fBINFO_FENETRE\fP  \fBINFO_FENETRE\fP"
+
+.SH "Documentation des fonctions"
+.PP 
+.SS "void afficherInterface ()"
+
+.PP
+Contenant toute l'interface et les fonction\&. 
+.SS "void creation (GtkWidget * widget, gpointer data)"
+
+.PP
+Interface de creation d'un reseau de neurones\&. Recuperation des données et sauvegarde du réseau de neurones\&.
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIwidget\fP Le widget qui est associer a la fonction\&. 
+.br
+\fIdata\fP Pour le passage de la structure \fBINFO_FENETRE\fP\&. 
+.RE
+.PP
+
+.SS "void creationRN (GtkWidget * widget, gpointer data)"
+
+.SS "void creer_file_selection ()"
+
+.PP
+Selection d'un fichier a analyser dans traitement\&. 
+.SS "void creer_folder_selection (GtkButton * button, gpointer data)"
+
+.PP
+Selection du dossier ou ce trouverons les données pour l'apprentissage\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIwidget\fP Le widget qui est associer a la fonction\&. 
+.br
+\fIdata\fP Pour le passage de la structure \fBINFO_FENETRE\fP\&. 
+.RE
+.PP
+
+.SS "void* fctThreadApp (void * arg)"
+
+.PP
+Fonction appeler par le thread qui fait l'apprentissage du reseau de neurone\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIarg\fP Pour le passage de la structure \fBINFO_FENETRE\fP\&. 
+.RE
+.PP
+
+.SS "void lancerApprentissage (GtkWidget * widget, gpointer data)"
+
+.PP
+Lancer l'apprentissage du réseau de neurones\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIwidget\fP Le widget qui est associer a la fonction\&. 
+.br
+\fIdata\fP Pour le passage de la structure \fBINFO_FENETRE\fP\&. 
+.RE
+.PP
+
+.SS "void matrice (GtkWidget * widget, gpointer data)"
+
+.PP
+Affichage de la matrice des poid du reseau de neurones\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIwidget\fP Le widget qui est associer a la fonction\&. 
+.br
+\fIdata\fP Pour le passage de la structure \fBINFO_FENETRE\fP\&. 
+.RE
+.PP
+
+.SS "int nombreReseau ()"
+
+.PP
+Nombre de Réseaux de neurones existant\&. 
+.PP
+\fBRenvoie:\fP
+.RS 4
+int nombre de Réseau\&. 
+.RE
+.PP
+
+.SS "void page_principale (\fBINFO_FENETRE\fP * fenetre)"
+
+.PP
+Page d'accueille du programme\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIfenetre\fP La fenetre qu'on affichera dans l'accueille\&. 
+.RE
+.PP
+
+.SS "void quitter (GtkWidget * widget, gpointer data)"
+
+.PP
+Lorsque l'on quitte la fenetre\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIwidget\fP Le widget qui est associer a la fonction\&. 
+.br
+\fIdata\fP Pour le passage de la structure \fBINFO_FENETRE\fP\&. 
+.RE
+.PP
+
+.SS "void resultatTraitement (GtkWidget * widget, gpointer data)"
+
+.PP
+Affiche le résultat du traitement d'une image\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIwidget\fP Le widget qui est associer a la fonction\&. 
+.br
+\fIdata\fP Pour le passage de la structure \fBINFO_FENETRE\fP\&. 
+.RE
+.PP
+
+.SS "void retourAccueille (GtkWidget * widget, gpointer data)"
+
+.PP
+Retourner a la page d'accueille\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIwidget\fP Le widget qui est associer a la fonction\&. 
+.br
+\fIdata\fP Pour le passage de la structure \fBINFO_FENETRE\fP\&. 
+.RE
+.PP
+
+.SS "void selectReseau (GtkWidget * widget, gpointer data)"
+
+.PP
+Selection d'un reseau de neurone\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIwidget\fP Le widget qui est associer a la fonction\&. 
+.br
+\fIdata\fP Pour le passage de la structure \fBINFO_FENETRE\fP\&. 
+.RE
+.PP
+
+.SS "void traitement (GtkWidget * widget, gpointer data)"
+
+.PP
+Lance le traitement d'une image\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIwidget\fP Le widget qui est associer a la fonction\&. 
+.br
+\fIdata\fP Pour le passage de la structure \fBINFO_FENETRE\fP\&. 
+.RE
+.PP
+
+.SS "void viderContainer (GtkWidget * data)"
+
+.PP
+Vider le contenu de la fenetre\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIdata\fP Pour le passage de la structure \fBINFO_FENETRE\fP\&. 
+.RE
+.PP
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour ProjetRn à partir du code source\&.
