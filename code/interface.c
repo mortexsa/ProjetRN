@@ -180,7 +180,6 @@ void selectReseau(GtkWidget *widget, gpointer data){
     g_signal_connect(G_OBJECT(button[1]), "clicked", G_CALLBACK(retourAccueille), fenetre);
     g_signal_connect(G_OBJECT(button[2]), "clicked", G_CALLBACK(traitement), fenetre);
     g_signal_connect(G_OBJECT(toggleBtn), "toggled", G_CALLBACK(lancerApprentissage), fenetre);
-    printf("%d\n", gtk_toggle_button_get_active ((GtkToggleButton *)toggleBtn));
     g_signal_connect(G_OBJECT(button[0]), "clicked", G_CALLBACK(matrice), fenetre);
     
 }
@@ -267,14 +266,11 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
         GtkWidget *Hbox;
         GtkWidget *pbutton[2];
      	INFO_RN *k=&(fenetre->info[fenetre->reseauSelectionner]);	  
-    	//~ RN *rn1 =initialisation(k); 
-    	//~ RN *rn= ChargerRN(k); //charger RN
     	RN *rn = initialisation(k); 
     	rn = ChargerRN(k); //charger RN
     	
     	char** rec;
         Image * image;
-        //~ image = ChargerBmp(fenetre->chemin,rn[fenetre->reseauSelectionner].info->w, rn[fenetre->reseauSelectionner].info->h);
         if(strcmp(resultat,"bmp") == 0){
             image = ChargerBmp(fenetre->chemin,rn->info->w, rn->info->h);            
         }
@@ -286,7 +282,6 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
         Propagation(image,*rn);
     	
     	
-    	//~ rec = Reconnaissance(rn[fenetre->reseauSelectionner]);
     	rec = Reconnaissance(*rn);
     	Vbox = gtk_vbox_new(FALSE, 0);
     	Hbox = gtk_hbox_new(FALSE, 0);
@@ -311,7 +306,7 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
         gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
         pbutton[0] = gtk_button_new_with_label("Ok");
         gtk_box_pack_start(GTK_BOX(Hbox), pbutton[0], TRUE, TRUE, 2); 
-         pbutton[1] = gtk_button_new_with_label("quitter");
+        pbutton[1] = gtk_button_new_with_label("quitter");
         gtk_box_pack_start(GTK_BOX(Hbox), pbutton[1], TRUE, TRUE, 2); 
      
         /* Affichage de la fenêtré et de tout ce qu'il contient */
@@ -331,10 +326,9 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
  * \param data Pour le passage de la structure INFO_FENETRE. 
  */
 void lancerApprentissage(GtkWidget *widget, gpointer data){
-    //printf("premier : %d\n", gtk_toggle_button_get_active ((GtkToggleButton *)widget));
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
-
     static pthread_t pid;
+    
     if(gtk_toggle_button_get_active ((GtkToggleButton *)widget)){
         fenetre->etatBoutton = 1;
         pthread_create(&pid, NULL, fctThreadApp,fenetre);
@@ -344,8 +338,6 @@ void lancerApprentissage(GtkWidget *widget, gpointer data){
         fenetre->etatBoutton = 0;
         pthread_join(pid, NULL);
     }
-    // gtk_button_set_label(GTK_BUTTON(widget), "stop");
-    // printf("%s\n", gtk_button_get_label(GTK_BUTTON(widget)));
 }
 
 /**
@@ -354,22 +346,15 @@ void lancerApprentissage(GtkWidget *widget, gpointer data){
  *
  * \param arg Pour le passage de la structure INFO_FENETRE. 
  */
-void* fctThreadApp(void* arg)
-{
+void* fctThreadApp(void* arg){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) arg;
-
     RN* rn = ChargerRN(&(fenetre->info[fenetre->reseauSelectionner]));
-
-    // for(int i=0;i<10;i++)
-    //     printf("%c\n",rn->info->etiquettes[i]);
-
     int i = 0;
     App* app;
     
     while((fenetre->etatBoutton)&&(app = ChargementCoupleAttIn(rn->info->repertoire,rn->info->w,rn->info->h)))
     {
         BackProp(rn,app->image,app->etiquette,0.5);
-        //printf("%d\n",i);
         i++;
         if(!(i%10000))
             SaveRN(*rn);
@@ -420,12 +405,12 @@ void matrice(GtkWidget *widget, gpointer data){
         for(j=0; j<rn->info->w; j++){
             
             text = g_strdup_printf("%f", tmp->W[i][j]); //création d'une chaine contenant la valeur de la cellule
-            printf("%f ",tmp->W[i][j]);
+            //printf("%f ",tmp->W[i][j]);
             cell = gtk_label_new(text); 
             gtk_table_attach (GTK_TABLE (table), cell, j, j+1, i, i+1, GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0); //ajout de la cellule au tableau
                 
         }
-        printf("\n");
+        //printf("\n");
     }
     
     g_free (text);

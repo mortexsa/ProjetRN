@@ -551,7 +551,6 @@ RN* ChargerRN(INFO_RN *info)
 		if(i>=7)
 		{
 			path[strlen(path)-1] = '\0';
-			printf("%s\n",path);
 			rn->info->etiquettes[i-7] = malloc(strlen(path)*sizeof(char));
 			strcpy(rn->info->etiquettes[i-7],path);
 		}

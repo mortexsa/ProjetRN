@@ -16,7 +16,11 @@ compilera le programme et créera un exécutable.
 > make run  
    
 permettra de lancer l'executable  
-   
+
+> make clean
+
+permettra d'éffacer les executable
+
 Pour plus de détails, consulter le manuel d'utilisation.  
 
 ## Apprentissage
@@ -33,3 +37,7 @@ Les fichier IDX devront également respecter une convention de nomage :
   pour les fichier contenant les etiquettes : nom.idx1-ubyte   
      
 Afin de lier le fichier contenant les étiquettes a celui contenant les images, les deux fichier doivent posseder le même nom.   
+## Documentation
+La documentation (au format html) de tout le programme ce trouve dans le dossier html, celui-ci a été généré par doxygen grace a la ligne de commande qui suit
+
+> doxygen Doxyfile
