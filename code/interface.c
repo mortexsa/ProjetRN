@@ -31,6 +31,11 @@ void viderContainer(GtkWidget *data){
 void retourAccueille(GtkWidget *widget, gpointer data){
     //pour suprimer l'ancienne page
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    if(fenetre->chemin[0] != 0){
+        for(int w = 0;w<200;w++){
+            fenetre->chemin[w] = 0;
+        }
+    }
     viderContainer(fenetre->Window);
     page_principale(fenetre);
 }
@@ -162,8 +167,7 @@ void selectReseau(GtkWidget *widget, gpointer data){
 
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
     gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Tableau de bord");
-    char titre[256];
-    strcpy(titre,gtk_button_get_label((GtkButton *)widget));
+    
     if(fenetre->chemin[0] != 0){
         for(int w = 0;w<200;w++){
             fenetre->chemin[w] = 0;
@@ -176,6 +180,8 @@ void selectReseau(GtkWidget *widget, gpointer data){
     Vbox = gtk_vbox_new(FALSE, 0);
     Hbox = gtk_hbox_new(FALSE, 0);
     if(fenetre->reseauSelectionner == -1){
+        char titre[256];
+        strcpy(titre,gtk_button_get_label((GtkButton *)widget));
         int i = 16;
         int j = 0;
         char name[50] = {0};
@@ -200,6 +206,20 @@ void selectReseau(GtkWidget *widget, gpointer data){
             }
         }
     }
+    else if(fenetre->reseauSelectionner == -2){
+        char titre[256];
+        strcpy(titre,gtk_label_get_text((GtkLabel *)widget));
+        char *parse = strtok(titre,"/");
+        strcpy(titre,parse);
+        parse = strtok(NULL, "/");
+        for(int i=0;i<fenetre->nombreReseau;i++){
+            if(strcmp(fenetre->info[i].nom,titre) == 0){
+                if(strcmp(fenetre->info[i].date,parse) == 0){
+                   fenetre->reseauSelectionner = i; 
+                }
+            }
+        }
+    }
     Hbox = gtk_hbox_new(FALSE, 0);
     char tab[200];
     strcpy(tab, "Nom du Reseau de Neurone :  ");
@@ -213,6 +233,7 @@ void selectReseau(GtkWidget *widget, gpointer data){
     strcpy(tab, "Pourcentage de reussite :  ");
     char b[100];
     double pourcentageReussite = 0;
+
     if(fenetre->info[fenetre->reseauSelectionner].reussite != 0){
     	pourcentageReussite = ((double)fenetre->info[fenetre->reseauSelectionner].reussite / (fenetre->info[fenetre->reseauSelectionner].reussite + fenetre->info[fenetre->reseauSelectionner].echec)) * 100;
     }
@@ -312,14 +333,15 @@ void creation(GtkWidget *widget, gpointer data){
 
   //pour suprimer l'ancienne page
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
-    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Creation d'un reseau");
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Creation d'un reseau de neurones");
     viderContainer(fenetre->Window);
 
     //GtkWidget *pWindow;
     GtkWidget *pVBox;
-    GtkWidget *pEntry[6];
+    GtkWidget *pEntry[2];
     GtkWidget *pLabel;
     gchar *sUtf8;
+    GtkWidget *pSpin[4];
     
 //pour les boutons    
     GtkWidget *pHBox;
@@ -340,24 +362,24 @@ void creation(GtkWidget *widget, gpointer data){
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 2);
-    pEntry[1] = gtk_entry_new_with_max_length(8);
-    gtk_box_pack_start(GTK_BOX(pVBox), pEntry[1], TRUE, FALSE, 2);
+    pSpin[0] = gtk_spin_button_new_with_range(1, 1000, 1);
+    gtk_box_pack_start(GTK_BOX(pVBox), pSpin[0], TRUE, FALSE, 0);
  
     sUtf8 = g_locale_to_utf8("nombre de neurones cachés :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 2);
-    pEntry[2] = gtk_entry_new_with_max_length(8);
-    gtk_box_pack_start(GTK_BOX(pVBox), pEntry[2], TRUE, FALSE, 2);
+    pSpin[1] = gtk_spin_button_new_with_range(1, 1000, 1);
+    gtk_box_pack_start(GTK_BOX(pVBox), pSpin[1], TRUE, FALSE, 0);
  
    // /* Creation d un GtkHSeparator */
    //  pSeparator = gtk_hseparator_new();
    //  gtk_box_pack_start(GTK_BOX(pVBox), pSeparator, TRUE, FALSE, 0);
  
-    pLabel = gtk_label_new("etiquette de sortie :");
+    pLabel = gtk_label_new("etiquette de sortie (format: etiquette1//etiquette2 ...) :");
     gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 2);
-    pEntry[3] = gtk_entry_new_with_max_length(200);
-    gtk_box_pack_start(GTK_BOX(pVBox), pEntry[3], TRUE, FALSE, 2);
+    pEntry[1] = gtk_entry_new();
+    gtk_box_pack_start(GTK_BOX(pVBox), pEntry[1], TRUE, FALSE, 2);
  
     
     pLabel = gtk_label_new("nom repertoire :");
@@ -365,7 +387,7 @@ void creation(GtkWidget *widget, gpointer data){
     
     //on met le bouton Explorer dans la frame
     gtk_box_pack_start(GTK_BOX(pHBox),bouton_explorer, TRUE, FALSE, 3);
-    g_signal_connect(G_OBJECT(bouton_explorer), "clicked", G_CALLBACK(creer_folder_selection), fenetre->Window);
+    g_signal_connect(G_OBJECT(bouton_explorer), "clicked", G_CALLBACK(creer_folder_selection), fenetre);
     
     /*definir la taille max des images qu'il devra analyser pour connaitre le nbr de neurones en entrées
       definir la hauteur*/
@@ -373,16 +395,15 @@ void creation(GtkWidget *widget, gpointer data){
     pLabel = gtk_label_new(sUtf8);
     g_free(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 0);
-    pEntry[4] = gtk_entry_new_with_max_length(Cmax);
-    gtk_box_pack_start(GTK_BOX(pVBox), pEntry[4], TRUE, FALSE, 0);
+    pSpin[2] = gtk_spin_button_new_with_range(1, 8000, 1);
+    gtk_box_pack_start(GTK_BOX(pVBox), pSpin[2], TRUE, FALSE, 0);
     
     //definir la largeur des images
     sUtf8 = g_locale_to_utf8("Largeur des images :", -1, NULL, NULL, NULL);
     pLabel = gtk_label_new(sUtf8);
     gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 0);
-    pEntry[5] = gtk_entry_new_with_max_length(Cmax); //j'ai limité à 30 on verra si on voudra modifier
-    gtk_box_pack_start(GTK_BOX(pVBox), pEntry[5], TRUE, FALSE, 0); 
-    
+    pSpin[3] = gtk_spin_button_new_with_range(1, 8000, 1);
+    gtk_box_pack_start(GTK_BOX(pVBox), pSpin[3], TRUE, FALSE, 0);
     
   //afficher les bouton dans la même frame 
     gtk_box_pack_start(GTK_BOX(pVBox), pHBox, TRUE, TRUE, 20);
@@ -401,40 +422,121 @@ void creation(GtkWidget *widget, gpointer data){
 
 void creationRN(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
+    GtkWidget *label;
     GList *pList = gtk_container_get_children(GTK_CONTAINER(fenetre->Window));
+    GList *pCopie = NULL;
     pList = gtk_container_get_children(GTK_CONTAINER(pList->data));
-    
+    int i = 0;
     pList = g_list_next(pList);
-    if(strlen(gtk_entry_get_text(pList->data))){
-        //ici on stock et on test si elle son rempli a chaque fois 
-        
+    while(i<6){
+        if(!strcmp("GtkEntry",gtk_widget_get_name(pList->data))){
+            if(!strlen(gtk_entry_get_text(GTK_ENTRY(pList->data)))){
+                break;
+            }
+        }
+        pCopie = g_list_append(pCopie,pList->data);
+        if(i<5){
+            pList = g_list_next(pList);
+            pList = g_list_next(pList);
+        }
+        i++;
     }
-    // if( == 0){
-    //     printf("tfouu");
-    // }
-    // else{
-    //     printf("merde%stfou\n", gtk_entry_get_text(pList->data));
-    // }
-    
+
+    if(g_list_length(pCopie) == 6 && fenetre->chemin[0] != 0){
+        int nbrCouche = 0;
+        int nbrNeurones = 0;
+        INFO_RN *newinfo = malloc(sizeof(INFO_RN));
+        newinfo->nom = malloc(sizeof(char)*(strlen(gtk_entry_get_text(GTK_ENTRY(pList->data)))+10));
+        strcpy(newinfo->nom,gtk_entry_get_text(GTK_ENTRY(pCopie->data)));
+        newinfo->repertoire = malloc(sizeof(char)*(strlen(fenetre->chemin)+10));
+        strcpy(newinfo->repertoire,fenetre->chemin);
+        if(fenetre->chemin[0] != 0){
+            for(int w = 0;w<200;w++){
+                fenetre->chemin[w] = 0;
+            }
+        }
+        pCopie = g_list_next(pCopie);
+        nbrCouche = gtk_spin_button_get_value_as_int(pCopie->data);
+        pCopie = g_list_next(pCopie);
+        nbrNeurones = gtk_spin_button_get_value_as_int(pCopie->data);
+        pCopie = g_list_next(pCopie);
+        char *resultat = malloc(sizeof(char)*(strlen(gtk_entry_get_text(GTK_ENTRY(pList->data)))+10));
+        strcpy(resultat,gtk_entry_get_text(GTK_ENTRY(pCopie->data)));
+        char *parse = strtok(resultat,"//");
+        int compteur = 0;
+        while(parse != NULL){
+            parse = strtok(NULL, "//");
+            compteur++;
+        }
+        i = 0;
+        newinfo->etiquettes = malloc(sizeof(char*)*compteur);        
+        strcpy(resultat,gtk_entry_get_text(GTK_ENTRY(pCopie->data)));
+        parse = strtok(resultat,"//");
+        while(parse != NULL){
+            if(strlen(parse) != 0){
+                newinfo->etiquettes[i] = malloc(sizeof(char)*(strlen(parse)+10));
+                strcpy(newinfo->etiquettes[i],parse);
+            }
+            parse = strtok(NULL, "//");
+            i++;
+        }
+        pCopie = g_list_next(pCopie);
+        newinfo->h = gtk_spin_button_get_value_as_int(pCopie->data);
+        pCopie = g_list_next(pCopie);
+        newinfo->w = gtk_spin_button_get_value_as_int(pCopie->data);
+        newinfo->reussite = 0;
+        newinfo->echec = 0;
+        time_t timestamp; 
+        struct tm * t; 
+        timestamp = time(NULL); 
+        t = localtime(&timestamp); 
+        newinfo->date = malloc(sizeof(char)*20);
+        
+        sprintf(resultat,"%04u", 1900 + t->tm_year);
+        strcpy(newinfo->date,resultat);
+        strcat(newinfo->date,"-");
+        sprintf(resultat,"%02u",t->tm_mon+1);
+        strcat(newinfo->date,resultat);
+        strcat(newinfo->date,"-");
+        sprintf(resultat,"%02u",t->tm_mday);
+        strcat(newinfo->date,resultat);
+
+        RN *rn = initialisation(newinfo);
+        AjoutPremiereCouche(rn, newinfo->h*newinfo->w*compteur);
+        for(i=0;i<nbrCouche;i++){
+            Ajout_couche_Fin(rn, nbrNeurones);
+        }
+        Ajout_couche_Fin(rn,compteur);
+        Remplissage(*rn);
+        SaveRN(*rn);
+        gchar *sUtf8;
+        strcpy(resultat,newinfo->nom);
+        strcat(resultat,"/");
+        strcat(resultat,newinfo->date);
+        fenetre->info = ChargerInfo();
+        fenetre->nombreReseau = nombreReseau();
+        fenetre->reseauSelectionner=-2;
+        sUtf8 = g_locale_to_utf8(resultat, -1, NULL, NULL, NULL);
+        label = gtk_label_new(sUtf8);
+        g_free(sUtf8);
+        selectReseau(GTK_WIDGET(label), fenetre);
+    }
 
     g_list_free(pList);
+    g_list_free(pCopie);
 }
 
 /*afin de selectionner un repertoire au choix*/
 void creer_folder_selection (GtkButton * button, gpointer data)
 {   
-    gchar* chemin;
-    GtkWidget *pDialog;
-     
-    GtkWidget *pParent;
+    INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
+    GtkWidget *pFileSelection = NULL;
+    gtk_widget_hide(fenetre->Window);
         
-     //cast en GTK_WIDGET 
-    pParent = GTK_WIDGET(data);   
-    GtkWidget *pFileSelection;
      
     /* Creation de la fenetre de selection */
-        pFileSelection = gtk_file_chooser_dialog_new("selectionnez un repertoire...",
-    GTK_WINDOW(pParent),
+    pFileSelection = gtk_file_chooser_dialog_new("selectionnez un repertoire...",
+    NULL,
     //GTK_FILE_CHOOSER_ACTION_OPEN
     GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -446,24 +548,20 @@ void creer_folder_selection (GtkButton * button, gpointer data)
     /* On limite les actions a cette fenetre */
     gtk_window_set_modal(GTK_WINDOW(pFileSelection), TRUE);   
     
-    
+    char *file_name = NULL;
     /* Affichage fenetre */
     switch(gtk_dialog_run(GTK_DIALOG(pFileSelection)))
     {
         case GTK_RESPONSE_OK:
             /* Recuperation du chemin */
-            chemin = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(pFileSelection));
-            pDialog = gtk_message_dialog_new(GTK_WINDOW(pFileSelection),
-                GTK_DIALOG_MODAL,
-                GTK_MESSAGE_INFO,
-                GTK_BUTTONS_OK,
-                "Chemin du repertoire choisi :\n%s", chemin);
-                
-            gtk_dialog_run(GTK_DIALOG(pDialog));
-            gtk_widget_destroy(pDialog);break;
+            file_name = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (pFileSelection));
+            //fenetre->chemin = malloc(sizeof(strlen(file_name+2)));
+            strcpy(fenetre->chemin,file_name);
+            break;
                       
         default : break;
     }
+    gtk_widget_show_all(fenetre->Window);
    //g_free(chemin); j'ai un probleme avec ce free
    gtk_widget_destroy(pFileSelection);
 }

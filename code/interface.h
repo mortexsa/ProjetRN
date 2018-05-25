@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <time.h> 
 //#include "01_09_02_bmp.h"
 
 #include <sys/types.h>
@@ -18,6 +19,7 @@
 #include <sys/stat.h>
 
 #include <gtk/gtk.h>
+
 
 typedef struct INFO_FENETRE
 {

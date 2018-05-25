@@ -39,11 +39,9 @@ struct INFO_RN
 	char* nom;
 	char* date;
 	char* repertoire;
-	int width; // largeur
-	int height; // hauteur
 	int reussite;
 	int echec;
-	int w,h;
+	int w,h; //w = largeur, h = hauteur
 };
 typedef struct INFO_RN INFO_RN;
 
