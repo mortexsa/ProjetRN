@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['sauver',['Sauver',['../gestionnaire__IO_8c.html#afea85431922f70840e9d0801f2f57542',1,'gestionnaire_IO.c']]],
+  ['savern',['SaveRN',['../gestionnaire__IO_8c.html#a31712d225439b4d860c5770ceb6ddbc9',1,'gestionnaire_IO.c']]],
   ['selectreseau',['selectReseau',['../interface_8c.html#a4aaaee29e9c54955715a9de0be73563d',1,'interface.c']]],
   ['sigmoide',['Sigmoide',['../gestionnaire__RN_8c.html#a9437015febf55efc8dd7038bf5b923eb',1,'gestionnaire_RN.c']]],
   ['sigmoideprimez',['SigmoidePrimeZ',['../Apprentissage_8c.html#a90d90aaa4be124cafa76914b80ad9321',1,'Apprentissage.c']]],

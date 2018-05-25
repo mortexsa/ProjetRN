@@ -1,5 +1,5 @@
 /**
- * \file gestionnaire_IO.h
+ * \file gestionnaire_IO.c
  * \brief Gestionnaire d'entrées sorties.
  * \author PEPIN Thibaut
  * \author REZGUI Soumia

@@ -1,0 +1,498 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Réseaux de neurones: Référence du fichier gestionnaire_IO.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Réseaux de neurones
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Variables&#160;globale</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Structures de données</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Définitions de type</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier gestionnaire_IO.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Gestionnaire d'entrées sorties.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;assert.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;dirent.h&gt;</code><br />
+<code>#include &lt;sys/dir.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;inttypes.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &quot;gestionnaire_IO.h&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de gestionnaire_IO.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="gestionnaire__IO_8c__incl.png" border="0" usemap="#gestionnaire__IO_8c" alt=""/></div>
+<map name="gestionnaire__IO_8c" id="gestionnaire__IO_8c">
+<area shape="rect" id="node14" href="gestionnaire__IO_8h_source.html" title="gestionnaire_IO.h" alt="" coords="1141,80,1265,107"/>
+<area shape="rect" id="node15" href="Structures_8h.html" title="Code contenant les structures utilisées dans le programme. " alt="" coords="1155,229,1248,256"/>
+<area shape="rect" id="node16" href="gestionnaire__RN_8h_source.html" title="gestionnaire_RN.h" alt="" coords="1188,155,1319,181"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Structures de données</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBMPImHead.html">BMPImHead</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBMPHead.html">BMPHead</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:af08ec37a8c99d747fb60fa15bc28678b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af08ec37a8c99d747fb60fa15bc28678b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>_CRT_SECURE_NO_WARNINGS</b></td></tr>
+<tr class="separator:af08ec37a8c99d747fb60fa15bc28678b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a322565ccf348d13e4d3de13af771e5fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a322565ccf348d13e4d3de13af771e5fc"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>debug</b>&#160;&#160;&#160;printf(&quot;line : %d in function : %s in file %s\n&quot;,__LINE__,__func__,__FILE__);</td></tr>
+<tr class="separator:a322565ccf348d13e4d3de13af771e5fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Définitions de type</h2></td></tr>
+<tr class="memitem:a56f1a81c92849566ae864511088eb7e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56f1a81c92849566ae864511088eb7e8"></a>
+typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>int32</b></td></tr>
+<tr class="separator:a56f1a81c92849566ae864511088eb7e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4355d16fcf9f644c9ac84293f0b1801f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4355d16fcf9f644c9ac84293f0b1801f"></a>
+typedef short&#160;</td><td class="memItemRight" valign="bottom"><b>int16</b></td></tr>
+<tr class="separator:a4355d16fcf9f644c9ac84293f0b1801f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a26b39d8e3f8d7e2a3abda288403454bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structImage.html">Image</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestionnaire__IO_8c.html#a26b39d8e3f8d7e2a3abda288403454bf">NouvelleImage</a> (int w, int h)</td></tr>
+<tr class="memdesc:a26b39d8e3f8d7e2a3abda288403454bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">alloue la mémoire nécessaire pour stocker une image avec sa hauteur et largeur passées en parametres  <a href="#a26b39d8e3f8d7e2a3abda288403454bf">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a26b39d8e3f8d7e2a3abda288403454bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad36403c11915b551d750b94d617af620"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad36403c11915b551d750b94d617af620"></a>
+<a class="el" href="structImage.html">Image</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>CopieImage</b> (<a class="el" href="structImage.html">Image</a> *I)</td></tr>
+<tr class="separator:ad36403c11915b551d750b94d617af620"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05735abfbf6d85ac173e89bea1bf8292"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05735abfbf6d85ac173e89bea1bf8292"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>DelImage</b> (<a class="el" href="structImage.html">Image</a> *I)</td></tr>
+<tr class="separator:a05735abfbf6d85ac173e89bea1bf8292"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e175e9510f61a53471ec283ee2c8e56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e175e9510f61a53471ec283ee2c8e56"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetPixel</b> (<a class="el" href="structImage.html">Image</a> *I, int i, int j, <a class="el" href="structPixel.html">Pixel</a> p)</td></tr>
+<tr class="separator:a5e175e9510f61a53471ec283ee2c8e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45c2e01712f3b36fdc1becde80c8356f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45c2e01712f3b36fdc1becde80c8356f"></a>
+<a class="el" href="structPixel.html">Pixel</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetPixel</b> (<a class="el" href="structImage.html">Image</a> *I, int i, int j)</td></tr>
+<tr class="separator:a45c2e01712f3b36fdc1becde80c8356f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a736f28efdaaa51977fd9045eb5b92f91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structImage.html">Image</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestionnaire__IO_8c.html#a736f28efdaaa51977fd9045eb5b92f91">ChargerBmp</a> (const char *fichier, int w_max, int h_max)</td></tr>
+<tr class="memdesc:a736f28efdaaa51977fd9045eb5b92f91"><td class="mdescLeft">&#160;</td><td class="mdescRight">On lis une image de format bmp et on l'enregistre dans la structure <a class="el" href="structImage.html" title="contient chaque pixel deffinissant une image ainsi que la taille de celle ci ">Image</a>.  <a href="#a736f28efdaaa51977fd9045eb5b92f91">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a736f28efdaaa51977fd9045eb5b92f91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afea85431922f70840e9d0801f2f57542"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestionnaire__IO_8c.html#afea85431922f70840e9d0801f2f57542">Sauver</a> (<a class="el" href="structImage.html">Image</a> *I, const char *fichier)</td></tr>
+<tr class="memdesc:afea85431922f70840e9d0801f2f57542"><td class="mdescLeft">&#160;</td><td class="mdescRight">enregistrement de l'image passée en paramètre dans le fichier passé en paramètre au format bmp.  <a href="#afea85431922f70840e9d0801f2f57542">Plus de détails...</a><br /></td></tr>
+<tr class="separator:afea85431922f70840e9d0801f2f57542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a742eef92a51c5a5d1153482d80e5791e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structImage.html">Image</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestionnaire__IO_8c.html#a742eef92a51c5a5d1153482d80e5791e">ChargerMnist</a> (const char *path, int w_max, int h_max)</td></tr>
+<tr class="memdesc:a742eef92a51c5a5d1153482d80e5791e"><td class="mdescLeft">&#160;</td><td class="mdescRight">lecture d'image de format Mnist non compressé et l'enregistre dans la structure <a class="el" href="structImage.html" title="contient chaque pixel deffinissant une image ainsi que la taille de celle ci ">Image</a>, elle supprime le fichier de mauvais format.  <a href="#a742eef92a51c5a5d1153482d80e5791e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a742eef92a51c5a5d1153482d80e5791e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ad214139b1298be364b18fd9b3c6b24"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestionnaire__IO_8c.html#a3ad214139b1298be364b18fd9b3c6b24">ChargerEtiquetteMNIST</a> (const char *path)</td></tr>
+<tr class="memdesc:a3ad214139b1298be364b18fd9b3c6b24"><td class="mdescLeft">&#160;</td><td class="mdescRight">recuperer l'ettiquette du fichier passé e parametres, supprimser celui ci s'il contient plus d'images.  <a href="#a3ad214139b1298be364b18fd9b3c6b24">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3ad214139b1298be364b18fd9b3c6b24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5f7e2a2961dd4a6e325bf71f016adc3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structApprentissage.html">App</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestionnaire__IO_8c.html#ac5f7e2a2961dd4a6e325bf71f016adc3">ChargementCoupleAttIn</a> (char *repertoire_app, int w_max, int h_max)</td></tr>
+<tr class="memdesc:ac5f7e2a2961dd4a6e325bf71f016adc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">rechercher dans le répertoire le premier couple donnée image et étiquette présent tout en supprimant tout fichier au mauvais format ou non reconnu  <a href="#ac5f7e2a2961dd4a6e325bf71f016adc3">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac5f7e2a2961dd4a6e325bf71f016adc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eb269f80a4c3d748111b95bc0af67fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structINFO__RN.html">INFO_RN</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestionnaire__IO_8c.html#a2eb269f80a4c3d748111b95bc0af67fb">ChargerInfo</a> ()</td></tr>
+<tr class="memdesc:a2eb269f80a4c3d748111b95bc0af67fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">récupère les structures <a class="el" href="structINFO__RN.html" title="contient les information concernant un réseau de neurones ">INFO_RN</a> de tous les réseaux de neurones enrigistrés dans le repertoire ../sav/ et le retourne sous forme de tableau  <a href="#a2eb269f80a4c3d748111b95bc0af67fb">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a2eb269f80a4c3d748111b95bc0af67fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf9f10951f1eb8a0769e6aa8c10c9923"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structRN.html">RN</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestionnaire__IO_8c.html#acf9f10951f1eb8a0769e6aa8c10c9923">ChargerRN</a> (<a class="el" href="structINFO__RN.html">INFO_RN</a> *info)</td></tr>
+<tr class="memdesc:acf9f10951f1eb8a0769e6aa8c10c9923"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialise et remplit un réseau de neurones dont les informations sont à l'emplacement passé en paramètres  <a href="#acf9f10951f1eb8a0769e6aa8c10c9923">Plus de détails...</a><br /></td></tr>
+<tr class="separator:acf9f10951f1eb8a0769e6aa8c10c9923"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31712d225439b4d860c5770ceb6ddbc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestionnaire__IO_8c.html#a31712d225439b4d860c5770ceb6ddbc9">SaveRN</a> (<a class="el" href="structRN.html">RN</a> rn)</td></tr>
+<tr class="memdesc:a31712d225439b4d860c5770ceb6ddbc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">va créer ou modifier tous les fichers nécessaires afin de sauvegarder le réseau de neurones passé en paramètre.  <a href="#a31712d225439b4d860c5770ceb6ddbc9">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a31712d225439b4d860c5770ceb6ddbc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Gestionnaire d'entrées sorties. </p>
+<dl class="section author"><dt>Auteur</dt><dd>PEPIN Thibaut </dd>
+<dd>
+REZGUI Soumia </dd>
+<dd>
+SLIMANI Arezki </dd>
+<dd>
+SELAQUET Severine </dd>
+<dd>
+SZULEK Isaac </dd>
+<dd>
+MONTIGNET Anthony</dd></dl>
+<p>Ce module s'occupe de lire , charger et sauvegarder les données. </p>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="ac5f7e2a2961dd4a6e325bf71f016adc3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structApprentissage.html">App</a> * ChargementCoupleAttIn </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>repertoire_app</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h_max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>rechercher dans le répertoire le premier couple donnée image et étiquette présent tout en supprimant tout fichier au mauvais format ou non reconnu </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">repertoire_app</td><td>chemin absolue du repertoire de données </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>la structure app renvoie le couple image etiquette </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a736f28efdaaa51977fd9045eb5b92f91"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structImage.html">Image</a> * ChargerBmp </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fichier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h_max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>On lis une image de format bmp et on l'enregistre dans la structure <a class="el" href="structImage.html" title="contient chaque pixel deffinissant une image ainsi que la taille de celle ci ">Image</a>. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fichier</td><td>Chemin absolue de l'image à charger. </td></tr>
+    <tr><td class="paramname"></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a3ad214139b1298be364b18fd9b3c6b24"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * ChargerEtiquetteMNIST </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>recuperer l'ettiquette du fichier passé e parametres, supprimser celui ci s'il contient plus d'images. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Chemin absolue de l'etiquette à charger. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>l'etiquette recupérée du fichier </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2eb269f80a4c3d748111b95bc0af67fb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structINFO__RN.html">INFO_RN</a> * ChargerInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>récupère les structures <a class="el" href="structINFO__RN.html" title="contient les information concernant un réseau de neurones ">INFO_RN</a> de tous les réseaux de neurones enrigistrés dans le repertoire ../sav/ et le retourne sous forme de tableau </p>
+<dl class="section return"><dt>Renvoie</dt><dd>renvoie l'adresse du tableau contenant tous les information sur les reseaux de neurones </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a742eef92a51c5a5d1153482d80e5791e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structImage.html">Image</a> * ChargerMnist </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h_max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>lecture d'image de format Mnist non compressé et l'enregistre dans la structure <a class="el" href="structImage.html" title="contient chaque pixel deffinissant une image ainsi que la taille de celle ci ">Image</a>, elle supprime le fichier de mauvais format. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Chemin absolue de l'image à charger. </td></tr>
+    <tr><td class="paramname">w_max</td><td>largeur maximale de l'image </td></tr>
+    <tr><td class="paramname">w_max</td><td>largeur maximale de l'image </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd><a class="el" href="structImage.html" title="contient chaque pixel deffinissant une image ainsi que la taille de celle ci ">Image</a> la structure qui stock le contenu d'une image. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acf9f10951f1eb8a0769e6aa8c10c9923"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structRN.html">RN</a> * ChargerRN </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structINFO__RN.html">INFO_RN</a> *&#160;</td>
+          <td class="paramname"><em>info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>initialise et remplit un réseau de neurones dont les informations sont à l'emplacement passé en paramètres </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">info</td><td>information sur le reseau de neurones choisi par l'utilisateur </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>renvoie l'adresse du reseau de neurone chargé </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a26b39d8e3f8d7e2a3abda288403454bf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structImage.html">Image</a> * NouvelleImage </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>alloue la mémoire nécessaire pour stocker une image avec sa hauteur et largeur passées en parametres </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">w</td><td>largeur de l'image </td></tr>
+    <tr><td class="paramname">h</td><td>Hauteur de l'image </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>renvoie l'adresse de l'image créée </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="afea85431922f70840e9d0801f2f57542"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Sauver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structImage.html">Image</a> *&#160;</td>
+          <td class="paramname"><em>I</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fichier</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>enregistrement de l'image passée en paramètre dans le fichier passé en paramètre au format bmp. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fichier</td><td>Chemin absolue de l'endroit ou on va enregistrer l'image''. </td></tr>
+    <tr><td class="paramname">I</td><td>l'image à enregistrer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>int pour savoir si l'enregistrement c'est fait ou pas. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a31712d225439b4d860c5770ceb6ddbc9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SaveRN </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structRN.html">RN</a>&#160;</td>
+          <td class="paramname"><em>rn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>va créer ou modifier tous les fichers nécessaires afin de sauvegarder le réseau de neurones passé en paramètre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rn</td><td>le reseau de neurone à recuperer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>
