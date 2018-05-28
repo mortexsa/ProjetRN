@@ -154,9 +154,11 @@ Cependant les fichiers de la base de données MNIST sont déjà écrits et ses o
 			\item Test difficiles à réaliser :
 			Le test de fonctionnement de l'apprentissage est assez compliqué à réaliser car on ne connaît pas quel résultat est censé obtenir le programme. Il a donc fallu réaliser tous les calculs à la main sur un petit réseau de neurones et le test se résume donc à afficher les valeurs obtenues par le programme et à les comparer avec les résultats calculés.
 			\item Interface :
-			 La mise en place du module a été complexe. Il a fallu apprendre l'utilisation de la bibliothèque $GTK+2$ et suivre des tutoriels pour pouvoir par la suite l'adapter selon nos besoins.  L'utilisation des champs de saisies  pour la récupération des informations n'était pas évidente et nécessitait l'utilisation de fonctions plus avancées comme l'imbrication de VBox entre elles ainsi que l'utilisation de plusieurs listes pour les récupérations . 
-Il y a aussi un problèmes de fenêtres superposées,  pour le résoudre nous avons créés des fonctions de destructions qui testaient à chaque fois la liste des fenêtres, détruisait l'ancienne élément et passait au suivant.
-Nous avons déclaré une structure INFO\_FENETRE pour les variables communes aux fenêtres comme window, ainsi que d'autres pour stocker et récupérer toutes les informations circulant dans les fenêtres pour pouvoir les utiliser par la suite.      
+			 La mise en place du module a été complexe. Il a fallu apprendre l'utilisation de la bibliothèque GTK+2.
+L'utilisation des champs de saisies  pour la récupération des informations n'était pas évidente et nécessitait l'utilisation de fonctions plus avancées comme les Vbox ainsi que l'utilisation de plusieurs listes pour les récupérations . 
+Il y a eu aussi un problèmes de fenêtres superposées,  pour le résoudre nous avons créés une fonction qui vide à chaque fois le contenu de la fenêtre puis recharge  la même fenêtre avec un nouveau contenu au lieu d’en créer plusieurs fenêtre à la fois.
+les fonctions Gtk nous permettait de récupérer qu’un seul argument et non pas plusieurs ce qui limitait l'interaction entre les différentes fenêtres. pour résoudre ce problèmes nous avons déclaré une structure INFO_FENETRE pour stocker les variables  comme window, ainsi que d'autres récupérer toutes les informations circulant dans les fenêtres pour pouvoir les utiliser par la suite dans n'importe quel fenetre. 
+
 	\end{enumerate}
 
 \section{Conclusion organisation interne :}
