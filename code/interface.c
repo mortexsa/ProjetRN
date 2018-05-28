@@ -6,7 +6,7 @@
  * \author SLIMANI Arezki
  * \author SELAQUET Severine
  * \author SZULEK Isaac
- * \author MONTIGNET Anthony
+ * \author MONTIGNE Anthony
  *
  * Interface du programme de reconnaissance d'image.
  *
@@ -375,32 +375,62 @@ void* fctThreadApp(void* arg){
  * \param widget Le widget qui est associer a la fonction.
  * \param data Pour le passage de la structure INFO_FENETRE. 
  */
+ gboolean
+on_darea_expose (GtkWidget *widget,
+     GdkEventExpose *event,
+      gpointer data)
+{
+	INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+	RN* rn = ChargerRN(fenetre->info);
+	guchar rgbbuf[rn->info->w* rn->info->h*3];
+  gdk_draw_rgb_image (widget->window, widget->style->fg_gc[GTK_STATE_NORMAL],
+          0, 0, rn->info->w, rn->info->h,
+          GDK_RGB_DITHER_MAX, rgbbuf, rn->info->w * 3);
+  return TRUE;
+}
+ 
 void matrice(GtkWidget *widget, gpointer data){
     
     GtkWidget *table;
     GtkWidget *Vbox;
-    //GtkWidget *label;
+    GtkWidget *window, *darea;
+    GtkWidget *pLabel;
+       
     
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
-    
+    RN* rn = ChargerRN(fenetre->info);
+    guchar rgbbuf[rn->info->w* rn->info->h*3];
+    gint x, y;
+    guchar *pos;
     gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Affichage de matrice");
     viderContainer(fenetre->Window);
-    
+	  
+    debug
+    darea = gtk_drawing_area_new ();
+    debug
+    gtk_widget_set_size_request (darea, rn->info->w, rn->info->h);
+    debug
+    gtk_container_add (GTK_CONTAINER (fenetre->Window), darea);
+    debug
+    gtk_signal_connect (GTK_OBJECT (darea), "expose-event",
+                  GTK_SIGNAL_FUNC (on_darea_expose), NULL);
+    debug
     Vbox = gtk_vbox_new(FALSE, 0);
-    gtk_container_add(GTK_CONTAINER(fenetre->Window), Vbox);
-    
-    RN* rn = ChargerRN(fenetre->info);
+    gtk_widget_show_all (window);
+
+    debug
+    pos = rgbbuf;
+    debug
     COUCHE* tmp = rn->couche_deb->suiv;
     int i;
     int j;
     
     GtkWidget *cell;
     gchar *text;
-    
+    debug
     
     table = gtk_table_new (rn->info->h, rn->info->w, TRUE); //tableau
-    
-    gtk_box_pack_start(GTK_BOX(Vbox), table, TRUE,TRUE,0);
+    debug
     for( i=0;i<rn->info->h; i++){
         for(j=0; j<rn->info->w; j++){
             
@@ -408,11 +438,14 @@ void matrice(GtkWidget *widget, gpointer data){
             //printf("%f ",tmp->W[i][j]);
             cell = gtk_label_new(text); 
             gtk_table_attach (GTK_TABLE (table), cell, j, j+1, i, i+1, GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0); //ajout de la cellule au tableau
-                
+            *pos++ = x - x % 32;   
+             //pLabel = gtk_label_new("Nom du Réseau de neurones :");
+            
         }
         //printf("\n");
     }
-    
+    gtk_box_pack_start(GTK_BOX(Vbox), table, TRUE,TRUE,0);
+    debug
     g_free (text);
 }
 
