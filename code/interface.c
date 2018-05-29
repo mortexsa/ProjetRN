@@ -477,7 +477,7 @@ void matrice(GtkWidget *widget, gpointer data){
      printf("la hauteur 2 est %d ",rn->info->w);
     printf("la largeur 2 est %d ",rn->info->h);
     
-    table = gtk_table_new (3, 2 , TRUE); //création tableau 
+    table = gtk_table_new (28, 28 , TRUE); //création tableau 
     gtk_container_add(GTK_CONTAINER(fenetre->Window), GTK_WIDGET(table));
   
     
