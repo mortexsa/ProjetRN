@@ -389,7 +389,7 @@ on_darea_expose (GtkWidget *widget,
   return TRUE;
 }
  
-void matrice(GtkWidget *widget, gpointer data){
+/*void matrice(GtkWidget *widget, gpointer data){
     
     GtkWidget *table;
     GtkWidget *Vbox;
@@ -445,8 +445,58 @@ void matrice(GtkWidget *widget, gpointer data){
         //printf("\n");
     }
     gtk_box_pack_start(GTK_BOX(Vbox), table, TRUE,TRUE,0);
+     gtk_widget_show_all(fenetre->Window); 
     debug
     g_free (text);
+}*/
+//ceration de la matrice des poids 
+void matrice(GtkWidget *widget, gpointer data){
+    
+    GtkWidget *table;
+    GtkWidget *Vbox;
+    GtkWidget *window;
+    GtkWidget *pLabel;
+    GtkWidget *cell;
+    gchar *text;
+   
+    
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;  
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Affichage de matrice"); //titre de la fenetre 
+    viderContainer(fenetre->Window);
+	
+     
+  //recuperation des données du réseau de neurones  
+  
+    RN* rn = ChargerRN(fenetre->info); //charger le reseau de neurones
+    COUCHE* tmp = rn->couche_deb->suiv;  //se positionner dans la couche de sortie
+    int i;
+    int j;
+    
+    printf("la hauteur est %d",tmp->taille);
+    printf("la largeur est %d",tmp->prec->taille);
+     printf("la hauteur 2 est %d ",rn->info->w);
+    printf("la largeur 2 est %d ",rn->info->h);
+    
+    table = gtk_table_new (3, 2 , TRUE); //création tableau 
+    gtk_container_add(GTK_CONTAINER(fenetre->Window), GTK_WIDGET(table));
+  
+    
+   for( i=0;i<28; i++){ //severine t'as un probleme par rapport à la taille alors essai de regler  ça 
+       for(j=0; j<28; j++){
+        
+            
+            text = g_strdup_printf("%f", tmp->W[i][j]); //création d'une chaine contenant la valeur de la cellule        
+            cell = gtk_label_new(text); 
+            //en principe je met directement table
+            gtk_table_attach (GTK_TABLE (table), cell, j, j+1, i, i+1, GTK_EXPAND, GTK_EXPAND, 0, 0); //ajout de la cellule au tableau
+                               
+        }
+        //printf("\n");
+    }
+ 
+     gtk_widget_show_all(fenetre->Window); 
+    g_free (text);
+
 }
 
 /**
