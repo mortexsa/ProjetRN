@@ -453,19 +453,26 @@ void* fctThreadApp(void* arg){
 void matrice(GtkWidget *widget, gpointer data){
     
     GtkWidget *table;
-    GtkWidget *Vbox;
+    //~ GtkWidget *Vbox;
     //~ GtkWidget *Hbox;
     GtkWidget *window;
-    GtkWidget *pLabel;
+    //~ GtkWidget *pLabel;
     GtkWidget *cell;
     gchar *text;
    //~ GtkWidget *pbutton[1];
-    //~ GtkWidget *scrolled_window;
+    GtkWidget *scrolled_window;
+    //~ char buffer[1000];
     
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;  
+    fenetre->Window = gtk_dialog_new ();
     gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Affichage de matrice"); //titre de la fenetre 
     viderContainer(fenetre->Window);
-	
+	gtk_widget_set_size_request (window, 300, 300);
+	scrolled_window = gtk_scrolled_window_new (NULL, NULL); // créer la barre de scroll
+	gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 10);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS); // la ça met les 2 barres (la premiere en automatique c'est l'horizontale, et la deuxieme qui sera toujours présente c'est la verticale
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG(fenetre->Window)->vbox), scrolled_window, TRUE, TRUE, 0);
+    gtk_widget_show (scrolled_window);
      
   //recuperation des données du réseau de neurones  
   
@@ -481,12 +488,10 @@ void matrice(GtkWidget *widget, gpointer data){
     
     table = gtk_table_new (28, 28 , TRUE); //création tableau 
     gtk_container_add(GTK_CONTAINER(fenetre->Window), GTK_WIDGET(table));
-   //~ scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-   //~ gtk_container_border_width (GTK_CONTAINER (scrolled_window), 10);
-    //~ gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
-     //~ gtk_box_pack_start (GTK_BOX (GTK_DIALOG(window)->vbox), scrolled_window,TRUE, TRUE, 0);
-    //~ gtk_widget_show (scrolled_window);
-  
+	gtk_table_set_row_spacings (GTK_TABLE (table), 10);
+    gtk_table_set_col_spacings (GTK_TABLE (table), 10);
+	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table); //met la matrice (table) avec les barres de déplacement
+    gtk_widget_show (table);
     
    for( i=0;i<28; i++){ //severine t'as un probleme par rapport à la taille alors essai de regler  ça 
        for(j=0; j<28; j++){
