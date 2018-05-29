@@ -375,19 +375,19 @@ void* fctThreadApp(void* arg){
  * \param widget Le widget qui est associer a la fonction.
  * \param data Pour le passage de la structure INFO_FENETRE. 
  */
- gboolean
-on_darea_expose (GtkWidget *widget,
-     GdkEventExpose *event,
-      gpointer data)
-{
-	INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
-	RN* rn = ChargerRN(fenetre->info);
-	guchar rgbbuf[rn->info->w* rn->info->h*3];
-  gdk_draw_rgb_image (widget->window, widget->style->fg_gc[GTK_STATE_NORMAL],
-          0, 0, rn->info->w, rn->info->h,
-          GDK_RGB_DITHER_MAX, rgbbuf, rn->info->w * 3);
-  return TRUE;
-}
+ //~ gboolean
+//~ on_darea_expose (GtkWidget *widget,
+     //~ GdkEventExpose *event,
+      //~ gpointer data)
+//~ {
+	//~ INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+	//~ RN* rn = ChargerRN(fenetre->info);
+	//~ guchar rgbbuf[rn->info->w* rn->info->h*3];
+  //~ gdk_draw_rgb_image (widget->window, widget->style->fg_gc[GTK_STATE_NORMAL],
+          //~ 0, 0, rn->info->w, rn->info->h,
+          //~ GDK_RGB_DITHER_MAX, rgbbuf, rn->info->w * 3);
+  //~ return TRUE;
+//~ }
  
 /*void matrice(GtkWidget *widget, gpointer data){
     
@@ -454,11 +454,13 @@ void matrice(GtkWidget *widget, gpointer data){
     
     GtkWidget *table;
     GtkWidget *Vbox;
+    //~ GtkWidget *Hbox;
     GtkWidget *window;
     GtkWidget *pLabel;
     GtkWidget *cell;
     gchar *text;
-   
+   //~ GtkWidget *pbutton[1];
+    //~ GtkWidget *scrolled_window;
     
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;  
     gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Affichage de matrice"); //titre de la fenetre 
@@ -479,6 +481,11 @@ void matrice(GtkWidget *widget, gpointer data){
     
     table = gtk_table_new (28, 28 , TRUE); //création tableau 
     gtk_container_add(GTK_CONTAINER(fenetre->Window), GTK_WIDGET(table));
+   //~ scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+   //~ gtk_container_border_width (GTK_CONTAINER (scrolled_window), 10);
+    //~ gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
+     //~ gtk_box_pack_start (GTK_BOX (GTK_DIALOG(window)->vbox), scrolled_window,TRUE, TRUE, 0);
+    //~ gtk_widget_show (scrolled_window);
   
     
    for( i=0;i<28; i++){ //severine t'as un probleme par rapport à la taille alors essai de regler  ça 
@@ -493,8 +500,13 @@ void matrice(GtkWidget *widget, gpointer data){
         }
         //printf("\n");
     }
- 
-     gtk_widget_show_all(fenetre->Window); 
+		//~ gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
+        //~ pbutton[0] = gtk_button_new_with_label("Ok");
+        //~ gtk_box_pack_start(GTK_BOX(Hbox), pbutton[0], TRUE, TRUE, 2);
+        //~ gtk_container_add (GTK_CONTAINER (scrolled_window), table);
+        //~ gtk_widget_show (scrolled_window);
+    gtk_widget_show_all(fenetre->Window); 
+     //g_signal_connect(G_OBJECT(pbutton[0]), "clicked", G_CALLBACK("Accueil"), fenetre); 
     g_free (text);
 
 }
