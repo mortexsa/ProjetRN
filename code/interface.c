@@ -280,7 +280,7 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
 
         if(image == NULL)
         {
-			//truc a faire si l'image n est pas au bon format
+			//truc a faire si la lecture de l'image n a pas reussi
 		}
         Propagation(image,*rn);
     	
@@ -357,7 +357,7 @@ void* fctThreadApp(void* arg){
     
     while((fenetre->etatBoutton)&&(app = ChargementCoupleAttIn(rn->info->repertoire,rn->info->w,rn->info->h)))
     {
-        BackProp(rn,app->image,app->etiquette,0.5);
+        BackProp(rn,app->image,app->etiquette,1.5);
         i++;
         if(!(i%10000))
             SaveRN(*rn);
@@ -494,7 +494,7 @@ void matrice(GtkWidget *widget, gpointer data)
     //printf("la hauteur 2 est %d ",rn->info->w);
     //printf("la largeur 2 est %d ",rn->info->h);
     
-    table = gtk_table_new (28, 28 , TRUE); //création tableau 
+    table = gtk_table_new (tmp->taille, tmp->prec->taille, TRUE); //création tableau 
     gtk_container_add(GTK_CONTAINER(fenetre->Window), GTK_WIDGET(table));
 	gtk_table_set_row_spacings (GTK_TABLE (table), 10);
     gtk_table_set_col_spacings (GTK_TABLE (table), 10);
@@ -723,6 +723,7 @@ void creationRN(GtkWidget *widget, gpointer data){
                 fenetre->chemin[w] = 0;
             }
         }
+        debug
         pCopie = g_list_next(pCopie);
         nbrCouche = gtk_spin_button_get_value_as_int(pCopie->data);
         pCopie = g_list_next(pCopie);
@@ -736,6 +737,7 @@ void creationRN(GtkWidget *widget, gpointer data){
             parse = strtok(NULL, "//");
             compteur++;
         }
+        debug
         i = 0;
         newinfo->etiquettes = malloc(sizeof(char*)*compteur);        
         strcpy(resultat,gtk_entry_get_text(GTK_ENTRY(pCopie->data)));
@@ -748,6 +750,7 @@ void creationRN(GtkWidget *widget, gpointer data){
             parse = strtok(NULL, "//");
             i++;
         }
+        debug
         pCopie = g_list_next(pCopie);
         newinfo->h = gtk_spin_button_get_value_as_int(pCopie->data);
         pCopie = g_list_next(pCopie);
@@ -759,7 +762,7 @@ void creationRN(GtkWidget *widget, gpointer data){
         timestamp = time(NULL); 
         t = localtime(&timestamp); 
         newinfo->date = malloc(sizeof(char)*20);
-        
+        debug
         sprintf(resultat,"%04u", 1900 + t->tm_year);
         strcpy(newinfo->date,resultat);
         strcat(newinfo->date,"-");
@@ -768,18 +771,20 @@ void creationRN(GtkWidget *widget, gpointer data){
         strcat(newinfo->date,"-");
         sprintf(resultat,"%02u",t->tm_mday);
         strcat(newinfo->date,resultat);
-
+		debug
         RN *rn = initialisation(newinfo);
         AjoutPremiereCouche(rn, newinfo->h*newinfo->w*compteur);
         for(i=0;i<nbrCouche;i++){
             Ajout_couche_Fin(rn, nbrNeurones);
         }
+        debug
         Ajout_couche_Fin(rn,compteur);
         Remplissage(*rn);
         SaveRN(*rn);
         gchar *sUtf8;
         strcpy(resultat,newinfo->nom);
         strcat(resultat,"/");
+        debug
         strcat(resultat,newinfo->date);
         fenetre->info = ChargerInfo();
         fenetre->nombreReseau = nombreReseau();
