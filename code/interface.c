@@ -747,7 +747,7 @@ void creationRN(GtkWidget *widget, gpointer data){
         pCopie = g_list_next(pCopie);
         nbrNeurones = gtk_spin_button_get_value_as_int(pCopie->data);
         pCopie = g_list_next(pCopie);
-        char *resultat = malloc(sizeof(char)*(strlen(gtk_entry_get_text(GTK_ENTRY(pList->data)))+10));
+        char *resultat = malloc(sizeof(char)*(strlen(gtk_entry_get_text(GTK_ENTRY(pList->data)))+100));
         strcpy(resultat,gtk_entry_get_text(GTK_ENTRY(pCopie->data)));
         char *parse = strtok(resultat,"//");
         int compteur = 0;
@@ -804,8 +804,15 @@ void creationRN(GtkWidget *widget, gpointer data){
         strcat(resultat,"/");
         debug
         strcat(resultat,newinfo->date);
+        debug
+        for(i=0;i<fenetre->nombreReseau;i++){
+            LibererInfo(&(fenetre->info[i]));
+        }
+        debug
         fenetre->info = ChargerInfo();
+        debug
         fenetre->nombreReseau = nombreReseau();
+        debug
         fenetre->reseauSelectionner=-2;
         sUtf8 = g_locale_to_utf8(resultat, -1, NULL, NULL, NULL);
         label = gtk_label_new(sUtf8);

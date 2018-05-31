@@ -693,16 +693,19 @@ void SaveRN(RN rn)
 	
 }
 
-void LibererInfos(RN* rn)
+void LibererInfo(INFO_RN *info)
 {
+	RN *rn = ChargerRN(info);
 	int i;
 	for(i=0;i<rn->couche_fin->taille;i++)
 	{
-		free(rn->info->etiquettes[i]);
+		free(info->etiquettes[i]);
 	}
 	
-	free(rn->info->nom);
-	free(rn->info->date);
-	free(rn->info->repertoire);
+	free(info->nom);
+	free(info->date);
+	free(info->repertoire);
+	libererRN(rn);
 }
+
 
