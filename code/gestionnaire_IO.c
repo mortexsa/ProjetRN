@@ -544,7 +544,7 @@ INFO_RN* ChargerInfo()
  */
 RN* ChargerRN(INFO_RN *info)
 {
-	printf("%s\n%s\n", info->date,info->nom);
+	//printf("%s\n%s\n", info->date,info->nom);
 	RN* rn = initialisation(info);
 	char path[100];
 	int i = 1,j;

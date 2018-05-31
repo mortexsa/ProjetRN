@@ -351,7 +351,6 @@ void lancerApprentissage(GtkWidget *widget, gpointer data){
     }
     else
     {
-        printf("merde\n");
         fenetre->etatBoutton = 0;
         gtk_widget_show(gList->data);
         pthread_join(pid, NULL);
@@ -373,7 +372,6 @@ void* fctThreadApp(void* arg){
         
     while((fenetre->etatBoutton)&&(app = ChargementCoupleAttIn(rn->info->repertoire,rn->info->w,rn->info->h)))
     {
-
         BackProp(rn,app->image,app->etiquette,1.5);
         i++;
         if(!(i%10000))
@@ -508,8 +506,8 @@ void matrice(GtkWidget *widget, gpointer data)
     int i;
     int j;
     
-    printf("la hauteur est %d\n",tmp->taille);
-    printf("la largeur est %d\n",tmp->prec->taille);
+    //printf("la hauteur est %d\n",tmp->taille);
+    //printf("la largeur est %d\n",tmp->prec->taille);
     //printf("la hauteur 2 est %d ",rn->info->w);
     //printf("la largeur 2 est %d ",rn->info->h);
     
