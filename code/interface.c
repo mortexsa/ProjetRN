@@ -391,7 +391,7 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
             /* Affichage de la fenêtré et de tout ce qu'il contient */
             gtk_widget_show_all(fenetre->Window);  
             g_signal_connect(G_OBJECT(pbutton[0]), "clicked", G_CALLBACK(traitement), fenetre);  
-            g_signal_connect(G_OBJECT(pbutton[1]), "clicked", G_CALLBACK(gtk_main_quit), fenetre); 
+            g_signal_connect(G_OBJECT(pbutton[1]), "clicked", G_CALLBACK(quitter), fenetre); 
         
         }
     }
@@ -563,7 +563,7 @@ void matrice(GtkWidget *widget, gpointer data)
         }
     }
     gtk_widget_show_all(window); 
-    g_signal_connect(G_OBJECT(window),"destroy",G_CALLBACK(gtk_widget_destroy),window);
+    //g_signal_connect(G_OBJECT(window),"destroy",G_CALLBACK(gtk_widget_destroy),window);
     libererRN(rn);
 }
 
@@ -587,7 +587,7 @@ void page_principale(INFO_FENETRE *fenetre){
 	
 	gtk_window_set_default_size(GTK_WINDOW(fenetre->Window), 640, 400); //donner les dimmenssion de la fenetre 
 	
-	g_signal_connect(G_OBJECT(fenetre->Window), "destroy", G_CALLBACK(gtk_main_quit), NULL); //pour pouvoir fermer la fenetre avec exit 
+	g_signal_connect(G_OBJECT(fenetre->Window), "destroy", G_CALLBACK(quitter), fenetre); //pour pouvoir fermer la fenetre avec exit 
 	
 	
 	Vbox = gtk_vbox_new(FALSE, 0);
@@ -622,7 +622,7 @@ void page_principale(INFO_FENETRE *fenetre){
 	 
 	gtk_widget_show_all(fenetre->Window); //afin d'afficher tout dans la fenetre 
   
-    g_signal_connect(G_OBJECT(button[fenetre->nombreReseau+1]), "clicked", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(G_OBJECT(button[fenetre->nombreReseau+1]), "clicked", G_CALLBACK(quitter), fenetre);
 
     g_signal_connect(G_OBJECT(button[fenetre->nombreReseau]), "clicked", G_CALLBACK(creation),fenetre); 
     
@@ -941,9 +941,13 @@ void creer_folder_selection (GtkButton * button, gpointer data)
  */
 void quitter(GtkWidget *widget, gpointer data)
 {
-    // destruction de win et de tout ce qu'il contient
-    gtk_widget_destroy(widget);
-    gtk_main_quit();
+    INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
+    int i;
+    for(i=0;i<fenetre->nombreReseau;i++){
+        LibererInfo(&(fenetre->info[i]));
+    }
+    free(fenetre);
+    gtk_main_quit();    
 }
 
 /**
