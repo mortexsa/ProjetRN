@@ -46,7 +46,6 @@ void traitement(GtkWidget *widget, gpointer data);
 void resultatTraitement(GtkWidget *widget, gpointer data);
 void lancerApprentissage(GtkWidget *widget, gpointer data);
 void* fctThreadApp(gpointer data);
-//~ gboolean on_darea_expose (GtkWidget *widget,GdkEventExpose *event, gpointer data);
 void matrice(GtkWidget *widget, gpointer data);
 void* fctMatriceThread(gpointer data);
 void page_principale(INFO_FENETRE *fenetre);

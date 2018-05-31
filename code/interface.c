@@ -31,6 +31,7 @@ int nombreReseau(){
     		i++;
 		}
     }
+    closedir(rep);
     return i;
 }
 
@@ -270,8 +271,7 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
         GtkWidget *Hbox;
         GtkWidget *pbutton[2];
      	INFO_RN *k=&(fenetre->info[fenetre->reseauSelectionner]);	  
-    	RN *rn = initialisation(k); 
-    	rn = ChargerRN(k); //charger RN
+    	RN *rn = ChargerRN(k); //charger RN
     	
     	char** rec;
         Image * image;
@@ -287,9 +287,11 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
 			//truc a faire si la lecture de l'image n a pas reussi
 		}
         Propagation(image,*rn);
-    	
-    	
     	rec = Reconnaissance(*rn);
+    	
+    	DelImage(image);
+    	libererRN(rn);
+    	
     	Vbox = gtk_vbox_new(FALSE, 0);
     	Hbox = gtk_hbox_new(FALSE, 0);
 
@@ -309,6 +311,10 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
         label = gtk_label_new(resultat);    
         gtk_box_pack_start(GTK_BOX(Vbox), label, TRUE, FALSE, 2);
         
+        free(rec[0]);
+        free(rec[1]);
+        free(rec[2]);
+        free(rec);
         
         gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
         pbutton[0] = gtk_button_new_with_label("Ok");
@@ -386,7 +392,6 @@ void* fctThreadApp(gpointer data){
 
     while((fenetre->etatBoutton)&&(app = ChargementCoupleAttIn(rn->info->repertoire,rn->info->w,rn->info->h)))
     {
-
         BackProp(rn,app->image,app->etiquette,1.5);
         i++;
         if(!(i%10000))
@@ -468,7 +473,6 @@ void* fctMatriceThread(gpointer data)
             }
             strcat(text,g_strdup_printf("%0.2f", tmp->W[i][j])); //création d'une chaine contenant la valeur de la cellule        
             strcat(text,"</span>");
-            // printf("%s\n", text);
             result = g_markup_printf_escaped(text,-1,NULL,NULL,NULL);
             gtk_label_set_markup(GTK_LABEL(cell), result);
             gtk_table_attach (GTK_TABLE (table), cell, j, j+1, i, i+1, GTK_EXPAND, GTK_EXPAND, 0, 0); //ajout de la cellule au tableau
@@ -679,7 +683,6 @@ void creationRN(GtkWidget *widget, gpointer data){
                 fenetre->chemin[w] = 0;
             }
         }
-        debug
         pCopie = g_list_next(pCopie);
         nbrCouche = gtk_spin_button_get_value_as_int(pCopie->data);
         pCopie = g_list_next(pCopie);
@@ -693,7 +696,6 @@ void creationRN(GtkWidget *widget, gpointer data){
             parse = strtok(NULL, "//");
             compteur++;
         }
-        debug
         i = 0;
         newinfo->etiquettes = malloc(sizeof(char*)*compteur);        
         strcpy(resultat,gtk_entry_get_text(GTK_ENTRY(pCopie->data)));
@@ -706,7 +708,6 @@ void creationRN(GtkWidget *widget, gpointer data){
             parse = strtok(NULL, "//");
             i++;
         }
-        debug
         pCopie = g_list_next(pCopie);
         newinfo->h = gtk_spin_button_get_value_as_int(pCopie->data);
         pCopie = g_list_next(pCopie);
@@ -718,7 +719,6 @@ void creationRN(GtkWidget *widget, gpointer data){
         timestamp = time(NULL); 
         t = localtime(&timestamp); 
         newinfo->date = malloc(sizeof(char)*20);
-        debug
         sprintf(resultat,"%04u", 1900 + t->tm_year);
         strcpy(newinfo->date,resultat);
         strcat(newinfo->date,"-");
@@ -727,30 +727,24 @@ void creationRN(GtkWidget *widget, gpointer data){
         strcat(newinfo->date,"-");
         sprintf(resultat,"%02u",t->tm_mday);
         strcat(newinfo->date,resultat);
-		debug
         RN *rn = initialisation(newinfo);
         AjoutPremiereCouche(rn, newinfo->h*newinfo->w*3);
         for(i=0;i<nbrCouche;i++){
             Ajout_couche_Fin(rn, nbrNeurones);
         }
-        debug
         Ajout_couche_Fin(rn,compteur);
         Remplissage(*rn);
         SaveRN(*rn);
+        libererRN(rn);
         gchar *sUtf8;
         strcpy(resultat,newinfo->nom);
         strcat(resultat,"/");
-        debug
         strcat(resultat,newinfo->date);
-        debug
         for(i=0;i<fenetre->nombreReseau;i++){
             LibererInfo(&(fenetre->info[i]));
         }
-        debug
         fenetre->info = ChargerInfo();
-        debug
         fenetre->nombreReseau = nombreReseau();
-        debug
         fenetre->reseauSelectionner=-2;
         sUtf8 = g_locale_to_utf8(resultat, -1, NULL, NULL, NULL);
         label = gtk_label_new(sUtf8);
@@ -856,7 +850,7 @@ void creer_folder_selection (GtkButton * button, gpointer data)
         default : break;
     }
     gtk_widget_show_all(fenetre->Window);
-   gtk_widget_destroy(pFileSelection);
+    gtk_widget_destroy(pFileSelection);
 }
 
 /**

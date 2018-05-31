@@ -292,13 +292,6 @@ char** Reconnaissance(RN rn)
 void libererRN(RN* rn)
 {
 	int i;
-	// for(i=0;i<rn->couche_fin->taille;i++)
-	// {
-	// 	free(rn->info->etiquettes[i]);
-	// }
-	// free(rn->info->etiquettes);
-	// free(rn->info->date);
-	// free(rn->info->nom);
 	
 	COUCHE* tmp = rn->couche_deb;
 	free(tmp->A);

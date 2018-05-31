@@ -542,9 +542,9 @@ INFO_RN* ChargerInfo()
  * \param info information sur le reseau de neurones choisi par l'utilisateur
  * \return renvoie l'adresse du reseau de neurone chargé
  */
-RN* ChargerRN(INFO_RN *info)
+RN* ChargerRN(INFO_RN *info) 
 {
-	printf("%s\n%s\n", info->date,info->nom);
+	//printf("%s\n%s\n", info->date,info->nom);
 	RN* rn = initialisation(info);
 	char path[100];
 	int i = 1,j;
