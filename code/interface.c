@@ -82,7 +82,7 @@ void selectReseau(GtkWidget *widget, gpointer data){
 
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
     gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Tableau de bord");
-    
+    fenetre->pageActuel = 3;
     if(fenetre->chemin[0] != 0){
         for(int w = 0;w<200;w++){
             fenetre->chemin[w] = 0;
@@ -201,7 +201,7 @@ void traitement(GtkWidget *widget, gpointer data){
     
     gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Traitement d'images");
     viderContainer(fenetre->Window);
-    
+    fenetre->pageActuel = 4;
     GtkWidget *Vbox;
     GtkWidget *Hbox;
     GtkWidget *button[3];
@@ -402,8 +402,49 @@ void* fctThreadApp(gpointer data){
     
     SaveRN(*rn);
     libererRN(rn);
-    fenetre->etatBoutton = 0;
+    
+    if(fenetre->etatBoutton == 1){
+        fenetre->etatBoutton = gtk_idle_add(afficherWarning,fenetre);
+    }
+
     return NULL;
+}
+
+/**
+ * \fn int afficherWarning(gpointer data)
+ * \brief Fonction appeler pour afficher une boite de dialogue
+ *
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
+int afficherWarning(gpointer data){
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    GtkWidget * avertissement;
+    GList *gList;
+    
+    avertissement = gtk_message_dialog_new(GTK_WINDOW(fenetre->Window), 
+        GTK_DIALOG_MODAL,
+        GTK_MESSAGE_INFO,
+        GTK_BUTTONS_OK,
+        "Apprentissage Terminé");
+    gtk_dialog_run(GTK_DIALOG(avertissement));
+    gtk_widget_destroy(avertissement);
+    gtk_idle_remove(fenetre->etatBoutton);
+    fenetre->etatBoutton = 0;
+    if(fenetre->pageActuel == 3){
+        int i;
+        gList = gtk_container_get_children(GTK_CONTAINER(fenetre->Window));
+        gList = gtk_container_get_children(GTK_CONTAINER(gList->data));
+        while(gList && i<4){
+            gList = g_list_next(gList);
+            i++;
+        }
+        gList = gtk_container_get_children(GTK_CONTAINER(gList->data));
+        gtk_widget_show(gList->data);
+        gList = g_list_next(gList);
+        gList = g_list_next(gList);
+        gtk_toggle_button_set_active(gList->data,0);
+    }
+    return 1;
 }
 
 /**
@@ -415,20 +456,7 @@ void* fctThreadApp(gpointer data){
  */
 void matrice(GtkWidget *widget, gpointer data)
 {
-    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
-    GThread* t1 = g_thread_new("merde",fctMatriceThread,(void*)fenetre);
-    g_thread_join(t1);
-}
-
-/**
- * \fn void* fctMatriceThread(gpointer data)
- * \brief Fonction appeler par le thread qui affiche la matrice des poids du reseau de neurone.
- *
- * \param data Pour le passage de la structure INFO_FENETRE. 
- */
-void* fctMatriceThread(gpointer data)
-{
-    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+   INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
 
     GtkWidget *table;
     GtkWidget *window;
@@ -445,14 +473,14 @@ void* fctMatriceThread(gpointer data)
     COUCHE* tmp = rn->couche_deb->suiv;  //se positionner dans la couche de sortie
     int i;
     int j;
-    table = gtk_table_new (tmp->taille, tmp->taille, TRUE); //création tableau 
+    table = gtk_table_new ((tmp->taille), (tmp->taille), TRUE); //création tableau 
     gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scrollbar), table);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollbar), GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
     gtk_table_set_row_spacings (GTK_TABLE (table), 3); //defini l'espacement
     gtk_table_set_col_spacings (GTK_TABLE (table), 4);
     
-   for( i=0;i<tmp->taille; i++){
-       for(j=0; j<tmp->taille; j++){
+   for( i=0;i<(tmp->taille); i++){
+       for(j=0; j<(tmp->taille); j++){
             GtkWidget *cell;
             cell = gtk_label_new(NULL);
             if(tmp->W[i][j] > 0){
@@ -482,7 +510,6 @@ void* fctMatriceThread(gpointer data)
     gtk_widget_show_all(window); 
     g_signal_connect(G_OBJECT(window),"destroy",G_CALLBACK(gtk_widget_destroy),window);
     libererRN(rn);
-    return NULL;
 }
 
 /**
@@ -495,6 +522,7 @@ void page_principale(INFO_FENETRE *fenetre){
 	gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Accueil");	
 	fenetre->info = ChargerInfo();
     fenetre->nombreReseau = nombreReseau();
+    fenetre->pageActuel = 1;
     fenetre->reseauSelectionner = -1;
 	GtkWidget *Vbox;
 	GtkWidget *Hbox;
@@ -559,7 +587,7 @@ void creation(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
     gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Creation d'un reseau de neurones");
     viderContainer(fenetre->Window);
-
+    fenetre->pageActuel = 2;
     //GtkWidget *pWindow;
     GtkWidget *pVBox;
     GtkWidget *pEntry[2];

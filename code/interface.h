@@ -35,6 +35,7 @@ typedef struct INFO_FENETRE
 	int reseauSelectionner; /*!< Réseau sélectionner */
 	char chemin[200]; /*!< Chemin des fichier ou dossier à enregistrer */
 	int etatBoutton; /*!< Etat du boutton Apprentissage du réseau de neurones */
+	int pageActuel; /*!< Page sur laquel on se trouve actuellement */
 } INFO_FENETRE;
 
 
@@ -47,7 +48,7 @@ void resultatTraitement(GtkWidget *widget, gpointer data);
 void lancerApprentissage(GtkWidget *widget, gpointer data);
 void* fctThreadApp(gpointer data);
 void matrice(GtkWidget *widget, gpointer data);
-void* fctMatriceThread(gpointer data);
+int afficherWarning(gpointer data);
 void page_principale(INFO_FENETRE *fenetre);
 void creation(GtkWidget *widget, gpointer data);
 void creationRN(GtkWidget *widget, gpointer data);
