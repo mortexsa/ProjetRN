@@ -35,6 +35,8 @@ typedef struct INFO_FENETRE
 	int reseauSelectionner; /*!< Réseau sélectionner */
 	char chemin[200]; /*!< Chemin des fichier ou dossier à enregistrer */
 	int etatBoutton; /*!< Etat du boutton Apprentissage du réseau de neurones */
+	pthread_mutex_t mutex;
+	pthread_cond_t condition;
 } INFO_FENETRE;
 
 

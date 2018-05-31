@@ -174,14 +174,18 @@ void selectReseau(GtkWidget *widget, gpointer data){
     gtk_box_pack_start(GTK_BOX(Hbox), button[1], TRUE, TRUE, 2);
     gtk_box_pack_start(GTK_BOX(Hbox), button[2], TRUE, TRUE, 2);
     gtk_box_pack_start(GTK_BOX(Hbox), toggleBtn, TRUE, TRUE, 2);
-
     gtk_widget_show_all(fenetre->Window);
-
+    if(fenetre->etatBoutton == 1){
+        gtk_toggle_button_set_active((GtkToggleButton *)toggleBtn,1);
+        gtk_widget_hide(GTK_WIDGET(button[1]));   
+    } else {
+        gtk_toggle_button_set_active((GtkToggleButton *)toggleBtn,0);
+        gtk_widget_show(GTK_WIDGET(button[1]));
+    }
     g_signal_connect(G_OBJECT(button[1]), "clicked", G_CALLBACK(retourAccueille), fenetre);
     g_signal_connect(G_OBJECT(button[2]), "clicked", G_CALLBACK(traitement), fenetre);
     g_signal_connect(G_OBJECT(toggleBtn), "toggled", G_CALLBACK(lancerApprentissage), fenetre);
     g_signal_connect(G_OBJECT(button[0]), "clicked", G_CALLBACK(matrice), fenetre);
-    
 }
 
 /**
@@ -327,17 +331,29 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
  */
 void lancerApprentissage(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    GList *gList = NULL;
     static pthread_t pid;
-    
+    int i=0;
+    gList = gtk_container_get_children(GTK_CONTAINER(fenetre->Window));
+    gList = gtk_container_get_children(GTK_CONTAINER(gList->data));
+    while(gList && i<4){
+        gList = g_list_next(gList);
+        i++;
+    }
+    gList = gtk_container_get_children(GTK_CONTAINER(gList->data));
     if(gtk_toggle_button_get_active ((GtkToggleButton *)widget)){
         fenetre->etatBoutton = 1;
+        gtk_widget_hide(GTK_WIDGET(gList->data));
         pthread_create(&pid, NULL, fctThreadApp,fenetre);
     }
     else
     {
+        printf("merde\n");
         fenetre->etatBoutton = 0;
+        gtk_widget_show(gList->data);
         pthread_join(pid, NULL);
     }
+    g_list_free(gList);
 }
 
 /**
@@ -354,17 +370,18 @@ void* fctThreadApp(void* arg){
     
     while((fenetre->etatBoutton)&&(app = ChargementCoupleAttIn(rn->info->repertoire,rn->info->w,rn->info->h)))
     {
+
         BackProp(rn,app->image,app->etiquette,0.5);
         i++;
         if(!(i%10000))
             SaveRN(*rn);
-        
+      
         DelApp(app);
     }
     
     SaveRN(*rn);
     libererRN(rn);
-
+    fenetre->etatBoutton = 0;
     return NULL;
 }
 
@@ -796,8 +813,13 @@ void quitter(GtkWidget *widget, gpointer data)
  */
 void afficherInterface(){
     INFO_FENETRE *fenetre = malloc(sizeof(INFO_FENETRE));
+    
+    fenetre->mutex = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+    fenetre->condition = (pthread_cond_t)PTHREAD_COND_INITIALIZER;
+    
     for(int i = 0; i<200; i++)
         fenetre->chemin[i] = 0;
+    
     fenetre->Window = gtk_window_new(GTK_WINDOW_TOPLEVEL);//creation de la fenetre graphique par defaut elle aura une taille 200*200pixel
     
     page_principale(fenetre);

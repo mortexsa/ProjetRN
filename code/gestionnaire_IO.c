@@ -486,12 +486,16 @@ INFO_RN* ChargerInfo()
 		}
 	}
 	
-    if (closedir(rep) == -1)
+    if (closedir(rep) == -1){
+    	debug
         exit(-1);
+    }
     INFO_RN* res = malloc(i*sizeof(INFO_RN));
     rep = opendir("../sav");
-	if (rep == NULL)
+	if (rep == NULL){
+		debug
         exit(1);
+	}
     
     i=0;
 
@@ -524,8 +528,10 @@ INFO_RN* ChargerInfo()
 		}
 	}
 	
-    if(closedir(rep) == -1)
+    if(closedir(rep) == -1){
+    	debug
 		exit(-1);
+    }
     
 	return res;
 }
@@ -538,13 +544,16 @@ INFO_RN* ChargerInfo()
  */
 RN* ChargerRN(INFO_RN *info)
 {
+	printf("%s\n%s\n", info->date,info->nom);
 	RN* rn = initialisation(info);
 	char path[100];
 	int i = 1,j;
 	sprintf(path,"../sav/%s_%s/C%d.rn",info->date,info->nom,i);
 	FILE* fichier = fopen(path,"rb");	
-	if(!fichier)
+	if(!fichier){
+		debug
 		exit(-1);
+	}
 	
 	int t[2];
 	fread(t,sizeof(int),2,fichier);
@@ -576,9 +585,10 @@ RN* ChargerRN(INFO_RN *info)
 	
 	sprintf(path,"../sav/%s_%s/INFO",info->date,info->nom);
 	fichier = fopen(path,"rb");
-	if(!fichier)
+	if(!fichier){
+		debug
 		exit(-1);
-		
+	}
 	i=0;
 	while(fgets(path, 1024, fichier))
 		i++;
@@ -592,7 +602,7 @@ RN* ChargerRN(INFO_RN *info)
 		if(i>=7)
 		{
 			path[strlen(path)-1] = '\0';
-			printf("%s\n",path);
+			//printf("%s\n",path);
 			rn->info->etiquettes[i-7] = malloc(strlen(path)*sizeof(char));
 			strcpy(rn->info->etiquettes[i-7],path);
 		}
@@ -639,7 +649,7 @@ void SaveRN(RN rn)
 		while(tmp)
 		{
 			sprintf(path2,"%s/C%d.rn",path,i);
-			printf("%s\n",path2);
+			//printf("%s\n",path2);
 			if((fichier = fopen(path2,"wb+")) == NULL)
 			{
 				printf("%d\n",errno);
