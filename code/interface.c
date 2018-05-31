@@ -31,6 +31,7 @@ int nombreReseau(){
     		i++;
 		}
     }
+    closedir(rep);
     return i;
 }
 
@@ -270,8 +271,7 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
         GtkWidget *Hbox;
         GtkWidget *pbutton[2];
      	INFO_RN *k=&(fenetre->info[fenetre->reseauSelectionner]);	  
-    	RN *rn = initialisation(k); 
-    	rn = ChargerRN(k); //charger RN
+    	RN *rn = ChargerRN(k); //charger RN
     	
     	char** rec;
         Image * image;
@@ -287,9 +287,11 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
 			//truc a faire si la lecture de l'image n a pas reussi
 		}
         Propagation(image,*rn);
-    	
-    	
     	rec = Reconnaissance(*rn);
+    	
+    	DelImage(image);
+    	libererRN(rn);
+    	
     	Vbox = gtk_vbox_new(FALSE, 0);
     	Hbox = gtk_hbox_new(FALSE, 0);
 
@@ -309,6 +311,10 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
         label = gtk_label_new(resultat);    
         gtk_box_pack_start(GTK_BOX(Vbox), label, TRUE, FALSE, 2);
         
+        free(rec[0]);
+        free(rec[1]);
+        free(rec[2]);
+        free(rec);
         
         gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
         pbutton[0] = gtk_button_new_with_label("Ok");
@@ -502,7 +508,7 @@ void matrice(GtkWidget *widget, gpointer data)
   //recuperation des données du réseau de neurones  
   
     RN* rn = ChargerRN(fenetre->info); //charger le reseau de neurones
-    COUCHE* tmp = rn->couche_deb->suiv;  //se positionner dans la couche de sortie
+    COUCHE* tmp = rn->couche_deb->suiv;  //se positionner dans la 2ieme couche
     int i;
     int j;
     
@@ -529,6 +535,9 @@ void matrice(GtkWidget *widget, gpointer data)
         }
         //printf("\n");
     }
+    
+    libererRN(rn);
+    
 		//~ gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
         //~ pbutton[0] = gtk_button_new_with_label("Ok");
         //~ gtk_box_pack_start(GTK_BOX(Hbox), pbutton[0], TRUE, TRUE, 2);
@@ -795,8 +804,13 @@ void creationRN(GtkWidget *widget, gpointer data){
         }
         debug
         Ajout_couche_Fin(rn,compteur);
+        debug
         Remplissage(*rn);
+        debug
         SaveRN(*rn);
+        debug
+        libererRN(rn);
+        debug
         gchar *sUtf8;
         strcpy(resultat,newinfo->nom);
         strcat(resultat,"/");
