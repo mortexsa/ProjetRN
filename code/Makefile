@@ -1,4 +1,4 @@
-all: clean clear neurone
+all: clear neurone
 	
 
 run: all

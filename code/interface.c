@@ -352,13 +352,21 @@ void* fctThreadApp(void* arg){
     int i = 0;
     App* app;
     
+    double c_rien;
+    
     while((fenetre->etatBoutton)&&(app = ChargementCoupleAttIn(rn->info->repertoire,rn->info->w,rn->info->h)))
     {
         BackProp(rn,app->image,app->etiquette,0.5);
         i++;
         if(!(i%10000))
             SaveRN(*rn);
-        
+
+		c_rien = (double)(rn->info->reussite+rn->info->echec);
+		c_rien = (double)(rn->info->reussite/c_rien);
+		c_rien *= 100;
+		
+		printf("%d : %f\n",rn->info->reussite+rn->info->echec,c_rien);
+
         DelApp(app);
     }
     
