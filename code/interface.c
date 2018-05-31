@@ -278,7 +278,10 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
             image = ChargerMnist(fenetre->chemin,rn->info->w, rn->info->h);
         }
 
-        if(image == NULL) printf("HAHAHAHAHAHAHAHAHAHHAAH\n");
+        if(image == NULL)
+        {
+			//truc a faire si la lecture de l'image n a pas reussi
+		}
         Propagation(image,*rn);
     	
     	
@@ -356,7 +359,7 @@ void* fctThreadApp(void* arg){
     
     while((fenetre->etatBoutton)&&(app = ChargementCoupleAttIn(rn->info->repertoire,rn->info->w,rn->info->h)))
     {
-        BackProp(rn,app->image,app->etiquette,0.5);
+        BackProp(rn,app->image,app->etiquette,1.5);
         i++;
         if(!(i%10000))
             SaveRN(*rn);
@@ -383,21 +386,21 @@ void* fctThreadApp(void* arg){
  * \param widget Le widget qui est associer a la fonction.
  * \param data Pour le passage de la structure INFO_FENETRE. 
  */
- gboolean
-on_darea_expose (GtkWidget *widget,
-     GdkEventExpose *event,
-      gpointer data)
-{
-	INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
-	RN* rn = ChargerRN(fenetre->info);
-	guchar rgbbuf[rn->info->w* rn->info->h*3];
-  gdk_draw_rgb_image (widget->window, widget->style->fg_gc[GTK_STATE_NORMAL],
-          0, 0, rn->info->w, rn->info->h,
-          GDK_RGB_DITHER_MAX, rgbbuf, rn->info->w * 3);
-  return TRUE;
-}
+ //~ gboolean
+//~ on_darea_expose (GtkWidget *widget,
+     //~ GdkEventExpose *event,
+      //~ gpointer data)
+//~ {
+	//~ INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+	//~ RN* rn = ChargerRN(fenetre->info);
+	//~ guchar rgbbuf[rn->info->w* rn->info->h*3];
+  //~ gdk_draw_rgb_image (widget->window, widget->style->fg_gc[GTK_STATE_NORMAL],
+          //~ 0, 0, rn->info->w, rn->info->h,
+          //~ GDK_RGB_DITHER_MAX, rgbbuf, rn->info->w * 3);
+  //~ return TRUE;
+//~ }
  
-void matrice(GtkWidget *widget, gpointer data){
+/*void matrice(GtkWidget *widget, gpointer data){
     
     GtkWidget *table;
     GtkWidget *Vbox;
@@ -453,8 +456,81 @@ void matrice(GtkWidget *widget, gpointer data){
         //printf("\n");
     }
     gtk_box_pack_start(GTK_BOX(Vbox), table, TRUE,TRUE,0);
+     gtk_widget_show_all(fenetre->Window); 
     debug
     g_free (text);
+}*/
+//ceration de la matrice des poids 
+void matrice(GtkWidget *widget, gpointer data)
+{
+	debug
+    GtkWidget *table;
+    //~ GtkWidget *Vbox;
+    //~ GtkWidget *Hbox;
+    GtkWidget *window;
+    //~ GtkWidget *pLabel;
+    GtkWidget *cell;
+    gchar *text;
+   //~ GtkWidget *pbutton[1];
+    GtkWidget *scrolled_window;
+    char buffer[1000];
+    debug
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;  
+    fenetre->Window = gtk_dialog_new ();
+    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Affichage de matrice"); //titre de la fenetre 
+    debug
+    viderContainer(fenetre->Window);
+	
+	gtk_widget_set_size_request (fenetre->Window, 750, 750);
+	debug
+	scrolled_window = gtk_scrolled_window_new (NULL, NULL); // créer la barre de scroll
+	debug
+	gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 10);
+	debug
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS); // la ça met les 2 barres (la premiere en automatique c'est l'horizontale, et la deuxieme qui sera toujours présente c'est la verticale
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG(fenetre->Window)->vbox), scrolled_window, TRUE, TRUE, 0);
+	debug
+    gtk_widget_show (scrolled_window);
+ 
+  //recuperation des données du réseau de neurones  
+  
+    RN* rn = ChargerRN(fenetre->info); //charger le reseau de neurones
+    COUCHE* tmp = rn->couche_deb->suiv;  //se positionner dans la couche de sortie
+    int i;
+    int j;
+    
+    printf("la hauteur est %d\n",tmp->taille);
+    printf("la largeur est %d\n",tmp->prec->taille);
+    //printf("la hauteur 2 est %d ",rn->info->w);
+    //printf("la largeur 2 est %d ",rn->info->h);
+    
+    table = gtk_table_new (tmp->taille, tmp->prec->taille, TRUE); //création tableau 
+    gtk_container_add(GTK_CONTAINER(fenetre->Window), GTK_WIDGET(table));
+	gtk_table_set_row_spacings (GTK_TABLE (table), 10); //defini l'espacement
+    gtk_table_set_col_spacings (GTK_TABLE (table), 10);
+	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table); //met la matrice (table) avec les barres de déplacement
+    gtk_widget_show (table);
+    
+   for( i=0;i<tmp->taille; i++){ //severine t'as un probleme par rapport à la taille alors essai de regler  ça 
+       for(j=0; j<tmp->prec->taille; j++){
+        
+            text = g_strdup_printf("%f", tmp->W[i][j]); //création d'une chaine contenant la valeur de la cellule        
+            cell = gtk_label_new(text); 
+            //en principe je met directement table
+            gtk_table_attach (GTK_TABLE (table), cell, j, j+1, i, i+1, GTK_EXPAND, GTK_EXPAND, 0, 0); //ajout de la cellule au tableau
+                               
+        }
+        //printf("\n");
+    }
+		//~ gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
+        //~ pbutton[0] = gtk_button_new_with_label("Ok");
+        //~ gtk_box_pack_start(GTK_BOX(Hbox), pbutton[0], TRUE, TRUE, 2);
+        //~ gtk_container_add (GTK_CONTAINER (scrolled_window), table);
+        //~ gtk_widget_show (scrolled_window);
+    gtk_widget_show_all(fenetre->Window); 
+     //g_signal_connect(G_OBJECT(pbutton[0]), "clicked", G_CALLBACK("Accueil"), fenetre); 
+    g_free (text);
+
 }
 
 /**
@@ -656,6 +732,7 @@ void creationRN(GtkWidget *widget, gpointer data){
                 fenetre->chemin[w] = 0;
             }
         }
+        debug
         pCopie = g_list_next(pCopie);
         nbrCouche = gtk_spin_button_get_value_as_int(pCopie->data);
         pCopie = g_list_next(pCopie);
@@ -669,6 +746,7 @@ void creationRN(GtkWidget *widget, gpointer data){
             parse = strtok(NULL, "//");
             compteur++;
         }
+        debug
         i = 0;
         newinfo->etiquettes = malloc(sizeof(char*)*compteur);        
         strcpy(resultat,gtk_entry_get_text(GTK_ENTRY(pCopie->data)));
@@ -681,6 +759,7 @@ void creationRN(GtkWidget *widget, gpointer data){
             parse = strtok(NULL, "//");
             i++;
         }
+        debug
         pCopie = g_list_next(pCopie);
         newinfo->h = gtk_spin_button_get_value_as_int(pCopie->data);
         pCopie = g_list_next(pCopie);
@@ -692,7 +771,7 @@ void creationRN(GtkWidget *widget, gpointer data){
         timestamp = time(NULL); 
         t = localtime(&timestamp); 
         newinfo->date = malloc(sizeof(char)*20);
-        
+        debug
         sprintf(resultat,"%04u", 1900 + t->tm_year);
         strcpy(newinfo->date,resultat);
         strcat(newinfo->date,"-");
@@ -701,18 +780,20 @@ void creationRN(GtkWidget *widget, gpointer data){
         strcat(newinfo->date,"-");
         sprintf(resultat,"%02u",t->tm_mday);
         strcat(newinfo->date,resultat);
-
+		debug
         RN *rn = initialisation(newinfo);
         AjoutPremiereCouche(rn, newinfo->h*newinfo->w*compteur);
         for(i=0;i<nbrCouche;i++){
             Ajout_couche_Fin(rn, nbrNeurones);
         }
+        debug
         Ajout_couche_Fin(rn,compteur);
         Remplissage(*rn);
         SaveRN(*rn);
         gchar *sUtf8;
         strcpy(resultat,newinfo->nom);
         strcat(resultat,"/");
+        debug
         strcat(resultat,newinfo->date);
         fenetre->info = ChargerInfo();
         fenetre->nombreReseau = nombreReseau();

@@ -45,4 +45,5 @@ clear:
 clean:
 	rm -f *.o
 	rm -f neurone
+	rm -f test
 	
