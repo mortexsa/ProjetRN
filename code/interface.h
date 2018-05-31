@@ -12,6 +12,7 @@
 #include <time.h>
 #include <pthread.h>
 
+#include <unistd.h>
 #include <sys/types.h>
 #include <dirent.h>
 #include <sys/dir.h>
@@ -43,6 +44,7 @@ int nombreReseau();
 void viderContainer(GtkWidget *data);
 void retourAccueille(GtkWidget *widget, gpointer data);
 void selectReseau(GtkWidget *widget, gpointer data);
+void suprimerReseau(GtkWidget *widget, gpointer data);
 void traitement(GtkWidget *widget, gpointer data);
 void resultatTraitement(GtkWidget *widget, gpointer data);
 void lancerApprentissage(GtkWidget *widget, gpointer data);

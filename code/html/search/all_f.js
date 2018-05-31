@@ -7,5 +7,6 @@ var searchData=
   ['sigmoideprimez',['SigmoidePrimeZ',['../Apprentissage_8c.html#a90d90aaa4be124cafa76914b80ad9321',1,'Apprentissage.c']]],
   ['sigmoidev',['SigmoideV',['../gestionnaire__RN_8c.html#a88161240b8b73cd76cb6c099c5016722',1,'gestionnaire_RN.c']]],
   ['structures_2eh',['Structures.h',['../Structures_8h.html',1,'']]],
-  ['suiv',['suiv',['../structCOUCHE.html#a17139b5e6dd8e69f1704d902742085cc',1,'COUCHE']]]
+  ['suiv',['suiv',['../structCOUCHE.html#a17139b5e6dd8e69f1704d902742085cc',1,'COUCHE']]],
+  ['suprimerreseau',['suprimerReseau',['../interface_8c.html#a65e854c43b6d90c130066a8af742b28f',1,'interface.c']]]
 ];

@@ -89,7 +89,7 @@ void selectReseau(GtkWidget *widget, gpointer data){
         }
     }
     GtkWidget *label;
-    GtkWidget *button[3];
+    GtkWidget *button[4];
     GtkWidget *toggleBtn;
     GtkWidget *Vbox;
     GtkWidget *Hbox;
@@ -171,10 +171,12 @@ void selectReseau(GtkWidget *widget, gpointer data){
     button[1] = gtk_button_new_with_label("Retour");
     button[2] = gtk_button_new_with_label("Traitement");
     toggleBtn = gtk_toggle_button_new_with_label("Apprentissage");
+    button[3] = gtk_button_new_with_label("Suprimer ce Reseaux");
     
     gtk_box_pack_start(GTK_BOX(Hbox), button[1], TRUE, TRUE, 2);
     gtk_box_pack_start(GTK_BOX(Hbox), button[2], TRUE, TRUE, 2);
     gtk_box_pack_start(GTK_BOX(Hbox), toggleBtn, TRUE, TRUE, 2);
+    gtk_box_pack_start(GTK_BOX(Vbox), button[3], FALSE, TRUE, 7);
     gtk_widget_show_all(fenetre->Window);
     if(fenetre->etatBoutton == 1){
         gtk_toggle_button_set_active((GtkToggleButton *)toggleBtn,1);
@@ -187,6 +189,59 @@ void selectReseau(GtkWidget *widget, gpointer data){
     g_signal_connect(G_OBJECT(button[2]), "clicked", G_CALLBACK(traitement), fenetre);
     g_signal_connect(G_OBJECT(toggleBtn), "toggled", G_CALLBACK(lancerApprentissage), fenetre);
     g_signal_connect(G_OBJECT(button[0]), "clicked", G_CALLBACK(matrice), fenetre);
+    g_signal_connect(G_OBJECT(button[3]), "clicked", G_CALLBACK(suprimerReseau), fenetre);
+}
+
+/**
+ * \fn void suprimerReseau(GtkWidget *widget, gpointer data)
+ * \brief Suprime un reseau de neurone
+ *
+ * \param widget Le widget qui est associer a la fonction.
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
+void suprimerReseau(GtkWidget *widget, gpointer data) {
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    GtkWidget *pQuestion;
+    DIR *repertoire;           /* pointeur de répertoire */
+    struct dirent *entry;     /* représente une entrée dans un répertoire. */
+    struct stat file_stat;    /* informations sur un fichier. */
+    char buffer[1024] = {0};
+    char name[200];
+    pQuestion = gtk_message_dialog_new (GTK_WINDOW(fenetre->Window),
+        GTK_DIALOG_MODAL,
+        GTK_MESSAGE_QUESTION,
+        GTK_BUTTONS_YES_NO,
+        "Voulez-vous vraiment\nsuprimer ce reseau?");
+     switch(gtk_dialog_run(GTK_DIALOG(pQuestion)))
+    {
+        case GTK_RESPONSE_YES:
+            sprintf(name,"../sav/%s_%s",fenetre->info[fenetre->reseauSelectionner].date,fenetre->info[fenetre->reseauSelectionner].nom);
+            repertoire = opendir(name);
+            if ( repertoire == NULL ) {
+                fprintf(stderr, "Impossible d'ouvrir le dossier %s\n", name);
+                exit(1);
+            }
+
+            while ( (entry = readdir(repertoire)) != NULL ) {
+                if ( strcmp(entry->d_name, ".") == 0 ||
+                     strcmp(entry->d_name, "..") == 0 ) {
+                    continue;
+                }
+                snprintf(buffer, 1024, "%s/%s", name, entry->d_name);
+                stat(buffer, &file_stat);
+                if ( S_ISREG(file_stat.st_mode) ) {
+                    remove(buffer);
+                }
+            }
+            closedir(repertoire);
+            remove(name);
+            gtk_widget_destroy(pQuestion);
+            retourAccueille(NULL,fenetre);
+            break;
+        case GTK_RESPONSE_NO:
+            gtk_widget_destroy(pQuestion);
+            break;
+    } 
 }
 
 /**
@@ -254,79 +309,91 @@ void traitement(GtkWidget *widget, gpointer data){
  */
 void resultatTraitement(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
-    char resultat[200];
-    strcpy(resultat,fenetre->chemin);
-    char *parse = strtok(resultat,".");
-    while(parse != NULL){
-        strcpy(resultat,parse);
-        parse = strtok(NULL, ".");
+    if(fenetre->chemin[0] == 0){
+        GtkWidget * avertissement;
+        avertissement = gtk_message_dialog_new(GTK_WINDOW(fenetre->Window), 
+            GTK_DIALOG_MODAL,
+            GTK_MESSAGE_WARNING,
+            GTK_BUTTONS_OK,
+            "Veuillez selectionner un fichier !!");
+        gtk_dialog_run(GTK_DIALOG(avertissement));
+        gtk_widget_destroy(avertissement);
     }
-    if(strcmp(resultat,"bmp") == 0 || strcmp(resultat,"idx3-ubyte") == 0){
-
-        gtk_window_set_title(GTK_WINDOW(fenetre->Window), "TOP 3 des Resultats ");
-        viderContainer(fenetre->Window);
-        
-        GtkWidget *label;
-        GtkWidget *Vbox;
-        GtkWidget *Hbox;
-        GtkWidget *pbutton[2];
-     	INFO_RN *k=&(fenetre->info[fenetre->reseauSelectionner]);	  
-    	RN *rn = ChargerRN(k); //charger RN
-    	
-    	char** rec;
-        Image * image;
-        if(strcmp(resultat,"bmp") == 0){
-            image = ChargerBmp(fenetre->chemin,rn->info->w, rn->info->h);            
+    else {
+        char resultat[200];
+        strcpy(resultat,fenetre->chemin);
+        char *parse = strtok(resultat,".");
+        while(parse != NULL){
+            strcpy(resultat,parse);
+            parse = strtok(NULL, ".");
         }
-        else{
-            image = ChargerMnist(fenetre->chemin,rn->info->w, rn->info->h);
+        if(strcmp(resultat,"bmp") == 0 || strcmp(resultat,"idx3-ubyte") == 0){
+
+            gtk_window_set_title(GTK_WINDOW(fenetre->Window), "TOP 3 des Resultats ");
+            viderContainer(fenetre->Window);
+            
+            GtkWidget *label;
+            GtkWidget *Vbox;
+            GtkWidget *Hbox;
+            GtkWidget *pbutton[2];
+         	INFO_RN *k=&(fenetre->info[fenetre->reseauSelectionner]);	  
+        	RN *rn = ChargerRN(k); //charger RN
+        	
+        	char** rec;
+            Image * image;
+            if(strcmp(resultat,"bmp") == 0){
+                image = ChargerBmp(fenetre->chemin,rn->info->w, rn->info->h);            
+            }
+            else{
+                image = ChargerMnist(fenetre->chemin,rn->info->w, rn->info->h);
+            }
+
+            if(image == NULL)
+            {
+    			//truc a faire si la lecture de l'image n a pas reussi
+    		}
+            Propagation(image,*rn);
+        	rec = Reconnaissance(*rn);
+        	
+        	DelImage(image);
+        	libererRN(rn);
+        	
+        	Vbox = gtk_vbox_new(FALSE, 0);
+        	Hbox = gtk_hbox_new(FALSE, 0);
+
+            gtk_container_add(GTK_CONTAINER(fenetre->Window), Vbox);
+        	strcpy(resultat,"resultat 1: ");
+            strcat(resultat,rec[0]);
+        	label = gtk_label_new(resultat);	
+        	gtk_box_pack_start(GTK_BOX(Vbox), label, TRUE, FALSE, 2);
+        	
+            strcpy(resultat,"resultat 2: ");
+            strcat(resultat,rec[1]);
+            label = gtk_label_new(resultat);    
+            gtk_box_pack_start(GTK_BOX(Vbox), label, TRUE, FALSE, 2);
+
+            strcpy(resultat,"resultat 3: ");
+            strcat(resultat,rec[2]);
+            label = gtk_label_new(resultat);    
+            gtk_box_pack_start(GTK_BOX(Vbox), label, TRUE, FALSE, 2);
+            
+            free(rec[0]);
+            free(rec[1]);
+            free(rec[2]);
+            free(rec);
+            
+            gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
+            pbutton[0] = gtk_button_new_with_label("Ok");
+            gtk_box_pack_start(GTK_BOX(Hbox), pbutton[0], TRUE, TRUE, 2); 
+            pbutton[1] = gtk_button_new_with_label("quitter");
+            gtk_box_pack_start(GTK_BOX(Hbox), pbutton[1], TRUE, TRUE, 2); 
+         
+            /* Affichage de la fenêtré et de tout ce qu'il contient */
+            gtk_widget_show_all(fenetre->Window);  
+            g_signal_connect(G_OBJECT(pbutton[0]), "clicked", G_CALLBACK(traitement), fenetre);  
+            g_signal_connect(G_OBJECT(pbutton[1]), "clicked", G_CALLBACK(gtk_main_quit), fenetre); 
+        
         }
-
-        if(image == NULL)
-        {
-			//truc a faire si la lecture de l'image n a pas reussi
-		}
-        Propagation(image,*rn);
-    	rec = Reconnaissance(*rn);
-    	
-    	DelImage(image);
-    	libererRN(rn);
-    	
-    	Vbox = gtk_vbox_new(FALSE, 0);
-    	Hbox = gtk_hbox_new(FALSE, 0);
-
-        gtk_container_add(GTK_CONTAINER(fenetre->Window), Vbox);
-    	strcpy(resultat,"resultat 1: ");
-        strcat(resultat,rec[0]);
-    	label = gtk_label_new(resultat);	
-    	gtk_box_pack_start(GTK_BOX(Vbox), label, TRUE, FALSE, 2);
-    	
-        strcpy(resultat,"resultat 2: ");
-        strcat(resultat,rec[1]);
-        label = gtk_label_new(resultat);    
-        gtk_box_pack_start(GTK_BOX(Vbox), label, TRUE, FALSE, 2);
-
-        strcpy(resultat,"resultat 3: ");
-        strcat(resultat,rec[2]);
-        label = gtk_label_new(resultat);    
-        gtk_box_pack_start(GTK_BOX(Vbox), label, TRUE, FALSE, 2);
-        
-        free(rec[0]);
-        free(rec[1]);
-        free(rec[2]);
-        free(rec);
-        
-        gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
-        pbutton[0] = gtk_button_new_with_label("Ok");
-        gtk_box_pack_start(GTK_BOX(Hbox), pbutton[0], TRUE, TRUE, 2); 
-        pbutton[1] = gtk_button_new_with_label("quitter");
-        gtk_box_pack_start(GTK_BOX(Hbox), pbutton[1], TRUE, TRUE, 2); 
-     
-        /* Affichage de la fenêtré et de tout ce qu'il contient */
-        gtk_widget_show_all(fenetre->Window);  
-        g_signal_connect(G_OBJECT(pbutton[0]), "clicked", G_CALLBACK(traitement), fenetre);  
-        g_signal_connect(G_OBJECT(pbutton[1]), "clicked", G_CALLBACK(gtk_main_quit), fenetre); 
-    
     }
 }
 
