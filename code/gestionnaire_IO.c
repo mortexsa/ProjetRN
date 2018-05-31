@@ -6,7 +6,7 @@
  * \author SLIMANI Arezki
  * \author SELAQUET Severine
  * \author SZULEK Isaac
- * \author MONTIGNET Anthony
+ * \author MONTIGNE Anthony
  *
  * Ce module s'occupe de lire , charger et sauvegarder les données.
  *
@@ -689,4 +689,20 @@ void SaveRN(RN rn)
 		fprintf(fichier,"%s\n",rn.info->etiquettes[i]);
 	
 	fclose(fichier);
+	
+	
 }
+
+void LibererInfos(RN* rn)
+{
+	int i;
+	for(i=0;i<rn->couche_fin->taille;i++)
+	{
+		free(rn->info->etiquettes[i]);
+	}
+	
+	free(rn->info->nom);
+	free(rn->info->date);
+	free(rn->info->repertoire);
+}
+

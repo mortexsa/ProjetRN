@@ -6,7 +6,7 @@
  * \author SLIMANI Arezki
  * \author SELAQUET Severine
  * \author SZULEK Isaac
- * \author MONTIGNET Anthony
+ * \author MONTIGNE Anthony
  */
 
 #include <math.h>

@@ -1,4 +1,4 @@
-all: clean clear neurone
+all: clear neurone
 	
 
 run: all
@@ -45,4 +45,5 @@ clear:
 clean:
 	rm -f *.o
 	rm -f neurone
+	rm -f test
 	
