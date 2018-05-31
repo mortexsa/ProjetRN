@@ -7,5 +7,7 @@ var searchData=
   ['chargermnist',['ChargerMnist',['../gestionnaire__IO_8c.html#a742eef92a51c5a5d1153482d80e5791e',1,'gestionnaire_IO.c']]],
   ['chargerrn',['ChargerRN',['../gestionnaire__IO_8c.html#acf9f10951f1eb8a0769e6aa8c10c9923',1,'gestionnaire_IO.c']]],
   ['creation',['creation',['../interface_8c.html#a15cf03bc8aef74929090ec43f9dcd1d6',1,'interface.c']]],
+  ['creationrn',['creationRN',['../interface_8c.html#afb7b9f7924beb4a920220bb2d9a13245',1,'interface.c']]],
+  ['creer_5ffile_5fselection',['creer_file_selection',['../interface_8c.html#a7407da4bcc79f7f2fd1036ef29df115a',1,'interface.c']]],
   ['creer_5ffolder_5fselection',['creer_folder_selection',['../interface_8c.html#aeb7db74660ad3d28b2b68874d30d9316',1,'interface.c']]]
 ];

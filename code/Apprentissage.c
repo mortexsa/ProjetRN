@@ -168,13 +168,13 @@ void MultiplicationMatricielleTransposeeTM(float** in_M, float* in_V, float* out
 }
 
 /**
- * \fn void MultiplicationMatricielleTransposeeTM(float** in_M, float* in_V, float* out, int taille_M1,int taille_M3)
+ * \fn void MultiplicationMatricielleTransposeeMT(float* in_M1, float* in_M2, float** out, int taille_M1,int taille_M2)
  * \brief effectue une multiplication matricielle en transposant la deuxieme matrice (qui est un vecteur)
  * \param in_M premiere matrice du calcul
  * \param in_V vecteur, sera transposée avant d'etre multipliée a la matrice
  * \param out vecteur ou sera stocké le résultat
  * \param taille_M1 hauteur de la matrice
- * \param taille_M3 largeur de la matrice
+ * \param taille_M2 largeur de la matrice
  */
 void MultiplicationMatricielleTransposeeMT(float* in_M1, float* in_M2, float** out, int taille_M1,int taille_M2) // = in_M1 * (in_M2)T
 {

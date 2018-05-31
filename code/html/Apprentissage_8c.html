@@ -126,8 +126,8 @@ Fonctions</h2></td></tr>
 <tr class="memitem:acb686b6abf78231e095fc83947b2ba82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Apprentissage_8c.html#acb686b6abf78231e095fc83947b2ba82">MultiplicationMatricielleTransposeeTM</a> (float **in_M, float *in_V, float *out, int taille_M1, int taille_M3)</td></tr>
 <tr class="memdesc:acb686b6abf78231e095fc83947b2ba82"><td class="mdescLeft">&#160;</td><td class="mdescRight">effectue une multiplication matricielle en transposant la premiere matrice  <a href="#acb686b6abf78231e095fc83947b2ba82">Plus de détails...</a><br /></td></tr>
 <tr class="separator:acb686b6abf78231e095fc83947b2ba82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc6059e44e95f6e4f51ced681c175255"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc6059e44e95f6e4f51ced681c175255"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>MultiplicationMatricielleTransposeeMT</b> (float *in_M1, float *in_M2, float **out, int taille_M1, int taille_M2)</td></tr>
+<tr class="memitem:acc6059e44e95f6e4f51ced681c175255"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Apprentissage_8c.html#acc6059e44e95f6e4f51ced681c175255">MultiplicationMatricielleTransposeeMT</a> (float *in_M1, float *in_M2, float **out, int taille_M1, int taille_M2)</td></tr>
+<tr class="memdesc:acc6059e44e95f6e4f51ced681c175255"><td class="mdescLeft">&#160;</td><td class="mdescRight">effectue une multiplication matricielle en transposant la deuxieme matrice (qui est un vecteur)  <a href="#acc6059e44e95f6e4f51ced681c175255">Plus de détails...</a><br /></td></tr>
 <tr class="separator:acc6059e44e95f6e4f51ced681c175255"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3feb851d99301e70423a23fdee859a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Apprentissage_8c.html#ad3feb851d99301e70423a23fdee859a2">Hadamard</a> (float **in_a, float *in_b, float *out, int taille)</td></tr>
 <tr class="memdesc:ad3feb851d99301e70423a23fdee859a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">effectue le produit hadamard  <a href="#ad3feb851d99301e70423a23fdee859a2">Plus de détails...</a><br /></td></tr>
@@ -148,7 +148,7 @@ SELAQUET Severine </dd>
 <dd>
 SZULEK Isaac </dd>
 <dd>
-MONTIGNET Anthony </dd></dl>
+MONTIGNE Anthony </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
 <a class="anchor" id="ad11c1cb76d7860d651b3ca20b5c9cb9b"></a>
 <div class="memitem">
@@ -412,6 +412,62 @@ MONTIGNET Anthony </dd></dl>
 
 </div>
 </div>
+<a class="anchor" id="acc6059e44e95f6e4f51ced681c175255"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MultiplicationMatricielleTransposeeMT </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in_M1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>in_M2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float **&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>taille_M1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>taille_M2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>effectue une multiplication matricielle en transposant la deuxieme matrice (qui est un vecteur) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in_M</td><td>premiere matrice du calcul </td></tr>
+    <tr><td class="paramname">in_V</td><td>vecteur, sera transposée avant d'etre multipliée a la matrice </td></tr>
+    <tr><td class="paramname">out</td><td>vecteur ou sera stocké le résultat </td></tr>
+    <tr><td class="paramname">taille_M1</td><td>hauteur de la matrice </td></tr>
+    <tr><td class="paramname">taille_M3</td><td>largeur de la matrice </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="acb686b6abf78231e095fc83947b2ba82"></a>
 <div class="memitem">
 <div class="memproto">
@@ -455,19 +511,13 @@ MONTIGNET Anthony </dd></dl>
 </div><div class="memdoc">
 
 <p>effectue une multiplication matricielle en transposant la premiere matrice </p>
-<p>effectue une multiplication matricielle en transposant la deuxieme matrice (qui est un vecteur)</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">in_M</td><td>premiere matrice du calcul, sera transposée avant d'etre multipliée </td></tr>
     <tr><td class="paramname">in_V</td><td>vecteur qui sera multiplié a la matrice </td></tr>
     <tr><td class="paramname">out</td><td>vecteur ou sera stocké le résultat </td></tr>
     <tr><td class="paramname">taille_M1</td><td>largeur de la matrice </td></tr>
-    <tr><td class="paramname">taille_M3</td><td>hauteur de la matrice</td></tr>
-    <tr><td class="paramname">in_M</td><td>premiere matrice du calcul </td></tr>
-    <tr><td class="paramname">in_V</td><td>vecteur, sera transposée avant d'etre multipliée a la matrice </td></tr>
-    <tr><td class="paramname">out</td><td>vecteur ou sera stocké le résultat </td></tr>
-    <tr><td class="paramname">taille_M1</td><td>hauteur de la matrice </td></tr>
-    <tr><td class="paramname">taille_M3</td><td>largeur de la matrice </td></tr>
+    <tr><td class="paramname">taille_M3</td><td>hauteur de la matrice </td></tr>
   </table>
   </dd>
 </dl>

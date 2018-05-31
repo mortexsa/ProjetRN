@@ -419,7 +419,6 @@ void* fctThreadApp(gpointer data){
 int afficherWarning(gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
     GtkWidget * avertissement;
-    GList *gList;
     
     avertissement = gtk_message_dialog_new(GTK_WINDOW(fenetre->Window), 
         GTK_DIALOG_MODAL,
@@ -431,18 +430,7 @@ int afficherWarning(gpointer data){
     gtk_idle_remove(fenetre->etatBoutton);
     fenetre->etatBoutton = 0;
     if(fenetre->pageActuel == 3){
-        int i;
-        gList = gtk_container_get_children(GTK_CONTAINER(fenetre->Window));
-        gList = gtk_container_get_children(GTK_CONTAINER(gList->data));
-        while(gList && i<4){
-            gList = g_list_next(gList);
-            i++;
-        }
-        gList = gtk_container_get_children(GTK_CONTAINER(gList->data));
-        gtk_widget_show(gList->data);
-        gList = g_list_next(gList);
-        gList = g_list_next(gList);
-        gtk_toggle_button_set_active(gList->data,0);
+        selectReseau(NULL,fenetre);
     }
     return 1;
 }
@@ -624,10 +612,6 @@ void creation(GtkWidget *widget, gpointer data){
     pSpin[1] = gtk_spin_button_new_with_range(1, 1000, 1);
     gtk_box_pack_start(GTK_BOX(pVBox), pSpin[1], TRUE, FALSE, 0);
  
-   // /* Creation d un GtkHSeparator */
-   //  pSeparator = gtk_hseparator_new();
-   //  gtk_box_pack_start(GTK_BOX(pVBox), pSeparator, TRUE, FALSE, 0);
- 
     pLabel = gtk_label_new("etiquette de sortie (format: etiquette1//etiquette2 ...) :");
     gtk_box_pack_start(GTK_BOX(pVBox), pLabel, TRUE, FALSE, 2);
     pEntry[1] = gtk_entry_new();
@@ -670,7 +654,7 @@ void creation(GtkWidget *widget, gpointer data){
 }
 
 /**
- * \fn void creation(GtkWidget *widget, gpointer data)
+ * \fn void creationRN(GtkWidget *widget, gpointer data)
  * \brief Recuperation des données et sauvegarde du réseau de neurones.
  *
  * \param widget Le widget qui est associer a la fonction.
@@ -785,7 +769,7 @@ void creationRN(GtkWidget *widget, gpointer data){
 }
 
 /**
- * \fn void creer_file_selection()
+ * \fn void creer_file_selection(GtkWidget *widget, gpointer data)
  * \brief Selection d'un fichier a analyser dans traitement.
  *
  */
