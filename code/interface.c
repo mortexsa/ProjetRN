@@ -374,7 +374,7 @@ void* fctThreadApp(void* arg){
     while((fenetre->etatBoutton)&&(app = ChargementCoupleAttIn(rn->info->repertoire,rn->info->w,rn->info->h)))
     {
 
-        BackProp(rn,app->image,app->etiquette,0.5);
+        BackProp(rn,app->image,app->etiquette,1.5);
         i++;
         if(!(i%10000))
             SaveRN(*rn);
