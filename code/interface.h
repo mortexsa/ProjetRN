@@ -35,8 +35,6 @@ typedef struct INFO_FENETRE
 	int reseauSelectionner; /*!< Réseau sélectionner */
 	char chemin[200]; /*!< Chemin des fichier ou dossier à enregistrer */
 	int etatBoutton; /*!< Etat du boutton Apprentissage du réseau de neurones */
-	pthread_mutex_t mutex;
-	pthread_cond_t condition;
 } INFO_FENETRE;
 
 
@@ -47,9 +45,10 @@ void selectReseau(GtkWidget *widget, gpointer data);
 void traitement(GtkWidget *widget, gpointer data);
 void resultatTraitement(GtkWidget *widget, gpointer data);
 void lancerApprentissage(GtkWidget *widget, gpointer data);
-void* fctThreadApp(void* arg);
+void* fctThreadApp(gpointer data);
 //~ gboolean on_darea_expose (GtkWidget *widget,GdkEventExpose *event, gpointer data);
 void matrice(GtkWidget *widget, gpointer data);
+void* fctMatriceThread(gpointer data);
 void page_principale(INFO_FENETRE *fenetre);
 void creation(GtkWidget *widget, gpointer data);
 void creationRN(GtkWidget *widget, gpointer data);

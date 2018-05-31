@@ -335,7 +335,7 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
 void lancerApprentissage(GtkWidget *widget, gpointer data){
     INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
     GList *gList = NULL;
-    static pthread_t pid;
+    static GThread* t2;
     int i=0;
     gList = gtk_container_get_children(GTK_CONTAINER(fenetre->Window));
     gList = gtk_container_get_children(GTK_CONTAINER(gList->data));
@@ -347,30 +347,43 @@ void lancerApprentissage(GtkWidget *widget, gpointer data){
     if(gtk_toggle_button_get_active ((GtkToggleButton *)widget)){
         fenetre->etatBoutton = 1;
         gtk_widget_hide(GTK_WIDGET(gList->data));
-        pthread_create(&pid, NULL, fctThreadApp,fenetre);
+        t2 = g_thread_new("Apprentissage",fctThreadApp,(void*)fenetre);
     }
     else
     {
-        printf("merde\n");
         fenetre->etatBoutton = 0;
         gtk_widget_show(gList->data);
-        pthread_join(pid, NULL);
+        g_thread_join(t2);
+        gList = gtk_container_get_children(GTK_CONTAINER(fenetre->Window));
+        gList = gtk_container_get_children(GTK_CONTAINER(gList->data));
+        gList = g_list_next(gList);
+        char tab[200];
+        char b[100];
+        double pourcentageReussite = 0;
+        if(fenetre->info[fenetre->reseauSelectionner].reussite != 0){
+                pourcentageReussite = ((double)fenetre->info[fenetre->reseauSelectionner].reussite / (fenetre->info[fenetre->reseauSelectionner].reussite + fenetre->info[fenetre->reseauSelectionner].echec)) * 100;
+        }
+        strcpy(tab, "Pourcentage de reussite :  ");
+        sprintf(b,"%.3f", pourcentageReussite);
+        strcat(tab,b);
+        strcat(tab," %");
+        gtk_label_set_text(GTK_LABEL(gList->data),tab); 
     }
     g_list_free(gList);
 }
 
 /**
- * \fn void* fctThreadApp(void* arg)
+ * \fn void* fctThreadApp(gpointer data)
  * \brief Fonction appeler par le thread qui fait l'apprentissage du reseau de neurone.
  *
- * \param arg Pour le passage de la structure INFO_FENETRE. 
+ * \param data Pour le passage de la structure INFO_FENETRE. 
  */
-void* fctThreadApp(void* arg){
-    INFO_FENETRE *fenetre = (INFO_FENETRE *) arg;
+void* fctThreadApp(gpointer data){
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
     RN* rn = ChargerRN(&(fenetre->info[fenetre->reseauSelectionner]));
     int i = 0;
     App* app;
-        
+
     while((fenetre->etatBoutton)&&(app = ChargementCoupleAttIn(rn->info->repertoire,rn->info->w,rn->info->h)))
     {
 
@@ -395,151 +408,77 @@ void* fctThreadApp(void* arg){
  * \param widget Le widget qui est associer a la fonction.
  * \param data Pour le passage de la structure INFO_FENETRE. 
  */
- //~ gboolean
-//~ on_darea_expose (GtkWidget *widget,
-     //~ GdkEventExpose *event,
-      //~ gpointer data)
-//~ {
-	//~ INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
-	//~ RN* rn = ChargerRN(fenetre->info);
-	//~ guchar rgbbuf[rn->info->w* rn->info->h*3];
-  //~ gdk_draw_rgb_image (widget->window, widget->style->fg_gc[GTK_STATE_NORMAL],
-          //~ 0, 0, rn->info->w, rn->info->h,
-          //~ GDK_RGB_DITHER_MAX, rgbbuf, rn->info->w * 3);
-  //~ return TRUE;
-//~ }
- 
-/*void matrice(GtkWidget *widget, gpointer data){
-    
-    GtkWidget *table;
-    GtkWidget *Vbox;
-    GtkWidget *window, *darea;
-    GtkWidget *pLabel;
-       
-    
-    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
-    RN* rn = ChargerRN(fenetre->info);
-    guchar rgbbuf[rn->info->w* rn->info->h*3];
-    gint x, y;
-    guchar *pos;
-    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Affichage de matrice");
-    viderContainer(fenetre->Window);
-	  
-    debug
-    darea = gtk_drawing_area_new ();
-    debug
-    gtk_widget_set_size_request (darea, rn->info->w, rn->info->h);
-    debug
-    gtk_container_add (GTK_CONTAINER (fenetre->Window), darea);
-    debug
-    gtk_signal_connect (GTK_OBJECT (darea), "expose-event",
-                  GTK_SIGNAL_FUNC (on_darea_expose), NULL);
-    debug
-    Vbox = gtk_vbox_new(FALSE, 0);
-    gtk_widget_show_all (window);
-
-    debug
-    pos = rgbbuf;
-    debug
-    COUCHE* tmp = rn->couche_deb->suiv;
-    int i;
-    int j;
-    
-    GtkWidget *cell;
-    gchar *text;
-    debug
-    
-    table = gtk_table_new (rn->info->h, rn->info->w, TRUE); //tableau
-    debug
-    for( i=0;i<rn->info->h; i++){
-        for(j=0; j<rn->info->w; j++){
-            
-            text = g_strdup_printf("%f", tmp->W[i][j]); //création d'une chaine contenant la valeur de la cellule
-            //printf("%f ",tmp->W[i][j]);
-            cell = gtk_label_new(text); 
-            gtk_table_attach (GTK_TABLE (table), cell, j, j+1, i, i+1, GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0); //ajout de la cellule au tableau
-            *pos++ = x - x % 32;   
-             //pLabel = gtk_label_new("Nom du Réseau de neurones :");
-            
-        }
-        //printf("\n");
-    }
-    gtk_box_pack_start(GTK_BOX(Vbox), table, TRUE,TRUE,0);
-     gtk_widget_show_all(fenetre->Window); 
-    debug
-    g_free (text);
-}*/
-//ceration de la matrice des poids 
 void matrice(GtkWidget *widget, gpointer data)
 {
-	debug
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+    GThread* t1 = g_thread_new("merde",fctMatriceThread,(void*)fenetre);
+    g_thread_join(t1);
+}
+
+/**
+ * \fn void* fctMatriceThread(gpointer data)
+ * \brief Fonction appeler par le thread qui affiche la matrice des poids du reseau de neurone.
+ *
+ * \param data Pour le passage de la structure INFO_FENETRE. 
+ */
+void* fctMatriceThread(gpointer data)
+{
+    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;
+
     GtkWidget *table;
-    //~ GtkWidget *Vbox;
-    //~ GtkWidget *Hbox;
     GtkWidget *window;
-    //~ GtkWidget *pLabel;
-    GtkWidget *cell;
-    gchar *text;
-   //~ GtkWidget *pbutton[1];
-    GtkWidget *scrolled_window;
-    char buffer[1000];
-    debug
-    INFO_FENETRE *fenetre = (INFO_FENETRE *) data;  
-    fenetre->Window = gtk_dialog_new ();
-    gtk_window_set_title(GTK_WINDOW(fenetre->Window), "Affichage de matrice"); //titre de la fenetre 
-    debug
-    viderContainer(fenetre->Window);
-	
-	gtk_widget_set_size_request (fenetre->Window, 750, 750);
-	debug
-	scrolled_window = gtk_scrolled_window_new (NULL, NULL); // créer la barre de scroll
-	debug
-	gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 10);
-	debug
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS); // la ça met les 2 barres (la premiere en automatique c'est l'horizontale, et la deuxieme qui sera toujours présente c'est la verticale
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG(fenetre->Window)->vbox), scrolled_window, TRUE, TRUE, 0);
-	debug
-    gtk_widget_show (scrolled_window);
- 
-  //recuperation des données du réseau de neurones  
-  
-    RN* rn = ChargerRN(fenetre->info); //charger le reseau de neurones
+
+    gchar text[200];
+    gchar *result;
+    GtkWidget *scrollbar;
+    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_default_size(GTK_WINDOW(window), 1300, 650);
+    gtk_window_set_title(GTK_WINDOW(window), "Matrice des poids");
+    scrollbar = gtk_scrolled_window_new(NULL, NULL);
+    gtk_container_add(GTK_CONTAINER(window),scrollbar);
+    RN* rn = ChargerRN(&(fenetre->info[fenetre->reseauSelectionner])); //charger le reseau de neurones
     COUCHE* tmp = rn->couche_deb->suiv;  //se positionner dans la couche de sortie
     int i;
     int j;
+    table = gtk_table_new (tmp->taille, tmp->taille, TRUE); //création tableau 
+    gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scrollbar), table);
+    gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollbar), GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
+    gtk_table_set_row_spacings (GTK_TABLE (table), 3); //defini l'espacement
+    gtk_table_set_col_spacings (GTK_TABLE (table), 4);
     
-    printf("la hauteur est %d\n",tmp->taille);
-    printf("la largeur est %d\n",tmp->prec->taille);
-    //printf("la hauteur 2 est %d ",rn->info->w);
-    //printf("la largeur 2 est %d ",rn->info->h);
-    
-    table = gtk_table_new (tmp->taille, tmp->prec->taille, TRUE); //création tableau 
-    gtk_container_add(GTK_CONTAINER(fenetre->Window), GTK_WIDGET(table));
-	gtk_table_set_row_spacings (GTK_TABLE (table), 10); //defini l'espacement
-    gtk_table_set_col_spacings (GTK_TABLE (table), 10);
-	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table); //met la matrice (table) avec les barres de déplacement
-    gtk_widget_show (table);
-    
-   for( i=0;i<tmp->taille; i++){ //severine t'as un probleme par rapport à la taille alors essai de regler  ça 
-       for(j=0; j<tmp->prec->taille; j++){
-        
-            text = g_strdup_printf("%f", tmp->W[i][j]); //création d'une chaine contenant la valeur de la cellule        
-            cell = gtk_label_new(text); 
-            //en principe je met directement table
+   for( i=0;i<tmp->taille; i++){
+       for(j=0; j<tmp->taille; j++){
+            GtkWidget *cell;
+            cell = gtk_label_new(NULL);
+            if(tmp->W[i][j] > 0){
+                if(tmp->W[i][j] > 0.5){
+                    strcpy(text,"<span background=\"#00FF00\">");
+                }else {
+                    strcpy(text,"<span background=\"#B2FA6E\">");
+                }
+                
+            }else {
+                if(tmp->W[i][j] < -0.5){
+                    strcpy(text,"<span background=\"#FF0000\">");
+                }
+                else {
+                    strcpy(text,"<span background=\"#FF5E4D\">");
+                }
+                
+            }
+            strcat(text,g_strdup_printf("%0.2f", tmp->W[i][j])); //création d'une chaine contenant la valeur de la cellule        
+            strcat(text,"</span>");
+            // printf("%s\n", text);
+            result = g_markup_printf_escaped(text,-1,NULL,NULL,NULL);
+            gtk_label_set_markup(GTK_LABEL(cell), result);
             gtk_table_attach (GTK_TABLE (table), cell, j, j+1, i, i+1, GTK_EXPAND, GTK_EXPAND, 0, 0); //ajout de la cellule au tableau
-                               
+            g_free (result);                   
         }
-        //printf("\n");
     }
-		//~ gtk_box_pack_start(GTK_BOX(Vbox), Hbox, FALSE, TRUE, 2);
-        //~ pbutton[0] = gtk_button_new_with_label("Ok");
-        //~ gtk_box_pack_start(GTK_BOX(Hbox), pbutton[0], TRUE, TRUE, 2);
-        //~ gtk_container_add (GTK_CONTAINER (scrolled_window), table);
-        //~ gtk_widget_show (scrolled_window);
-    gtk_widget_show_all(fenetre->Window); 
-     //g_signal_connect(G_OBJECT(pbutton[0]), "clicked", G_CALLBACK("Accueil"), fenetre); 
-    g_free (text);
-
+    gtk_widget_show_all(window); 
+    g_signal_connect(G_OBJECT(window),"destroy",G_CALLBACK(gtk_widget_destroy),window);
+    libererRN(rn);
+    return NULL;
 }
 
 /**
@@ -663,7 +602,6 @@ void creation(GtkWidget *widget, gpointer data){
     gtk_box_pack_start(GTK_BOX(pVBox), pEntry[1], TRUE, FALSE, 2);
  
     
-    pLabel = gtk_label_new("nom repertoire :");
     bouton_explorer=gtk_button_new_with_label("Explorer repertoire ...");
     
     //on met le bouton Explorer dans la frame
@@ -880,6 +818,7 @@ void creer_folder_selection (GtkButton * button, gpointer data)
 {   
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
     GtkWidget *pFileSelection = NULL;
+    GtkWidget *cheminDossier;
     gtk_widget_hide(fenetre->Window);
         
      
@@ -905,6 +844,13 @@ void creer_folder_selection (GtkButton * button, gpointer data)
             /* Recuperation du chemin */
             file_name = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (pFileSelection));
             strcpy(fenetre->chemin,file_name);
+            cheminDossier = gtk_message_dialog_new(GTK_WINDOW(fenetre->Window),
+                    GTK_DIALOG_MODAL,
+                    GTK_MESSAGE_INFO,
+                    GTK_BUTTONS_OK,
+                    file_name);
+                gtk_dialog_run(GTK_DIALOG(cheminDossier));
+                gtk_widget_destroy(cheminDossier);
             break;
                       
         default : break;
@@ -934,9 +880,6 @@ void quitter(GtkWidget *widget, gpointer data)
  */
 void afficherInterface(){
     INFO_FENETRE *fenetre = malloc(sizeof(INFO_FENETRE));
-    
-    fenetre->mutex = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
-    fenetre->condition = (pthread_cond_t)PTHREAD_COND_INITIALIZER;
     
     for(int i = 0; i<200; i++)
         fenetre->chemin[i] = 0;

@@ -10,8 +10,8 @@ test: all
 	
 
 neurone: gestionnaire_IO.o gestionnaire_RN.o Apprentissage.o interface.o test.o neurone.o
-	gcc -o neurone gestionnaire_IO.o gestionnaire_RN.o Apprentissage.o interface.o neurone.o `pkg-config --cflags --libs gtk+-2.0` -g -lm -lpthread -Wall
-	gcc -o test gestionnaire_IO.o gestionnaire_RN.o Apprentissage.o interface.o test.o `pkg-config --cflags --libs gtk+-2.0` -g -lm -lpthread -Wall
+	gcc -o neurone gestionnaire_IO.o gestionnaire_RN.o Apprentissage.o interface.o neurone.o `pkg-config --cflags --libs gtk+-2.0` -g -lm -lpthread -lgthread-2.0 -Wall
+	gcc -o test gestionnaire_IO.o gestionnaire_RN.o Apprentissage.o interface.o test.o `pkg-config --cflags --libs gtk+-2.0` -g -lm -lpthread -lgthread-2.0 -Wall
 	
 
 Apprentissage.o: Apprentissage.h Apprentissage.c gestionnaire_RN.h gestionnaire_IO.h
