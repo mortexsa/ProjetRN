@@ -844,7 +844,26 @@ void creationRN(GtkWidget *widget, gpointer data){
         sUtf8 = g_locale_to_utf8(resultat, -1, NULL, NULL, NULL);
         label = gtk_label_new(sUtf8);
         g_free(sUtf8);
+        free(resultat);
         selectReseau(GTK_WIDGET(label), fenetre);
+    } else if(g_list_length(pCopie) != 6){
+        GtkWidget * avertissement;
+        avertissement = gtk_message_dialog_new(GTK_WINDOW(fenetre->Window), 
+            GTK_DIALOG_MODAL,
+            GTK_MESSAGE_WARNING,
+            GTK_BUTTONS_OK,
+            "Tout les champs son obligatoire!");
+        gtk_dialog_run(GTK_DIALOG(avertissement));
+        gtk_widget_destroy(avertissement);
+    } else if(g_list_length(pCopie) == 6 && fenetre->chemin[0] == 0) {
+        GtkWidget * avertissement;
+        avertissement = gtk_message_dialog_new(GTK_WINDOW(fenetre->Window), 
+            GTK_DIALOG_MODAL,
+            GTK_MESSAGE_WARNING,
+            GTK_BUTTONS_OK,
+            "Veuillez selectionner un repertoire!");
+        gtk_dialog_run(GTK_DIALOG(avertissement));
+        gtk_widget_destroy(avertissement);
     }
 
     g_list_free(pList);
