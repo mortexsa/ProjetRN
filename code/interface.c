@@ -315,7 +315,7 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
             GTK_DIALOG_MODAL,
             GTK_MESSAGE_WARNING,
             GTK_BUTTONS_OK,
-            "Veuillez selectionner un fichier !!");
+            "Veuillez selectionner un fichier!");
         gtk_dialog_run(GTK_DIALOG(avertissement));
         gtk_widget_destroy(avertissement);
     }
@@ -392,7 +392,22 @@ void resultatTraitement(GtkWidget *widget, gpointer data){
             gtk_widget_show_all(fenetre->Window);  
             g_signal_connect(G_OBJECT(pbutton[0]), "clicked", G_CALLBACK(traitement), fenetre);  
             g_signal_connect(G_OBJECT(pbutton[1]), "clicked", G_CALLBACK(quitter), fenetre); 
-        
+        }
+        else {
+            GtkWidget * avertissement;
+            avertissement = gtk_message_dialog_new(GTK_WINDOW(fenetre->Window), 
+                GTK_DIALOG_MODAL,
+                GTK_MESSAGE_WARNING,
+                GTK_BUTTONS_OK,
+                "Ce format de fichier n'ai pas pris en charge!");
+            gtk_dialog_run(GTK_DIALOG(avertissement));
+            gtk_widget_destroy(avertissement);
+            if(fenetre->chemin[0] != 0){
+                for(int w = 0;w<200;w++){
+                    fenetre->chemin[w] = 0;
+                }
+            }
+            traitement(NULL,fenetre);
         }
     }
 }
@@ -822,6 +837,7 @@ void creationRN(GtkWidget *widget, gpointer data){
         for(i=0;i<fenetre->nombreReseau;i++){
             LibererInfo(&(fenetre->info[i]));
         }
+        LibererInfo(newinfo);
         fenetre->info = ChargerInfo();
         fenetre->nombreReseau = nombreReseau();
         fenetre->reseauSelectionner=-2;
@@ -839,6 +855,8 @@ void creationRN(GtkWidget *widget, gpointer data){
  * \fn void creer_file_selection(GtkWidget *widget, gpointer data)
  * \brief Selection d'un fichier a analyser dans traitement.
  *
+ * \param widget Le widget qui est associer a la fonction.
+ * \param data Pour le passage de la structure INFO_FENETRE. 
  */
 void creer_file_selection(GtkWidget *widget, gpointer data) {
     INFO_FENETRE *fenetre = (INFO_FENETRE *)data;
